@@ -1,4 +1,4 @@
-package client
+package landscape
 
 import "net/http"
 
