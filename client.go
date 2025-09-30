@@ -3,19 +3,19 @@ package landscape
 import "net/http"
 
 type LandscapeAPIClient struct {
-	accountName string
-	rootURL     string
-	accessKey   string
-	secretKey   string
-	http        *http.Client
+	AccountName string
+	RootURL     string
+	AccessKey   string
+	SecretKey   string
+	HTTP        *http.Client
 }
 
-func NewClient(accountName, rootURL, accessKey, secretKey string) *LandscapeAPIClient {
+func NewLandscapeAPIClient(accountName, rootURL, accessKey, secretKey string) *LandscapeAPIClient {
 	return &LandscapeAPIClient{
-		accountName: accountName,
-		rootURL:     rootURL,
-		accessKey:   accessKey,
-		secretKey:   secretKey,
-		http:        &http.Client{},
+		AccountName: accountName,
+		RootURL:     rootURL,
+		AccessKey:   accessKey,
+		SecretKey:   secretKey,
+		HTTP:        &http.Client{},
 	}
 }
