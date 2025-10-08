@@ -1,11 +1,19 @@
 package landscape
 
 import (
+	"encoding/json"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"reflect"
 	"testing"
 )
+
+type CreateComputerRequest struct {
+	Title     string `json:"title"`
+	AccountID int    `json:"account_id"`
+}
 
 func TestDoRequest(t *testing.T) {
 	tests := []struct {
@@ -14,30 +22,40 @@ func TestDoRequest(t *testing.T) {
 		path       string
 		query      map[string]any
 		wantQuery  url.Values
+		body       any
+		wantBody   any
 		statusCode int
 	}{
 		{
-			name:       "post request succeeds",
+			name:       "post request with typed body succeeds",
 			method:     http.MethodPost,
-			path:       "/api",
-			statusCode: http.StatusOK,
+			path:       "/computers",
+			body:       CreateComputerRequest{Title: "hello", AccountID: 1},
+			wantBody:   CreateComputerRequest{Title: "hello", AccountID: 1},
+			statusCode: http.StatusCreated,
 			wantQuery:  url.Values{},
 		},
 		{
 			name:   "get request includes query args",
 			method: http.MethodGet,
-			path:   "/resources",
+			path:   "/computers",
 			query: map[string]any{
-				"status":  "active",
-				"limit":   10,
-				"verbose": true,
+				"limit": 10,
 			},
-			wantQuery: url.Values{
-				"status":  []string{"active"},
-				"limit":   []string{"10"},
-				"verbose": []string{"true"},
-			},
+			wantQuery:  url.Values{"limit": []string{"10"}},
 			statusCode: http.StatusAccepted,
+		},
+		{
+			name:   "post request with map body and query args",
+			method: http.MethodPost,
+			path:   "/computers",
+			query: map[string]any{
+				"all_computers": true,
+			},
+			body:       map[string]any{"title": "hello", "account_id": 1},
+			wantBody:   map[string]any{"title": "hello", "account_id": 1},
+			wantQuery:  url.Values{"all_computers": []string{"true"}},
+			statusCode: http.StatusCreated,
 		},
 	}
 
@@ -51,12 +69,44 @@ func TestDoRequest(t *testing.T) {
 					t.Fatalf("expected path %s, got %s", tc.path, r.URL.Path)
 				}
 
-				wantEncoded := ""
-				if tc.wantQuery != nil {
-					wantEncoded = tc.wantQuery.Encode()
+				if !reflect.DeepEqual(r.URL.Query(), tc.wantQuery) {
+					t.Fatalf("unexpected query: want %v, got %v", tc.wantQuery, r.URL.Query())
 				}
-				if got := r.URL.Query().Encode(); got != wantEncoded {
-					t.Fatalf("unexpected query string: want %q, got %q", wantEncoded, got)
+
+				if tc.wantBody != nil {
+					data, err := io.ReadAll(r.Body)
+					if err != nil {
+						t.Fatalf("failed to read body: %v", err)
+					}
+					defer r.Body.Close()
+
+					switch want := tc.wantBody.(type) {
+					case CreateComputerRequest:
+						var got CreateComputerRequest
+						if err := json.Unmarshal(data, &got); err != nil {
+							t.Fatalf("failed to unmarshal body: %v", err)
+						}
+						if !reflect.DeepEqual(got, want) {
+							t.Fatalf("unexpected body: want %+v, got %+v", want, got)
+						}
+
+					case map[string]any:
+						var got map[string]any
+						if err := json.Unmarshal(data, &got); err != nil {
+							t.Fatalf("failed to unmarshal body: %v", err)
+						}
+						for k, v := range want {
+							if iv, ok := v.(int); ok {
+								want[k] = float64(iv)
+							}
+						}
+						if !reflect.DeepEqual(got, want) {
+							t.Fatalf("unexpected body: want %+v, got %+v", want, got)
+						}
+
+					default:
+						t.Fatalf("unhandled body type %T", tc.wantBody)
+					}
 				}
 
 				w.WriteHeader(tc.statusCode)
@@ -71,14 +121,13 @@ func TestDoRequest(t *testing.T) {
 				HTTP:        server.Client(),
 			}
 
-			resp, err := client.DoRequest(tc.method, tc.path, nil, tc.query, nil, nil)
+			resp, err := client.DoRequest(tc.method, tc.path, tc.body, tc.query)
 			if err != nil {
 				t.Fatalf("unexpected error: %v", err)
 			}
 
-			got := resp.(*http.Response)
-			if got.StatusCode != tc.statusCode {
-				t.Fatalf("expected status %d, got %d", tc.statusCode, got.StatusCode)
+			if resp.StatusCode != tc.statusCode {
+				t.Fatalf("expected status %d, got %d", tc.statusCode, resp.StatusCode)
 			}
 		})
 	}

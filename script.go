@@ -1,6 +1,10 @@
 package landscape
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+)
 
 type User struct {
 	ID   int    `json:"id"`
@@ -34,7 +38,19 @@ type ScriptType struct {
 }
 
 func (c *LandscapeAPIClient) GetScript(id int) (*ScriptType, error) {
-	var script *ScriptType
-	c.DoRequest("GET", fmt.Sprintf("scripts/%d", id), nil, nil, nil, &script)
-	return nil, nil
+	var script ScriptType
+	res, err := c.DoRequest("GET", fmt.Sprintf("scripts/%d", id), nil, nil)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+	bodyBytes, err := io.ReadAll(res.Body)
+	if err != nil {
+		return nil, err
+	}
+	if err := json.Unmarshal(bodyBytes, &script); err != nil {
+		return nil, err
+	}
+
+	return &script, nil
 }

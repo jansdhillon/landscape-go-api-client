@@ -1,6 +1,7 @@
 package landscape
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -8,7 +9,7 @@ import (
 	"net/url"
 )
 
-func (c *LandscapeAPIClient) DoRequest(method, relativeURL string, body map[string]any, queryArgs, urlArgs map[string]any, target any) (any, error) {
+func (c *LandscapeAPIClient) DoRequest(method, relativeURL string, body any, queryArgs map[string]any) (*http.Response, error) {
 	baseURL, err := url.Parse(c.RootURL)
 	if err != nil {
 		return nil, err
@@ -21,26 +22,31 @@ func (c *LandscapeAPIClient) DoRequest(method, relativeURL string, body map[stri
 
 	if len(queryArgs) > 0 {
 		values := fullURL.Query()
-		for key, raw := range queryArgs {
-			switch v := raw.(type) {
+		for key, v := range queryArgs {
+			switch t := v.(type) {
 			case []string:
-				values.Del(key)
-				for _, s := range v {
-					values.Add(key, s)
-				}
+				values[key] = append([]string(nil), t...)
 			case []any:
-				values.Del(key)
-				for _, item := range v {
+				for _, item := range t {
 					values.Add(key, fmt.Sprint(item))
 				}
 			default:
-				values.Set(key, fmt.Sprint(v))
+				values.Set(key, fmt.Sprint(t))
 			}
 		}
 		fullURL.RawQuery = values.Encode()
 	}
 
-	req, err := http.NewRequest(method, fullURL.String(), nil)
+	var bodyReader io.Reader
+	if body != nil {
+		data, err := json.Marshal(body)
+		if err != nil {
+			return nil, fmt.Errorf("failed to marshal request body: %w", err)
+		}
+		bodyReader = bytes.NewReader(data)
+	}
+
+	req, err := http.NewRequest(method, fullURL.String(), bodyReader)
 	if err != nil {
 		return nil, err
 	}
@@ -50,18 +56,5 @@ func (c *LandscapeAPIClient) DoRequest(method, relativeURL string, body map[stri
 		return nil, err
 	}
 
-	defer res.Body.Close()
-	bodyBytes, err := io.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	if target != nil {
-		if err := json.Unmarshal(bodyBytes, target); err != nil {
-			return nil, err
-		}
-		return target, nil
-	} else {
-		return nil, fmt.Errorf("failed to unmarshal response into given struct %T", target)
-	}
+	return res, nil
 }
