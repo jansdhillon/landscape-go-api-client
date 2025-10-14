@@ -4,6 +4,7 @@
 package client
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
@@ -13,37 +14,343 @@ import (
 	"strings"
 
 	"github.com/oapi-codegen/runtime"
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 const (
 	BearerAuthScopes = "bearerAuth.Scopes"
 )
 
-// GetScriptResponse defines model for GetScriptResponse.
-// type GetScriptResponse struct {
-// 	AccessGroup    *string        `json:"accessGroup,omitempty"`
-// 	Attachments    *[]interface{} `json:"attachments,omitempty"`
-// 	Code           *string        `json:"code,omitempty"`
-// 	CreatedAt      *string        `json:"createdAt,omitempty"`
-// 	CreatedBy      *string        `json:"createdBy,omitempty"`
-// 	Id             int            `json:"id"`
-// 	Interpreter    *string        `json:"interpreter,omitempty"`
-// 	IsEditable     *bool          `json:"isEditable,omitempty"`
-// 	IsExecutable   *bool          `json:"isExecutable,omitempty"`
-// 	IsRedactable   *bool          `json:"isRedactable,omitempty"`
-// 	LastEditedBy   *string        `json:"lastEditedBy,omitempty"`
-// 	ScriptProfiles *[]interface{} `json:"scriptProfiles,omitempty"`
-// 	Status         *string        `json:"status,omitempty"`
-// 	TimeLimit      *int           `json:"timeLimit,omitempty"`
-// 	Title          string         `json:"title"`
-// 	Username       *string        `json:"username,omitempty"`
-// 	Version        *int           `json:"version,omitempty"`
-// }
+// AccessKeyLoginRequest defines model for AccessKeyLoginRequest.
+type AccessKeyLoginRequest struct {
+	// AccessKey Access key issued for API authentication.
+	AccessKey string `json:"access_key"`
 
-// UnauthorizedError defines model for UnauthorizedError.
-type UnauthorizedError struct {
+	// SecretKey Secret key paired with the access key.
+	SecretKey string `json:"secret_key"`
+}
+
+// Error defines model for Error.
+type Error struct {
 	Code    *int    `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
+}
+
+// LegacyActionResult defines model for LegacyActionResult.
+type LegacyActionResult struct {
+	union json.RawMessage
+}
+
+// LegacyActionResult1 defines model for .
+type LegacyActionResult1 struct {
+	// Filename Name of the attachment that was created.
+	Filename string `json:"filename"`
+}
+
+// LoginAccount defines model for LoginAccount.
+type LoginAccount struct {
+	// ClassicDashboardUrl URL of the classic dashboard for the account.
+	ClassicDashboardUrl *string `json:"classic_dashboard_url,omitempty"`
+
+	// Default Indicates whether this is the default account.
+	Default bool `json:"default"`
+
+	// Name Internal account identifier.
+	Name string `json:"name"`
+
+	// Subdomain Optional subdomain assigned to the account.
+	Subdomain *string `json:"subdomain"`
+
+	// Title Display name for the account.
+	Title string `json:"title"`
+}
+
+// LoginRequest defines model for LoginRequest.
+type LoginRequest struct {
+	// Email Email address used to authenticate with Landscape.
+	Email openapi_types.Email `json:"email"`
+
+	// Password Account password associated with the provided email.
+	Password string `json:"password"`
+}
+
+// LoginResponse defines model for LoginResponse.
+type LoginResponse struct {
+	// Accounts Accounts available to the authenticated user.
+	Accounts []LoginAccount `json:"accounts"`
+
+	// CurrentAccount Identifier of the account in current use.
+	CurrentAccount string `json:"current_account"`
+
+	// Email Email address of the authenticated user.
+	Email openapi_types.Email `json:"email"`
+
+	// Name Display name of the authenticated user.
+	Name *string `json:"name,omitempty"`
+
+	// SelfHosted Indicates whether the Landscape deployment is self hosted.
+	SelfHosted *bool `json:"self_hosted,omitempty"`
+
+	// Token JWT used to authorize subsequent API requests.
+	Token                string                 `json:"token"`
+	AdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// Script defines model for Script.
+type Script struct {
+	AccessGroup    *string        `json:"accessGroup,omitempty"`
+	Attachments    *[]interface{} `json:"attachments,omitempty"`
+	Code           *string        `json:"code,omitempty"`
+	CreatedAt      *string        `json:"createdAt,omitempty"`
+	CreatedBy      *string        `json:"createdBy,omitempty"`
+	Id             int            `json:"id"`
+	Interpreter    *string        `json:"interpreter,omitempty"`
+	IsEditable     *bool          `json:"isEditable,omitempty"`
+	IsExecutable   *bool          `json:"isExecutable,omitempty"`
+	IsRedactable   *bool          `json:"isRedactable,omitempty"`
+	LastEditedBy   *string        `json:"lastEditedBy,omitempty"`
+	ScriptProfiles *[]interface{} `json:"scriptProfiles,omitempty"`
+	Status         *string        `json:"status,omitempty"`
+	TimeLimit      *int           `json:"timeLimit,omitempty"`
+	Title          string         `json:"title"`
+	Username       *string        `json:"username,omitempty"`
+	Version        *int           `json:"version,omitempty"`
+}
+
+// LegacyActionParam defines model for LegacyActionParam.
+type LegacyActionParam = string
+
+// LegacyVersionParam defines model for LegacyVersionParam.
+type LegacyVersionParam = string
+
+// ScriptIdPathParam defines model for ScriptIdPathParam.
+type ScriptIdPathParam = int
+
+// BadRequest defines model for BadRequest.
+type BadRequest = Error
+
+// LegacyActionResponse defines model for LegacyActionResponse.
+type LegacyActionResponse = LegacyActionResult
+
+// NotFound defines model for NotFound.
+type NotFound = Error
+
+// ScriptNotFound defines model for ScriptNotFound.
+type ScriptNotFound = Error
+
+// Unauthorized defines model for Unauthorized.
+type Unauthorized = Error
+
+// InvokeLegacyActionParams defines parameters for InvokeLegacyAction.
+type InvokeLegacyActionParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action The legacy API action name to invoke.
+	Action LegacyActionParam `form:"action" json:"action"`
+}
+
+// LoginWithPasswordJSONRequestBody defines body for LoginWithPassword for application/json ContentType.
+type LoginWithPasswordJSONRequestBody = LoginRequest
+
+// LoginWithAccessKeyJSONRequestBody defines body for LoginWithAccessKey for application/json ContentType.
+type LoginWithAccessKeyJSONRequestBody = AccessKeyLoginRequest
+
+// Getter for additional properties for LoginResponse. Returns the specified
+// element and whether it was found
+func (a LoginResponse) Get(fieldName string) (value interface{}, found bool) {
+	if a.AdditionalProperties != nil {
+		value, found = a.AdditionalProperties[fieldName]
+	}
+	return
+}
+
+// Setter for additional properties for LoginResponse
+func (a *LoginResponse) Set(fieldName string, value interface{}) {
+	if a.AdditionalProperties == nil {
+		a.AdditionalProperties = make(map[string]interface{})
+	}
+	a.AdditionalProperties[fieldName] = value
+}
+
+// Override default JSON handling for LoginResponse to handle AdditionalProperties
+func (a *LoginResponse) UnmarshalJSON(b []byte) error {
+	object := make(map[string]json.RawMessage)
+	err := json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["accounts"]; found {
+		err = json.Unmarshal(raw, &a.Accounts)
+		if err != nil {
+			return fmt.Errorf("error reading 'accounts': %w", err)
+		}
+		delete(object, "accounts")
+	}
+
+	if raw, found := object["current_account"]; found {
+		err = json.Unmarshal(raw, &a.CurrentAccount)
+		if err != nil {
+			return fmt.Errorf("error reading 'current_account': %w", err)
+		}
+		delete(object, "current_account")
+	}
+
+	if raw, found := object["email"]; found {
+		err = json.Unmarshal(raw, &a.Email)
+		if err != nil {
+			return fmt.Errorf("error reading 'email': %w", err)
+		}
+		delete(object, "email")
+	}
+
+	if raw, found := object["name"]; found {
+		err = json.Unmarshal(raw, &a.Name)
+		if err != nil {
+			return fmt.Errorf("error reading 'name': %w", err)
+		}
+		delete(object, "name")
+	}
+
+	if raw, found := object["self_hosted"]; found {
+		err = json.Unmarshal(raw, &a.SelfHosted)
+		if err != nil {
+			return fmt.Errorf("error reading 'self_hosted': %w", err)
+		}
+		delete(object, "self_hosted")
+	}
+
+	if raw, found := object["token"]; found {
+		err = json.Unmarshal(raw, &a.Token)
+		if err != nil {
+			return fmt.Errorf("error reading 'token': %w", err)
+		}
+		delete(object, "token")
+	}
+
+	if len(object) != 0 {
+		a.AdditionalProperties = make(map[string]interface{})
+		for fieldName, fieldBuf := range object {
+			var fieldVal interface{}
+			err := json.Unmarshal(fieldBuf, &fieldVal)
+			if err != nil {
+				return fmt.Errorf("error unmarshaling field %s: %w", fieldName, err)
+			}
+			a.AdditionalProperties[fieldName] = fieldVal
+		}
+	}
+	return nil
+}
+
+// Override default JSON handling for LoginResponse to handle AdditionalProperties
+func (a LoginResponse) MarshalJSON() ([]byte, error) {
+	var err error
+	object := make(map[string]json.RawMessage)
+
+	object["accounts"], err = json.Marshal(a.Accounts)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'accounts': %w", err)
+	}
+
+	object["current_account"], err = json.Marshal(a.CurrentAccount)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'current_account': %w", err)
+	}
+
+	object["email"], err = json.Marshal(a.Email)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'email': %w", err)
+	}
+
+	if a.Name != nil {
+		object["name"], err = json.Marshal(a.Name)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'name': %w", err)
+		}
+	}
+
+	if a.SelfHosted != nil {
+		object["self_hosted"], err = json.Marshal(a.SelfHosted)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'self_hosted': %w", err)
+		}
+	}
+
+	object["token"], err = json.Marshal(a.Token)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'token': %w", err)
+	}
+
+	for fieldName, field := range a.AdditionalProperties {
+		object[fieldName], err = json.Marshal(field)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling '%s': %w", fieldName, err)
+		}
+	}
+	return json.Marshal(object)
+}
+
+// AsScript returns the union data inside the LegacyActionResult as a Script
+func (t LegacyActionResult) AsScript() (Script, error) {
+	var body Script
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScript overwrites any union data inside the LegacyActionResult as the provided Script
+func (t *LegacyActionResult) FromScript(v Script) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScript performs a merge with any union data inside the LegacyActionResult, using the provided Script
+func (t *LegacyActionResult) MergeScript(v Script) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsLegacyActionResult1 returns the union data inside the LegacyActionResult as a LegacyActionResult1
+func (t LegacyActionResult) AsLegacyActionResult1() (LegacyActionResult1, error) {
+	var body LegacyActionResult1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromLegacyActionResult1 overwrites any union data inside the LegacyActionResult as the provided LegacyActionResult1
+func (t *LegacyActionResult) FromLegacyActionResult1(v LegacyActionResult1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeLegacyActionResult1 performs a merge with any union data inside the LegacyActionResult, using the provided LegacyActionResult1
+func (t *LegacyActionResult) MergeLegacyActionResult1(v LegacyActionResult1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t LegacyActionResult) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *LegacyActionResult) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
 }
 
 // RequestEditorFn  is the function signature for the RequestEditor callback function
@@ -119,11 +426,90 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
+	// InvokeLegacyAction request
+	InvokeLegacyAction(ctx context.Context, params *InvokeLegacyActionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// LoginWithPasswordWithBody request with any body
+	LoginWithPasswordWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	LoginWithPassword(ctx context.Context, body LoginWithPasswordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// LoginWithAccessKeyWithBody request with any body
+	LoginWithAccessKeyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	LoginWithAccessKey(ctx context.Context, body LoginWithAccessKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GetScript request
-	GetScript(ctx context.Context, scriptId int, reqEditors ...RequestEditorFn) (*http.Response, error)
+	GetScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ArchiveScript request
+	ArchiveScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RedactScript request
+	RedactScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *Client) GetScript(ctx context.Context, scriptId int, reqEditors ...RequestEditorFn) (*http.Response, error) {
+func (c *Client) InvokeLegacyAction(ctx context.Context, params *InvokeLegacyActionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewInvokeLegacyActionRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) LoginWithPasswordWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLoginWithPasswordRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) LoginWithPassword(ctx context.Context, body LoginWithPasswordJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLoginWithPasswordRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) LoginWithAccessKeyWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLoginWithAccessKeyRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) LoginWithAccessKey(ctx context.Context, body LoginWithAccessKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLoginWithAccessKeyRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetScriptRequest(c.Server, scriptId)
 	if err != nil {
 		return nil, err
@@ -135,8 +521,169 @@ func (c *Client) GetScript(ctx context.Context, scriptId int, reqEditors ...Requ
 	return c.Client.Do(req)
 }
 
+func (c *Client) ArchiveScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewArchiveScriptRequest(c.Server, scriptId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RedactScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRedactScriptRequest(c.Server, scriptId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// NewInvokeLegacyActionRequest generates requests for InvokeLegacyAction
+func NewInvokeLegacyActionRequest(server string, params *InvokeLegacyActionParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewLoginWithPasswordRequest calls the generic LoginWithPassword builder with application/json body
+func NewLoginWithPasswordRequest(server string, body LoginWithPasswordJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewLoginWithPasswordRequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewLoginWithPasswordRequestWithBody generates requests for LoginWithPassword with any type of body
+func NewLoginWithPasswordRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/login")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewLoginWithAccessKeyRequest calls the generic LoginWithAccessKey builder with application/json body
+func NewLoginWithAccessKeyRequest(server string, body LoginWithAccessKeyJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewLoginWithAccessKeyRequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewLoginWithAccessKeyRequestWithBody generates requests for LoginWithAccessKey with any type of body
+func NewLoginWithAccessKeyRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/login/access-key")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewGetScriptRequest generates requests for GetScript
-func NewGetScriptRequest(server string, scriptId int) (*http.Request, error) {
+func NewGetScriptRequest(server string, scriptId ScriptIdPathParam) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -151,7 +698,7 @@ func NewGetScriptRequest(server string, scriptId int) (*http.Request, error) {
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/scripts/%s", pathParam0)
+	operationPath := fmt.Sprintf("/api/scripts/%s", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -162,6 +709,74 @@ func NewGetScriptRequest(server string, scriptId int) (*http.Request, error) {
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewArchiveScriptRequest generates requests for ArchiveScript
+func NewArchiveScriptRequest(server string, scriptId ScriptIdPathParam) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "scriptId", runtime.ParamLocationPath, scriptId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/scripts/%s:archive", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRedactScriptRequest generates requests for RedactScript
+func NewRedactScriptRequest(server string, scriptId ScriptIdPathParam) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "scriptId", runtime.ParamLocationPath, scriptId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/scripts/%s:redact", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -212,15 +827,107 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
+	// InvokeLegacyActionWithResponse request
+	InvokeLegacyActionWithResponse(ctx context.Context, params *InvokeLegacyActionParams, reqEditors ...RequestEditorFn) (*InvokeLegacyActionResponse, error)
+
+	// LoginWithPasswordWithBodyWithResponse request with any body
+	LoginWithPasswordWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LoginWithPasswordResponse, error)
+
+	LoginWithPasswordWithResponse(ctx context.Context, body LoginWithPasswordJSONRequestBody, reqEditors ...RequestEditorFn) (*LoginWithPasswordResponse, error)
+
+	// LoginWithAccessKeyWithBodyWithResponse request with any body
+	LoginWithAccessKeyWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LoginWithAccessKeyResponse, error)
+
+	LoginWithAccessKeyWithResponse(ctx context.Context, body LoginWithAccessKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*LoginWithAccessKeyResponse, error)
+
 	// GetScriptWithResponse request
-	GetScriptWithResponse(ctx context.Context, scriptId int, reqEditors ...RequestEditorFn) (*GetScriptResponse, error)
+	GetScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*GetScriptResponse, error)
+
+	// ArchiveScriptWithResponse request
+	ArchiveScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*ArchiveScriptResponse, error)
+
+	// RedactScriptWithResponse request
+	RedactScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*RedactScriptResponse, error)
+}
+
+type InvokeLegacyActionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON404      *NotFound
+}
+
+// Status returns HTTPResponse.Status
+func (r InvokeLegacyActionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r InvokeLegacyActionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type LoginWithPasswordResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LoginResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+}
+
+// Status returns HTTPResponse.Status
+func (r LoginWithPasswordResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r LoginWithPasswordResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type LoginWithAccessKeyResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LoginResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+}
+
+// Status returns HTTPResponse.Status
+func (r LoginWithAccessKeyResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r LoginWithAccessKeyResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
 }
 
 type GetScriptResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *GetScriptResponse
-	JSON404      *UnauthorizedError
+	JSON200      *Script
+	JSON404      *ScriptNotFound
 }
 
 // Status returns HTTPResponse.Status
@@ -239,13 +946,247 @@ func (r GetScriptResponse) StatusCode() int {
 	return 0
 }
 
+type ArchiveScriptResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON401      *Unauthorized
+	JSON404      *ScriptNotFound
+}
+
+// Status returns HTTPResponse.Status
+func (r ArchiveScriptResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ArchiveScriptResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RedactScriptResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON401      *Unauthorized
+	JSON404      *ScriptNotFound
+}
+
+// Status returns HTTPResponse.Status
+func (r RedactScriptResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RedactScriptResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// InvokeLegacyActionWithResponse request returning *InvokeLegacyActionResponse
+func (c *ClientWithResponses) InvokeLegacyActionWithResponse(ctx context.Context, params *InvokeLegacyActionParams, reqEditors ...RequestEditorFn) (*InvokeLegacyActionResponse, error) {
+	rsp, err := c.InvokeLegacyAction(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseInvokeLegacyActionResponse(rsp)
+}
+
+// LoginWithPasswordWithBodyWithResponse request with arbitrary body returning *LoginWithPasswordResponse
+func (c *ClientWithResponses) LoginWithPasswordWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LoginWithPasswordResponse, error) {
+	rsp, err := c.LoginWithPasswordWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseLoginWithPasswordResponse(rsp)
+}
+
+func (c *ClientWithResponses) LoginWithPasswordWithResponse(ctx context.Context, body LoginWithPasswordJSONRequestBody, reqEditors ...RequestEditorFn) (*LoginWithPasswordResponse, error) {
+	rsp, err := c.LoginWithPassword(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseLoginWithPasswordResponse(rsp)
+}
+
+// LoginWithAccessKeyWithBodyWithResponse request with arbitrary body returning *LoginWithAccessKeyResponse
+func (c *ClientWithResponses) LoginWithAccessKeyWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LoginWithAccessKeyResponse, error) {
+	rsp, err := c.LoginWithAccessKeyWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseLoginWithAccessKeyResponse(rsp)
+}
+
+func (c *ClientWithResponses) LoginWithAccessKeyWithResponse(ctx context.Context, body LoginWithAccessKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*LoginWithAccessKeyResponse, error) {
+	rsp, err := c.LoginWithAccessKey(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseLoginWithAccessKeyResponse(rsp)
+}
+
 // GetScriptWithResponse request returning *GetScriptResponse
-func (c *ClientWithResponses) GetScriptWithResponse(ctx context.Context, scriptId int, reqEditors ...RequestEditorFn) (*GetScriptResponse, error) {
+func (c *ClientWithResponses) GetScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*GetScriptResponse, error) {
 	rsp, err := c.GetScript(ctx, scriptId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
 	return ParseGetScriptResponse(rsp)
+}
+
+// ArchiveScriptWithResponse request returning *ArchiveScriptResponse
+func (c *ClientWithResponses) ArchiveScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*ArchiveScriptResponse, error) {
+	rsp, err := c.ArchiveScript(ctx, scriptId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseArchiveScriptResponse(rsp)
+}
+
+// RedactScriptWithResponse request returning *RedactScriptResponse
+func (c *ClientWithResponses) RedactScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*RedactScriptResponse, error) {
+	rsp, err := c.RedactScript(ctx, scriptId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRedactScriptResponse(rsp)
+}
+
+// ParseInvokeLegacyActionResponse parses an HTTP response from a InvokeLegacyActionWithResponse call
+func ParseInvokeLegacyActionResponse(rsp *http.Response) (*InvokeLegacyActionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &InvokeLegacyActionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest NotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseLoginWithPasswordResponse parses an HTTP response from a LoginWithPasswordWithResponse call
+func ParseLoginWithPasswordResponse(rsp *http.Response) (*LoginWithPasswordResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &LoginWithPasswordResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LoginResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseLoginWithAccessKeyResponse parses an HTTP response from a LoginWithAccessKeyWithResponse call
+func ParseLoginWithAccessKeyResponse(rsp *http.Response) (*LoginWithAccessKeyResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &LoginWithAccessKeyResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LoginResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	}
+
+	return response, nil
 }
 
 // ParseGetScriptResponse parses an HTTP response from a GetScriptWithResponse call
@@ -263,14 +1204,80 @@ func ParseGetScriptResponse(rsp *http.Response) (*GetScriptResponse, error) {
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GetScriptResponse
+		var dest Script
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest UnauthorizedError
+		var dest ScriptNotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseArchiveScriptResponse parses an HTTP response from a ArchiveScriptWithResponse call
+func ParseArchiveScriptResponse(rsp *http.Response) (*ArchiveScriptResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ArchiveScriptResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ScriptNotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRedactScriptResponse parses an HTTP response from a RedactScriptWithResponse call
+func ParseRedactScriptResponse(rsp *http.Response) (*RedactScriptResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RedactScriptResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ScriptNotFound
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
