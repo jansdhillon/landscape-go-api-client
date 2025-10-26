@@ -115,10 +115,10 @@ func NewLandscapeAPIClient(apiURL string, loginProvider LoginProvider) (*ClientW
 	return NewClientWithResponses(apiURL, WithRequestEditorFn(authEditor))
 }
 
-// NewLegacyLandscapeAPIActionParams is a helper to call legacy API
+// LegacyActionParams is a helper to call legacy API
 // actions by creating a pointer to a InvokeLegacyActionParams with
 // the hardcoded version, as well as the provided action.
-func NewLegacyLandscapeAPIActionParams(action string) *InvokeLegacyActionParams {
+func LegacyActionParams(action string) *InvokeLegacyActionParams {
 	return &InvokeLegacyActionParams{
 		Action:  action,
 		Version: "2011-08-01",
@@ -130,7 +130,6 @@ func NewLegacyLandscapeAPIActionParams(action string) *InvokeLegacyActionParams 
 // URL.
 func EncodeQueryRequestEditor(values url.Values) RequestEditorFn {
 	return func(ctx context.Context, req *http.Request) error {
-		// start from the existing query values
 		query := req.URL.Query()
 
 		for k, v := range values {
@@ -141,7 +140,6 @@ func EncodeQueryRequestEditor(values url.Values) RequestEditorFn {
 			}
 		}
 
-		// write the encoded query back to the request URL
 		req.URL.RawQuery = query.Encode()
 
 		return nil
