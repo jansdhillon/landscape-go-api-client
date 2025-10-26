@@ -1,4 +1,4 @@
-module github.com/jansdhillon/landscape-go-client
+module github.com/jansdhillon/landscape-go-api-client
 
 go 1.24.6
 

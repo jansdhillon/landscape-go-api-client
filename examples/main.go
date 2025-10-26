@@ -8,7 +8,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/jansdhillon/landscape-go-client/client"
+	"github.com/jansdhillon/landscape-go-api-client/client"
 )
 
 func main() {
