@@ -175,27 +175,6 @@ func TestInvokeLegacyAction(t *testing.T) {
 
 	baseURL := server.URL
 
-	makeParams := func(action string) *InvokeLegacyActionParams {
-		return &InvokeLegacyActionParams{
-			Version: "2011-08-01",
-			Action:  action,
-		}
-	}
-
-	withQuery := func(values url.Values) RequestEditorFn {
-		return func(ctx context.Context, req *http.Request) error {
-			query := req.URL.Query()
-			for key, vals := range values {
-				query.Del(key)
-				for _, v := range vals {
-					query.Add(key, v)
-				}
-			}
-			req.URL.RawQuery = query.Encode()
-			return nil
-		}
-	}
-
 	t.Run("missing version", func(t *testing.T) {
 		client, err := NewClient(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
 		if err != nil {
@@ -215,7 +194,7 @@ func TestInvokeLegacyAction(t *testing.T) {
 		resp, err := client.InvokeLegacyAction(
 			context.Background(),
 			params,
-			withQuery(queryValues),
+			EncodeQueryRequestEditor(queryValues),
 		)
 		if err != nil {
 			t.Fatalf("InvokeLegacyAction returned error: %v", err)
@@ -246,7 +225,7 @@ func TestInvokeLegacyAction(t *testing.T) {
 		resp, err := client.InvokeLegacyAction(
 			context.Background(),
 			params,
-			withQuery(queryValues),
+			EncodeQueryRequestEditor(queryValues),
 		)
 		if err != nil {
 			t.Fatalf("InvokeLegacyAction returned error: %v", err)
@@ -269,7 +248,7 @@ func TestInvokeLegacyAction(t *testing.T) {
 			t.Fatalf("failed to init client: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyAction(context.Background(), makeParams("CreateScript"), withQuery(values))
+		resp, err := client.InvokeLegacyAction(context.Background(), NewLegacyLandscapeAPIActionParams("CreateScript"), EncodeQueryRequestEditor(values))
 		if err != nil {
 			t.Fatalf("InvokeLegacyAction failed: %v", err)
 		}
@@ -300,7 +279,7 @@ func TestInvokeLegacyAction(t *testing.T) {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), makeParams("CreateScript"), withQuery(values))
+		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), NewLegacyLandscapeAPIActionParams("CreateScript"), EncodeQueryRequestEditor(values))
 		if err != nil {
 			t.Fatalf("InvokeLegacyActionWithResponse failed: %v", err)
 		}
@@ -334,7 +313,7 @@ func TestInvokeLegacyAction(t *testing.T) {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), makeParams("EditScript"), withQuery(values))
+		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), NewLegacyLandscapeAPIActionParams("EditScript"), EncodeQueryRequestEditor(values))
 		if err != nil {
 			t.Fatalf("InvokeLegacyActionWithResponse failed: %v", err)
 		}
@@ -368,7 +347,7 @@ func TestInvokeLegacyAction(t *testing.T) {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), makeParams("CopyScript"), withQuery(values))
+		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), NewLegacyLandscapeAPIActionParams("CopyScript"), EncodeQueryRequestEditor(values))
 		if err != nil {
 			t.Fatalf("InvokeLegacyActionWithResponse failed: %v", err)
 		}
@@ -401,7 +380,7 @@ func TestInvokeLegacyAction(t *testing.T) {
 			t.Fatalf("failed to init client: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyAction(context.Background(), makeParams("RemoveScript"), withQuery(values))
+		resp, err := client.InvokeLegacyAction(context.Background(), NewLegacyLandscapeAPIActionParams("RemoveScript"), EncodeQueryRequestEditor(values))
 		if err != nil {
 			t.Fatalf("InvokeLegacyAction failed: %v", err)
 		}
@@ -423,7 +402,7 @@ func TestInvokeLegacyAction(t *testing.T) {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), makeParams("RemoveScriptAttachment"), withQuery(values))
+		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), NewLegacyLandscapeAPIActionParams("RemoveScriptAttachment"), EncodeQueryRequestEditor(values))
 		if err != nil {
 			t.Fatalf("InvokeLegacyActionWithResponse failed: %v", err)
 		}
@@ -448,7 +427,7 @@ func TestInvokeLegacyAction(t *testing.T) {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), makeParams("CreateScriptAttachment"), withQuery(values))
+		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), NewLegacyLandscapeAPIActionParams("CreateScriptAttachment"), EncodeQueryRequestEditor(values))
 		if err != nil {
 			t.Fatalf("InvokeLegacyActionWithResponse failed: %v", err)
 		}

@@ -67,10 +67,13 @@ type LoginAccount struct {
 
 // LoginRequest defines model for LoginRequest.
 type LoginRequest struct {
-	// Email Email address used to authenticate with Landscape.
+	// Account The account to login into (optional).
+	Account *string `json:"account"`
+
+	// Email Email address used to authenticate with Landscape Server.
 	Email openapi_types.Email `json:"email"`
 
-	// Password Account password associated with the provided email.
+	// Password Password associated with the provided email.
 	Password string `json:"password"`
 }
 
