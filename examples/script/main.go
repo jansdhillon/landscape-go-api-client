@@ -61,7 +61,8 @@ func main() {
 		log.Printf("script code: %s", *scriptRes.JSON200.Code)
 	}
 	if scriptRes.JSON200.Attachments != nil {
-		log.Printf("script attachments: %v", *scriptRes.JSON200.Attachments...)
+		log.Printf("script attachments: %s", scriptRes.JSON200.Attachments)
+
 	}
 
 	editParams := client.LegacyActionParams("EditScript")
@@ -103,7 +104,7 @@ func main() {
 		log.Printf("edited script code: %s", *editedScript.Code)
 	}
 	if editedScript.Attachments != nil {
-		log.Printf("edited script attachments: %v", *editedScript.Attachments...)
+		log.Printf("edited script attachments: %s", editedScript.Attachments)
 	}
 
 }

@@ -21,6 +21,14 @@ const (
 	BearerAuthScopes = "bearerAuth.Scopes"
 )
 
+// Defines values for ScriptStatus.
+const (
+	ACTIVE   ScriptStatus = "ACTIVE"
+	ARCHIVED ScriptStatus = "ARCHIVED"
+	REDACTED ScriptStatus = "REDACTED"
+	V1       ScriptStatus = "V1"
+)
+
 // AccessKeyLoginRequest defines model for AccessKeyLoginRequest.
 type AccessKeyLoginRequest struct {
 	// AccessKey Access key issued for API authentication.
@@ -101,23 +109,61 @@ type LoginResponse struct {
 
 // Script defines model for Script.
 type Script struct {
-	AccessGroup    *string        `json:"access_group,omitempty" tfsdk:"access_group"`
-	Attachments    *[]interface{} `json:"attachments,omitempty" tfsdk:"attachments"`
-	Code           *string        `json:"code,omitempty" tfsdk:"code"`
-	CreatedAt      *string        `json:"created_at,omitempty" tfsdk:"created_at"`
-	CreatedBy      *string        `json:"created_by,omitempty" tfsdk:"created_by"`
-	Id             int            `json:"id" tfsdk:"id"`
-	Interpreter    *string        `json:"interpreter,omitempty" tfsdk:"interpreter"`
-	IsEditable     *bool          `json:"is_editable,omitempty" tfsdk:"is_editable"`
-	IsExecutable   *bool          `json:"is_executable,omitempty" tfsdk:"is_executable"`
-	IsRedactable   *bool          `json:"is_redactable,omitempty" tfsdk:"is_redactable"`
-	LastEditedBy   *string        `json:"last_edited_by,omitempty" tfsdk:"last_edited_by"`
-	ScriptProfiles *[]interface{} `json:"script_profiles,omitempty" tfsdk:"script_profiles"`
-	Status         *string        `json:"status,omitempty" tfsdk:"status"`
-	TimeLimit      *int           `json:"time_limit,omitempty" tfsdk:"time_limit"`
-	Title          string         `json:"title" tfsdk:"title"`
-	Username       *string        `json:"username,omitempty" tfsdk:"username"`
-	Version        *int           `json:"version,omitempty" tfsdk:"version"`
+	AccessGroup    *string                    `json:"access_group,omitempty" tfsdk:"access_group"`
+	Attachments    *[]Script_Attachments_Item `json:"attachments" tfsdk:"attachments"`
+	Code           *string                    `json:"code" tfsdk:"code"`
+	CreatedAt      *string                    `json:"created_at" tfsdk:"created_at"`
+	CreatedBy      *ScriptCreator             `json:"created_by,omitempty" tfsdk:"created_by"`
+	Id             int                        `json:"id" tfsdk:"id"`
+	Interpreter    *string                    `json:"interpreter" tfsdk:"interpreter"`
+	IsEditable     *bool                      `json:"is_editable" tfsdk:"is_editable"`
+	IsExecutable   *bool                      `json:"is_executable" tfsdk:"is_executable"`
+	IsRedactable   *bool                      `json:"is_redactable" tfsdk:"is_redactable"`
+	LastEditedAt   *string                    `json:"last_edited_at" tfsdk:"last_edited_at"`
+	LastEditedBy   *Script_LastEditedBy       `json:"last_edited_by" tfsdk:"last_edited_by"`
+	ScriptProfiles *[]ScriptProfile           `json:"script_profiles" tfsdk:"script_profiles"`
+	Status         ScriptStatus               `json:"status" tfsdk:"status"`
+	TimeLimit      *int                       `json:"time_limit,omitempty" tfsdk:"time_limit"`
+	Title          string                     `json:"title" tfsdk:"title"`
+	Username       *string                    `json:"username" tfsdk:"username"`
+	VersionNumber  *int                       `json:"version_number" tfsdk:"version_number"`
+}
+
+// ScriptAttachments1 defines model for .
+type ScriptAttachments1 = int
+
+// Script_Attachments_Item defines model for Script.attachments.Item.
+type Script_Attachments_Item struct {
+	union json.RawMessage
+}
+
+// ScriptLastEditedBy1 defines model for .
+type ScriptLastEditedBy1 = string
+
+// Script_LastEditedBy defines model for Script.LastEditedBy.
+type Script_LastEditedBy struct {
+	union json.RawMessage
+}
+
+// ScriptStatus defines model for Script.Status.
+type ScriptStatus string
+
+// ScriptAttachment defines model for ScriptAttachment.
+type ScriptAttachment struct {
+	Filename string `json:"filename" tfsdk:"filename"`
+	Id       int    `json:"id" tfsdk:"id"`
+}
+
+// ScriptCreator defines model for ScriptCreator.
+type ScriptCreator struct {
+	Id   *int    `json:"id" tfsdk:"id"`
+	Name *string `json:"name" tfsdk:"name"`
+}
+
+// ScriptProfile defines model for ScriptProfile.
+type ScriptProfile struct {
+	Id    int    `json:"id" tfsdk:"id"`
+	Title string `json:"title" tfsdk:"title"`
 }
 
 // LegacyActionParam defines model for LegacyActionParam.
@@ -352,6 +398,130 @@ func (t LegacyActionResult) MarshalJSON() ([]byte, error) {
 }
 
 func (t *LegacyActionResult) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsScriptAttachment returns the union data inside the Script_Attachments_Item as a ScriptAttachment
+func (t Script_Attachments_Item) AsScriptAttachment() (ScriptAttachment, error) {
+	var body ScriptAttachment
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptAttachment overwrites any union data inside the Script_Attachments_Item as the provided ScriptAttachment
+func (t *Script_Attachments_Item) FromScriptAttachment(v ScriptAttachment) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptAttachment performs a merge with any union data inside the Script_Attachments_Item, using the provided ScriptAttachment
+func (t *Script_Attachments_Item) MergeScriptAttachment(v ScriptAttachment) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsScriptAttachments1 returns the union data inside the Script_Attachments_Item as a ScriptAttachments1
+func (t Script_Attachments_Item) AsScriptAttachments1() (ScriptAttachments1, error) {
+	var body ScriptAttachments1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptAttachments1 overwrites any union data inside the Script_Attachments_Item as the provided ScriptAttachments1
+func (t *Script_Attachments_Item) FromScriptAttachments1(v ScriptAttachments1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptAttachments1 performs a merge with any union data inside the Script_Attachments_Item, using the provided ScriptAttachments1
+func (t *Script_Attachments_Item) MergeScriptAttachments1(v ScriptAttachments1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t Script_Attachments_Item) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *Script_Attachments_Item) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsScriptCreator returns the union data inside the Script_LastEditedBy as a ScriptCreator
+func (t Script_LastEditedBy) AsScriptCreator() (ScriptCreator, error) {
+	var body ScriptCreator
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptCreator overwrites any union data inside the Script_LastEditedBy as the provided ScriptCreator
+func (t *Script_LastEditedBy) FromScriptCreator(v ScriptCreator) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptCreator performs a merge with any union data inside the Script_LastEditedBy, using the provided ScriptCreator
+func (t *Script_LastEditedBy) MergeScriptCreator(v ScriptCreator) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsScriptLastEditedBy1 returns the union data inside the Script_LastEditedBy as a ScriptLastEditedBy1
+func (t Script_LastEditedBy) AsScriptLastEditedBy1() (ScriptLastEditedBy1, error) {
+	var body ScriptLastEditedBy1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptLastEditedBy1 overwrites any union data inside the Script_LastEditedBy as the provided ScriptLastEditedBy1
+func (t *Script_LastEditedBy) FromScriptLastEditedBy1(v ScriptLastEditedBy1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptLastEditedBy1 performs a merge with any union data inside the Script_LastEditedBy, using the provided ScriptLastEditedBy1
+func (t *Script_LastEditedBy) MergeScriptLastEditedBy1(v ScriptLastEditedBy1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t Script_LastEditedBy) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *Script_LastEditedBy) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
