@@ -24,16 +24,16 @@ const (
 // AccessKeyLoginRequest defines model for AccessKeyLoginRequest.
 type AccessKeyLoginRequest struct {
 	// AccessKey Access key issued for API authentication.
-	AccessKey string `json:"access_key"`
+	AccessKey string `json:"access_key" tfsdk:"access_key"`
 
 	// SecretKey Secret key paired with the access key.
-	SecretKey string `json:"secret_key"`
+	SecretKey string `json:"secret_key" tfsdk:"secret_key"`
 }
 
 // Error defines model for Error.
 type Error struct {
-	Code    *int    `json:"code,omitempty"`
-	Message *string `json:"message,omitempty"`
+	Code    *int    `json:"code,omitempty" tfsdk:"code"`
+	Message *string `json:"message,omitempty" tfsdk:"message"`
 }
 
 // LegacyActionResult defines model for LegacyActionResult.
@@ -44,80 +44,80 @@ type LegacyActionResult struct {
 // LegacyActionResult1 defines model for .
 type LegacyActionResult1 struct {
 	// Filename Name of the attachment that was created.
-	Filename string `json:"filename"`
+	Filename string `json:"filename" tfsdk:"filename"`
 }
 
 // LoginAccount defines model for LoginAccount.
 type LoginAccount struct {
 	// ClassicDashboardUrl URL of the classic dashboard for the account.
-	ClassicDashboardUrl *string `json:"classic_dashboard_url,omitempty"`
+	ClassicDashboardUrl *string `json:"classic_dashboard_url,omitempty" tfsdk:"classic_dashboard_url"`
 
 	// Default Indicates whether this is the default account.
-	Default bool `json:"default"`
+	Default bool `json:"default" tfsdk:"default"`
 
 	// Name Internal account identifier.
-	Name string `json:"name"`
+	Name string `json:"name" tfsdk:"name"`
 
 	// Subdomain Optional subdomain assigned to the account.
-	Subdomain *string `json:"subdomain"`
+	Subdomain *string `json:"subdomain" tfsdk:"subdomain"`
 
 	// Title Display name for the account.
-	Title string `json:"title"`
+	Title string `json:"title" tfsdk:"title"`
 }
 
 // LoginRequest defines model for LoginRequest.
 type LoginRequest struct {
 	// Account The account to login into (optional).
-	Account *string `json:"account"`
+	Account *string `json:"account" tfsdk:"account"`
 
 	// Email Email address used to authenticate with Landscape Server.
-	Email openapi_types.Email `json:"email"`
+	Email openapi_types.Email `json:"email" tfsdk:"email"`
 
 	// Password Password associated with the provided email.
-	Password string `json:"password"`
+	Password string `json:"password" tfsdk:"password"`
 }
 
 // LoginResponse defines model for LoginResponse.
 type LoginResponse struct {
 	// Accounts Accounts available to the authenticated user.
-	Accounts []LoginAccount `json:"accounts"`
+	Accounts []LoginAccount `json:"accounts" tfsdk:"accounts"`
 
 	// CurrentAccount Identifier of the account in current use.
-	CurrentAccount string `json:"current_account"`
+	CurrentAccount string `json:"current_account" tfsdk:"current_account"`
 
 	// Email Email address of the authenticated user.
-	Email openapi_types.Email `json:"email"`
+	Email openapi_types.Email `json:"email" tfsdk:"email"`
 
 	// Name Display name of the authenticated user.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name,omitempty" tfsdk:"name"`
 
 	// SelfHosted Indicates whether the Landscape deployment is self hosted.
-	SelfHosted *bool `json:"self_hosted,omitempty"`
+	SelfHosted *bool `json:"self_hosted,omitempty" tfsdk:"self_hosted"`
 
 	// Token JWT used to authorize subsequent API requests.
-	Token                string                 `json:"token"`
+	Token                string                 `json:"token" tfsdk:"token"`
 	AdditionalProperties map[string]interface{} `json:"-"`
 }
 
 // Script defines model for Script.
 type Script struct {
-	AccessGroup    *string        `json:"accessGroup,omitempty"`
-	Attachments    *[]interface{} `json:"attachments,omitempty"`
-	Code           *string        `json:"code,omitempty"`
-	CreatedAt      *string        `json:"createdAt,omitempty"`
-	CreatedBy      *string        `json:"createdBy,omitempty"`
-	Id             int            `json:"id"`
-	Interpreter    *string        `json:"interpreter,omitempty"`
-	IsEditable     *bool          `json:"isEditable,omitempty"`
-	IsExecutable   *bool          `json:"isExecutable,omitempty"`
-	IsRedactable   *bool          `json:"isRedactable,omitempty"`
-	LastEditedBy   *string        `json:"lastEditedBy,omitempty"`
-	ScriptProfiles *[]interface{} `json:"scriptProfiles,omitempty"`
-	Status         *string        `json:"status,omitempty"`
-	TimeLimit      *int           `json:"timeLimit,omitempty"`
-	Title          string         `json:"title"`
-	Username       *string        `json:"username,omitempty"`
-	Version        *int           `json:"version,omitempty"`
+	AccessGroup    *string        `json:"access_group,omitempty" tfsdk:"access_group"`
+	Attachments    *[]interface{} `json:"attachments,omitempty" tfsdk:"attachments"`
+	Code           *string        `json:"code,omitempty" tfsdk:"code"`
+	CreatedAt      *string        `json:"created_at,omitempty" tfsdk:"created_at"`
+	CreatedBy      *string        `json:"created_by,omitempty" tfsdk:"created_by"`
+	Id             int            `json:"id" tfsdk:"id"`
+	Interpreter    *string        `json:"interpreter,omitempty" tfsdk:"interpreter"`
+	IsEditable     *bool          `json:"is_editable,omitempty" tfsdk:"is_editable"`
+	IsExecutable   *bool          `json:"is_executable,omitempty" tfsdk:"is_executable"`
+	IsRedactable   *bool          `json:"is_redactable,omitempty" tfsdk:"is_redactable"`
+	LastEditedBy   *string        `json:"last_edited_by,omitempty" tfsdk:"last_edited_by"`
+	ScriptProfiles *[]interface{} `json:"script_profiles,omitempty" tfsdk:"script_profiles"`
+	Status         *string        `json:"status,omitempty" tfsdk:"status"`
+	TimeLimit      *int           `json:"time_limit,omitempty" tfsdk:"time_limit"`
+	Title          string         `json:"title" tfsdk:"title"`
+	Username       *string        `json:"username,omitempty" tfsdk:"username"`
+	Version        *int           `json:"version,omitempty" tfsdk:"version"`
 }
 
 // LegacyActionParam defines model for LegacyActionParam.
@@ -691,7 +691,7 @@ func NewGetScriptRequest(server string, scriptId ScriptIdPathParam) (*http.Reque
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "scriptId", runtime.ParamLocationPath, scriptId)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "script_id", runtime.ParamLocationPath, scriptId)
 	if err != nil {
 		return nil, err
 	}
@@ -725,7 +725,7 @@ func NewArchiveScriptRequest(server string, scriptId ScriptIdPathParam) (*http.R
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "scriptId", runtime.ParamLocationPath, scriptId)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "script_id", runtime.ParamLocationPath, scriptId)
 	if err != nil {
 		return nil, err
 	}
@@ -759,7 +759,7 @@ func NewRedactScriptRequest(server string, scriptId ScriptIdPathParam) (*http.Re
 
 	var pathParam0 string
 
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "scriptId", runtime.ParamLocationPath, scriptId)
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "script_id", runtime.ParamLocationPath, scriptId)
 	if err != nil {
 		return nil, err
 	}
