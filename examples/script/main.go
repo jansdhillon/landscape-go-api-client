@@ -61,7 +61,7 @@ func main() {
 		log.Printf("script code: %s", *scriptRes.JSON200.Code)
 	}
 	if scriptRes.JSON200.Attachments != nil {
-		log.Printf("script attachments: %s", scriptRes.JSON200.Attachments)
+		log.Printf("script attachments: %s", *scriptRes.JSON200.Attachments)
 
 	}
 

@@ -55,11 +55,6 @@ type LegacyActionResult1 struct {
 	Filename string `json:"filename" tfsdk:"filename"`
 }
 
-// LegacyScriptAttachments defines model for LegacyScriptAttachments.
-type LegacyScriptAttachments struct {
-	Filename string `json:"filename" tfsdk:"filename"`
-}
-
 // LegacyScriptCreator defines model for LegacyScriptCreator.
 type LegacyScriptCreator struct {
 	Email *openapi_types.Email `json:"email" tfsdk:"email"`
@@ -141,6 +136,9 @@ type Script struct {
 	Username       *string                    `json:"username" tfsdk:"username"`
 	VersionNumber  *int                       `json:"version_number" tfsdk:"version_number"`
 }
+
+// ScriptAttachments0 defines model for .
+type ScriptAttachments0 = string
 
 // Script_Attachments_Item defines model for Script.attachments.Item.
 type Script_Attachments_Item struct {
@@ -409,6 +407,32 @@ func (t *LegacyActionResult) UnmarshalJSON(b []byte) error {
 	return err
 }
 
+// AsScriptAttachments0 returns the union data inside the Script_Attachments_Item as a ScriptAttachments0
+func (t Script_Attachments_Item) AsScriptAttachments0() (ScriptAttachments0, error) {
+	var body ScriptAttachments0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptAttachments0 overwrites any union data inside the Script_Attachments_Item as the provided ScriptAttachments0
+func (t *Script_Attachments_Item) FromScriptAttachments0(v ScriptAttachments0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptAttachments0 performs a merge with any union data inside the Script_Attachments_Item, using the provided ScriptAttachments0
+func (t *Script_Attachments_Item) MergeScriptAttachments0(v ScriptAttachments0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 // AsScriptAttachments returns the union data inside the Script_Attachments_Item as a ScriptAttachments
 func (t Script_Attachments_Item) AsScriptAttachments() (ScriptAttachments, error) {
 	var body ScriptAttachments
@@ -425,32 +449,6 @@ func (t *Script_Attachments_Item) FromScriptAttachments(v ScriptAttachments) err
 
 // MergeScriptAttachments performs a merge with any union data inside the Script_Attachments_Item, using the provided ScriptAttachments
 func (t *Script_Attachments_Item) MergeScriptAttachments(v ScriptAttachments) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsLegacyScriptAttachments returns the union data inside the Script_Attachments_Item as a LegacyScriptAttachments
-func (t Script_Attachments_Item) AsLegacyScriptAttachments() (LegacyScriptAttachments, error) {
-	var body LegacyScriptAttachments
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromLegacyScriptAttachments overwrites any union data inside the Script_Attachments_Item as the provided LegacyScriptAttachments
-func (t *Script_Attachments_Item) FromLegacyScriptAttachments(v LegacyScriptAttachments) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeLegacyScriptAttachments performs a merge with any union data inside the Script_Attachments_Item, using the provided LegacyScriptAttachments
-func (t *Script_Attachments_Item) MergeLegacyScriptAttachments(v LegacyScriptAttachments) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
