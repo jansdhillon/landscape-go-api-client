@@ -70,7 +70,7 @@ func main() {
 	enc := base64.StdEncoding.EncodeToString([]byte(raw))
 	queryArgsEditorFn := client.EncodeQueryRequestEditor(url.Values{
 		"script_id": []string{scriptId},
-		"title":     []string{"goodbyeworld2"},
+		"title":     []string{"goodbyeworld5"},
 		"code":      []string{enc},
 	})
 
@@ -88,7 +88,7 @@ func main() {
 		log.Fatalf("legacy action failed: status=%d body=%s", editedScriptRes.StatusCode(), string(editedScriptRes.Body))
 	}
 
-	log.Printf("raw script response: %s", editedScriptRes.Body)
+	log.Printf("raw edit script response: %s", editedScriptRes.Body)
 
 	if editedScriptRes.JSON200 == nil {
 		log.Fatalf("legacy action did not return a script object: %s", string(editedScriptRes.Body))
@@ -105,6 +105,17 @@ func main() {
 	}
 	if editedScript.Attachments != nil {
 		log.Printf("edited script attachments: %s", editedScript.Attachments)
+	}
+
+	if editedScript.CreatedBy != nil {
+		log.Printf("edited CreatedBy name: %s", *editedScript.CreatedBy.Name)
+		log.Printf("edited CreatedBy id: %d", *editedScript.CreatedBy.Id)
+	}
+
+	if editedScript.Creator != nil {
+		log.Printf("edited creator email: %s", *editedScript.Creator.Email)
+		log.Printf("edited creator id: %d", *editedScript.Creator.Id)
+		log.Printf("edited creator name: %s", *editedScript.Creator.Name)
 	}
 
 }

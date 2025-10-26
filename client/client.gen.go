@@ -55,6 +55,18 @@ type LegacyActionResult1 struct {
 	Filename string `json:"filename" tfsdk:"filename"`
 }
 
+// LegacyScriptAttachments defines model for LegacyScriptAttachments.
+type LegacyScriptAttachments struct {
+	Filename string `json:"filename" tfsdk:"filename"`
+}
+
+// LegacyScriptCreator defines model for LegacyScriptCreator.
+type LegacyScriptCreator struct {
+	Email *openapi_types.Email `json:"email" tfsdk:"email"`
+	Id    *int                 `json:"id" tfsdk:"id"`
+	Name  *string              `json:"name" tfsdk:"name"`
+}
+
 // LoginAccount defines model for LoginAccount.
 type LoginAccount struct {
 	// ClassicDashboardUrl URL of the classic dashboard for the account.
@@ -114,6 +126,7 @@ type Script struct {
 	Code           *string                    `json:"code" tfsdk:"code"`
 	CreatedAt      *string                    `json:"created_at" tfsdk:"created_at"`
 	CreatedBy      *ScriptCreator             `json:"created_by,omitempty" tfsdk:"created_by"`
+	Creator        *LegacyScriptCreator       `json:"creator,omitempty" tfsdk:"creator"`
 	Id             int                        `json:"id" tfsdk:"id"`
 	Interpreter    *string                    `json:"interpreter" tfsdk:"interpreter"`
 	IsEditable     *bool                      `json:"is_editable" tfsdk:"is_editable"`
@@ -129,16 +142,10 @@ type Script struct {
 	VersionNumber  *int                       `json:"version_number" tfsdk:"version_number"`
 }
 
-// ScriptAttachments1 defines model for .
-type ScriptAttachments1 = int
-
 // Script_Attachments_Item defines model for Script.attachments.Item.
 type Script_Attachments_Item struct {
 	union json.RawMessage
 }
-
-// ScriptLastEditedBy1 defines model for .
-type ScriptLastEditedBy1 = string
 
 // Script_LastEditedBy defines model for Script.LastEditedBy.
 type Script_LastEditedBy struct {
@@ -148,8 +155,8 @@ type Script_LastEditedBy struct {
 // ScriptStatus defines model for Script.Status.
 type ScriptStatus string
 
-// ScriptAttachment defines model for ScriptAttachment.
-type ScriptAttachment struct {
+// ScriptAttachments defines model for ScriptAttachments.
+type ScriptAttachments struct {
 	Filename string `json:"filename" tfsdk:"filename"`
 	Id       int    `json:"id" tfsdk:"id"`
 }
@@ -402,22 +409,22 @@ func (t *LegacyActionResult) UnmarshalJSON(b []byte) error {
 	return err
 }
 
-// AsScriptAttachment returns the union data inside the Script_Attachments_Item as a ScriptAttachment
-func (t Script_Attachments_Item) AsScriptAttachment() (ScriptAttachment, error) {
-	var body ScriptAttachment
+// AsScriptAttachments returns the union data inside the Script_Attachments_Item as a ScriptAttachments
+func (t Script_Attachments_Item) AsScriptAttachments() (ScriptAttachments, error) {
+	var body ScriptAttachments
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromScriptAttachment overwrites any union data inside the Script_Attachments_Item as the provided ScriptAttachment
-func (t *Script_Attachments_Item) FromScriptAttachment(v ScriptAttachment) error {
+// FromScriptAttachments overwrites any union data inside the Script_Attachments_Item as the provided ScriptAttachments
+func (t *Script_Attachments_Item) FromScriptAttachments(v ScriptAttachments) error {
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeScriptAttachment performs a merge with any union data inside the Script_Attachments_Item, using the provided ScriptAttachment
-func (t *Script_Attachments_Item) MergeScriptAttachment(v ScriptAttachment) error {
+// MergeScriptAttachments performs a merge with any union data inside the Script_Attachments_Item, using the provided ScriptAttachments
+func (t *Script_Attachments_Item) MergeScriptAttachments(v ScriptAttachments) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -428,22 +435,22 @@ func (t *Script_Attachments_Item) MergeScriptAttachment(v ScriptAttachment) erro
 	return err
 }
 
-// AsScriptAttachments1 returns the union data inside the Script_Attachments_Item as a ScriptAttachments1
-func (t Script_Attachments_Item) AsScriptAttachments1() (ScriptAttachments1, error) {
-	var body ScriptAttachments1
+// AsLegacyScriptAttachments returns the union data inside the Script_Attachments_Item as a LegacyScriptAttachments
+func (t Script_Attachments_Item) AsLegacyScriptAttachments() (LegacyScriptAttachments, error) {
+	var body LegacyScriptAttachments
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromScriptAttachments1 overwrites any union data inside the Script_Attachments_Item as the provided ScriptAttachments1
-func (t *Script_Attachments_Item) FromScriptAttachments1(v ScriptAttachments1) error {
+// FromLegacyScriptAttachments overwrites any union data inside the Script_Attachments_Item as the provided LegacyScriptAttachments
+func (t *Script_Attachments_Item) FromLegacyScriptAttachments(v LegacyScriptAttachments) error {
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeScriptAttachments1 performs a merge with any union data inside the Script_Attachments_Item, using the provided ScriptAttachments1
-func (t *Script_Attachments_Item) MergeScriptAttachments1(v ScriptAttachments1) error {
+// MergeLegacyScriptAttachments performs a merge with any union data inside the Script_Attachments_Item, using the provided LegacyScriptAttachments
+func (t *Script_Attachments_Item) MergeLegacyScriptAttachments(v LegacyScriptAttachments) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -490,22 +497,22 @@ func (t *Script_LastEditedBy) MergeScriptCreator(v ScriptCreator) error {
 	return err
 }
 
-// AsScriptLastEditedBy1 returns the union data inside the Script_LastEditedBy as a ScriptLastEditedBy1
-func (t Script_LastEditedBy) AsScriptLastEditedBy1() (ScriptLastEditedBy1, error) {
-	var body ScriptLastEditedBy1
+// AsLegacyScriptCreator returns the union data inside the Script_LastEditedBy as a LegacyScriptCreator
+func (t Script_LastEditedBy) AsLegacyScriptCreator() (LegacyScriptCreator, error) {
+	var body LegacyScriptCreator
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromScriptLastEditedBy1 overwrites any union data inside the Script_LastEditedBy as the provided ScriptLastEditedBy1
-func (t *Script_LastEditedBy) FromScriptLastEditedBy1(v ScriptLastEditedBy1) error {
+// FromLegacyScriptCreator overwrites any union data inside the Script_LastEditedBy as the provided LegacyScriptCreator
+func (t *Script_LastEditedBy) FromLegacyScriptCreator(v LegacyScriptCreator) error {
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeScriptLastEditedBy1 performs a merge with any union data inside the Script_LastEditedBy, using the provided ScriptLastEditedBy1
-func (t *Script_LastEditedBy) MergeScriptLastEditedBy1(v ScriptLastEditedBy1) error {
+// MergeLegacyScriptCreator performs a merge with any union data inside the Script_LastEditedBy, using the provided LegacyScriptCreator
+func (t *Script_LastEditedBy) MergeLegacyScriptCreator(v LegacyScriptCreator) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
