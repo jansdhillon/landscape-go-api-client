@@ -131,7 +131,7 @@ type Script struct {
 	IsExecutable   *bool                      `json:"is_executable" tfsdk:"is_executable"`
 	IsRedactable   *bool                      `json:"is_redactable" tfsdk:"is_redactable"`
 	LastEditedAt   *string                    `json:"last_edited_at" tfsdk:"last_edited_at"`
-	LastEditedBy   *Script_LastEditedBy       `json:"last_edited_by" tfsdk:"last_edited_by"`
+	LastEditedBy   *ScriptCreator             `json:"last_edited_by,omitempty" tfsdk:"created_by"`
 	ScriptProfiles *[]ScriptProfile           `json:"script_profiles" tfsdk:"script_profiles"`
 	Status         ScriptStatus               `json:"status" tfsdk:"status"`
 	TimeLimit      *int                       `json:"time_limit,omitempty" tfsdk:"time_limit"`
@@ -142,11 +142,6 @@ type Script struct {
 
 // Script_Attachments_Item defines model for Script.attachments.Item.
 type Script_Attachments_Item struct {
-	union json.RawMessage
-}
-
-// Script_LastEditedBy defines model for Script.LastEditedBy.
-type Script_LastEditedBy struct {
 	union json.RawMessage
 }
 
@@ -465,68 +460,6 @@ func (t Script_Attachments_Item) MarshalJSON() ([]byte, error) {
 }
 
 func (t *Script_Attachments_Item) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsScriptCreator returns the union data inside the Script_LastEditedBy as a ScriptCreator
-func (t Script_LastEditedBy) AsScriptCreator() (ScriptCreator, error) {
-	var body ScriptCreator
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromScriptCreator overwrites any union data inside the Script_LastEditedBy as the provided ScriptCreator
-func (t *Script_LastEditedBy) FromScriptCreator(v ScriptCreator) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeScriptCreator performs a merge with any union data inside the Script_LastEditedBy, using the provided ScriptCreator
-func (t *Script_LastEditedBy) MergeScriptCreator(v ScriptCreator) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsLegacyScriptCreator returns the union data inside the Script_LastEditedBy as a LegacyScriptCreator
-func (t Script_LastEditedBy) AsLegacyScriptCreator() (LegacyScriptCreator, error) {
-	var body LegacyScriptCreator
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromLegacyScriptCreator overwrites any union data inside the Script_LastEditedBy as the provided LegacyScriptCreator
-func (t *Script_LastEditedBy) FromLegacyScriptCreator(v LegacyScriptCreator) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeLegacyScriptCreator performs a merge with any union data inside the Script_LastEditedBy, using the provided LegacyScriptCreator
-func (t *Script_LastEditedBy) MergeLegacyScriptCreator(v LegacyScriptCreator) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t Script_LastEditedBy) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *Script_LastEditedBy) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
