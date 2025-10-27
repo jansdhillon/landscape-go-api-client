@@ -131,7 +131,7 @@ type Script struct {
 	IsExecutable   *bool                      `json:"is_executable" tfsdk:"is_executable"`
 	IsRedactable   *bool                      `json:"is_redactable" tfsdk:"is_redactable"`
 	LastEditedAt   *string                    `json:"last_edited_at" tfsdk:"last_edited_at"`
-	LastEditedBy   *ScriptCreator             `json:"last_edited_by,omitempty" tfsdk:"created_by"`
+	LastEditedBy   *ScriptEditor              `json:"last_edited_by,omitempty" tfsdk:"last_edited_by"`
 	ScriptProfiles *[]ScriptProfile           `json:"script_profiles" tfsdk:"script_profiles"`
 	Status         ScriptStatus               `json:"status" tfsdk:"status"`
 	TimeLimit      *int                       `json:"time_limit,omitempty" tfsdk:"time_limit"`
@@ -156,7 +156,19 @@ type ScriptAttachment struct {
 
 // ScriptCreator defines model for ScriptCreator.
 type ScriptCreator struct {
-	Id   *int    `json:"id" tfsdk:"id"`
+	// Id The ID of the person who created the script.
+	Id *int `json:"id" tfsdk:"id"`
+
+	// Name The name of the person who created the script.
+	Name *string `json:"name" tfsdk:"name"`
+}
+
+// ScriptEditor defines model for ScriptEditor.
+type ScriptEditor struct {
+	// Id The ID of the person who edited the script.
+	Id *int `json:"id" tfsdk:"id"`
+
+	// Name The name of the person who edited the script.
 	Name *string `json:"name" tfsdk:"name"`
 }
 
