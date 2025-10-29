@@ -21,12 +21,16 @@ const (
 	BearerAuthScopes = "bearerAuth.Scopes"
 )
 
-// Defines values for ScriptStatus.
+// Defines values for V1ScriptStatus.
 const (
-	ACTIVE   ScriptStatus = "ACTIVE"
-	ARCHIVED ScriptStatus = "ARCHIVED"
-	REDACTED ScriptStatus = "REDACTED"
-	V1       ScriptStatus = "V1"
+	V1 V1ScriptStatus = "V1"
+)
+
+// Defines values for V2ScriptStatus.
+const (
+	ACTIVE   V2ScriptStatus = "ACTIVE"
+	ARCHIVED V2ScriptStatus = "ARCHIVED"
+	REDACTED V2ScriptStatus = "REDACTED"
 )
 
 // AccessKeyLoginRequest defines model for AccessKeyLoginRequest.
@@ -49,8 +53,8 @@ type LegacyActionResult struct {
 	union json.RawMessage
 }
 
-// LegacyActionResult1 defines model for .
-type LegacyActionResult1 struct {
+// LegacyActionResult2 defines model for .
+type LegacyActionResult2 struct {
 	// Filename Name of the attachment that was created.
 	Filename string `json:"filename" tfsdk:"filename"`
 }
@@ -117,37 +121,6 @@ type LoginResponse struct {
 	AdditionalProperties map[string]interface{} `json:"-"`
 }
 
-// Script defines model for Script.
-type Script struct {
-	AccessGroup    *string                    `json:"access_group,omitempty" tfsdk:"access_group"`
-	Attachments    *[]Script_Attachments_Item `json:"attachments" tfsdk:"attachments"`
-	Code           *string                    `json:"code" tfsdk:"code"`
-	CreatedAt      *string                    `json:"created_at" tfsdk:"created_at"`
-	CreatedBy      *ScriptCreator             `json:"created_by,omitempty" tfsdk:"created_by"`
-	Creator        *LegacyScriptCreator       `json:"creator,omitempty" tfsdk:"creator"`
-	Id             int                        `json:"id" tfsdk:"id"`
-	Interpreter    *string                    `json:"interpreter" tfsdk:"interpreter"`
-	IsEditable     *bool                      `json:"is_editable" tfsdk:"is_editable"`
-	IsExecutable   *bool                      `json:"is_executable" tfsdk:"is_executable"`
-	IsRedactable   *bool                      `json:"is_redactable" tfsdk:"is_redactable"`
-	LastEditedAt   *string                    `json:"last_edited_at" tfsdk:"last_edited_at"`
-	LastEditedBy   *ScriptEditor              `json:"last_edited_by,omitempty" tfsdk:"last_edited_by"`
-	ScriptProfiles *[]ScriptProfile           `json:"script_profiles" tfsdk:"script_profiles"`
-	Status         ScriptStatus               `json:"status" tfsdk:"status"`
-	TimeLimit      *int                       `json:"time_limit,omitempty" tfsdk:"time_limit"`
-	Title          string                     `json:"title" tfsdk:"title"`
-	Username       *string                    `json:"username" tfsdk:"username"`
-	VersionNumber  *int                       `json:"version_number" tfsdk:"version_number"`
-}
-
-// Script_Attachments_Item defines model for Script.attachments.Item.
-type Script_Attachments_Item struct {
-	union json.RawMessage
-}
-
-// ScriptStatus defines model for Script.Status.
-type ScriptStatus string
-
 // ScriptAttachment defines model for ScriptAttachment.
 type ScriptAttachment struct {
 	Filename string `json:"filename" tfsdk:"filename"`
@@ -177,6 +150,50 @@ type ScriptProfile struct {
 	Id    int    `json:"id" tfsdk:"id"`
 	Title string `json:"title" tfsdk:"title"`
 }
+
+// V1Script defines model for V1Script.
+type V1Script struct {
+	AccessGroup *string                   `json:"access_group,omitempty" tfsdk:"access_group"`
+	Attachments *[]LegacyScriptAttachment `json:"attachments" tfsdk:"attachments"`
+	Creator     *LegacyScriptCreator      `json:"creator,omitempty" tfsdk:"creator"`
+	Id          int                       `json:"id" tfsdk:"id"`
+	Status      V1ScriptStatus            `json:"status" tfsdk:"status"`
+	TimeLimit   *int                      `json:"time_limit,omitempty" tfsdk:"time_limit"`
+	Title       string                    `json:"title" tfsdk:"title"`
+	Username    *string                   `json:"username" tfsdk:"username"`
+}
+
+// V1ScriptStatus defines model for V1Script.Status.
+type V1ScriptStatus string
+
+// V2Script defines model for V2Script.
+type V2Script struct {
+	AccessGroup    *string             `json:"access_group,omitempty" tfsdk:"access_group"`
+	Attachments    *[]ScriptAttachment `json:"attachments" tfsdk:"attachments"`
+	Code           *string             `json:"code,omitempty" tfsdk:"code"`
+	CreatedAt      *string             `json:"created_at" tfsdk:"created_at"`
+	CreatedBy      *ScriptCreator      `json:"created_by,omitempty" tfsdk:"created_by"`
+	Id             int                 `json:"id" tfsdk:"id"`
+	Interpreter    *string             `json:"interpreter,omitempty" tfsdk:"interpreter"`
+	IsEditable     *bool               `json:"is_editable,omitempty" tfsdk:"is_editable"`
+	IsExecutable   *bool               `json:"is_executable,omitempty"`
+	IsRedactable   *bool               `json:"is_redactable,omitempty" tfsdk:"is_redactable"`
+	LastEditedAt   *string             `json:"last_edited_at" tfsdk:"last_edited_at"`
+	LastEditedBy   *ScriptEditor       `json:"last_edited_by,omitempty" tfsdk:"last_edited_by"`
+	ScriptProfiles *[]ScriptProfile    `json:"script_profiles" tfsdk:"script_profiles"`
+	Status         V2ScriptStatus      `json:"status" tfsdk:"status"`
+	TimeLimit      *int                `json:"time_limit,omitempty" tfsdk:"time_limit"`
+	Title          string              `json:"title" tfsdk:"title"`
+	Username       *string             `json:"username" tfsdk:"username"`
+	VersionNumber  *int                `json:"version_number" tfsdk:"version_number"`
+}
+
+// V2ScriptStatus defines model for V2Script.Status.
+type V2ScriptStatus string
+
+// Backwards-compatibility: expose a plain `Script` type expected by older code/tests
+// as an alias to the generated V2Script model.
+type Script = V2Script
 
 // LegacyActionParam defines model for LegacyActionParam.
 type LegacyActionParam = string
@@ -352,22 +369,22 @@ func (a LoginResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(object)
 }
 
-// AsScript returns the union data inside the LegacyActionResult as a Script
-func (t LegacyActionResult) AsScript() (Script, error) {
-	var body Script
+// AsV1Script returns the union data inside the LegacyActionResult as a V1Script
+func (t LegacyActionResult) AsV1Script() (V1Script, error) {
+	var body V1Script
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromScript overwrites any union data inside the LegacyActionResult as the provided Script
-func (t *LegacyActionResult) FromScript(v Script) error {
+// FromV1Script overwrites any union data inside the LegacyActionResult as the provided V1Script
+func (t *LegacyActionResult) FromV1Script(v V1Script) error {
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeScript performs a merge with any union data inside the LegacyActionResult, using the provided Script
-func (t *LegacyActionResult) MergeScript(v Script) error {
+// MergeV1Script performs a merge with any union data inside the LegacyActionResult, using the provided V1Script
+func (t *LegacyActionResult) MergeV1Script(v V1Script) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -378,22 +395,68 @@ func (t *LegacyActionResult) MergeScript(v Script) error {
 	return err
 }
 
-// AsLegacyActionResult1 returns the union data inside the LegacyActionResult as a LegacyActionResult1
-func (t LegacyActionResult) AsLegacyActionResult1() (LegacyActionResult1, error) {
-	var body LegacyActionResult1
+// AsV2Script returns the union data inside the LegacyActionResult as a V2Script
+func (t LegacyActionResult) AsV2Script() (V2Script, error) {
+	var body V2Script
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromLegacyActionResult1 overwrites any union data inside the LegacyActionResult as the provided LegacyActionResult1
-func (t *LegacyActionResult) FromLegacyActionResult1(v LegacyActionResult1) error {
+// FromV2Script overwrites any union data inside the LegacyActionResult as the provided V2Script
+func (t *LegacyActionResult) FromV2Script(v V2Script) error {
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeLegacyActionResult1 performs a merge with any union data inside the LegacyActionResult, using the provided LegacyActionResult1
-func (t *LegacyActionResult) MergeLegacyActionResult1(v LegacyActionResult1) error {
+// MergeV2Script performs a merge with any union data inside the LegacyActionResult, using the provided V2Script
+func (t *LegacyActionResult) MergeV2Script(v V2Script) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsLegacyActionResult2 returns the union data inside the LegacyActionResult as a LegacyActionResult2
+func (t LegacyActionResult) AsLegacyActionResult2() (LegacyActionResult2, error) {
+	var body LegacyActionResult2
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// Backwards-compatibility: older code expects AsLegacyActionResult1 to exist.
+func (t LegacyActionResult) AsLegacyActionResult1() (LegacyActionResult2, error) {
+	return t.AsLegacyActionResult2()
+}
+
+// Backwards-compatibility helpers: older code expects AsScript/FromScript/MergeScript
+// to exist on the union type. Forward to the V2Script helpers.
+func (t LegacyActionResult) AsScript() (Script, error) {
+	v2, err := t.AsV2Script()
+	return Script(v2), err
+}
+
+func (t *LegacyActionResult) FromScript(v Script) error {
+	return t.FromV2Script(V2Script(v))
+}
+
+func (t *LegacyActionResult) MergeScript(v Script) error {
+	return t.MergeV2Script(V2Script(v))
+}
+
+// FromLegacyActionResult2 overwrites any union data inside the LegacyActionResult as the provided LegacyActionResult2
+func (t *LegacyActionResult) FromLegacyActionResult2(v LegacyActionResult2) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeLegacyActionResult2 performs a merge with any union data inside the LegacyActionResult, using the provided LegacyActionResult2
+func (t *LegacyActionResult) MergeLegacyActionResult2(v LegacyActionResult2) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -410,68 +473,6 @@ func (t LegacyActionResult) MarshalJSON() ([]byte, error) {
 }
 
 func (t *LegacyActionResult) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsScriptAttachment returns the union data inside the Script_Attachments_Item as a ScriptAttachment
-func (t Script_Attachments_Item) AsScriptAttachment() (ScriptAttachment, error) {
-	var body ScriptAttachment
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromScriptAttachment overwrites any union data inside the Script_Attachments_Item as the provided ScriptAttachment
-func (t *Script_Attachments_Item) FromScriptAttachment(v ScriptAttachment) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeScriptAttachment performs a merge with any union data inside the Script_Attachments_Item, using the provided ScriptAttachment
-func (t *Script_Attachments_Item) MergeScriptAttachment(v ScriptAttachment) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsLegacyScriptAttachment returns the union data inside the Script_Attachments_Item as a LegacyScriptAttachment
-func (t Script_Attachments_Item) AsLegacyScriptAttachment() (LegacyScriptAttachment, error) {
-	var body LegacyScriptAttachment
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromLegacyScriptAttachment overwrites any union data inside the Script_Attachments_Item as the provided LegacyScriptAttachment
-func (t *Script_Attachments_Item) FromLegacyScriptAttachment(v LegacyScriptAttachment) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeLegacyScriptAttachment performs a merge with any union data inside the Script_Attachments_Item, using the provided LegacyScriptAttachment
-func (t *Script_Attachments_Item) MergeLegacyScriptAttachment(v LegacyScriptAttachment) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t Script_Attachments_Item) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *Script_Attachments_Item) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }

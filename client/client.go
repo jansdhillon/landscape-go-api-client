@@ -96,8 +96,8 @@ func (p *AccessKeyProvider) Login(ctx context.Context, c *ClientWithResponses) (
 // NewLandscapeAPIClient creates a new Landscape API client configured with authentication
 // provided by the given LoginProvider. The provider is used to obtain a JWT token which
 // is then applied to subsequent requests as a Bearer token.
-func NewLandscapeAPIClient(apiURL string, loginProvider LoginProvider) (*ClientWithResponses, error) {
-	tempClient, err := NewClientWithResponses(apiURL)
+func NewLandscapeAPIClient(baseURL string, loginProvider LoginProvider) (*ClientWithResponses, error) {
+	tempClient, err := NewClientWithResponses(baseURL)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create temp client: %w", err)
 	}
@@ -112,7 +112,7 @@ func NewLandscapeAPIClient(apiURL string, loginProvider LoginProvider) (*ClientW
 		return nil
 	}
 
-	return NewClientWithResponses(apiURL, WithRequestEditorFn(authEditor))
+	return NewClientWithResponses(baseURL, WithRequestEditorFn(authEditor))
 }
 
 // LegacyActionParams is a helper to call legacy API
