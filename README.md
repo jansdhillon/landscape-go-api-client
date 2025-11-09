@@ -27,7 +27,7 @@ export LANDSCAPE_ACCESS_KEY="XXXXX"
 export LANDSCAPE_SECRET_KEY="YYYYY"
 ```
 
-> [!CAUTION]
+> [!TIP]
 > See the help text for the CLI by passing `-h` to any of the commands. For example:
 >
 > ````sh
