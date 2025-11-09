@@ -27,6 +27,14 @@ export LANDSCAPE_ACCESS_KEY="XXXXX"
 export LANDSCAPE_SECRET_KEY="YYYYY"
 ```
 
+Alternatively, you can provide an email/password combination (and, optionally, an account to log into) if the Landscape instance accepts password-based authentication:
+
+```sh
+export LANDSCAPE_BASE_URL="https://example-landscape-self-hosted.com"
+export LANDSCAPE_EMAIL="jan@example.com"
+export LANDSCAPE_PASSWORD="pwd"
+```
+
 > [!TIP]
 > See the help text for the CLI by passing `-h` to any of the commands. For example:
 >

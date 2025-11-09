@@ -22,6 +22,9 @@ const (
 	baseURLFlag   = "base-url"
 	accessKeyFlag = "access-key"
 	secretKeyFlag = "secret-key"
+	emailFlag     = "email"
+	passwordFlag  = "password"
+	accountFlag   = "account"
 )
 
 func main() {
@@ -35,31 +38,71 @@ func main() {
 			&cli.StringFlag{
 				Name:     baseURLFlag,
 				Aliases:  []string{"u", "url", "base_url"},
-				Usage:    "The base URL of Landscape (can also be set via LANDSCAPE_BASE_URL env var)",
+				Usage:    "The base URL of Landscape (can also be set via LANDSCAPE_BASE_URL env var).",
 				Required: true,
 				Sources:  cli.EnvVars("LANDSCAPE_BASE_URL"),
 			},
 			&cli.StringFlag{
-				Name:     accessKeyFlag,
-				Aliases:  []string{"ak", "access_key"},
-				Usage:    "An access key for the Landscape API (can also be set via LANDSCAPE_ACCESS_KEY env var)",
-				Required: true,
-				Sources:  cli.EnvVars("LANDSCAPE_ACCESS_KEY"),
+				Name:    accessKeyFlag,
+				Aliases: []string{"ak", "access_key"},
+				Usage:   "An access key for the Landscape API (can also be set via LANDSCAPE_ACCESS_KEY env var). If provided, you must also provide the -secret-key flag or set the LANDSCAPE_SECRET_KEY env var.",
+				Sources: cli.EnvVars("LANDSCAPE_ACCESS_KEY"),
 			},
 			&cli.StringFlag{
-				Name:     secretKeyFlag,
-				Aliases:  []string{"sk", "secret_key"},
-				Usage:    "An secret key for the Landscape API (can also be set via LANDSCAPE_SECRET_KEY env var)",
-				Required: true,
-				Sources:  cli.EnvVars("LANDSCAPE_SECRET_KEY"),
+				Name:    secretKeyFlag,
+				Aliases: []string{"sk", "secret_key"},
+				Usage:   "An secret key for the Landscape API (can also be set via LANDSCAPE_SECRET_KEY env var). If provided, you must also provide the -access-key flag or set the LANDSCAPE_ACCESS_KEY env var.",
+				Sources: cli.EnvVars("LANDSCAPE_SECRET_KEY"),
+			},
+			&cli.StringFlag{
+				Name:    emailFlag,
+				Aliases: []string{"e"},
+				Usage:   "An email to access the Landscape API (can also be set via LANDSCAPE_EMAIL env var). If provided, you must also provide the -password flag or set the LANDSCAPE_PASSWORD env var.",
+				Sources: cli.EnvVars("LANDSCAPE_EMAIL"),
+			},
+			&cli.StringFlag{
+				Name:    passwordFlag,
+				Aliases: []string{"p"},
+				Usage:   "A password to access the Landscape API (can also be set via LANDSCAPE_PASSWORD env var). If provided, you must also provide the -email flag or set the LANDSCAPE_EMAIL env var.",
+				Sources: cli.EnvVars("LANDSCAPE_PASSWORD"),
+			},
+			&cli.StringFlag{
+				Name:    accountFlag,
+				Aliases: []string{"a"},
+				Usage:   "An account to login into the Landscape API with (can also be set via LANDSCAPE_ACCOUNT env var). If provided, you must also provide the -email and -password flags or set the LANDSCAPE_EMAIL and LANDSCAPE_PASSWORD env vars.",
+				Sources: cli.EnvVars("LANDSCAPE_ACCOUNT"),
 			},
 		},
 		Before: func(ctx context.Context, c *cli.Command) (context.Context, error) {
 			baseURL := c.String(baseURLFlag)
-			accessKey := c.String(accessKeyFlag)
-			secretKey := c.String(secretKeyFlag)
+			if baseURL == "" {
+				return ctx, fmt.Errorf("base URL must be provided")
+			}
 
-			lp := client.NewAccessKeyProvider(accessKey, secretKey)
+			email := c.String(emailFlag)
+			password := c.String(passwordFlag)
+			account := c.String(accountFlag)
+
+			var lp client.LoginProvider
+
+			if email != "" && password != "" {
+				if account != "" {
+					lp = client.NewEmailPasswordProvider(email, password, &account)
+				} else {
+					lp = client.NewEmailPasswordProvider(email, password, nil)
+				}
+
+			} else {
+				accessKey := c.String(accessKeyFlag)
+				secretKey := c.String(secretKeyFlag)
+
+				if accessKey == "" || secretKey == "" {
+					return ctx, fmt.Errorf("must provide the -e & -p flags or the -ak & -sk flags, or set either the LANDSCAPE_EMAIL & LANDSCAPE_PASSWORD env vars or the LANDSCAPE_ACCESS_KEY & LANDSCAPE_SECRET_KEY env vars")
+				}
+
+				lp = client.NewAccessKeyProvider(accessKey, secretKey)
+			}
+
 			api, err := client.NewLandscapeAPIClient(baseURL, lp)
 			if err != nil {
 				return ctx, err
