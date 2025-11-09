@@ -18,7 +18,16 @@ func TestNewEmailPasswordProvider(t *testing.T) {
 		args args
 		want *EmailPasswordProvider
 	}{
-		// TODO: Add test cases.
+		{
+			name: "without account",
+			args: args{email: "test@test.com", password: "pass", account: nil},
+			want: &EmailPasswordProvider{Email: "test@test.com", Password: "pass", Account: nil},
+		},
+		{
+			name: "with account",
+			args: args{email: "test@test.com", password: "pass", account: func() *string { s := "acct"; return &s }()},
+			want: &EmailPasswordProvider{Email: "test@test.com", Password: "pass", Account: func() *string { s := "acct"; return &s }()},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -67,7 +76,11 @@ func TestNewAccessKeyProvider(t *testing.T) {
 		args args
 		want *AccessKeyProvider
 	}{
-		// TODO: Add test cases.
+		{
+			name: "valid keys",
+			args: args{accessKey: "AKIATEST", secretKey: "secretkey123"},
+			want: &AccessKeyProvider{AccessKey: "AKIATEST", SecretKey: "secretkey123"},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -142,7 +155,16 @@ func TestLegacyActionParams(t *testing.T) {
 		args args
 		want *InvokeLegacyActionParams
 	}{
-		// TODO: Add test cases.
+		{
+			name: "GetScripts action",
+			args: args{action: "GetScripts"},
+			want: &InvokeLegacyActionParams{Action: "GetScripts", Version: "2011-08-01"},
+		},
+		{
+			name: "CreateScript action",
+			args: args{action: "CreateScript"},
+			want: &InvokeLegacyActionParams{Action: "CreateScript", Version: "2011-08-01"},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

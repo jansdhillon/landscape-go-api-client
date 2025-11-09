@@ -19,7 +19,26 @@ func TestLoginResponse_Get(t *testing.T) {
 		wantValue interface{}
 		wantFound bool
 	}{
-		// TODO: Add test cases.
+		{
+			name: "get existing field",
+			a: LoginResponse{
+				AdditionalProperties: map[string]interface{}{
+					"custom_field": "custom_value",
+				},
+			},
+			args:      args{fieldName: "custom_field"},
+			wantValue: "custom_value",
+			wantFound: true,
+		},
+		{
+			name: "get non-existing field",
+			a: LoginResponse{
+				AdditionalProperties: map[string]interface{}{},
+			},
+			args:      args{fieldName: "missing"},
+			wantValue: nil,
+			wantFound: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -44,11 +63,29 @@ func TestLoginResponse_Set(t *testing.T) {
 		a    *LoginResponse
 		args args
 	}{
-		// TODO: Add test cases.
+		{
+			name: "set new field",
+			a:    &LoginResponse{},
+			args: args{fieldName: "test", value: "value"},
+		},
+		{
+			name: "overwrite existing",
+			a: &LoginResponse{
+				AdditionalProperties: map[string]interface{}{"test": "old"},
+			},
+			args: args{fieldName: "test", value: "new"},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			tt.a.Set(tt.args.fieldName, tt.args.value)
+			val, found := tt.a.Get(tt.args.fieldName)
+			if !found {
+				t.Errorf("LoginResponse.Set() failed to set field")
+			}
+			if !reflect.DeepEqual(val, tt.args.value) {
+				t.Errorf("LoginResponse.Set() value = %v, want %v", val, tt.args.value)
+			}
 		})
 	}
 }
@@ -567,7 +604,16 @@ func TestNewClient(t *testing.T) {
 		want    *Client
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		{
+			name:    "valid server",
+			args:    args{server: "https://test.com"},
+			wantErr: false,
+		},
+		{
+			name:    "valid server with options",
+			args:    args{server: "https://test.com", opts: []ClientOption{WithHTTPClient(&http.Client{})}},
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -576,8 +622,8 @@ func TestNewClient(t *testing.T) {
 				t.Errorf("NewClient() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("NewClient() = %v, want %v", got, tt.want)
+			if !tt.wantErr && got == nil {
+				t.Errorf("NewClient() returned nil")
 			}
 		})
 	}
