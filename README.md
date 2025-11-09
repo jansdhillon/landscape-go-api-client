@@ -1,4 +1,4 @@
-# landscape-go-client
+# landscape-go-api-client
 
 ## Generating from the OpenAPI spec
 
