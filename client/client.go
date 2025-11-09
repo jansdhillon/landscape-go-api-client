@@ -2,7 +2,6 @@ package client
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -48,11 +47,8 @@ func (p *EmailPasswordProvider) Login(ctx context.Context, c *ClientWithResponse
 	if resp.StatusCode() != http.StatusOK {
 		return "", fmt.Errorf("login failed with status: %d", resp.StatusCode())
 	}
-	if resp.JSON200 != nil && resp.JSON200.Token != "" {
-		return resp.JSON200.Token, nil
-	}
 
-	return "", fmt.Errorf("login response did not contain a token")
+	return resp.JSON200.Token, nil
 }
 
 // AccessKeyProvider logs in with an access key/secret key pair.
@@ -83,14 +79,8 @@ func (p *AccessKeyProvider) Login(ctx context.Context, c *ClientWithResponses) (
 	if resp.StatusCode() != http.StatusOK {
 		return "", fmt.Errorf("login failed with status: %d", resp.StatusCode())
 	}
-	if resp.JSON200 != nil && resp.JSON200.Token != "" {
-		return resp.JSON200.Token, nil
-	}
-	var lr LoginResponse
-	if err := json.Unmarshal(resp.Body, &lr); err == nil && lr.Token != "" {
-		return lr.Token, nil
-	}
-	return "", fmt.Errorf("login response did not contain a token")
+
+	return resp.JSON200.Token, nil
 }
 
 // NewLandscapeAPIClient creates a new Landscape API client configured with authentication

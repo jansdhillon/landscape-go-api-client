@@ -7,6 +7,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -46,17 +47,6 @@ type AccessKeyLoginRequest struct {
 type Error struct {
 	Code    *int    `json:"code,omitempty" tfsdk:"code"`
 	Message *string `json:"message,omitempty" tfsdk:"message"`
-}
-
-// LegacyActionResult defines model for LegacyActionResult.
-type LegacyActionResult struct {
-	union json.RawMessage
-}
-
-// LegacyActionResult2 defines model for .
-type LegacyActionResult2 struct {
-	// Filename Name of the attachment that was created.
-	Filename string `json:"filename" tfsdk:"filename"`
 }
 
 // LegacyScriptAttachment defines model for LegacyScriptAttachment.
@@ -151,6 +141,11 @@ type ScriptProfile struct {
 	Title string `json:"title" tfsdk:"title"`
 }
 
+// ScriptResult defines model for ScriptResult.
+type ScriptResult struct {
+	union json.RawMessage
+}
+
 // V1Script defines model for V1Script.
 type V1Script struct {
 	AccessGroup *string                   `json:"access_group,omitempty" tfsdk:"access_group"`
@@ -191,10 +186,6 @@ type V2Script struct {
 // V2ScriptStatus defines model for V2Script.Status.
 type V2ScriptStatus string
 
-// Backwards-compatibility: expose a plain `Script` type expected by older code/tests
-// as an alias to the generated V2Script model.
-type Script = V2Script
-
 // LegacyActionParam defines model for LegacyActionParam.
 type LegacyActionParam = string
 
@@ -208,7 +199,9 @@ type ScriptIdPathParam = int
 type BadRequest = Error
 
 // LegacyActionResponse defines model for LegacyActionResponse.
-type LegacyActionResponse = LegacyActionResult
+type LegacyActionResponse struct {
+	union json.RawMessage
+}
 
 // NotFound defines model for NotFound.
 type NotFound = Error
@@ -369,22 +362,24 @@ func (a LoginResponse) MarshalJSON() ([]byte, error) {
 	return json.Marshal(object)
 }
 
-// AsV1Script returns the union data inside the LegacyActionResult as a V1Script
-func (t LegacyActionResult) AsV1Script() (V1Script, error) {
+// AsV1Script returns the union data inside the ScriptResult as a V1Script
+func (t ScriptResult) AsV1Script() (V1Script, error) {
 	var body V1Script
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromV1Script overwrites any union data inside the LegacyActionResult as the provided V1Script
-func (t *LegacyActionResult) FromV1Script(v V1Script) error {
+// FromV1Script overwrites any union data inside the ScriptResult as the provided V1Script
+func (t *ScriptResult) FromV1Script(v V1Script) error {
+	v.Status = "V1Script"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeV1Script performs a merge with any union data inside the LegacyActionResult, using the provided V1Script
-func (t *LegacyActionResult) MergeV1Script(v V1Script) error {
+// MergeV1Script performs a merge with any union data inside the ScriptResult, using the provided V1Script
+func (t *ScriptResult) MergeV1Script(v V1Script) error {
+	v.Status = "V1Script"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -395,22 +390,24 @@ func (t *LegacyActionResult) MergeV1Script(v V1Script) error {
 	return err
 }
 
-// AsV2Script returns the union data inside the LegacyActionResult as a V2Script
-func (t LegacyActionResult) AsV2Script() (V2Script, error) {
+// AsV2Script returns the union data inside the ScriptResult as a V2Script
+func (t ScriptResult) AsV2Script() (V2Script, error) {
 	var body V2Script
 	err := json.Unmarshal(t.union, &body)
 	return body, err
 }
 
-// FromV2Script overwrites any union data inside the LegacyActionResult as the provided V2Script
-func (t *LegacyActionResult) FromV2Script(v V2Script) error {
+// FromV2Script overwrites any union data inside the ScriptResult as the provided V2Script
+func (t *ScriptResult) FromV2Script(v V2Script) error {
+	v.Status = "V2Script"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
 }
 
-// MergeV2Script performs a merge with any union data inside the LegacyActionResult, using the provided V2Script
-func (t *LegacyActionResult) MergeV2Script(v V2Script) error {
+// MergeV2Script performs a merge with any union data inside the ScriptResult, using the provided V2Script
+func (t *ScriptResult) MergeV2Script(v V2Script) error {
+	v.Status = "V2Script"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -421,58 +418,123 @@ func (t *LegacyActionResult) MergeV2Script(v V2Script) error {
 	return err
 }
 
-// AsLegacyActionResult2 returns the union data inside the LegacyActionResult as a LegacyActionResult2
-func (t LegacyActionResult) AsLegacyActionResult2() (LegacyActionResult2, error) {
-	var body LegacyActionResult2
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// Backwards-compatibility: older code expects AsLegacyActionResult1 to exist.
-func (t LegacyActionResult) AsLegacyActionResult1() (LegacyActionResult2, error) {
-	return t.AsLegacyActionResult2()
-}
-
-// Backwards-compatibility helpers: older code expects AsScript/FromScript/MergeScript
-// to exist on the union type. Forward to the V2Script helpers.
-func (t LegacyActionResult) AsScript() (Script, error) {
-	v2, err := t.AsV2Script()
-	return Script(v2), err
-}
-
-func (t *LegacyActionResult) FromScript(v Script) error {
-	return t.FromV2Script(V2Script(v))
-}
-
-func (t *LegacyActionResult) MergeScript(v Script) error {
-	return t.MergeV2Script(V2Script(v))
-}
-
-// FromLegacyActionResult2 overwrites any union data inside the LegacyActionResult as the provided LegacyActionResult2
-func (t *LegacyActionResult) FromLegacyActionResult2(v LegacyActionResult2) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeLegacyActionResult2 performs a merge with any union data inside the LegacyActionResult, using the provided LegacyActionResult2
-func (t *LegacyActionResult) MergeLegacyActionResult2(v LegacyActionResult2) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
+func (t ScriptResult) Discriminator() (string, error) {
+	var discriminator struct {
+		Discriminator string `json:"status"`
 	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
+	err := json.Unmarshal(t.union, &discriminator)
+	return discriminator.Discriminator, err
 }
 
-func (t LegacyActionResult) MarshalJSON() ([]byte, error) {
+func (t ScriptResult) ValueByDiscriminator() (interface{}, error) {
+	discriminator, err := t.Discriminator()
+	if err != nil {
+		return nil, err
+	}
+	switch discriminator {
+	case "V1Script":
+		return t.AsV1Script()
+	case "V2Script":
+		return t.AsV2Script()
+	default:
+		return nil, errors.New("unknown discriminator value: " + discriminator)
+	}
+}
+
+func (t ScriptResult) MarshalJSON() ([]byte, error) {
 	b, err := t.union.MarshalJSON()
 	return b, err
 }
 
-func (t *LegacyActionResult) UnmarshalJSON(b []byte) error {
+func (t *ScriptResult) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsV1Script returns the union data inside the LegacyActionResponse as a V1Script
+func (t LegacyActionResponse) AsV1Script() (V1Script, error) {
+	var body V1Script
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromV1Script overwrites any union data inside the LegacyActionResponse as the provided V1Script
+func (t *LegacyActionResponse) FromV1Script(v V1Script) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeV1Script performs a merge with any union data inside the LegacyActionResponse, using the provided V1Script
+func (t *LegacyActionResponse) MergeV1Script(v V1Script) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsV2Script returns the union data inside the LegacyActionResponse as a V2Script
+func (t LegacyActionResponse) AsV2Script() (V2Script, error) {
+	var body V2Script
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromV2Script overwrites any union data inside the LegacyActionResponse as the provided V2Script
+func (t *LegacyActionResponse) FromV2Script(v V2Script) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeV2Script performs a merge with any union data inside the LegacyActionResponse, using the provided V2Script
+func (t *LegacyActionResponse) MergeV2Script(v V2Script) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsLegacyScriptAttachment returns the union data inside the LegacyActionResponse as a LegacyScriptAttachment
+func (t LegacyActionResponse) AsLegacyScriptAttachment() (LegacyScriptAttachment, error) {
+	var body LegacyScriptAttachment
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromLegacyScriptAttachment overwrites any union data inside the LegacyActionResponse as the provided LegacyScriptAttachment
+func (t *LegacyActionResponse) FromLegacyScriptAttachment(v LegacyScriptAttachment) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeLegacyScriptAttachment performs a merge with any union data inside the LegacyActionResponse, using the provided LegacyScriptAttachment
+func (t *LegacyActionResponse) MergeLegacyScriptAttachment(v LegacyScriptAttachment) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t LegacyActionResponse) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *LegacyActionResponse) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
@@ -1050,7 +1112,7 @@ func (r LoginWithAccessKeyResponse) StatusCode() int {
 type GetScriptResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *Script
+	JSON200      *ScriptResult
 	JSON404      *ScriptNotFound
 }
 
@@ -1328,7 +1390,7 @@ func ParseGetScriptResponse(rsp *http.Response) (*GetScriptResponse, error) {
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Script
+		var dest ScriptResult
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

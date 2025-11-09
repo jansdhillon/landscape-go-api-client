@@ -20,12 +20,12 @@ func main() {
 	if baseURL == "" {
 		log.Fatalf("base URL not set")
 	}
-	ak := os.Getenv("LANDSCAPE_API_ACCESS_KEY")
+	ak := os.Getenv("LANDSCAPE_ACCESS_KEY")
 	if ak == "" {
 		log.Fatalf("access key not set")
 	}
 
-	sk := os.Getenv("LANDSCAPE_API_SECRET_KEY")
+	sk := os.Getenv("LANDSCAPE_SECRET_KEY")
 	if sk == "" {
 		log.Fatalf("secret key not set")
 	}
