@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: Apache-2.0
+
 module github.com/jansdhillon/landscape-go-api-client
 
 go 1.24.6
