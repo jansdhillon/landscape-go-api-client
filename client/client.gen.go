@@ -45,18 +45,26 @@ type AccessKeyLoginRequest struct {
 
 // Error defines model for Error.
 type Error struct {
-	Code    *int    `json:"code,omitempty" tfsdk:"code"`
+	// Code HTTP status code for the error.
+	Code *int `json:"code,omitempty" tfsdk:"code"`
+
+	// Message Human-readable error message describing what went wrong.
 	Message *string `json:"message,omitempty" tfsdk:"message"`
 }
 
 // LegacyScriptAttachment defines model for LegacyScriptAttachment.
 type LegacyScriptAttachment = string
 
-// LegacyScriptCreator defines model for LegacyScriptCreator.
+// LegacyScriptCreator Information about the creator of a V1 legacy script.
 type LegacyScriptCreator struct {
+	// Email The email address of the person who created the script.
 	Email *openapi_types.Email `json:"email" tfsdk:"email"`
-	Id    *int                 `json:"id" tfsdk:"id"`
-	Name  *string              `json:"name" tfsdk:"name"`
+
+	// Id The ID of the person who created the script.
+	Id *int `json:"id" tfsdk:"id"`
+
+	// Name The name of the person who created the script.
+	Name *string `json:"name" tfsdk:"name"`
 }
 
 // LoginAccount defines model for LoginAccount.
@@ -113,11 +121,14 @@ type LoginResponse struct {
 
 // ScriptAttachment defines model for ScriptAttachment.
 type ScriptAttachment struct {
+	// Filename The filename of the attachment.
 	Filename string `json:"filename" tfsdk:"filename"`
-	Id       int    `json:"id" tfsdk:"id"`
+
+	// Id The unique identifier for the script attachment.
+	Id int `json:"id" tfsdk:"id"`
 }
 
-// ScriptCreator defines model for ScriptCreator.
+// ScriptCreator Information about the user who created the script.
 type ScriptCreator struct {
 	// Id The ID of the person who created the script.
 	Id *int `json:"id" tfsdk:"id"`
@@ -126,7 +137,7 @@ type ScriptCreator struct {
 	Name *string `json:"name" tfsdk:"name"`
 }
 
-// ScriptEditor defines model for ScriptEditor.
+// ScriptEditor Information about the user who last edited the script.
 type ScriptEditor struct {
 	// Id The ID of the person who edited the script.
 	Id *int `json:"id" tfsdk:"id"`
@@ -137,7 +148,10 @@ type ScriptEditor struct {
 
 // ScriptProfile defines model for ScriptProfile.
 type ScriptProfile struct {
-	Id    int    `json:"id" tfsdk:"id"`
+	// Id The unique identifier for the script profile.
+	Id int `json:"id" tfsdk:"id"`
+
+	// Title The title of the script profile.
 	Title string `json:"title" tfsdk:"title"`
 }
 
@@ -148,42 +162,92 @@ type ScriptResult struct {
 
 // V1Script defines model for V1Script.
 type V1Script struct {
-	AccessGroup *string                   `json:"access_group,omitempty" tfsdk:"access_group"`
+	// AccessGroup The access group that can view or execute this script.
+	AccessGroup *string `json:"access_group,omitempty" tfsdk:"access_group"`
+
+	// Attachments List of attachments associated with the script.
 	Attachments *[]LegacyScriptAttachment `json:"attachments" tfsdk:"attachments"`
-	Creator     *LegacyScriptCreator      `json:"creator,omitempty" tfsdk:"creator"`
-	Id          int                       `json:"id" tfsdk:"id"`
-	Status      V1ScriptStatus            `json:"status" tfsdk:"status"`
-	TimeLimit   *int                      `json:"time_limit,omitempty" tfsdk:"time_limit"`
-	Title       string                    `json:"title" tfsdk:"title"`
-	Username    *string                   `json:"username" tfsdk:"username"`
+
+	// Creator Information about the creator of a V1 legacy script.
+	Creator *LegacyScriptCreator `json:"creator,omitempty" tfsdk:"creator"`
+
+	// Id The unique identifier for the script.
+	Id int `json:"id" tfsdk:"id"`
+
+	// Status The status of the script (V1 for legacy scripts).
+	Status V1ScriptStatus `json:"status" tfsdk:"status"`
+
+	// TimeLimit The execution time limit for the script in seconds.
+	TimeLimit *int `json:"time_limit,omitempty" tfsdk:"time_limit"`
+
+	// Title The title of the script.
+	Title string `json:"title" tfsdk:"title"`
+
+	// Username The username under which the script runs.
+	Username *string `json:"username" tfsdk:"username"`
 }
 
-// V1ScriptStatus defines model for V1Script.Status.
+// V1ScriptStatus The status of the script (V1 for legacy scripts).
 type V1ScriptStatus string
 
 // V2Script defines model for V2Script.
 type V2Script struct {
-	AccessGroup    *string             `json:"access_group,omitempty" tfsdk:"access_group"`
-	Attachments    *[]ScriptAttachment `json:"attachments" tfsdk:"attachments"`
-	Code           *string             `json:"code,omitempty" tfsdk:"code"`
-	CreatedAt      *string             `json:"created_at" tfsdk:"created_at"`
-	CreatedBy      *ScriptCreator      `json:"created_by,omitempty" tfsdk:"created_by"`
-	Id             int                 `json:"id" tfsdk:"id"`
-	Interpreter    *string             `json:"interpreter,omitempty" tfsdk:"interpreter"`
-	IsEditable     *bool               `json:"is_editable,omitempty" tfsdk:"is_editable"`
-	IsExecutable   *bool               `json:"is_executable,omitempty"`
-	IsRedactable   *bool               `json:"is_redactable,omitempty" tfsdk:"is_redactable"`
-	LastEditedAt   *string             `json:"last_edited_at" tfsdk:"last_edited_at"`
-	LastEditedBy   *ScriptEditor       `json:"last_edited_by,omitempty" tfsdk:"last_edited_by"`
-	ScriptProfiles *[]ScriptProfile    `json:"script_profiles" tfsdk:"script_profiles"`
-	Status         V2ScriptStatus      `json:"status" tfsdk:"status"`
-	TimeLimit      *int                `json:"time_limit,omitempty" tfsdk:"time_limit"`
-	Title          string              `json:"title" tfsdk:"title"`
-	Username       *string             `json:"username" tfsdk:"username"`
-	VersionNumber  *int                `json:"version_number" tfsdk:"version_number"`
+	// AccessGroup The access group that can view or execute this script.
+	AccessGroup *string `json:"access_group,omitempty" tfsdk:"access_group"`
+
+	// Attachments List of attachments associated with the script.
+	Attachments *[]ScriptAttachment `json:"attachments" tfsdk:"attachments"`
+
+	// Code The source code of the script.
+	Code *string `json:"code,omitempty" tfsdk:"code"`
+
+	// CreatedAt The timestamp when the script was created.
+	CreatedAt *string `json:"created_at" tfsdk:"created_at"`
+
+	// CreatedBy Information about the user who created the script.
+	CreatedBy *ScriptCreator `json:"created_by,omitempty" tfsdk:"created_by"`
+
+	// Id The unique identifier for the script.
+	Id int `json:"id" tfsdk:"id"`
+
+	// Interpreter The interpreter used to execute the script.
+	Interpreter *string `json:"interpreter,omitempty" tfsdk:"interpreter"`
+
+	// IsEditable Whether the script can be edited.
+	IsEditable *bool `json:"is_editable,omitempty" tfsdk:"is_editable"`
+
+	// IsExecutable Whether the script can be executed.
+	IsExecutable *bool `json:"is_executable,omitempty" tfsdk:"is_executable"`
+
+	// IsRedactable Whether the script can be redacted.
+	IsRedactable *bool `json:"is_redactable,omitempty" tfsdk:"is_redactable"`
+
+	// LastEditedAt The timestamp when the script was last edited.
+	LastEditedAt *string `json:"last_edited_at" tfsdk:"last_edited_at"`
+
+	// LastEditedBy Information about the user who last edited the script.
+	LastEditedBy *ScriptEditor `json:"last_edited_by,omitempty" tfsdk:"last_edited_by"`
+
+	// ScriptProfiles The script profiles associated with this script.
+	ScriptProfiles *[]ScriptProfile `json:"script_profiles" tfsdk:"script_profiles"`
+
+	// Status The current status of the script.
+	Status V2ScriptStatus `json:"status" tfsdk:"status"`
+
+	// TimeLimit The execution time limit for the script in seconds.
+	TimeLimit *int `json:"time_limit,omitempty" tfsdk:"time_limit"`
+
+	// Title The title of the script.
+	Title string `json:"title" tfsdk:"title"`
+
+	// Username The username under which the script runs.
+	Username *string `json:"username" tfsdk:"username"`
+
+	// VersionNumber The version number of the script.
+	VersionNumber *int `json:"version_number" tfsdk:"version_number"`
 }
 
-// V2ScriptStatus defines model for V2Script.Status.
+// V2ScriptStatus The current status of the script.
 type V2ScriptStatus string
 
 // LegacyActionParam defines model for LegacyActionParam.
@@ -740,7 +804,7 @@ func NewInvokeLegacyActionRequest(server string, params *InvokeLegacyActionParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/")
+	operationPath := fmt.Sprintf("/api")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
