@@ -1,0 +1,566 @@
+openapi: 3.1.0
+info:
+  title: Landscape OpenAPI Spec
+  version: 0.0.2
+  license:
+    name: Apache-2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  - url: 'https://{landscape_root_url}'
+    variables:
+      landscape_root_url:
+        default: landscape.canonical.com
+security:
+  - bearerAuth: []
+paths:
+  '/api/scripts/{script_id}':
+    parameters:
+      - $ref: '#/components/parameters/ScriptIdPathParam'
+    get:
+      operationId: get_script
+      description: Get a specific script.
+      responses:
+        '200':
+          description: The found script and its state.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScriptResult'
+        '404':
+          $ref: '#/components/responses/ScriptNotFound'
+  '/api/scripts/{script_id}:archive':
+    parameters:
+      - $ref: '#/components/parameters/ScriptIdPathParam'
+    post:
+      operationId: archive_script
+      summary: Archive a script.
+      description: Archive a script and any associated script profiles. Redacted scripts cannot be archived.
+      responses:
+        '204':
+          description: Script archived successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/ScriptNotFound'
+  '/api/scripts/{script_id}:redact':
+    parameters:
+      - $ref: '#/components/parameters/ScriptIdPathParam'
+    post:
+      operationId: redact_script
+      summary: Redact a script.
+      description: 'Redact a script, archive profiles, delete attachments, and redact script versions.'
+      responses:
+        '204':
+          description: Script redacted successfully.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/ScriptNotFound'
+  /api/:
+    parameters:
+      - $ref: '#/components/parameters/LegacyVersionParam'
+      - $ref: '#/components/parameters/LegacyActionParam'
+    post:
+      tags:
+        - Legacy Actions
+      operationId: invoke_legacy_action
+      summary: Invoke a legacy action.
+      description: |
+        Calls Landscape legacy API endpoints. Provide the desired action name in the `action` query parameter and include the corresponding parameters in the query string.
+      responses:
+        '200':
+          $ref: '#/components/responses/LegacyActionResponse'
+        '204':
+          description: The legacy action completed successfully without a response body.
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/login:
+    post:
+      tags:
+        - Authentication
+      operationId: login_with_password
+      summary: Authenticate with email and password.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Authentication succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      security: []
+  /api/login/access-key:
+    post:
+      tags:
+        - Authentication
+      operationId: login_with_access_key
+      summary: Authenticate with access and secret key.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccessKeyLoginRequest'
+      responses:
+        '200':
+          description: Authentication succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      security: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    ScriptIdPathParam:
+      name: script_id
+      in: path
+      required: true
+      schema:
+        type: integer
+      description: The ID of the script.
+    LegacyVersionParam:
+      name: version
+      in: query
+      required: true
+      schema:
+        type: string
+        const: '2011-08-01'
+      description: The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+    LegacyActionParam:
+      name: action
+      in: query
+      required: true
+      schema:
+        type: string
+        minLength: 1
+      description: The legacy API action name to invoke.
+  schemas:
+    AccessKeyLoginRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        access_key:
+          type: string
+          description: Access key issued for API authentication.
+          x-oapi-codegen-extra-tags:
+            tfsdk: access_key
+        secret_key:
+          type: string
+          description: Secret key paired with the access key.
+          x-oapi-codegen-extra-tags:
+            tfsdk: secret_key
+      required:
+        - access_key
+        - secret_key
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          x-oapi-codegen-extra-tags:
+            tfsdk: code
+        message:
+          type: string
+          x-oapi-codegen-extra-tags:
+            tfsdk: message
+    LegacyScriptAttachment:
+      type: string
+    LegacyScriptCreator:
+      type: object
+      x-oapi-codegen-extra-tags:
+        tfsdk: creator
+      properties:
+        id:
+          type: integer
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: id
+        name:
+          type: string
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: name
+        email:
+          type: string
+          format: email
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: email
+      required:
+        - id
+        - name
+        - email
+    LoginAccount:
+      type: object
+      additionalProperties: false
+      properties:
+        default:
+          type: boolean
+          description: Indicates whether this is the default account.
+          x-oapi-codegen-extra-tags:
+            tfsdk: default
+        name:
+          type: string
+          description: Internal account identifier.
+          x-oapi-codegen-extra-tags:
+            tfsdk: name
+        title:
+          type: string
+          description: Display name for the account.
+          x-oapi-codegen-extra-tags:
+            tfsdk: title
+        classic_dashboard_url:
+          type: string
+          format: uri
+          description: URL of the classic dashboard for the account.
+          x-oapi-codegen-extra-tags:
+            tfsdk: classic_dashboard_url
+        subdomain:
+          type: string
+          nullable: true
+          description: Optional subdomain assigned to the account.
+          x-oapi-codegen-extra-tags:
+            tfsdk: subdomain
+      required:
+        - default
+        - name
+        - title
+    LoginRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        email:
+          type: string
+          format: email
+          description: Email address used to authenticate with Landscape Server.
+          x-oapi-codegen-extra-tags:
+            tfsdk: email
+        password:
+          type: string
+          format: password
+          description: Password associated with the provided email.
+          x-oapi-codegen-extra-tags:
+            tfsdk: password
+        account:
+          type: string
+          nullable: true
+          description: The account to login into (optional).
+          x-oapi-codegen-extra-tags:
+            tfsdk: account
+      required:
+        - email
+        - password
+    LoginResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        accounts:
+          type: array
+          description: Accounts available to the authenticated user.
+          x-oapi-codegen-extra-tags:
+            tfsdk: accounts
+          items:
+            $ref: '#/components/schemas/LoginAccount'
+        current_account:
+          type: string
+          description: Identifier of the account in current use.
+          x-oapi-codegen-extra-tags:
+            tfsdk: current_account
+        email:
+          type: string
+          format: email
+          description: Email address of the authenticated user.
+          x-oapi-codegen-extra-tags:
+            tfsdk: email
+        name:
+          type: string
+          description: Display name of the authenticated user.
+          x-oapi-codegen-extra-tags:
+            tfsdk: name
+        self_hosted:
+          type: boolean
+          description: Indicates whether the Landscape deployment is self hosted.
+          x-oapi-codegen-extra-tags:
+            tfsdk: self_hosted
+        token:
+          type: string
+          description: JWT used to authorize subsequent API requests.
+          x-oapi-codegen-extra-tags:
+            tfsdk: token
+      required:
+        - accounts
+        - current_account
+        - email
+        - token
+    ScriptAttachment:
+      type: object
+      properties:
+        id:
+          type: integer
+          x-oapi-codegen-extra-tags:
+            tfsdk: id
+        filename:
+          type: string
+          x-oapi-codegen-extra-tags:
+            tfsdk: filename
+      required:
+        - id
+        - filename
+    ScriptCreator:
+      type: object
+      x-oapi-codegen-extra-tags:
+        tfsdk: created_by
+      properties:
+        id:
+          type: integer
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: id
+          description: The ID of the person who created the script.
+        name:
+          type: string
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: name
+          description: The name of the person who created the script.
+      required:
+        - id
+        - name
+    ScriptEditor:
+      type: object
+      x-oapi-codegen-extra-tags:
+        tfsdk: last_edited_by
+      properties:
+        id:
+          type: integer
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: id
+          description: The ID of the person who edited the script.
+        name:
+          type: string
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: name
+          description: The name of the person who edited the script.
+      required:
+        - id
+        - name
+    ScriptProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+          x-oapi-codegen-extra-tags:
+            tfsdk: id
+        title:
+          type: string
+          x-oapi-codegen-extra-tags:
+            tfsdk: title
+      required:
+        - id
+        - title
+    ScriptResult:
+      oneOf:
+        - $ref: '#/components/schemas/V1Script'
+        - $ref: '#/components/schemas/V2Script'
+      discriminator:
+        propertyName: status
+        mapping:
+          V1: '#/V1Script'
+          ARCHIVED: '#/V2Script'
+          REDACTED: '#/V2Script'
+          ACTIVE: '#/V2Script'
+    V1Script:
+      type: object
+      properties:
+        id:
+          type: integer
+          x-oapi-codegen-extra-tags:
+            tfsdk: id
+        title:
+          type: string
+          x-oapi-codegen-extra-tags:
+            tfsdk: title
+        creator:
+          $ref: '#/components/schemas/LegacyScriptCreator'
+          nullable: true
+        status:
+          type: string
+          x-oapi-codegen-extra-tags:
+            tfsdk: status
+          enum:
+            - V1
+        attachments:
+          type: array
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: attachments
+          items:
+            $ref: '#/components/schemas/LegacyScriptAttachment'
+        access_group:
+          type: string
+          x-oapi-codegen-extra-tags:
+            tfsdk: access_group
+        time_limit:
+          type: integer
+          x-oapi-codegen-extra-tags:
+            tfsdk: time_limit
+        username:
+          type: string
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: username
+      required:
+        - id
+        - title
+        - status
+    V2Script:
+      type: object
+      properties:
+        id:
+          type: integer
+          x-oapi-codegen-extra-tags:
+            tfsdk: id
+        title:
+          type: string
+          x-oapi-codegen-extra-tags:
+            tfsdk: title
+        version_number:
+          type: integer
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: version_number
+        created_at:
+          type: string
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: created_at
+        created_by:
+          $ref: '#/components/schemas/ScriptCreator'
+          nullable: true
+        last_edited_at:
+          type: string
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: last_edited_at
+        last_edited_by:
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: last_edited_by
+          $ref: '#/components/schemas/ScriptEditor'
+        script_profiles:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ScriptProfile'
+          x-oapi-codegen-extra-tags:
+            tfsdk: script_profiles
+        status:
+          type: string
+          x-oapi-codegen-extra-tags:
+            tfsdk: status
+          enum:
+            - ARCHIVED
+            - REDACTED
+            - ACTIVE
+        attachments:
+          type: array
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: attachments
+          items:
+            $ref: '#/components/schemas/ScriptAttachment'
+        code:
+          type: string
+          x-oapi-codegen-extra-tags:
+            tfsdk: code
+        interpreter:
+          type: string
+          x-oapi-codegen-extra-tags:
+            tfsdk: interpreter
+        access_group:
+          type: string
+          x-oapi-codegen-extra-tags:
+            tfsdk: access_group
+        time_limit:
+          type: integer
+          x-oapi-codegen-extra-tags:
+            tfsdk: time_limit
+        username:
+          type: string
+          nullable: true
+          x-oapi-codegen-extra-tags:
+            tfsdk: username
+        is_redactable:
+          type: boolean
+          x-oapi-codegen-extra-tags:
+            tfsdk: is_redactable
+        is_editable:
+          type: boolean
+          x-oapi-codegen-extra-tags:
+            tfsdk: is_editable
+        is_executable:
+          type: boolean
+          x-oapi-codegenw-extra-tags:
+            tfsdk: is_executable
+      required:
+        - id
+        - title
+        - status
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Not Found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ScriptNotFound:
+      description: The specified script does not exist.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    LegacyActionResponse:
+      description: Result returned by a legacy action.
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: '#/components/schemas/V1Script'
+              - $ref: '#/components/schemas/V2Script'
+              - $ref: '#/components/schemas/LegacyScriptAttachment'
