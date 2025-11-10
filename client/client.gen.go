@@ -171,7 +171,7 @@ type V2Script struct {
 	Id             int                 `json:"id" tfsdk:"id"`
 	Interpreter    *string             `json:"interpreter,omitempty" tfsdk:"interpreter"`
 	IsEditable     *bool               `json:"is_editable,omitempty" tfsdk:"is_editable"`
-	IsExecutable   *bool               `json:"is_executable,omitempty"`
+	IsExecutable   *bool               `json:"is_executable,omitempty" tfsdk:"is_executable"`
 	IsRedactable   *bool               `json:"is_redactable,omitempty" tfsdk:"is_redactable"`
 	LastEditedAt   *string             `json:"last_edited_at" tfsdk:"last_edited_at"`
 	LastEditedBy   *ScriptEditor       `json:"last_edited_by,omitempty" tfsdk:"last_edited_by"`
