@@ -9,7 +9,7 @@ cd client && go generate ./...
 ```
 
 > [!NOTE]
-> There is a [workflow](https://github.com/jansdhillon/landscape-openapi-spec/edit/main/README.md#syncing) that automatically syncs the generated portions of this repository with the OpenAPI spec.
+> There is [a workflow](https://github.com/jansdhillon/landscape-openapi-spec/tree/main?tab=readme-ov-file#syncing) that automatically syncs the generated portions of this repository with the OpenAPI spec.
 
 ## Using the API client
 
@@ -70,12 +70,12 @@ Now, you can use the CLI tool to call the Landscape API. For example, to create 
   "title": "coolscript",
   "version_number": 1,
   "created_by": {
-    "id": 127649,
+    "id": 1234,
     "name": "Jan-Yaeger Dhillon"
   },
   "created_at": "2025-11-10T02:56:25.366742",
   "last_edited_by": {
-    "id": 127649,
+    "id": 1234,
     "name": "Jan-Yaeger Dhillon"
   },
   "last_edited_at": "2025-11-10T02:56:25.366742",
@@ -104,12 +104,12 @@ Edit it:
   "title": "coolerscript",
   "version_number": 2,
   "created_by": {
-    "id": 127649,
+    "id": 1234,
     "name": "Jan-Yaeger Dhillon"
   },
   "created_at": "2025-11-10T02:56:25.366742",
   "last_edited_by": {
-    "id": 127649,
+    "id": 1234,
     "name": "Jan-Yaeger Dhillon"
   },
   "last_edited_at": "2025-11-10T02:57:57.842792",
@@ -151,12 +151,12 @@ View the script:
   "title": "coolerscript",
   "version_number": 2,
   "created_by": {
-    "id": 127649,
+    "id": 1234,
     "name": "Jan-Yaeger Dhillon"
   },
   "created_at": "2025-11-10T02:56:25.366742",
   "last_edited_by": {
-    "id": 127649,
+    "id": 1234,
     "name": "Jan-Yaeger Dhillon"
   },
   "last_edited_at": "2025-11-10T02:57:57.842792",
@@ -196,7 +196,7 @@ You can also create and manage V1 scripts (i.e., those shown in the legacy UI) b
   "creator": {
     "name": "Jan-Yaeger Dhillon",
     "email": "jan.dhillon@canonical.com",
-    "id": 127649
+    "id": 1234
   },
   "title": "legacy-script",
   "time_limit": 300,
@@ -232,12 +232,11 @@ View the script:
   "id": 21434,
   "title": "legacy-script",
   "creator": {
-    "id": 127649,
+    "id": 1234,
     "name": "Jan-Yaeger Dhillon",
     "email": "jan.dhillon@canonical.com"
   },
   "attachments": [
-    "attachment.txt",
     "legacy-attachment.txt"
   ],
   "access_group": "global",
