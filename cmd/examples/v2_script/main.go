@@ -22,12 +22,12 @@ func main() {
 	if baseURL == "" {
 		log.Fatalf("base URL not set")
 	}
-	ak := os.Getenv("LANDSCAPE_API_ACCESS_KEY")
+	ak := os.Getenv("LANDSCAPE_ACCESS_KEY")
 	if ak == "" {
 		log.Fatalf("access key not set")
 	}
 
-	sk := os.Getenv("LANDSCAPE_API_SECRET_KEY")
+	sk := os.Getenv("LANDSCAPE_SECRET_KEY")
 	if sk == "" {
 		log.Fatalf("secret key not set")
 	}
@@ -41,7 +41,7 @@ func main() {
 		log.Fatalf("failed to create Landscape API client: %v", err)
 	}
 
-	// Create a V1 script
+	// Create a V2 script
 	createParams := client.LegacyActionParams("CreateScript")
 	rawCode := "#!/bin/bash\n \"hello\" > /home/ubuntu/hello.txt"
 	enc := base64.StdEncoding.EncodeToString([]byte(rawCode))
@@ -120,7 +120,6 @@ func main() {
 		}
 	}
 	if editedScript.CreatedBy != nil {
-		log.Printf("edited created by email: %s", *editedScript.CreatedBy.Name)
 		log.Printf("edited created by id: %d", *editedScript.CreatedBy.Id)
 		log.Printf("edited created by name: %s", *editedScript.CreatedBy.Name)
 	}

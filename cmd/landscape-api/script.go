@@ -26,9 +26,8 @@ var scriptCmd = &cli.Command{
 	Usage: "Manage and create Landscape scripts.",
 	Commands: []*cli.Command{
 		{
-			Name:      "create",
-			Usage:     "Create a new script.",
-			ArgsUsage: "[script-id]",
+			Name:  "create",
+			Usage: "Create a new script.",
 			Flags: []cli.Flag{
 				&cli.StringFlag{
 					Name:     titleFlag,

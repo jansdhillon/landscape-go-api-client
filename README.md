@@ -13,7 +13,7 @@ cd client && go generate ./...
 
 ## Using the API client
 
-The [`client`](./client) package contains the generated code (`client.gen.go`), its configuration, and a lightweight wrapper around it to make it usable. See [`examples`](./examples) for some examples that use the API client (without the CLI tool).
+The [`client`](./client) package contains the generated code (`client.gen.go`), its configuration, and a lightweight wrapper around it to make it usable. See [`examples`](./cmd/examples) for some examples that use the API client (without the CLI tool).
 
 ## Usage in the Terraform provider for Landscape
 
