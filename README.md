@@ -2,11 +2,22 @@
 
 ## Generating from the OpenAPI spec
 
-This project uses [`oapi-codegen`](https://github.com/oapi-codegen/oapi-codegen) to generate the core API client from the [Landscape API OpenAPI spec](https://github.com/jansdhillon/landscape-openapi-spec). Update the generated code with:
+This project uses [`oapi-codegen`](https://github.com/oapi-codegen/oapi-codegen) to generate the core API client from the [Landscape API OpenAPI spec](https://github.com/jansdhillon/landscape-openapi-spec). Update the generated code by setting the `OPENAPI_SPEC` environment variable to the path of the OpenAPI bundle and running the following:
 
 ```sh
 cd client && go generate ./...
 ```
+
+> [!NOTE]
+> There is a [workflow](https://github.com/jansdhillon/landscape-openapi-spec/edit/main/README.md#syncing) that automatically syncs the generated portions of this repository with the OpenAPI spec.
+
+## Using the API client
+
+The [`client`](./client) package contains the generated code (`client.gen.go`), its configuration, and a lightweight wrapper around it to make it usable. See [`examples`](./examples) for some examples that use the API client (without the CLI tool).
+
+## Usage in the Terraform provider for Landscape
+
+This project is used in the (WIP) [Terraform provider for Landscape](https://github.com/jansdhillon/terraform-provider-landscape/tree/main).
 
 ## Using the CLI tool
 
