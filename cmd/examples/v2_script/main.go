@@ -15,8 +15,8 @@ import (
 )
 
 func main() {
-	ctx := context.Background()
-	defer ctx.Done()
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 
 	baseURL := os.Getenv("LANDSCAPE_BASE_URL")
 	if baseURL == "" {
