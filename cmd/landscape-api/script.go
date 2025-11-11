@@ -77,21 +77,15 @@ var scriptCmd = &cli.Command{
 			Usage: "Create or manage script attachments.",
 			Commands: []*cli.Command{
 				{
-					Name:  "create",
-					Usage: "Create a script attachment.",
+					Name:      "create",
+					Usage:     "Create a script attachment.",
+					ArgsUsage: "[script-id]",
 					Flags: []cli.Flag{
 						&cli.StringFlag{
 							Name:     fileFlag,
 							Aliases:  []string{"f"},
 							Usage:    "The file you wish to use as an attachment. The format for this parameter is: <filename>$$<base64 encoded file contents>.",
 							Required: true,
-						},
-						&cli.IntFlag{
-							Name:     scriptIdFlag,
-							Aliases:  []string{"i", "script_id"},
-							Usage:    "The ID of the script to create the attachment for.",
-							Required: true,
-							Value:    -1,
 						},
 					},
 					Action: createScriptAttachmentAction,
@@ -133,16 +127,15 @@ func editScriptAction(ctx context.Context, cmd *cli.Command) error {
 		return fmt.Errorf("api not initialized")
 	}
 
+	noArgs := cmd.Args().Len() == 0
 	scriptIDStr := cmd.Args().First()
-
-	if scriptIDStr == "" {
-		return fmt.Errorf("script ID must be provided")
+	if noArgs || scriptIDStr == "" {
+		return fmt.Errorf("script ID must be provided as the first argument")
 	}
 
 	scriptID, err := strconv.Atoi(scriptIDStr)
-
 	if err != nil {
-		return err
+		return fmt.Errorf("couldn't convert script ID to string: %s", err)
 	}
 
 	title := cmd.String(titleFlag)
@@ -170,14 +163,15 @@ func getScriptAction(ctx context.Context, cmd *cli.Command) error {
 		return fmt.Errorf("api client not initialized")
 	}
 
-	if cmd.Args().Len() == 0 {
+	noArgs := cmd.Args().Len() == 0
+	scriptIDStr := cmd.Args().First()
+	if noArgs || scriptIDStr == "" {
 		return fmt.Errorf("script ID must be provided as the first argument")
 	}
 
-	scriptIDStr := cmd.Args().First()
 	scriptID, err := strconv.Atoi(scriptIDStr)
 	if err != nil {
-		return err
+		return fmt.Errorf("couldn't convert script ID to string: %s", err)
 	}
 
 	res, err := api.GetScript(ctx, scriptID)
@@ -194,10 +188,17 @@ func createScriptAttachmentAction(ctx context.Context, cmd *cli.Command) error {
 		return fmt.Errorf("api client not initialized")
 	}
 
-	scriptID := cmd.Int(scriptIdFlag)
-	if scriptID == -1 {
-		return fmt.Errorf("must provide script ID when creating an attachment")
+	noArgs := cmd.Args().Len() == 0
+	scriptIDStr := cmd.Args().First()
+	if noArgs || scriptIDStr == "" {
+		return fmt.Errorf("script ID must be provided as the first argument")
 	}
+
+	scriptID, err := strconv.Atoi(scriptIDStr)
+	if err != nil {
+		return fmt.Errorf("couldn't convert script ID to string: %s", err)
+	}
+
 	file := cmd.String(fileFlag)
 
 	params := client.LegacyActionParams("CreateScriptAttachment")

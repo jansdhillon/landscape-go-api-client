@@ -128,7 +128,7 @@ Create an attachment for it:
 
 ```sh
 code=$(echo "attachment" | base64)
-./landscape-api script attachment create -i 21433 -f "attachment.txt\$\$$code"
+./landscape-api script attachment create 21433 -f "attachment.txt\$\$$code"
 ```
 
 ...
@@ -210,7 +210,7 @@ Create an attachment for it:
 
 ```sh
 code=$(echo "legacy attachment" | base64)
-./landscape-api script attachment create -i 21434 -f "legacy-attachment.txt\$\$$code"
+./landscape-api script attachment create 21434 -f "legacy-attachment.txt\$\$$code"
 ```
 
 ...
