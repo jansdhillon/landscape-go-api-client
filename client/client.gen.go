@@ -52,8 +52,11 @@ type Error struct {
 	Message *string `json:"message,omitempty" tfsdk:"message"`
 }
 
-// LegacyScriptAttachment defines model for LegacyScriptAttachment.
+// LegacyScriptAttachment The response from creating a legacy script attachment.
 type LegacyScriptAttachment = string
+
+// LegacyScriptCode The response of getting a legacy script's code (raw, doesn't split code and interpreter).
+type LegacyScriptCode = string
 
 // LegacyScriptCreator Information about the creator of a V1 legacy script.
 type LegacyScriptCreator struct {
@@ -583,6 +586,32 @@ func (t *LegacyActionResponse) FromLegacyScriptAttachment(v LegacyScriptAttachme
 
 // MergeLegacyScriptAttachment performs a merge with any union data inside the LegacyActionResponse, using the provided LegacyScriptAttachment
 func (t *LegacyActionResponse) MergeLegacyScriptAttachment(v LegacyScriptAttachment) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsLegacyScriptCode returns the union data inside the LegacyActionResponse as a LegacyScriptCode
+func (t LegacyActionResponse) AsLegacyScriptCode() (LegacyScriptCode, error) {
+	var body LegacyScriptCode
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromLegacyScriptCode overwrites any union data inside the LegacyActionResponse as the provided LegacyScriptCode
+func (t *LegacyActionResponse) FromLegacyScriptCode(v LegacyScriptCode) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeLegacyScriptCode performs a merge with any union data inside the LegacyActionResponse, using the provided LegacyScriptCode
+func (t *LegacyActionResponse) MergeLegacyScriptCode(v LegacyScriptCode) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
