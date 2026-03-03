@@ -597,31 +597,16 @@ type ScriptProfileNamesQueryParam = string
 // BadRequest defines model for BadRequest.
 type BadRequest = Error
 
-// CreateScriptProfileResponse A script profile and its full state.
-type CreateScriptProfileResponse = ScriptProfileDetail
-
 // GetScriptProfileActivitiesResponse Paginated list of activity runs for a script profile.
 type GetScriptProfileActivitiesResponse = ScriptProfileActivitiesListResponse
 
 // GetScriptProfileComputersResponse Paginated list of computers associated with a script profile.
 type GetScriptProfileComputersResponse = ScriptProfileComputersListResponse
 
-// GetScriptProfileLimitsResponse Limits and constraints for script profiles in an account.
-type GetScriptProfileLimitsResponse = ScriptProfileLimits
-
-// GetScriptProfileResponse A script profile and its full state.
-type GetScriptProfileResponse = ScriptProfileDetail
-
 // LegacyActionResponse defines model for LegacyActionResponse.
 type LegacyActionResponse struct {
 	union json.RawMessage
 }
-
-// ListScriptProfilesByScriptResponse defines model for ListScriptProfilesByScriptResponse.
-type ListScriptProfilesByScriptResponse = []ScriptProfile
-
-// ListScriptProfilesResponse Paginated list of script profiles.
-type ListScriptProfilesResponse = ScriptProfileListResponse
 
 // NotFound defines model for NotFound.
 type NotFound = Error
@@ -632,8 +617,20 @@ type ScriptNotFound = Error
 // ScriptProfileArchived defines model for ScriptProfileArchived.
 type ScriptProfileArchived = Error
 
+// ScriptProfileCreatedResult A script profile and its full state.
+type ScriptProfileCreatedResult = ScriptProfileDetail
+
+// ScriptProfileDetailResult A script profile and its full state.
+type ScriptProfileDetailResult = ScriptProfileDetail
+
 // ScriptProfileDuplicate defines model for ScriptProfileDuplicate.
 type ScriptProfileDuplicate = Error
+
+// ScriptProfileLimitsResult Limits and constraints for script profiles in an account.
+type ScriptProfileLimitsResult = ScriptProfileLimits
+
+// ScriptProfileListResult Paginated list of script profiles.
+type ScriptProfileListResult = ScriptProfileListResponse
 
 // ScriptProfileMaxReached defines model for ScriptProfileMaxReached.
 type ScriptProfileMaxReached = Error
@@ -643,6 +640,9 @@ type ScriptProfileNotEnabled = Error
 
 // ScriptProfileNotFound defines model for ScriptProfileNotFound.
 type ScriptProfileNotFound = Error
+
+// ScriptProfilesByScriptResult defines model for ScriptProfilesByScriptResult.
+type ScriptProfilesByScriptResult = []ScriptProfile
 
 // Unauthorized defines model for Unauthorized.
 type Unauthorized = Error
@@ -2524,7 +2524,7 @@ func (r LoginWithAccessKeyResponse) StatusCode() int {
 type GetScriptProfileLimitsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *GetScriptProfileLimitsResponse
+	JSON200      *ScriptProfileLimitsResult
 	JSON401      *Unauthorized
 }
 
@@ -2547,7 +2547,7 @@ func (r GetScriptProfileLimitsResponse) StatusCode() int {
 type ListScriptProfilesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ListScriptProfilesResponse
+	JSON200      *ScriptProfileListResult
 	JSON401      *Unauthorized
 	JSON403      *ScriptProfileNotEnabled
 }
@@ -2571,7 +2571,7 @@ func (r ListScriptProfilesResponse) StatusCode() int {
 type CreateScriptProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON201      *CreateScriptProfileResponse
+	JSON201      *ScriptProfileCreatedResult
 	JSON400      *ScriptProfileMaxReached
 	JSON401      *Unauthorized
 	JSON403      *ScriptProfileNotEnabled
@@ -2598,7 +2598,7 @@ func (r CreateScriptProfileResponse) StatusCode() int {
 type GetScriptProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *GetScriptProfileResponse
+	JSON200      *ScriptProfileDetailResult
 	JSON401      *Unauthorized
 	JSON403      *ScriptProfileNotEnabled
 	JSON404      *ScriptProfileNotFound
@@ -2623,7 +2623,7 @@ func (r GetScriptProfileResponse) StatusCode() int {
 type UpdateScriptProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *GetScriptProfileResponse
+	JSON200      *ScriptProfileDetailResult
 	JSON400      *ScriptProfileArchived
 	JSON401      *Unauthorized
 	JSON403      *ScriptProfileNotEnabled
@@ -2770,7 +2770,7 @@ func (r GetScriptAttachmentResponse) StatusCode() int {
 type ListScriptProfilesByScriptResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *ListScriptProfilesByScriptResponse
+	JSON200      *ScriptProfilesByScriptResult
 	JSON401      *Unauthorized
 	JSON404      *ScriptNotFound
 }
@@ -3155,7 +3155,7 @@ func ParseGetScriptProfileLimitsResponse(rsp *http.Response) (*GetScriptProfileL
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GetScriptProfileLimitsResponse
+		var dest ScriptProfileLimitsResult
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -3188,7 +3188,7 @@ func ParseListScriptProfilesResponse(rsp *http.Response) (*ListScriptProfilesRes
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ListScriptProfilesResponse
+		var dest ScriptProfileListResult
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -3228,7 +3228,7 @@ func ParseCreateScriptProfileResponse(rsp *http.Response) (*CreateScriptProfileR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest CreateScriptProfileResponse
+		var dest ScriptProfileCreatedResult
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -3289,7 +3289,7 @@ func ParseGetScriptProfileResponse(rsp *http.Response) (*GetScriptProfileRespons
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GetScriptProfileResponse
+		var dest ScriptProfileDetailResult
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -3336,7 +3336,7 @@ func ParseUpdateScriptProfileResponse(rsp *http.Response) (*UpdateScriptProfileR
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GetScriptProfileResponse
+		var dest ScriptProfileDetailResult
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -3597,7 +3597,7 @@ func ParseListScriptProfilesByScriptResponse(rsp *http.Response) (*ListScriptPro
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest ListScriptProfilesByScriptResponse
+		var dest ScriptProfilesByScriptResult
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
