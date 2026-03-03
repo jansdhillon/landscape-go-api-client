@@ -292,7 +292,7 @@ type ScriptProfileDetail struct {
 	Computers ScriptProfileComputersInfo `json:"computers" tfsdk:"computers_info"`
 
 	// CreatedAt The timestamp when the script profile was created.
-	CreatedAt time.Time `json:"created_at" tfsdk:"created_at"`
+	CreatedAt string `json:"created_at" tfsdk:"created_at"`
 
 	// CreatedBy The user who created the script profile.
 	CreatedBy *ScriptProfileCreatedBy `json:"created_by,omitempty" tfsdk:"script_profile_created_by"`
@@ -301,7 +301,7 @@ type ScriptProfileDetail struct {
 	Id int `json:"id" tfsdk:"id"`
 
 	// LastEditedAt The timestamp when the script profile was last modified.
-	LastEditedAt time.Time `json:"last_edited_at" tfsdk:"last_edited_at"`
+	LastEditedAt string `json:"last_edited_at" tfsdk:"last_edited_at"`
 
 	// ScriptId The ID of the script this profile executes.
 	ScriptId int `json:"script_id" tfsdk:"script_id"`
