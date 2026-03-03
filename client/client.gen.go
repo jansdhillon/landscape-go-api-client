@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	"github.com/oapi-codegen/runtime"
 	openapi_types "github.com/oapi-codegen/runtime/types"
@@ -20,6 +21,41 @@ import (
 
 const (
 	BearerAuthScopes = "bearerAuth.Scopes"
+)
+
+// Defines values for ScriptProfileEventTriggerTriggerType.
+const (
+	Event ScriptProfileEventTriggerTriggerType = "event"
+)
+
+// Defines values for ScriptProfileEventType.
+const (
+	PostEnrollment ScriptProfileEventType = "post_enrollment"
+)
+
+// Defines values for ScriptProfileOneTimeDraftTriggerTriggerType.
+const (
+	ScriptProfileOneTimeDraftTriggerTriggerTypeOneTime ScriptProfileOneTimeDraftTriggerTriggerType = "one_time"
+)
+
+// Defines values for ScriptProfileOneTimeTriggerTriggerType.
+const (
+	ScriptProfileOneTimeTriggerTriggerTypeOneTime ScriptProfileOneTimeTriggerTriggerType = "one_time"
+)
+
+// Defines values for ScriptProfileScheduleDraftEditTriggerTriggerType.
+const (
+	ScriptProfileScheduleDraftEditTriggerTriggerTypeRecurring ScriptProfileScheduleDraftEditTriggerTriggerType = "recurring"
+)
+
+// Defines values for ScriptProfileScheduleDraftTriggerTriggerType.
+const (
+	ScriptProfileScheduleDraftTriggerTriggerTypeRecurring ScriptProfileScheduleDraftTriggerTriggerType = "recurring"
+)
+
+// Defines values for ScriptProfileScheduleTriggerTriggerType.
+const (
+	Recurring ScriptProfileScheduleTriggerTriggerType = "recurring"
 )
 
 // Defines values for V1ScriptStatus.
@@ -32,6 +68,20 @@ const (
 	ACTIVE   V2ScriptStatus = "ACTIVE"
 	ARCHIVED V2ScriptStatus = "ARCHIVED"
 	REDACTED V2ScriptStatus = "REDACTED"
+)
+
+// Defines values for ScriptProfileArchivedQueryParam.
+const (
+	ScriptProfileArchivedQueryParamActive   ScriptProfileArchivedQueryParam = "active"
+	ScriptProfileArchivedQueryParamAll      ScriptProfileArchivedQueryParam = "all"
+	ScriptProfileArchivedQueryParamArchived ScriptProfileArchivedQueryParam = "archived"
+)
+
+// Defines values for ListScriptProfilesParamsArchived.
+const (
+	ListScriptProfilesParamsArchivedActive   ListScriptProfilesParamsArchived = "active"
+	ListScriptProfilesParamsArchivedAll      ListScriptProfilesParamsArchived = "all"
+	ListScriptProfilesParamsArchivedArchived ListScriptProfilesParamsArchived = "archived"
 )
 
 // AccessKeyLoginRequest defines model for AccessKeyLoginRequest.
@@ -161,6 +211,273 @@ type ScriptProfile struct {
 	Title string `json:"title" tfsdk:"title"`
 }
 
+// ScriptProfileActivitiesListResponse Paginated list of activity runs for a script profile.
+type ScriptProfileActivitiesListResponse struct {
+	// Count Total number of activity runs for the script profile.
+	Count int `json:"count" tfsdk:"count"`
+
+	// Results List of activity state objects for each run.
+	Results []map[string]interface{} `json:"results" tfsdk:"results"`
+}
+
+// ScriptProfileActivityInfo The most recent activity information for a script profile.
+type ScriptProfileActivityInfo struct {
+	// LastActivity The state of the last activity run for this script profile.
+	LastActivity *map[string]interface{} `json:"last_activity" tfsdk:"last_activity"`
+}
+
+// ScriptProfileComputersInfo Aggregate computer association information for a script profile.
+type ScriptProfileComputersInfo struct {
+	// NumAssociatedComputers The number of computers currently associated with the script profile.
+	NumAssociatedComputers int `json:"num_associated_computers" tfsdk:"num_associated_computers"`
+}
+
+// ScriptProfileComputersListResponse Paginated list of computers associated with a script profile.
+type ScriptProfileComputersListResponse struct {
+	// Count Total number of computers associated with the script profile.
+	Count int `json:"count" tfsdk:"count"`
+
+	// Results List of computers targeted by the script profile.
+	Results []map[string]interface{} `json:"results" tfsdk:"results"`
+}
+
+// ScriptProfileCreateBody Request body for creating a new script profile.
+type ScriptProfileCreateBody struct {
+	// AllComputers Whether to target all computers in the account.
+	AllComputers *bool `json:"all_computers,omitempty"`
+
+	// ScriptId The ID of the script to execute.
+	ScriptId int `json:"script_id"`
+
+	// Tags Tags used to target specific computers.
+	Tags *[]string `json:"tags,omitempty"`
+
+	// TimeLimit Maximum execution time for the script in seconds.
+	TimeLimit int `json:"time_limit"`
+
+	// Title The title of the script profile.
+	Title string `json:"title"`
+
+	// Trigger A discriminated union representing a script profile trigger in create requests.
+	Trigger ScriptProfileTriggerCreateRequest `json:"trigger"`
+
+	// Username The username under which the script will run.
+	Username string `json:"username"`
+}
+
+// ScriptProfileCreatedBy The user who created the script profile.
+type ScriptProfileCreatedBy struct {
+	// Id The ID of the person who created the script profile.
+	Id int `json:"id" tfsdk:"id"`
+
+	// Name The full name of the person who created the script profile.
+	Name string `json:"name" tfsdk:"name"`
+}
+
+// ScriptProfileDetail A script profile and its full state.
+type ScriptProfileDetail struct {
+	// AccessGroup The access group associated with the script profile.
+	AccessGroup string `json:"access_group" tfsdk:"access_group"`
+
+	// Activities The most recent activity information for a script profile.
+	Activities ScriptProfileActivityInfo `json:"activities" tfsdk:"activity_info"`
+
+	// AllComputers Whether the script profile targets all computers in the account.
+	AllComputers bool `json:"all_computers" tfsdk:"all_computers"`
+
+	// Archived Whether the script profile has been archived.
+	Archived bool `json:"archived" tfsdk:"archived"`
+
+	// Computers Aggregate computer association information for a script profile.
+	Computers ScriptProfileComputersInfo `json:"computers" tfsdk:"computers_info"`
+
+	// CreatedAt The timestamp when the script profile was created.
+	CreatedAt time.Time `json:"created_at" tfsdk:"created_at"`
+
+	// CreatedBy The user who created the script profile.
+	CreatedBy *ScriptProfileCreatedBy `json:"created_by,omitempty" tfsdk:"script_profile_created_by"`
+
+	// Id The unique identifier for the script profile.
+	Id int `json:"id" tfsdk:"id"`
+
+	// LastEditedAt The timestamp when the script profile was last modified.
+	LastEditedAt time.Time `json:"last_edited_at" tfsdk:"last_edited_at"`
+
+	// ScriptId The ID of the script this profile executes.
+	ScriptId int `json:"script_id" tfsdk:"script_id"`
+
+	// Tags The list of tags used to target computers.
+	Tags []string `json:"tags" tfsdk:"tags"`
+
+	// TimeLimit The execution time limit for the script in seconds.
+	TimeLimit int `json:"time_limit" tfsdk:"time_limit"`
+
+	// Title The title of the script profile.
+	Title string `json:"title" tfsdk:"title"`
+
+	// Trigger A discriminated union representing a script profile trigger as returned in responses.
+	Trigger ScriptProfileTriggerResponse `json:"trigger"`
+
+	// Username The username under which the script runs.
+	Username string `json:"username" tfsdk:"username"`
+}
+
+// ScriptProfileEventTrigger An event-based trigger that executes the script profile on a specific system event.
+type ScriptProfileEventTrigger struct {
+	// EventType The type of event that triggers the script profile execution.
+	EventType ScriptProfileEventType `json:"event_type"`
+
+	// TriggerType The type of trigger. Must be "event" for event-based triggers.
+	TriggerType ScriptProfileEventTriggerTriggerType `json:"trigger_type" tfsdk:"trigger_type"`
+}
+
+// ScriptProfileEventTriggerTriggerType The type of trigger. Must be "event" for event-based triggers.
+type ScriptProfileEventTriggerTriggerType string
+
+// ScriptProfileEventType The type of event that triggers the script profile execution.
+type ScriptProfileEventType string
+
+// ScriptProfileLimits Limits and constraints for script profiles in an account.
+type ScriptProfileLimits struct {
+	// MaxNumComputers Maximum number of computers a single script profile can target.
+	MaxNumComputers int `json:"max_num_computers" tfsdk:"max_num_computers"`
+
+	// MaxNumProfiles Maximum number of script profiles allowed per account.
+	MaxNumProfiles int `json:"max_num_profiles" tfsdk:"max_num_profiles"`
+
+	// MinInterval Minimum interval in minutes between recurring script profile executions.
+	MinInterval int `json:"min_interval" tfsdk:"min_interval"`
+}
+
+// ScriptProfileListResponse Paginated list of script profiles.
+type ScriptProfileListResponse struct {
+	// Count Total number of script profiles matching the query.
+	Count int `json:"count" tfsdk:"count"`
+
+	// Results The list of script profiles.
+	Results []ScriptProfileDetail `json:"results" tfsdk:"results"`
+}
+
+// ScriptProfileOneTimeDraftTrigger A one-time trigger definition for creating or patching a script profile.
+type ScriptProfileOneTimeDraftTrigger struct {
+	// Timestamp The datetime at which the script profile will execute.
+	Timestamp time.Time `json:"timestamp" tfsdk:"timestamp"`
+
+	// TriggerType The type of trigger. Must be "one_time" for one-time triggers.
+	TriggerType ScriptProfileOneTimeDraftTriggerTriggerType `json:"trigger_type" tfsdk:"trigger_type"`
+}
+
+// ScriptProfileOneTimeDraftTriggerTriggerType The type of trigger. Must be "one_time" for one-time triggers.
+type ScriptProfileOneTimeDraftTriggerTriggerType string
+
+// ScriptProfileOneTimeTrigger A one-time trigger that executes the script profile at a specific datetime.
+type ScriptProfileOneTimeTrigger struct {
+	// IsFinished Whether the one-time execution has already completed.
+	IsFinished bool `json:"is_finished" tfsdk:"is_finished"`
+
+	// LastRun The most recent execution time.
+	LastRun *time.Time `json:"last_run" tfsdk:"last_run"`
+
+	// NextRun The scheduled next run time, or null if already finished.
+	NextRun *time.Time `json:"next_run" tfsdk:"next_run"`
+
+	// Timestamp The datetime at which the script profile will execute.
+	Timestamp time.Time `json:"timestamp" tfsdk:"timestamp"`
+
+	// TriggerType The type of trigger. Must be "one_time" for one-time triggers.
+	TriggerType ScriptProfileOneTimeTriggerTriggerType `json:"trigger_type" tfsdk:"trigger_type"`
+}
+
+// ScriptProfileOneTimeTriggerTriggerType The type of trigger. Must be "one_time" for one-time triggers.
+type ScriptProfileOneTimeTriggerTriggerType string
+
+// ScriptProfilePatchBody Request body for partially updating a script profile.
+type ScriptProfilePatchBody struct {
+	// AllComputers Whether to target all computers in the account.
+	AllComputers *bool `json:"all_computers"`
+
+	// Tags Tags used to target specific computers.
+	Tags *[]string `json:"tags"`
+
+	// TimeLimit Maximum execution time for the script in seconds.
+	TimeLimit *int `json:"time_limit"`
+
+	// Title The new title for the script profile.
+	Title *string `json:"title"`
+
+	// Trigger A discriminated union representing a script profile trigger in patch requests.
+	Trigger *ScriptProfileTriggerPatchRequest `json:"trigger,omitempty"`
+
+	// Username The username under which the script will run.
+	Username *string `json:"username"`
+}
+
+// ScriptProfileScheduleDraftEditTrigger A partial recurring trigger update for patching a script profile.
+type ScriptProfileScheduleDraftEditTrigger struct {
+	// Interval A cron expression defining the recurrence interval.
+	Interval *string `json:"interval" tfsdk:"interval"`
+
+	// StartAfter The earliest datetime after which the schedule begins.
+	StartAfter *time.Time `json:"start_after" tfsdk:"start_after"`
+
+	// TriggerType The type of trigger. Must be "recurring" for schedule-based triggers.
+	TriggerType ScriptProfileScheduleDraftEditTriggerTriggerType `json:"trigger_type" tfsdk:"trigger_type"`
+}
+
+// ScriptProfileScheduleDraftEditTriggerTriggerType The type of trigger. Must be "recurring" for schedule-based triggers.
+type ScriptProfileScheduleDraftEditTriggerTriggerType string
+
+// ScriptProfileScheduleDraftTrigger A recurring trigger definition for creating a script profile.
+type ScriptProfileScheduleDraftTrigger struct {
+	// Interval A cron expression defining the recurrence interval.
+	Interval string `json:"interval" tfsdk:"interval"`
+
+	// StartAfter The earliest datetime after which the schedule begins.
+	StartAfter time.Time `json:"start_after" tfsdk:"start_after"`
+
+	// TriggerType The type of trigger. Must be "recurring" for schedule-based triggers.
+	TriggerType ScriptProfileScheduleDraftTriggerTriggerType `json:"trigger_type" tfsdk:"trigger_type"`
+}
+
+// ScriptProfileScheduleDraftTriggerTriggerType The type of trigger. Must be "recurring" for schedule-based triggers.
+type ScriptProfileScheduleDraftTriggerTriggerType string
+
+// ScriptProfileScheduleTrigger A recurring (cron-based) trigger for a script profile.
+type ScriptProfileScheduleTrigger struct {
+	// Interval A cron expression defining the recurrence interval.
+	Interval string `json:"interval" tfsdk:"interval"`
+
+	// LastRun The most recent execution time.
+	LastRun *time.Time `json:"last_run" tfsdk:"last_run"`
+
+	// NextRun The next scheduled execution time.
+	NextRun *time.Time `json:"next_run" tfsdk:"next_run"`
+
+	// StartAfter The earliest datetime after which the schedule begins.
+	StartAfter time.Time `json:"start_after" tfsdk:"start_after"`
+
+	// TriggerType The type of trigger. Must be "recurring" for schedule-based triggers.
+	TriggerType ScriptProfileScheduleTriggerTriggerType `json:"trigger_type" tfsdk:"trigger_type"`
+}
+
+// ScriptProfileScheduleTriggerTriggerType The type of trigger. Must be "recurring" for schedule-based triggers.
+type ScriptProfileScheduleTriggerTriggerType string
+
+// ScriptProfileTriggerCreateRequest A discriminated union representing a script profile trigger in create requests.
+type ScriptProfileTriggerCreateRequest struct {
+	union json.RawMessage
+}
+
+// ScriptProfileTriggerPatchRequest A discriminated union representing a script profile trigger in patch requests.
+type ScriptProfileTriggerPatchRequest struct {
+	union json.RawMessage
+}
+
+// ScriptProfileTriggerResponse A discriminated union representing a script profile trigger as returned in responses.
+type ScriptProfileTriggerResponse struct {
+	union json.RawMessage
+}
+
 // ScriptResult defines model for ScriptResult.
 type ScriptResult struct {
 	union json.RawMessage
@@ -268,19 +585,64 @@ type ScriptAttachmentIdPathParam = int
 // ScriptIdPathParam defines model for ScriptIdPathParam.
 type ScriptIdPathParam = int
 
+// ScriptProfileArchivedQueryParam defines model for ScriptProfileArchivedQueryParam.
+type ScriptProfileArchivedQueryParam string
+
+// ScriptProfileIdPathParam defines model for ScriptProfileIdPathParam.
+type ScriptProfileIdPathParam = int
+
+// ScriptProfileNamesQueryParam defines model for ScriptProfileNamesQueryParam.
+type ScriptProfileNamesQueryParam = string
+
 // BadRequest defines model for BadRequest.
 type BadRequest = Error
+
+// CreateScriptProfileResponse A script profile and its full state.
+type CreateScriptProfileResponse = ScriptProfileDetail
+
+// GetScriptProfileActivitiesResponse Paginated list of activity runs for a script profile.
+type GetScriptProfileActivitiesResponse = ScriptProfileActivitiesListResponse
+
+// GetScriptProfileComputersResponse Paginated list of computers associated with a script profile.
+type GetScriptProfileComputersResponse = ScriptProfileComputersListResponse
+
+// GetScriptProfileLimitsResponse Limits and constraints for script profiles in an account.
+type GetScriptProfileLimitsResponse = ScriptProfileLimits
+
+// GetScriptProfileResponse A script profile and its full state.
+type GetScriptProfileResponse = ScriptProfileDetail
 
 // LegacyActionResponse defines model for LegacyActionResponse.
 type LegacyActionResponse struct {
 	union json.RawMessage
 }
 
+// ListScriptProfilesByScriptResponse defines model for ListScriptProfilesByScriptResponse.
+type ListScriptProfilesByScriptResponse = []ScriptProfile
+
+// ListScriptProfilesResponse Paginated list of script profiles.
+type ListScriptProfilesResponse = ScriptProfileListResponse
+
 // NotFound defines model for NotFound.
 type NotFound = Error
 
 // ScriptNotFound defines model for ScriptNotFound.
 type ScriptNotFound = Error
+
+// ScriptProfileArchived defines model for ScriptProfileArchived.
+type ScriptProfileArchived = Error
+
+// ScriptProfileDuplicate defines model for ScriptProfileDuplicate.
+type ScriptProfileDuplicate = Error
+
+// ScriptProfileMaxReached defines model for ScriptProfileMaxReached.
+type ScriptProfileMaxReached = Error
+
+// ScriptProfileNotEnabled defines model for ScriptProfileNotEnabled.
+type ScriptProfileNotEnabled = Error
+
+// ScriptProfileNotFound defines model for ScriptProfileNotFound.
+type ScriptProfileNotFound = Error
 
 // Unauthorized defines model for Unauthorized.
 type Unauthorized = Error
@@ -294,11 +656,29 @@ type InvokeLegacyActionParams struct {
 	Action LegacyActionParam `form:"action" json:"action"`
 }
 
+// ListScriptProfilesParams defines parameters for ListScriptProfiles.
+type ListScriptProfilesParams struct {
+	// Archived Filter script profiles by archived status.
+	Archived *ListScriptProfilesParamsArchived `form:"archived,omitempty" json:"archived,omitempty"`
+
+	// Names Comma-separated list of script profile titles to filter by.
+	Names *ScriptProfileNamesQueryParam `form:"names,omitempty" json:"names,omitempty"`
+}
+
+// ListScriptProfilesParamsArchived defines parameters for ListScriptProfiles.
+type ListScriptProfilesParamsArchived string
+
 // LoginWithPasswordJSONRequestBody defines body for LoginWithPassword for application/json ContentType.
 type LoginWithPasswordJSONRequestBody = LoginRequest
 
 // LoginWithAccessKeyJSONRequestBody defines body for LoginWithAccessKey for application/json ContentType.
 type LoginWithAccessKeyJSONRequestBody = AccessKeyLoginRequest
+
+// CreateScriptProfileJSONRequestBody defines body for CreateScriptProfile for application/json ContentType.
+type CreateScriptProfileJSONRequestBody = ScriptProfileCreateBody
+
+// UpdateScriptProfileJSONRequestBody defines body for UpdateScriptProfile for application/json ContentType.
+type UpdateScriptProfileJSONRequestBody = ScriptProfilePatchBody
 
 // Getter for additional properties for LoginResponse. Returns the specified
 // element and whether it was found
@@ -433,6 +813,363 @@ func (a LoginResponse) MarshalJSON() ([]byte, error) {
 		}
 	}
 	return json.Marshal(object)
+}
+
+// AsScriptProfileEventTrigger returns the union data inside the ScriptProfileTriggerCreateRequest as a ScriptProfileEventTrigger
+func (t ScriptProfileTriggerCreateRequest) AsScriptProfileEventTrigger() (ScriptProfileEventTrigger, error) {
+	var body ScriptProfileEventTrigger
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptProfileEventTrigger overwrites any union data inside the ScriptProfileTriggerCreateRequest as the provided ScriptProfileEventTrigger
+func (t *ScriptProfileTriggerCreateRequest) FromScriptProfileEventTrigger(v ScriptProfileEventTrigger) error {
+	v.TriggerType = "ScriptProfileEventTrigger"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptProfileEventTrigger performs a merge with any union data inside the ScriptProfileTriggerCreateRequest, using the provided ScriptProfileEventTrigger
+func (t *ScriptProfileTriggerCreateRequest) MergeScriptProfileEventTrigger(v ScriptProfileEventTrigger) error {
+	v.TriggerType = "ScriptProfileEventTrigger"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsScriptProfileScheduleDraftTrigger returns the union data inside the ScriptProfileTriggerCreateRequest as a ScriptProfileScheduleDraftTrigger
+func (t ScriptProfileTriggerCreateRequest) AsScriptProfileScheduleDraftTrigger() (ScriptProfileScheduleDraftTrigger, error) {
+	var body ScriptProfileScheduleDraftTrigger
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptProfileScheduleDraftTrigger overwrites any union data inside the ScriptProfileTriggerCreateRequest as the provided ScriptProfileScheduleDraftTrigger
+func (t *ScriptProfileTriggerCreateRequest) FromScriptProfileScheduleDraftTrigger(v ScriptProfileScheduleDraftTrigger) error {
+	v.TriggerType = "ScriptProfileScheduleDraftTrigger"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptProfileScheduleDraftTrigger performs a merge with any union data inside the ScriptProfileTriggerCreateRequest, using the provided ScriptProfileScheduleDraftTrigger
+func (t *ScriptProfileTriggerCreateRequest) MergeScriptProfileScheduleDraftTrigger(v ScriptProfileScheduleDraftTrigger) error {
+	v.TriggerType = "ScriptProfileScheduleDraftTrigger"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsScriptProfileOneTimeDraftTrigger returns the union data inside the ScriptProfileTriggerCreateRequest as a ScriptProfileOneTimeDraftTrigger
+func (t ScriptProfileTriggerCreateRequest) AsScriptProfileOneTimeDraftTrigger() (ScriptProfileOneTimeDraftTrigger, error) {
+	var body ScriptProfileOneTimeDraftTrigger
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptProfileOneTimeDraftTrigger overwrites any union data inside the ScriptProfileTriggerCreateRequest as the provided ScriptProfileOneTimeDraftTrigger
+func (t *ScriptProfileTriggerCreateRequest) FromScriptProfileOneTimeDraftTrigger(v ScriptProfileOneTimeDraftTrigger) error {
+	v.TriggerType = "ScriptProfileOneTimeDraftTrigger"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptProfileOneTimeDraftTrigger performs a merge with any union data inside the ScriptProfileTriggerCreateRequest, using the provided ScriptProfileOneTimeDraftTrigger
+func (t *ScriptProfileTriggerCreateRequest) MergeScriptProfileOneTimeDraftTrigger(v ScriptProfileOneTimeDraftTrigger) error {
+	v.TriggerType = "ScriptProfileOneTimeDraftTrigger"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t ScriptProfileTriggerCreateRequest) Discriminator() (string, error) {
+	var discriminator struct {
+		Discriminator string `json:"trigger_type"`
+	}
+	err := json.Unmarshal(t.union, &discriminator)
+	return discriminator.Discriminator, err
+}
+
+func (t ScriptProfileTriggerCreateRequest) ValueByDiscriminator() (interface{}, error) {
+	discriminator, err := t.Discriminator()
+	if err != nil {
+		return nil, err
+	}
+	switch discriminator {
+	case "ScriptProfileEventTrigger":
+		return t.AsScriptProfileEventTrigger()
+	case "ScriptProfileOneTimeDraftTrigger":
+		return t.AsScriptProfileOneTimeDraftTrigger()
+	case "ScriptProfileScheduleDraftTrigger":
+		return t.AsScriptProfileScheduleDraftTrigger()
+	default:
+		return nil, errors.New("unknown discriminator value: " + discriminator)
+	}
+}
+
+func (t ScriptProfileTriggerCreateRequest) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *ScriptProfileTriggerCreateRequest) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsScriptProfileEventTrigger returns the union data inside the ScriptProfileTriggerPatchRequest as a ScriptProfileEventTrigger
+func (t ScriptProfileTriggerPatchRequest) AsScriptProfileEventTrigger() (ScriptProfileEventTrigger, error) {
+	var body ScriptProfileEventTrigger
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptProfileEventTrigger overwrites any union data inside the ScriptProfileTriggerPatchRequest as the provided ScriptProfileEventTrigger
+func (t *ScriptProfileTriggerPatchRequest) FromScriptProfileEventTrigger(v ScriptProfileEventTrigger) error {
+	v.TriggerType = "ScriptProfileEventTrigger"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptProfileEventTrigger performs a merge with any union data inside the ScriptProfileTriggerPatchRequest, using the provided ScriptProfileEventTrigger
+func (t *ScriptProfileTriggerPatchRequest) MergeScriptProfileEventTrigger(v ScriptProfileEventTrigger) error {
+	v.TriggerType = "ScriptProfileEventTrigger"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsScriptProfileScheduleDraftEditTrigger returns the union data inside the ScriptProfileTriggerPatchRequest as a ScriptProfileScheduleDraftEditTrigger
+func (t ScriptProfileTriggerPatchRequest) AsScriptProfileScheduleDraftEditTrigger() (ScriptProfileScheduleDraftEditTrigger, error) {
+	var body ScriptProfileScheduleDraftEditTrigger
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptProfileScheduleDraftEditTrigger overwrites any union data inside the ScriptProfileTriggerPatchRequest as the provided ScriptProfileScheduleDraftEditTrigger
+func (t *ScriptProfileTriggerPatchRequest) FromScriptProfileScheduleDraftEditTrigger(v ScriptProfileScheduleDraftEditTrigger) error {
+	v.TriggerType = "ScriptProfileScheduleDraftEditTrigger"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptProfileScheduleDraftEditTrigger performs a merge with any union data inside the ScriptProfileTriggerPatchRequest, using the provided ScriptProfileScheduleDraftEditTrigger
+func (t *ScriptProfileTriggerPatchRequest) MergeScriptProfileScheduleDraftEditTrigger(v ScriptProfileScheduleDraftEditTrigger) error {
+	v.TriggerType = "ScriptProfileScheduleDraftEditTrigger"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsScriptProfileOneTimeDraftTrigger returns the union data inside the ScriptProfileTriggerPatchRequest as a ScriptProfileOneTimeDraftTrigger
+func (t ScriptProfileTriggerPatchRequest) AsScriptProfileOneTimeDraftTrigger() (ScriptProfileOneTimeDraftTrigger, error) {
+	var body ScriptProfileOneTimeDraftTrigger
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptProfileOneTimeDraftTrigger overwrites any union data inside the ScriptProfileTriggerPatchRequest as the provided ScriptProfileOneTimeDraftTrigger
+func (t *ScriptProfileTriggerPatchRequest) FromScriptProfileOneTimeDraftTrigger(v ScriptProfileOneTimeDraftTrigger) error {
+	v.TriggerType = "ScriptProfileOneTimeDraftTrigger"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptProfileOneTimeDraftTrigger performs a merge with any union data inside the ScriptProfileTriggerPatchRequest, using the provided ScriptProfileOneTimeDraftTrigger
+func (t *ScriptProfileTriggerPatchRequest) MergeScriptProfileOneTimeDraftTrigger(v ScriptProfileOneTimeDraftTrigger) error {
+	v.TriggerType = "ScriptProfileOneTimeDraftTrigger"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t ScriptProfileTriggerPatchRequest) Discriminator() (string, error) {
+	var discriminator struct {
+		Discriminator string `json:"trigger_type"`
+	}
+	err := json.Unmarshal(t.union, &discriminator)
+	return discriminator.Discriminator, err
+}
+
+func (t ScriptProfileTriggerPatchRequest) ValueByDiscriminator() (interface{}, error) {
+	discriminator, err := t.Discriminator()
+	if err != nil {
+		return nil, err
+	}
+	switch discriminator {
+	case "ScriptProfileEventTrigger":
+		return t.AsScriptProfileEventTrigger()
+	case "ScriptProfileOneTimeDraftTrigger":
+		return t.AsScriptProfileOneTimeDraftTrigger()
+	case "ScriptProfileScheduleDraftEditTrigger":
+		return t.AsScriptProfileScheduleDraftEditTrigger()
+	default:
+		return nil, errors.New("unknown discriminator value: " + discriminator)
+	}
+}
+
+func (t ScriptProfileTriggerPatchRequest) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *ScriptProfileTriggerPatchRequest) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsScriptProfileEventTrigger returns the union data inside the ScriptProfileTriggerResponse as a ScriptProfileEventTrigger
+func (t ScriptProfileTriggerResponse) AsScriptProfileEventTrigger() (ScriptProfileEventTrigger, error) {
+	var body ScriptProfileEventTrigger
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptProfileEventTrigger overwrites any union data inside the ScriptProfileTriggerResponse as the provided ScriptProfileEventTrigger
+func (t *ScriptProfileTriggerResponse) FromScriptProfileEventTrigger(v ScriptProfileEventTrigger) error {
+	v.TriggerType = "ScriptProfileEventTrigger"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptProfileEventTrigger performs a merge with any union data inside the ScriptProfileTriggerResponse, using the provided ScriptProfileEventTrigger
+func (t *ScriptProfileTriggerResponse) MergeScriptProfileEventTrigger(v ScriptProfileEventTrigger) error {
+	v.TriggerType = "ScriptProfileEventTrigger"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsScriptProfileScheduleTrigger returns the union data inside the ScriptProfileTriggerResponse as a ScriptProfileScheduleTrigger
+func (t ScriptProfileTriggerResponse) AsScriptProfileScheduleTrigger() (ScriptProfileScheduleTrigger, error) {
+	var body ScriptProfileScheduleTrigger
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptProfileScheduleTrigger overwrites any union data inside the ScriptProfileTriggerResponse as the provided ScriptProfileScheduleTrigger
+func (t *ScriptProfileTriggerResponse) FromScriptProfileScheduleTrigger(v ScriptProfileScheduleTrigger) error {
+	v.TriggerType = "ScriptProfileScheduleTrigger"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptProfileScheduleTrigger performs a merge with any union data inside the ScriptProfileTriggerResponse, using the provided ScriptProfileScheduleTrigger
+func (t *ScriptProfileTriggerResponse) MergeScriptProfileScheduleTrigger(v ScriptProfileScheduleTrigger) error {
+	v.TriggerType = "ScriptProfileScheduleTrigger"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsScriptProfileOneTimeTrigger returns the union data inside the ScriptProfileTriggerResponse as a ScriptProfileOneTimeTrigger
+func (t ScriptProfileTriggerResponse) AsScriptProfileOneTimeTrigger() (ScriptProfileOneTimeTrigger, error) {
+	var body ScriptProfileOneTimeTrigger
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromScriptProfileOneTimeTrigger overwrites any union data inside the ScriptProfileTriggerResponse as the provided ScriptProfileOneTimeTrigger
+func (t *ScriptProfileTriggerResponse) FromScriptProfileOneTimeTrigger(v ScriptProfileOneTimeTrigger) error {
+	v.TriggerType = "ScriptProfileOneTimeTrigger"
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeScriptProfileOneTimeTrigger performs a merge with any union data inside the ScriptProfileTriggerResponse, using the provided ScriptProfileOneTimeTrigger
+func (t *ScriptProfileTriggerResponse) MergeScriptProfileOneTimeTrigger(v ScriptProfileOneTimeTrigger) error {
+	v.TriggerType = "ScriptProfileOneTimeTrigger"
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t ScriptProfileTriggerResponse) Discriminator() (string, error) {
+	var discriminator struct {
+		Discriminator string `json:"trigger_type"`
+	}
+	err := json.Unmarshal(t.union, &discriminator)
+	return discriminator.Discriminator, err
+}
+
+func (t ScriptProfileTriggerResponse) ValueByDiscriminator() (interface{}, error) {
+	discriminator, err := t.Discriminator()
+	if err != nil {
+		return nil, err
+	}
+	switch discriminator {
+	case "ScriptProfileEventTrigger":
+		return t.AsScriptProfileEventTrigger()
+	case "ScriptProfileOneTimeTrigger":
+		return t.AsScriptProfileOneTimeTrigger()
+	case "ScriptProfileScheduleTrigger":
+		return t.AsScriptProfileScheduleTrigger()
+	default:
+		return nil, errors.New("unknown discriminator value: " + discriminator)
+	}
+}
+
+func (t ScriptProfileTriggerResponse) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *ScriptProfileTriggerResponse) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
 }
 
 // AsV1Script returns the union data inside the ScriptResult as a V1Script
@@ -698,11 +1435,42 @@ type ClientInterface interface {
 
 	LoginWithAccessKey(ctx context.Context, body LoginWithAccessKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GetScriptProfileLimits request
+	GetScriptProfileLimits(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListScriptProfiles request
+	ListScriptProfiles(ctx context.Context, params *ListScriptProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateScriptProfileWithBody request with any body
+	CreateScriptProfileWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	CreateScriptProfile(ctx context.Context, body CreateScriptProfileJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetScriptProfile request
+	GetScriptProfile(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpdateScriptProfileWithBody request with any body
+	UpdateScriptProfileWithBody(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	UpdateScriptProfile(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, body UpdateScriptProfileJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListScriptProfileActivities request
+	ListScriptProfileActivities(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListScriptProfileComputers request
+	ListScriptProfileComputers(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ArchiveScriptProfile request
+	ArchiveScriptProfile(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GetScript request
 	GetScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GetScriptAttachment request
 	GetScriptAttachment(ctx context.Context, scriptId ScriptIdPathParam, attachmentId ScriptAttachmentIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListScriptProfilesByScript request
+	ListScriptProfilesByScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ArchiveScript request
 	ArchiveScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -771,6 +1539,126 @@ func (c *Client) LoginWithAccessKey(ctx context.Context, body LoginWithAccessKey
 	return c.Client.Do(req)
 }
 
+func (c *Client) GetScriptProfileLimits(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetScriptProfileLimitsRequest(c.Server)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListScriptProfiles(ctx context.Context, params *ListScriptProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListScriptProfilesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateScriptProfileWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScriptProfileRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateScriptProfile(ctx context.Context, body CreateScriptProfileJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScriptProfileRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetScriptProfile(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetScriptProfileRequest(c.Server, scriptProfileId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateScriptProfileWithBody(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScriptProfileRequestWithBody(c.Server, scriptProfileId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpdateScriptProfile(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, body UpdateScriptProfileJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpdateScriptProfileRequest(c.Server, scriptProfileId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListScriptProfileActivities(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListScriptProfileActivitiesRequest(c.Server, scriptProfileId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListScriptProfileComputers(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListScriptProfileComputersRequest(c.Server, scriptProfileId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ArchiveScriptProfile(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewArchiveScriptProfileRequest(c.Server, scriptProfileId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 func (c *Client) GetScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetScriptRequest(c.Server, scriptId)
 	if err != nil {
@@ -785,6 +1673,18 @@ func (c *Client) GetScript(ctx context.Context, scriptId ScriptIdPathParam, reqE
 
 func (c *Client) GetScriptAttachment(ctx context.Context, scriptId ScriptIdPathParam, attachmentId ScriptAttachmentIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetScriptAttachmentRequest(c.Server, scriptId, attachmentId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListScriptProfilesByScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListScriptProfilesByScriptRequest(c.Server, scriptId)
 	if err != nil {
 		return nil, err
 	}
@@ -956,6 +1856,321 @@ func NewLoginWithAccessKeyRequestWithBody(server string, contentType string, bod
 	return req, nil
 }
 
+// NewGetScriptProfileLimitsRequest generates requests for GetScriptProfileLimits
+func NewGetScriptProfileLimitsRequest(server string) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/script-profile-limits")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewListScriptProfilesRequest generates requests for ListScriptProfiles
+func NewListScriptProfilesRequest(server string, params *ListScriptProfilesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/script-profiles")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Archived != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "archived", runtime.ParamLocationQuery, *params.Archived); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Names != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateScriptProfileRequest calls the generic CreateScriptProfile builder with application/json body
+func NewCreateScriptProfileRequest(server string, body CreateScriptProfileJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewCreateScriptProfileRequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewCreateScriptProfileRequestWithBody generates requests for CreateScriptProfile with any type of body
+func NewCreateScriptProfileRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/script-profiles")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGetScriptProfileRequest generates requests for GetScriptProfile
+func NewGetScriptProfileRequest(server string, scriptProfileId ScriptProfileIdPathParam) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "script_profile_id", runtime.ParamLocationPath, scriptProfileId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/script-profiles/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpdateScriptProfileRequest calls the generic UpdateScriptProfile builder with application/json body
+func NewUpdateScriptProfileRequest(server string, scriptProfileId ScriptProfileIdPathParam, body UpdateScriptProfileJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewUpdateScriptProfileRequestWithBody(server, scriptProfileId, "application/json", bodyReader)
+}
+
+// NewUpdateScriptProfileRequestWithBody generates requests for UpdateScriptProfile with any type of body
+func NewUpdateScriptProfileRequestWithBody(server string, scriptProfileId ScriptProfileIdPathParam, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "script_profile_id", runtime.ParamLocationPath, scriptProfileId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/script-profiles/%s", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("PATCH", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewListScriptProfileActivitiesRequest generates requests for ListScriptProfileActivities
+func NewListScriptProfileActivitiesRequest(server string, scriptProfileId ScriptProfileIdPathParam) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "script_profile_id", runtime.ParamLocationPath, scriptProfileId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/script-profiles/%s/activities", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewListScriptProfileComputersRequest generates requests for ListScriptProfileComputers
+func NewListScriptProfileComputersRequest(server string, scriptProfileId ScriptProfileIdPathParam) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "script_profile_id", runtime.ParamLocationPath, scriptProfileId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/script-profiles/%s/computers", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewArchiveScriptProfileRequest generates requests for ArchiveScriptProfile
+func NewArchiveScriptProfileRequest(server string, scriptProfileId ScriptProfileIdPathParam) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "script_profile_id", runtime.ParamLocationPath, scriptProfileId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/script-profiles/%s:archive", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewGetScriptRequest generates requests for GetScript
 func NewGetScriptRequest(server string, scriptId ScriptIdPathParam) (*http.Request, error) {
 	var err error
@@ -1014,6 +2229,40 @@ func NewGetScriptAttachmentRequest(server string, scriptId ScriptIdPathParam, at
 	}
 
 	operationPath := fmt.Sprintf("/api/scripts/%s/attachments/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewListScriptProfilesByScriptRequest generates requests for ListScriptProfilesByScript
+func NewListScriptProfilesByScriptRequest(server string, scriptId ScriptIdPathParam) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "script_id", runtime.ParamLocationPath, scriptId)
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/scripts/%s/script-profiles", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1155,11 +2404,42 @@ type ClientWithResponsesInterface interface {
 
 	LoginWithAccessKeyWithResponse(ctx context.Context, body LoginWithAccessKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*LoginWithAccessKeyResponse, error)
 
+	// GetScriptProfileLimitsWithResponse request
+	GetScriptProfileLimitsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetScriptProfileLimitsResponse, error)
+
+	// ListScriptProfilesWithResponse request
+	ListScriptProfilesWithResponse(ctx context.Context, params *ListScriptProfilesParams, reqEditors ...RequestEditorFn) (*ListScriptProfilesResponse, error)
+
+	// CreateScriptProfileWithBodyWithResponse request with any body
+	CreateScriptProfileWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScriptProfileResponse, error)
+
+	CreateScriptProfileWithResponse(ctx context.Context, body CreateScriptProfileJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScriptProfileResponse, error)
+
+	// GetScriptProfileWithResponse request
+	GetScriptProfileWithResponse(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*GetScriptProfileResponse, error)
+
+	// UpdateScriptProfileWithBodyWithResponse request with any body
+	UpdateScriptProfileWithBodyWithResponse(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScriptProfileResponse, error)
+
+	UpdateScriptProfileWithResponse(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, body UpdateScriptProfileJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScriptProfileResponse, error)
+
+	// ListScriptProfileActivitiesWithResponse request
+	ListScriptProfileActivitiesWithResponse(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*ListScriptProfileActivitiesResponse, error)
+
+	// ListScriptProfileComputersWithResponse request
+	ListScriptProfileComputersWithResponse(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*ListScriptProfileComputersResponse, error)
+
+	// ArchiveScriptProfileWithResponse request
+	ArchiveScriptProfileWithResponse(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*ArchiveScriptProfileResponse, error)
+
 	// GetScriptWithResponse request
 	GetScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*GetScriptResponse, error)
 
 	// GetScriptAttachmentWithResponse request
 	GetScriptAttachmentWithResponse(ctx context.Context, scriptId ScriptIdPathParam, attachmentId ScriptAttachmentIdPathParam, reqEditors ...RequestEditorFn) (*GetScriptAttachmentResponse, error)
+
+	// ListScriptProfilesByScriptWithResponse request
+	ListScriptProfilesByScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*ListScriptProfilesByScriptResponse, error)
 
 	// ArchiveScriptWithResponse request
 	ArchiveScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*ArchiveScriptResponse, error)
@@ -1241,6 +2521,206 @@ func (r LoginWithAccessKeyResponse) StatusCode() int {
 	return 0
 }
 
+type GetScriptProfileLimitsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *GetScriptProfileLimitsResponse
+	JSON401      *Unauthorized
+}
+
+// Status returns HTTPResponse.Status
+func (r GetScriptProfileLimitsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetScriptProfileLimitsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListScriptProfilesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListScriptProfilesResponse
+	JSON401      *Unauthorized
+	JSON403      *ScriptProfileNotEnabled
+}
+
+// Status returns HTTPResponse.Status
+func (r ListScriptProfilesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListScriptProfilesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateScriptProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON201      *CreateScriptProfileResponse
+	JSON400      *ScriptProfileMaxReached
+	JSON401      *Unauthorized
+	JSON403      *ScriptProfileNotEnabled
+	JSON404      *ScriptNotFound
+	JSON409      *ScriptProfileDuplicate
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateScriptProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateScriptProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetScriptProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *GetScriptProfileResponse
+	JSON401      *Unauthorized
+	JSON403      *ScriptProfileNotEnabled
+	JSON404      *ScriptProfileNotFound
+}
+
+// Status returns HTTPResponse.Status
+func (r GetScriptProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetScriptProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpdateScriptProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *GetScriptProfileResponse
+	JSON400      *ScriptProfileArchived
+	JSON401      *Unauthorized
+	JSON403      *ScriptProfileNotEnabled
+	JSON404      *ScriptProfileNotFound
+	JSON409      *ScriptProfileDuplicate
+}
+
+// Status returns HTTPResponse.Status
+func (r UpdateScriptProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpdateScriptProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListScriptProfileActivitiesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *GetScriptProfileActivitiesResponse
+	JSON401      *Unauthorized
+	JSON403      *ScriptProfileNotEnabled
+	JSON404      *ScriptProfileNotFound
+}
+
+// Status returns HTTPResponse.Status
+func (r ListScriptProfileActivitiesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListScriptProfileActivitiesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListScriptProfileComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *GetScriptProfileComputersResponse
+	JSON401      *Unauthorized
+	JSON403      *ScriptProfileNotEnabled
+	JSON404      *ScriptProfileNotFound
+}
+
+// Status returns HTTPResponse.Status
+func (r ListScriptProfileComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListScriptProfileComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ArchiveScriptProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON401      *Unauthorized
+	JSON403      *ScriptProfileNotEnabled
+	JSON404      *ScriptProfileNotFound
+}
+
+// Status returns HTTPResponse.Status
+func (r ArchiveScriptProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ArchiveScriptProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
 type GetScriptResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -1281,6 +2761,30 @@ func (r GetScriptAttachmentResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r GetScriptAttachmentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListScriptProfilesByScriptResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ListScriptProfilesByScriptResponse
+	JSON401      *Unauthorized
+	JSON404      *ScriptNotFound
+}
+
+// Status returns HTTPResponse.Status
+func (r ListScriptProfilesByScriptResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListScriptProfilesByScriptResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -1376,6 +2880,94 @@ func (c *ClientWithResponses) LoginWithAccessKeyWithResponse(ctx context.Context
 	return ParseLoginWithAccessKeyResponse(rsp)
 }
 
+// GetScriptProfileLimitsWithResponse request returning *GetScriptProfileLimitsResponse
+func (c *ClientWithResponses) GetScriptProfileLimitsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetScriptProfileLimitsResponse, error) {
+	rsp, err := c.GetScriptProfileLimits(ctx, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetScriptProfileLimitsResponse(rsp)
+}
+
+// ListScriptProfilesWithResponse request returning *ListScriptProfilesResponse
+func (c *ClientWithResponses) ListScriptProfilesWithResponse(ctx context.Context, params *ListScriptProfilesParams, reqEditors ...RequestEditorFn) (*ListScriptProfilesResponse, error) {
+	rsp, err := c.ListScriptProfiles(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListScriptProfilesResponse(rsp)
+}
+
+// CreateScriptProfileWithBodyWithResponse request with arbitrary body returning *CreateScriptProfileResponse
+func (c *ClientWithResponses) CreateScriptProfileWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*CreateScriptProfileResponse, error) {
+	rsp, err := c.CreateScriptProfileWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScriptProfileResponse(rsp)
+}
+
+func (c *ClientWithResponses) CreateScriptProfileWithResponse(ctx context.Context, body CreateScriptProfileJSONRequestBody, reqEditors ...RequestEditorFn) (*CreateScriptProfileResponse, error) {
+	rsp, err := c.CreateScriptProfile(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScriptProfileResponse(rsp)
+}
+
+// GetScriptProfileWithResponse request returning *GetScriptProfileResponse
+func (c *ClientWithResponses) GetScriptProfileWithResponse(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*GetScriptProfileResponse, error) {
+	rsp, err := c.GetScriptProfile(ctx, scriptProfileId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetScriptProfileResponse(rsp)
+}
+
+// UpdateScriptProfileWithBodyWithResponse request with arbitrary body returning *UpdateScriptProfileResponse
+func (c *ClientWithResponses) UpdateScriptProfileWithBodyWithResponse(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateScriptProfileResponse, error) {
+	rsp, err := c.UpdateScriptProfileWithBody(ctx, scriptProfileId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateScriptProfileResponse(rsp)
+}
+
+func (c *ClientWithResponses) UpdateScriptProfileWithResponse(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, body UpdateScriptProfileJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateScriptProfileResponse, error) {
+	rsp, err := c.UpdateScriptProfile(ctx, scriptProfileId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpdateScriptProfileResponse(rsp)
+}
+
+// ListScriptProfileActivitiesWithResponse request returning *ListScriptProfileActivitiesResponse
+func (c *ClientWithResponses) ListScriptProfileActivitiesWithResponse(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*ListScriptProfileActivitiesResponse, error) {
+	rsp, err := c.ListScriptProfileActivities(ctx, scriptProfileId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListScriptProfileActivitiesResponse(rsp)
+}
+
+// ListScriptProfileComputersWithResponse request returning *ListScriptProfileComputersResponse
+func (c *ClientWithResponses) ListScriptProfileComputersWithResponse(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*ListScriptProfileComputersResponse, error) {
+	rsp, err := c.ListScriptProfileComputers(ctx, scriptProfileId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListScriptProfileComputersResponse(rsp)
+}
+
+// ArchiveScriptProfileWithResponse request returning *ArchiveScriptProfileResponse
+func (c *ClientWithResponses) ArchiveScriptProfileWithResponse(ctx context.Context, scriptProfileId ScriptProfileIdPathParam, reqEditors ...RequestEditorFn) (*ArchiveScriptProfileResponse, error) {
+	rsp, err := c.ArchiveScriptProfile(ctx, scriptProfileId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseArchiveScriptProfileResponse(rsp)
+}
+
 // GetScriptWithResponse request returning *GetScriptResponse
 func (c *ClientWithResponses) GetScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*GetScriptResponse, error) {
 	rsp, err := c.GetScript(ctx, scriptId, reqEditors...)
@@ -1392,6 +2984,15 @@ func (c *ClientWithResponses) GetScriptAttachmentWithResponse(ctx context.Contex
 		return nil, err
 	}
 	return ParseGetScriptAttachmentResponse(rsp)
+}
+
+// ListScriptProfilesByScriptWithResponse request returning *ListScriptProfilesByScriptResponse
+func (c *ClientWithResponses) ListScriptProfilesByScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*ListScriptProfilesByScriptResponse, error) {
+	rsp, err := c.ListScriptProfilesByScript(ctx, scriptId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListScriptProfilesByScriptResponse(rsp)
 }
 
 // ArchiveScriptWithResponse request returning *ArchiveScriptResponse
@@ -1539,6 +3140,382 @@ func ParseLoginWithAccessKeyResponse(rsp *http.Response) (*LoginWithAccessKeyRes
 	return response, nil
 }
 
+// ParseGetScriptProfileLimitsResponse parses an HTTP response from a GetScriptProfileLimitsWithResponse call
+func ParseGetScriptProfileLimitsResponse(rsp *http.Response) (*GetScriptProfileLimitsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetScriptProfileLimitsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetScriptProfileLimitsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListScriptProfilesResponse parses an HTTP response from a ListScriptProfilesWithResponse call
+func ParseListScriptProfilesResponse(rsp *http.Response) (*ListScriptProfilesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListScriptProfilesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListScriptProfilesResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ScriptProfileNotEnabled
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateScriptProfileResponse parses an HTTP response from a CreateScriptProfileWithResponse call
+func ParseCreateScriptProfileResponse(rsp *http.Response) (*CreateScriptProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateScriptProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
+		var dest CreateScriptProfileResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON201 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ScriptProfileMaxReached
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ScriptProfileNotEnabled
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ScriptNotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ScriptProfileDuplicate
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetScriptProfileResponse parses an HTTP response from a GetScriptProfileWithResponse call
+func ParseGetScriptProfileResponse(rsp *http.Response) (*GetScriptProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetScriptProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetScriptProfileResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ScriptProfileNotEnabled
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ScriptProfileNotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpdateScriptProfileResponse parses an HTTP response from a UpdateScriptProfileWithResponse call
+func ParseUpdateScriptProfileResponse(rsp *http.Response) (*UpdateScriptProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpdateScriptProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetScriptProfileResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest ScriptProfileArchived
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ScriptProfileNotEnabled
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ScriptProfileNotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 409:
+		var dest ScriptProfileDuplicate
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON409 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListScriptProfileActivitiesResponse parses an HTTP response from a ListScriptProfileActivitiesWithResponse call
+func ParseListScriptProfileActivitiesResponse(rsp *http.Response) (*ListScriptProfileActivitiesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListScriptProfileActivitiesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetScriptProfileActivitiesResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ScriptProfileNotEnabled
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ScriptProfileNotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListScriptProfileComputersResponse parses an HTTP response from a ListScriptProfileComputersWithResponse call
+func ParseListScriptProfileComputersResponse(rsp *http.Response) (*ListScriptProfileComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListScriptProfileComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GetScriptProfileComputersResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ScriptProfileNotEnabled
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ScriptProfileNotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseArchiveScriptProfileResponse parses an HTTP response from a ArchiveScriptProfileWithResponse call
+func ParseArchiveScriptProfileResponse(rsp *http.Response) (*ArchiveScriptProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ArchiveScriptProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest ScriptProfileNotEnabled
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ScriptProfileNotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseGetScriptResponse parses an HTTP response from a GetScriptWithResponse call
 func ParseGetScriptResponse(rsp *http.Response) (*GetScriptResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -1592,6 +3569,46 @@ func ParseGetScriptAttachmentResponse(rsp *http.Response) (*GetScriptAttachmentR
 			return nil, err
 		}
 		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
+		var dest ScriptNotFound
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON404 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListScriptProfilesByScriptResponse parses an HTTP response from a ListScriptProfilesByScriptWithResponse call
+func ParseListScriptProfilesByScriptResponse(rsp *http.Response) (*ListScriptProfilesByScriptResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListScriptProfilesByScriptResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ListScriptProfilesByScriptResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
 		var dest ScriptNotFound
