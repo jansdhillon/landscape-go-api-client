@@ -824,7 +824,7 @@ func (t ScriptProfileTriggerCreateRequest) AsScriptProfileEventTrigger() (Script
 
 // FromScriptProfileEventTrigger overwrites any union data inside the ScriptProfileTriggerCreateRequest as the provided ScriptProfileEventTrigger
 func (t *ScriptProfileTriggerCreateRequest) FromScriptProfileEventTrigger(v ScriptProfileEventTrigger) error {
-	v.TriggerType = "ScriptProfileEventTrigger"
+	v.TriggerType = "event"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -832,7 +832,7 @@ func (t *ScriptProfileTriggerCreateRequest) FromScriptProfileEventTrigger(v Scri
 
 // MergeScriptProfileEventTrigger performs a merge with any union data inside the ScriptProfileTriggerCreateRequest, using the provided ScriptProfileEventTrigger
 func (t *ScriptProfileTriggerCreateRequest) MergeScriptProfileEventTrigger(v ScriptProfileEventTrigger) error {
-	v.TriggerType = "ScriptProfileEventTrigger"
+	v.TriggerType = "event"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -852,7 +852,7 @@ func (t ScriptProfileTriggerCreateRequest) AsScriptProfileScheduleDraftTrigger()
 
 // FromScriptProfileScheduleDraftTrigger overwrites any union data inside the ScriptProfileTriggerCreateRequest as the provided ScriptProfileScheduleDraftTrigger
 func (t *ScriptProfileTriggerCreateRequest) FromScriptProfileScheduleDraftTrigger(v ScriptProfileScheduleDraftTrigger) error {
-	v.TriggerType = "ScriptProfileScheduleDraftTrigger"
+	v.TriggerType = "recurring"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -860,7 +860,7 @@ func (t *ScriptProfileTriggerCreateRequest) FromScriptProfileScheduleDraftTrigge
 
 // MergeScriptProfileScheduleDraftTrigger performs a merge with any union data inside the ScriptProfileTriggerCreateRequest, using the provided ScriptProfileScheduleDraftTrigger
 func (t *ScriptProfileTriggerCreateRequest) MergeScriptProfileScheduleDraftTrigger(v ScriptProfileScheduleDraftTrigger) error {
-	v.TriggerType = "ScriptProfileScheduleDraftTrigger"
+	v.TriggerType = "recurring"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -880,7 +880,7 @@ func (t ScriptProfileTriggerCreateRequest) AsScriptProfileOneTimeDraftTrigger() 
 
 // FromScriptProfileOneTimeDraftTrigger overwrites any union data inside the ScriptProfileTriggerCreateRequest as the provided ScriptProfileOneTimeDraftTrigger
 func (t *ScriptProfileTriggerCreateRequest) FromScriptProfileOneTimeDraftTrigger(v ScriptProfileOneTimeDraftTrigger) error {
-	v.TriggerType = "ScriptProfileOneTimeDraftTrigger"
+	v.TriggerType = "one_time"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -888,7 +888,7 @@ func (t *ScriptProfileTriggerCreateRequest) FromScriptProfileOneTimeDraftTrigger
 
 // MergeScriptProfileOneTimeDraftTrigger performs a merge with any union data inside the ScriptProfileTriggerCreateRequest, using the provided ScriptProfileOneTimeDraftTrigger
 func (t *ScriptProfileTriggerCreateRequest) MergeScriptProfileOneTimeDraftTrigger(v ScriptProfileOneTimeDraftTrigger) error {
-	v.TriggerType = "ScriptProfileOneTimeDraftTrigger"
+	v.TriggerType = "one_time"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -913,11 +913,11 @@ func (t ScriptProfileTriggerCreateRequest) ValueByDiscriminator() (interface{}, 
 		return nil, err
 	}
 	switch discriminator {
-	case "ScriptProfileEventTrigger":
+	case "event":
 		return t.AsScriptProfileEventTrigger()
-	case "ScriptProfileOneTimeDraftTrigger":
+	case "one_time":
 		return t.AsScriptProfileOneTimeDraftTrigger()
-	case "ScriptProfileScheduleDraftTrigger":
+	case "recurring":
 		return t.AsScriptProfileScheduleDraftTrigger()
 	default:
 		return nil, errors.New("unknown discriminator value: " + discriminator)
@@ -943,7 +943,7 @@ func (t ScriptProfileTriggerPatchRequest) AsScriptProfileEventTrigger() (ScriptP
 
 // FromScriptProfileEventTrigger overwrites any union data inside the ScriptProfileTriggerPatchRequest as the provided ScriptProfileEventTrigger
 func (t *ScriptProfileTriggerPatchRequest) FromScriptProfileEventTrigger(v ScriptProfileEventTrigger) error {
-	v.TriggerType = "ScriptProfileEventTrigger"
+	v.TriggerType = "event"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -951,7 +951,7 @@ func (t *ScriptProfileTriggerPatchRequest) FromScriptProfileEventTrigger(v Scrip
 
 // MergeScriptProfileEventTrigger performs a merge with any union data inside the ScriptProfileTriggerPatchRequest, using the provided ScriptProfileEventTrigger
 func (t *ScriptProfileTriggerPatchRequest) MergeScriptProfileEventTrigger(v ScriptProfileEventTrigger) error {
-	v.TriggerType = "ScriptProfileEventTrigger"
+	v.TriggerType = "event"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -971,7 +971,7 @@ func (t ScriptProfileTriggerPatchRequest) AsScriptProfileScheduleDraftEditTrigge
 
 // FromScriptProfileScheduleDraftEditTrigger overwrites any union data inside the ScriptProfileTriggerPatchRequest as the provided ScriptProfileScheduleDraftEditTrigger
 func (t *ScriptProfileTriggerPatchRequest) FromScriptProfileScheduleDraftEditTrigger(v ScriptProfileScheduleDraftEditTrigger) error {
-	v.TriggerType = "ScriptProfileScheduleDraftEditTrigger"
+	v.TriggerType = "recurring"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -979,7 +979,7 @@ func (t *ScriptProfileTriggerPatchRequest) FromScriptProfileScheduleDraftEditTri
 
 // MergeScriptProfileScheduleDraftEditTrigger performs a merge with any union data inside the ScriptProfileTriggerPatchRequest, using the provided ScriptProfileScheduleDraftEditTrigger
 func (t *ScriptProfileTriggerPatchRequest) MergeScriptProfileScheduleDraftEditTrigger(v ScriptProfileScheduleDraftEditTrigger) error {
-	v.TriggerType = "ScriptProfileScheduleDraftEditTrigger"
+	v.TriggerType = "recurring"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -999,7 +999,7 @@ func (t ScriptProfileTriggerPatchRequest) AsScriptProfileOneTimeDraftTrigger() (
 
 // FromScriptProfileOneTimeDraftTrigger overwrites any union data inside the ScriptProfileTriggerPatchRequest as the provided ScriptProfileOneTimeDraftTrigger
 func (t *ScriptProfileTriggerPatchRequest) FromScriptProfileOneTimeDraftTrigger(v ScriptProfileOneTimeDraftTrigger) error {
-	v.TriggerType = "ScriptProfileOneTimeDraftTrigger"
+	v.TriggerType = "one_time"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -1007,7 +1007,7 @@ func (t *ScriptProfileTriggerPatchRequest) FromScriptProfileOneTimeDraftTrigger(
 
 // MergeScriptProfileOneTimeDraftTrigger performs a merge with any union data inside the ScriptProfileTriggerPatchRequest, using the provided ScriptProfileOneTimeDraftTrigger
 func (t *ScriptProfileTriggerPatchRequest) MergeScriptProfileOneTimeDraftTrigger(v ScriptProfileOneTimeDraftTrigger) error {
-	v.TriggerType = "ScriptProfileOneTimeDraftTrigger"
+	v.TriggerType = "one_time"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -1032,11 +1032,11 @@ func (t ScriptProfileTriggerPatchRequest) ValueByDiscriminator() (interface{}, e
 		return nil, err
 	}
 	switch discriminator {
-	case "ScriptProfileEventTrigger":
+	case "event":
 		return t.AsScriptProfileEventTrigger()
-	case "ScriptProfileOneTimeDraftTrigger":
+	case "one_time":
 		return t.AsScriptProfileOneTimeDraftTrigger()
-	case "ScriptProfileScheduleDraftEditTrigger":
+	case "recurring":
 		return t.AsScriptProfileScheduleDraftEditTrigger()
 	default:
 		return nil, errors.New("unknown discriminator value: " + discriminator)
@@ -1062,7 +1062,7 @@ func (t ScriptProfileTriggerResponse) AsScriptProfileEventTrigger() (ScriptProfi
 
 // FromScriptProfileEventTrigger overwrites any union data inside the ScriptProfileTriggerResponse as the provided ScriptProfileEventTrigger
 func (t *ScriptProfileTriggerResponse) FromScriptProfileEventTrigger(v ScriptProfileEventTrigger) error {
-	v.TriggerType = "ScriptProfileEventTrigger"
+	v.TriggerType = "event"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -1070,7 +1070,7 @@ func (t *ScriptProfileTriggerResponse) FromScriptProfileEventTrigger(v ScriptPro
 
 // MergeScriptProfileEventTrigger performs a merge with any union data inside the ScriptProfileTriggerResponse, using the provided ScriptProfileEventTrigger
 func (t *ScriptProfileTriggerResponse) MergeScriptProfileEventTrigger(v ScriptProfileEventTrigger) error {
-	v.TriggerType = "ScriptProfileEventTrigger"
+	v.TriggerType = "event"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -1090,7 +1090,7 @@ func (t ScriptProfileTriggerResponse) AsScriptProfileScheduleTrigger() (ScriptPr
 
 // FromScriptProfileScheduleTrigger overwrites any union data inside the ScriptProfileTriggerResponse as the provided ScriptProfileScheduleTrigger
 func (t *ScriptProfileTriggerResponse) FromScriptProfileScheduleTrigger(v ScriptProfileScheduleTrigger) error {
-	v.TriggerType = "ScriptProfileScheduleTrigger"
+	v.TriggerType = "recurring"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -1098,7 +1098,7 @@ func (t *ScriptProfileTriggerResponse) FromScriptProfileScheduleTrigger(v Script
 
 // MergeScriptProfileScheduleTrigger performs a merge with any union data inside the ScriptProfileTriggerResponse, using the provided ScriptProfileScheduleTrigger
 func (t *ScriptProfileTriggerResponse) MergeScriptProfileScheduleTrigger(v ScriptProfileScheduleTrigger) error {
-	v.TriggerType = "ScriptProfileScheduleTrigger"
+	v.TriggerType = "recurring"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -1118,7 +1118,7 @@ func (t ScriptProfileTriggerResponse) AsScriptProfileOneTimeTrigger() (ScriptPro
 
 // FromScriptProfileOneTimeTrigger overwrites any union data inside the ScriptProfileTriggerResponse as the provided ScriptProfileOneTimeTrigger
 func (t *ScriptProfileTriggerResponse) FromScriptProfileOneTimeTrigger(v ScriptProfileOneTimeTrigger) error {
-	v.TriggerType = "ScriptProfileOneTimeTrigger"
+	v.TriggerType = "one_time"
 	b, err := json.Marshal(v)
 	t.union = b
 	return err
@@ -1126,7 +1126,7 @@ func (t *ScriptProfileTriggerResponse) FromScriptProfileOneTimeTrigger(v ScriptP
 
 // MergeScriptProfileOneTimeTrigger performs a merge with any union data inside the ScriptProfileTriggerResponse, using the provided ScriptProfileOneTimeTrigger
 func (t *ScriptProfileTriggerResponse) MergeScriptProfileOneTimeTrigger(v ScriptProfileOneTimeTrigger) error {
-	v.TriggerType = "ScriptProfileOneTimeTrigger"
+	v.TriggerType = "one_time"
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -1151,11 +1151,11 @@ func (t ScriptProfileTriggerResponse) ValueByDiscriminator() (interface{}, error
 		return nil, err
 	}
 	switch discriminator {
-	case "ScriptProfileEventTrigger":
+	case "event":
 		return t.AsScriptProfileEventTrigger()
-	case "ScriptProfileOneTimeTrigger":
+	case "one_time":
 		return t.AsScriptProfileOneTimeTrigger()
-	case "ScriptProfileScheduleTrigger":
+	case "recurring":
 		return t.AsScriptProfileScheduleTrigger()
 	default:
 		return nil, errors.New("unknown discriminator value: " + discriminator)
