@@ -600,8 +600,10 @@ type GetScriptProfileActivitiesResponse = ScriptProfileActivitiesListResponse
 // GetScriptProfileComputersResponse Paginated list of computers associated with a script profile.
 type GetScriptProfileComputersResponse = ScriptProfileComputersListResponse
 
-// LegacyActionResponse The response body varies by action.
-type LegacyActionResponse = map[string]interface{}
+// LegacyActionResponse The response body varies by action; may be a JSON object or a plain string.
+type LegacyActionResponse struct {
+	union json.RawMessage
+}
 
 // ScriptNotFound defines model for ScriptNotFound.
 type ScriptNotFound = Error
@@ -3679,6 +3681,68 @@ func (t ScriptResult) MarshalJSON() ([]byte, error) {
 }
 
 func (t *ScriptResult) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsLegacyActionResponse0 returns the union data inside the LegacyActionResponse as a LegacyActionResponse0
+func (t LegacyActionResponse) AsLegacyActionResponse0() (LegacyActionResponse0, error) {
+	var body LegacyActionResponse0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromLegacyActionResponse0 overwrites any union data inside the LegacyActionResponse as the provided LegacyActionResponse0
+func (t *LegacyActionResponse) FromLegacyActionResponse0(v LegacyActionResponse0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeLegacyActionResponse0 performs a merge with any union data inside the LegacyActionResponse, using the provided LegacyActionResponse0
+func (t *LegacyActionResponse) MergeLegacyActionResponse0(v LegacyActionResponse0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsLegacyActionResponse1 returns the union data inside the LegacyActionResponse as a LegacyActionResponse1
+func (t LegacyActionResponse) AsLegacyActionResponse1() (LegacyActionResponse1, error) {
+	var body LegacyActionResponse1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromLegacyActionResponse1 overwrites any union data inside the LegacyActionResponse as the provided LegacyActionResponse1
+func (t *LegacyActionResponse) FromLegacyActionResponse1(v LegacyActionResponse1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeLegacyActionResponse1 performs a merge with any union data inside the LegacyActionResponse, using the provided LegacyActionResponse1
+func (t *LegacyActionResponse) MergeLegacyActionResponse1(v LegacyActionResponse1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t LegacyActionResponse) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *LegacyActionResponse) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
@@ -20650,6 +20714,8 @@ type AcceptPendingComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AcceptPendingComputers2000 = map[string]interface{}
+type AcceptPendingComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AcceptPendingComputersResponse) Status() string {
@@ -20675,6 +20741,8 @@ type AddAPTSourcesToRepositoryProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AddAPTSourcesToRepositoryProfile2000 = map[string]interface{}
+type AddAPTSourcesToRepositoryProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AddAPTSourcesToRepositoryProfileResponse) Status() string {
@@ -20700,6 +20768,8 @@ type AddAccessGroupsToRoleResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AddAccessGroupsToRole2000 = map[string]interface{}
+type AddAccessGroupsToRole2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AddAccessGroupsToRoleResponse) Status() string {
@@ -20725,6 +20795,8 @@ type AddAnnotationToComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AddAnnotationToComputers2000 = map[string]interface{}
+type AddAnnotationToComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AddAnnotationToComputersResponse) Status() string {
@@ -20750,6 +20822,8 @@ type AddPackageFiltersToPocketResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AddPackageFiltersToPocket2000 = map[string]interface{}
+type AddPackageFiltersToPocket2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AddPackageFiltersToPocketResponse) Status() string {
@@ -20775,6 +20849,8 @@ type AddPermissionsToRoleResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AddPermissionsToRole2000 = map[string]interface{}
+type AddPermissionsToRole2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AddPermissionsToRoleResponse) Status() string {
@@ -20800,6 +20876,8 @@ type AddPersonsToRoleResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AddPersonsToRole2000 = map[string]interface{}
+type AddPersonsToRole2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AddPersonsToRoleResponse) Status() string {
@@ -20825,6 +20903,8 @@ type AddPocketsToRepositoryProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AddPocketsToRepositoryProfile2000 = map[string]interface{}
+type AddPocketsToRepositoryProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AddPocketsToRepositoryProfileResponse) Status() string {
@@ -20850,6 +20930,8 @@ type AddTagsToComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AddTagsToComputers2000 = map[string]interface{}
+type AddTagsToComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AddTagsToComputersResponse) Status() string {
@@ -20875,6 +20957,8 @@ type AddUploaderGPGKeysToPocketResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AddUploaderGPGKeysToPocket2000 = map[string]interface{}
+type AddUploaderGPGKeysToPocket2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AddUploaderGPGKeysToPocketResponse) Status() string {
@@ -20900,6 +20984,8 @@ type ApproveActivitiesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type ApproveActivities2000 = map[string]interface{}
+type ApproveActivities2001 = string
 
 // Status returns HTTPResponse.Status
 func (r ApproveActivitiesResponse) Status() string {
@@ -20925,6 +21011,8 @@ type AssociateAlertResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AssociateAlert2000 = map[string]interface{}
+type AssociateAlert2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AssociateAlertResponse) Status() string {
@@ -20950,6 +21038,8 @@ type AssociatePackageProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AssociatePackageProfile2000 = map[string]interface{}
+type AssociatePackageProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AssociatePackageProfileResponse) Status() string {
@@ -20975,6 +21065,8 @@ type AssociateRemovalProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AssociateRemovalProfile2000 = map[string]interface{}
+type AssociateRemovalProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AssociateRemovalProfileResponse) Status() string {
@@ -21000,6 +21092,8 @@ type AssociateRepositoryProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AssociateRepositoryProfile2000 = map[string]interface{}
+type AssociateRepositoryProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AssociateRepositoryProfileResponse) Status() string {
@@ -21025,6 +21119,8 @@ type AssociateUpgradeProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type AssociateUpgradeProfile2000 = map[string]interface{}
+type AssociateUpgradeProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r AssociateUpgradeProfileResponse) Status() string {
@@ -21050,6 +21146,8 @@ type CancelActivitiesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CancelActivities2000 = map[string]interface{}
+type CancelActivities2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CancelActivitiesResponse) Status() string {
@@ -21075,6 +21173,8 @@ type ChangeComputersAccessGroupResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type ChangeComputersAccessGroup2000 = map[string]interface{}
+type ChangeComputersAccessGroup2001 = string
 
 // Status returns HTTPResponse.Status
 func (r ChangeComputersAccessGroupResponse) Status() string {
@@ -21100,6 +21200,8 @@ type CopyPackageProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CopyPackageProfile2000 = map[string]interface{}
+type CopyPackageProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CopyPackageProfileResponse) Status() string {
@@ -21125,6 +21227,8 @@ type CopyRoleResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CopyRole2000 = map[string]interface{}
+type CopyRole2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CopyRoleResponse) Status() string {
@@ -21150,6 +21254,8 @@ type CopyScriptResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CopyScript2000 = map[string]interface{}
+type CopyScript2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CopyScriptResponse) Status() string {
@@ -21175,6 +21281,8 @@ type CreateAPTSourceResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateAPTSource2000 = map[string]interface{}
+type CreateAPTSource2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateAPTSourceResponse) Status() string {
@@ -21200,6 +21308,8 @@ type CreateAccessGroupResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateAccessGroup2000 = map[string]interface{}
+type CreateAccessGroup2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateAccessGroupResponse) Status() string {
@@ -21225,6 +21335,8 @@ type CreateChildComputerResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateChildComputer2000 = map[string]interface{}
+type CreateChildComputer2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateChildComputerResponse) Status() string {
@@ -21250,6 +21362,8 @@ type CreateDistributionResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateDistribution2000 = map[string]interface{}
+type CreateDistribution2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateDistributionResponse) Status() string {
@@ -21275,6 +21389,8 @@ type CreatePackageProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreatePackageProfile2000 = map[string]interface{}
+type CreatePackageProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreatePackageProfileResponse) Status() string {
@@ -21300,6 +21416,8 @@ type CreatePocketResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreatePocket2000 = map[string]interface{}
+type CreatePocket2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreatePocketResponse) Status() string {
@@ -21325,6 +21443,8 @@ type CreateRemovalProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateRemovalProfile2000 = map[string]interface{}
+type CreateRemovalProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateRemovalProfileResponse) Status() string {
@@ -21350,6 +21470,8 @@ type CreateRepositoryProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateRepositoryProfile2000 = map[string]interface{}
+type CreateRepositoryProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateRepositoryProfileResponse) Status() string {
@@ -21375,6 +21497,8 @@ type CreateRoleResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateRole2000 = map[string]interface{}
+type CreateRole2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateRoleResponse) Status() string {
@@ -21400,6 +21524,8 @@ type CreateSavedSearchResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateSavedSearch2000 = map[string]interface{}
+type CreateSavedSearch2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateSavedSearchResponse) Status() string {
@@ -21425,6 +21551,8 @@ type CreateScriptResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateScript2000 = map[string]interface{}
+type CreateScript2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateScriptResponse) Status() string {
@@ -21450,6 +21578,8 @@ type CreateScriptAttachmentResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateScriptAttachment2000 = map[string]interface{}
+type CreateScriptAttachment2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateScriptAttachmentResponse) Status() string {
@@ -21475,6 +21605,8 @@ type CreateSeriesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateSeries2000 = map[string]interface{}
+type CreateSeries2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateSeriesResponse) Status() string {
@@ -21500,6 +21632,8 @@ type CreateUpgradeProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateUpgradeProfile2000 = map[string]interface{}
+type CreateUpgradeProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateUpgradeProfileResponse) Status() string {
@@ -21525,6 +21659,8 @@ type CreateUserResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type CreateUser2000 = map[string]interface{}
+type CreateUser2001 = string
 
 // Status returns HTTPResponse.Status
 func (r CreateUserResponse) Status() string {
@@ -21550,6 +21686,8 @@ type DeleteChildComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type DeleteChildComputers2000 = map[string]interface{}
+type DeleteChildComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r DeleteChildComputersResponse) Status() string {
@@ -21575,6 +21713,8 @@ type DeriveSeriesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type DeriveSeries2000 = map[string]interface{}
+type DeriveSeries2001 = string
 
 // Status returns HTTPResponse.Status
 func (r DeriveSeriesResponse) Status() string {
@@ -21600,6 +21740,8 @@ type DiffPullPocketResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type DiffPullPocket2000 = map[string]interface{}
+type DiffPullPocket2001 = string
 
 // Status returns HTTPResponse.Status
 func (r DiffPullPocketResponse) Status() string {
@@ -21625,6 +21767,8 @@ type DisableAdministratorResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type DisableAdministrator2000 = map[string]interface{}
+type DisableAdministrator2001 = string
 
 // Status returns HTTPResponse.Status
 func (r DisableAdministratorResponse) Status() string {
@@ -21650,6 +21794,8 @@ type DisassociateAlertResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type DisassociateAlert2000 = map[string]interface{}
+type DisassociateAlert2001 = string
 
 // Status returns HTTPResponse.Status
 func (r DisassociateAlertResponse) Status() string {
@@ -21675,6 +21821,8 @@ type DisassociatePackageProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type DisassociatePackageProfile2000 = map[string]interface{}
+type DisassociatePackageProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r DisassociatePackageProfileResponse) Status() string {
@@ -21700,6 +21848,8 @@ type DisassociateRemovalProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type DisassociateRemovalProfile2000 = map[string]interface{}
+type DisassociateRemovalProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r DisassociateRemovalProfileResponse) Status() string {
@@ -21725,6 +21875,8 @@ type DisassociateRepositoryProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type DisassociateRepositoryProfile2000 = map[string]interface{}
+type DisassociateRepositoryProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r DisassociateRepositoryProfileResponse) Status() string {
@@ -21750,6 +21902,8 @@ type DisassociateUpgradeProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type DisassociateUpgradeProfile2000 = map[string]interface{}
+type DisassociateUpgradeProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r DisassociateUpgradeProfileResponse) Status() string {
@@ -21775,6 +21929,8 @@ type EditPackageProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type EditPackageProfile2000 = map[string]interface{}
+type EditPackageProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r EditPackageProfileResponse) Status() string {
@@ -21800,6 +21956,8 @@ type EditPocketResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type EditPocket2000 = map[string]interface{}
+type EditPocket2001 = string
 
 // Status returns HTTPResponse.Status
 func (r EditPocketResponse) Status() string {
@@ -21825,6 +21983,8 @@ type EditRemovalProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type EditRemovalProfile2000 = map[string]interface{}
+type EditRemovalProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r EditRemovalProfileResponse) Status() string {
@@ -21850,6 +22010,8 @@ type EditRepositoryProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type EditRepositoryProfile2000 = map[string]interface{}
+type EditRepositoryProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r EditRepositoryProfileResponse) Status() string {
@@ -21875,6 +22037,8 @@ type EditSavedSearchResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type EditSavedSearch2000 = map[string]interface{}
+type EditSavedSearch2001 = string
 
 // Status returns HTTPResponse.Status
 func (r EditSavedSearchResponse) Status() string {
@@ -21900,6 +22064,8 @@ type EditScriptResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type EditScript2000 = map[string]interface{}
+type EditScript2001 = string
 
 // Status returns HTTPResponse.Status
 func (r EditScriptResponse) Status() string {
@@ -21925,6 +22091,8 @@ type EditUpgradeProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type EditUpgradeProfile2000 = map[string]interface{}
+type EditUpgradeProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r EditUpgradeProfileResponse) Status() string {
@@ -21950,6 +22118,8 @@ type EditUserResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type EditUser2000 = map[string]interface{}
+type EditUser2001 = string
 
 // Status returns HTTPResponse.Status
 func (r EditUserResponse) Status() string {
@@ -21975,6 +22145,8 @@ type ExecuteScriptResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type ExecuteScript2000 = map[string]interface{}
+type ExecuteScript2001 = string
 
 // Status returns HTTPResponse.Status
 func (r ExecuteScriptResponse) Status() string {
@@ -22000,6 +22172,8 @@ type GetAPTSourcesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetAPTSources2000 = map[string]interface{}
+type GetAPTSources2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetAPTSourcesResponse) Status() string {
@@ -22025,6 +22199,8 @@ type GetAccessGroupsResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetAccessGroups2000 = map[string]interface{}
+type GetAccessGroups2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetAccessGroupsResponse) Status() string {
@@ -22050,6 +22226,8 @@ type GetActivitiesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetActivities2000 = map[string]interface{}
+type GetActivities2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetActivitiesResponse) Status() string {
@@ -22074,6 +22252,8 @@ type GetActivityTypesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetActivityTypes2000 = map[string]interface{}
+type GetActivityTypes2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetActivityTypesResponse) Status() string {
@@ -22098,6 +22278,8 @@ type GetAdministratorsResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetAdministrators2000 = map[string]interface{}
+type GetAdministrators2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetAdministratorsResponse) Status() string {
@@ -22123,6 +22305,8 @@ type GetAlertSubscribersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetAlertSubscribers2000 = map[string]interface{}
+type GetAlertSubscribers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetAlertSubscribersResponse) Status() string {
@@ -22147,6 +22331,8 @@ type GetAlertsResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetAlerts2000 = map[string]interface{}
+type GetAlerts2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetAlertsResponse) Status() string {
@@ -22172,6 +22358,8 @@ type GetCSVComplianceDataResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetCSVComplianceData2000 = map[string]interface{}
+type GetCSVComplianceData2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetCSVComplianceDataResponse) Status() string {
@@ -22197,6 +22385,8 @@ type GetComputerProcessesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetComputerProcesses2000 = map[string]interface{}
+type GetComputerProcesses2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetComputerProcessesResponse) Status() string {
@@ -22222,6 +22412,8 @@ type GetComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetComputers2000 = map[string]interface{}
+type GetComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetComputersResponse) Status() string {
@@ -22247,6 +22439,8 @@ type GetComputersNotUpgradedResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetComputersNotUpgraded2000 = map[string]interface{}
+type GetComputersNotUpgraded2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetComputersNotUpgradedResponse) Status() string {
@@ -22271,6 +22465,8 @@ type GetDistributionsResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetDistributions2000 = map[string]interface{}
+type GetDistributions2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetDistributionsResponse) Status() string {
@@ -22296,6 +22492,8 @@ type GetEventLogResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetEventLog2000 = map[string]interface{}
+type GetEventLog2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetEventLogResponse) Status() string {
@@ -22320,6 +22518,8 @@ type GetGPGKeysResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetGPGKeys2000 = map[string]interface{}
+type GetGPGKeys2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetGPGKeysResponse) Status() string {
@@ -22345,6 +22545,8 @@ type GetNotPingingComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetNotPingingComputers2000 = map[string]interface{}
+type GetNotPingingComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetNotPingingComputersResponse) Status() string {
@@ -22369,6 +22571,8 @@ type GetPackageProfilesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetPackageProfiles2000 = map[string]interface{}
+type GetPackageProfiles2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetPackageProfilesResponse) Status() string {
@@ -22394,6 +22598,8 @@ type GetPackagesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetPackages2000 = map[string]interface{}
+type GetPackages2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetPackagesResponse) Status() string {
@@ -22418,6 +22624,8 @@ type GetPendingComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetPendingComputers2000 = map[string]interface{}
+type GetPendingComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetPendingComputersResponse) Status() string {
@@ -22442,6 +22650,8 @@ type GetPermissionsResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetPermissions2000 = map[string]interface{}
+type GetPermissions2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetPermissionsResponse) Status() string {
@@ -22466,6 +22676,8 @@ type GetRemovalProfilesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetRemovalProfiles2000 = map[string]interface{}
+type GetRemovalProfiles2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetRemovalProfilesResponse) Status() string {
@@ -22491,6 +22703,8 @@ type GetRepoInfoResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetRepoInfo2000 = map[string]interface{}
+type GetRepoInfo2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetRepoInfoResponse) Status() string {
@@ -22515,6 +22729,8 @@ type GetRepositoryProfilesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetRepositoryProfiles2000 = map[string]interface{}
+type GetRepositoryProfiles2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetRepositoryProfilesResponse) Status() string {
@@ -22539,6 +22755,8 @@ type GetRolesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetRoles2000 = map[string]interface{}
+type GetRoles2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetRolesResponse) Status() string {
@@ -22563,6 +22781,8 @@ type GetSavedSearchesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetSavedSearches2000 = map[string]interface{}
+type GetSavedSearches2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetSavedSearchesResponse) Status() string {
@@ -22588,6 +22808,8 @@ type GetScriptCodeResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetScriptCode2000 = map[string]interface{}
+type GetScriptCode2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetScriptCodeResponse) Status() string {
@@ -22613,6 +22835,8 @@ type GetScriptsResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetScripts2000 = map[string]interface{}
+type GetScripts2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetScriptsResponse) Status() string {
@@ -22637,6 +22861,8 @@ type GetSettingsResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetSettings2000 = map[string]interface{}
+type GetSettings2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetSettingsResponse) Status() string {
@@ -22662,6 +22888,8 @@ type GetUSNTimeToFixResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetUSNTimeToFix2000 = map[string]interface{}
+type GetUSNTimeToFix2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetUSNTimeToFixResponse) Status() string {
@@ -22686,6 +22914,8 @@ type GetUpgradeProfilesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetUpgradeProfiles2000 = map[string]interface{}
+type GetUpgradeProfiles2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetUpgradeProfilesResponse) Status() string {
@@ -22711,6 +22941,8 @@ type GetUpgradedComputersByFrequencyResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetUpgradedComputersByFrequency2000 = map[string]interface{}
+type GetUpgradedComputersByFrequency2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetUpgradedComputersByFrequencyResponse) Status() string {
@@ -22736,6 +22968,8 @@ type GetUsersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetUsers2000 = map[string]interface{}
+type GetUsers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetUsersResponse) Status() string {
@@ -22761,6 +22995,8 @@ type GetWSLHostsResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type GetWSLHosts2000 = map[string]interface{}
+type GetWSLHosts2001 = string
 
 // Status returns HTTPResponse.Status
 func (r GetWSLHostsResponse) Status() string {
@@ -22786,6 +23022,8 @@ type ImportGPGKeyResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type ImportGPGKey2000 = map[string]interface{}
+type ImportGPGKey2001 = string
 
 // Status returns HTTPResponse.Status
 func (r ImportGPGKeyResponse) Status() string {
@@ -22811,6 +23049,8 @@ type InstallPackagesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type InstallPackages2000 = map[string]interface{}
+type InstallPackages2001 = string
 
 // Status returns HTTPResponse.Status
 func (r InstallPackagesResponse) Status() string {
@@ -22836,6 +23076,8 @@ type InviteAdministratorResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type InviteAdministrator2000 = map[string]interface{}
+type InviteAdministrator2001 = string
 
 // Status returns HTTPResponse.Status
 func (r InviteAdministratorResponse) Status() string {
@@ -22861,6 +23103,8 @@ type KillComputerProcessesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type KillComputerProcesses2000 = map[string]interface{}
+type KillComputerProcesses2001 = string
 
 // Status returns HTTPResponse.Status
 func (r KillComputerProcessesResponse) Status() string {
@@ -22886,6 +23130,8 @@ type ListPocketResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type ListPocket2000 = map[string]interface{}
+type ListPocket2001 = string
 
 // Status returns HTTPResponse.Status
 func (r ListPocketResponse) Status() string {
@@ -22911,6 +23157,8 @@ type ModifyPackageProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type ModifyPackageProfile2000 = map[string]interface{}
+type ModifyPackageProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r ModifyPackageProfileResponse) Status() string {
@@ -22936,6 +23184,8 @@ type PullPackagesToPocketResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type PullPackagesToPocket2000 = map[string]interface{}
+type PullPackagesToPocket2001 = string
 
 // Status returns HTTPResponse.Status
 func (r PullPackagesToPocketResponse) Status() string {
@@ -22961,6 +23211,8 @@ type RebootComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RebootComputers2000 = map[string]interface{}
+type RebootComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RebootComputersResponse) Status() string {
@@ -22986,6 +23238,8 @@ type RejectPendingComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RejectPendingComputers2000 = map[string]interface{}
+type RejectPendingComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RejectPendingComputersResponse) Status() string {
@@ -23011,6 +23265,8 @@ type RemoveAPTSourceResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveAPTSource2000 = map[string]interface{}
+type RemoveAPTSource2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveAPTSourceResponse) Status() string {
@@ -23036,6 +23292,8 @@ type RemoveAPTSourceFromRepositoryProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveAPTSourceFromRepositoryProfile2000 = map[string]interface{}
+type RemoveAPTSourceFromRepositoryProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveAPTSourceFromRepositoryProfileResponse) Status() string {
@@ -23061,6 +23319,8 @@ type RemoveAPTSourcesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveAPTSources2000 = map[string]interface{}
+type RemoveAPTSources2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveAPTSourcesResponse) Status() string {
@@ -23086,6 +23346,8 @@ type RemoveAPTSourcesFromRepositoryProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveAPTSourcesFromRepositoryProfile2000 = map[string]interface{}
+type RemoveAPTSourcesFromRepositoryProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveAPTSourcesFromRepositoryProfileResponse) Status() string {
@@ -23111,6 +23373,8 @@ type RemoveAccessGroupResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveAccessGroup2000 = map[string]interface{}
+type RemoveAccessGroup2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveAccessGroupResponse) Status() string {
@@ -23136,6 +23400,8 @@ type RemoveAccessGroupsFromRoleResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveAccessGroupsFromRole2000 = map[string]interface{}
+type RemoveAccessGroupsFromRole2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveAccessGroupsFromRoleResponse) Status() string {
@@ -23161,6 +23427,8 @@ type RemoveAnnotationFromComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveAnnotationFromComputers2000 = map[string]interface{}
+type RemoveAnnotationFromComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveAnnotationFromComputersResponse) Status() string {
@@ -23186,6 +23454,8 @@ type RemoveComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveComputers2000 = map[string]interface{}
+type RemoveComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveComputersResponse) Status() string {
@@ -23211,6 +23481,8 @@ type RemoveDistributionResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveDistribution2000 = map[string]interface{}
+type RemoveDistribution2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveDistributionResponse) Status() string {
@@ -23236,6 +23508,8 @@ type RemoveGPGKeyResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveGPGKey2000 = map[string]interface{}
+type RemoveGPGKey2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveGPGKeyResponse) Status() string {
@@ -23261,6 +23535,8 @@ type RemovePackageFiltersFromPocketResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemovePackageFiltersFromPocket2000 = map[string]interface{}
+type RemovePackageFiltersFromPocket2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemovePackageFiltersFromPocketResponse) Status() string {
@@ -23286,6 +23562,8 @@ type RemovePackageProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemovePackageProfile2000 = map[string]interface{}
+type RemovePackageProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemovePackageProfileResponse) Status() string {
@@ -23311,6 +23589,8 @@ type RemovePackagesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemovePackages2000 = map[string]interface{}
+type RemovePackages2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemovePackagesResponse) Status() string {
@@ -23336,6 +23616,8 @@ type RemovePackagesFromPocketResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemovePackagesFromPocket2000 = map[string]interface{}
+type RemovePackagesFromPocket2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemovePackagesFromPocketResponse) Status() string {
@@ -23361,6 +23643,8 @@ type RemovePermissionsFromRoleResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemovePermissionsFromRole2000 = map[string]interface{}
+type RemovePermissionsFromRole2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemovePermissionsFromRoleResponse) Status() string {
@@ -23386,6 +23670,8 @@ type RemovePersonsFromRoleResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemovePersonsFromRole2000 = map[string]interface{}
+type RemovePersonsFromRole2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemovePersonsFromRoleResponse) Status() string {
@@ -23411,6 +23697,8 @@ type RemovePocketResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemovePocket2000 = map[string]interface{}
+type RemovePocket2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemovePocketResponse) Status() string {
@@ -23436,6 +23724,8 @@ type RemovePocketsFromRepositoryProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemovePocketsFromRepositoryProfile2000 = map[string]interface{}
+type RemovePocketsFromRepositoryProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemovePocketsFromRepositoryProfileResponse) Status() string {
@@ -23461,6 +23751,8 @@ type RemoveRemovalProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveRemovalProfile2000 = map[string]interface{}
+type RemoveRemovalProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveRemovalProfileResponse) Status() string {
@@ -23486,6 +23778,8 @@ type RemoveRepositoryProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveRepositoryProfile2000 = map[string]interface{}
+type RemoveRepositoryProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveRepositoryProfileResponse) Status() string {
@@ -23511,6 +23805,8 @@ type RemoveRepositoryProfilesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveRepositoryProfiles2000 = map[string]interface{}
+type RemoveRepositoryProfiles2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveRepositoryProfilesResponse) Status() string {
@@ -23536,6 +23832,8 @@ type RemoveRoleResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveRole2000 = map[string]interface{}
+type RemoveRole2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveRoleResponse) Status() string {
@@ -23561,6 +23859,8 @@ type RemoveSavedSearchResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveSavedSearch2000 = map[string]interface{}
+type RemoveSavedSearch2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveSavedSearchResponse) Status() string {
@@ -23586,6 +23886,8 @@ type RemoveScriptResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveScript2000 = map[string]interface{}
+type RemoveScript2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveScriptResponse) Status() string {
@@ -23611,6 +23913,8 @@ type RemoveScriptAttachmentResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveScriptAttachment2000 = map[string]interface{}
+type RemoveScriptAttachment2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveScriptAttachmentResponse) Status() string {
@@ -23636,6 +23940,8 @@ type RemoveSeriesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveSeries2000 = map[string]interface{}
+type RemoveSeries2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveSeriesResponse) Status() string {
@@ -23661,6 +23967,8 @@ type RemoveTagsFromComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveTagsFromComputers2000 = map[string]interface{}
+type RemoveTagsFromComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveTagsFromComputersResponse) Status() string {
@@ -23686,6 +23994,8 @@ type RemoveUpgradeProfileResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveUpgradeProfile2000 = map[string]interface{}
+type RemoveUpgradeProfile2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveUpgradeProfileResponse) Status() string {
@@ -23711,6 +24021,8 @@ type RemoveUploaderGPGKeysFromPocketResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveUploaderGPGKeysFromPocket2000 = map[string]interface{}
+type RemoveUploaderGPGKeysFromPocket2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveUploaderGPGKeysFromPocketResponse) Status() string {
@@ -23736,6 +24048,8 @@ type RemoveWSLHostsResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RemoveWSLHosts2000 = map[string]interface{}
+type RemoveWSLHosts2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RemoveWSLHostsResponse) Status() string {
@@ -23761,6 +24075,8 @@ type RenameComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type RenameComputers2000 = map[string]interface{}
+type RenameComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r RenameComputersResponse) Status() string {
@@ -23786,6 +24102,8 @@ type SetDefaultChildComputerResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type SetDefaultChildComputer2000 = map[string]interface{}
+type SetDefaultChildComputer2001 = string
 
 // Status returns HTTPResponse.Status
 func (r SetDefaultChildComputerResponse) Status() string {
@@ -23811,6 +24129,8 @@ type SetSettingsResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type SetSettings2000 = map[string]interface{}
+type SetSettings2001 = string
 
 // Status returns HTTPResponse.Status
 func (r SetSettingsResponse) Status() string {
@@ -23836,6 +24156,8 @@ type ShutdownComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type ShutdownComputers2000 = map[string]interface{}
+type ShutdownComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r ShutdownComputersResponse) Status() string {
@@ -23861,6 +24183,8 @@ type ShutdownHostComputerResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type ShutdownHostComputer2000 = map[string]interface{}
+type ShutdownHostComputer2001 = string
 
 // Status returns HTTPResponse.Status
 func (r ShutdownHostComputerResponse) Status() string {
@@ -23886,6 +24210,8 @@ type StartChildComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type StartChildComputers2000 = map[string]interface{}
+type StartChildComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r StartChildComputersResponse) Status() string {
@@ -23911,6 +24237,8 @@ type StopChildComputersResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type StopChildComputers2000 = map[string]interface{}
+type StopChildComputers2001 = string
 
 // Status returns HTTPResponse.Status
 func (r StopChildComputersResponse) Status() string {
@@ -23936,6 +24264,8 @@ type SubscribeToAlertResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type SubscribeToAlert2000 = map[string]interface{}
+type SubscribeToAlert2001 = string
 
 // Status returns HTTPResponse.Status
 func (r SubscribeToAlertResponse) Status() string {
@@ -23961,6 +24291,8 @@ type SyncMirrorPocketResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type SyncMirrorPocket2000 = map[string]interface{}
+type SyncMirrorPocket2001 = string
 
 // Status returns HTTPResponse.Status
 func (r SyncMirrorPocketResponse) Status() string {
@@ -23986,6 +24318,8 @@ type TerminateComputerProcessesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type TerminateComputerProcesses2000 = map[string]interface{}
+type TerminateComputerProcesses2001 = string
 
 // Status returns HTTPResponse.Status
 func (r TerminateComputerProcessesResponse) Status() string {
@@ -24011,6 +24345,8 @@ type UnsubscribeFromAlertResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type UnsubscribeFromAlert2000 = map[string]interface{}
+type UnsubscribeFromAlert2001 = string
 
 // Status returns HTTPResponse.Status
 func (r UnsubscribeFromAlertResponse) Status() string {
@@ -24036,6 +24372,8 @@ type UpgradePackagesResponse struct {
 	JSON401      *Unauthorized
 	JSON403      *Forbidden
 }
+type UpgradePackages2000 = map[string]interface{}
+type UpgradePackages2001 = string
 
 // Status returns HTTPResponse.Status
 func (r UpgradePackagesResponse) Status() string {
