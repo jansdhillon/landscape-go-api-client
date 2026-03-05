@@ -6,7 +6,6 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
-	"net/url"
 	"strings"
 	"testing"
 )
@@ -102,18 +101,10 @@ func TestGetScript(t *testing.T) {
 	})
 }
 
-func TestInvokeLegacyAction(t *testing.T) {
+func TestLegacyScriptActions(t *testing.T) {
 	handler := http.NewServeMux()
 	legacyHandler := func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodPost {
-			t.Fatalf("expected POST, got %s", r.Method)
-		}
-
 		if r.URL.Query().Get("version") == "" {
-			w.WriteHeader(http.StatusBadRequest)
-			return
-		}
-		if r.URL.Query().Get("action") == "" {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
@@ -161,7 +152,6 @@ func TestInvokeLegacyAction(t *testing.T) {
 			w.WriteHeader(http.StatusBadRequest)
 		}
 	}
-	handler.HandleFunc("/api", legacyHandler)
 	handler.HandleFunc("/api/", legacyHandler)
 
 	server := httptest.NewTLSServer(handler)
@@ -182,23 +172,14 @@ func TestInvokeLegacyAction(t *testing.T) {
 			t.Fatalf("failed to init client: %v", err)
 		}
 
-		params := &InvokeLegacyActionParams{
+		resp, err := client.CreateScript(context.Background(), &CreateScriptParams{
 			Version: "",
 			Action:  "CreateScript",
-		}
-
-		queryValues := url.Values{
-			"title": []string{"example"},
-			"code":  []string{"ZWNobyAiSGVsbG8i"},
-		}
-
-		resp, err := client.InvokeLegacyAction(
-			context.Background(),
-			params,
-			EncodeQueryRequestEditor(queryValues),
-		)
+			Title:   "example",
+			Code:    "ZWNobyAiSGVsbG8i",
+		})
 		if err != nil {
-			t.Fatalf("InvokeLegacyAction returned error: %v", err)
+			t.Fatalf("CreateScript returned error: %v", err)
 		}
 		defer resp.Body.Close()
 
@@ -207,51 +188,20 @@ func TestInvokeLegacyAction(t *testing.T) {
 		}
 	})
 
-	t.Run("missing action", func(t *testing.T) {
-		client, err := NewClient(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
-		if err != nil {
-			t.Fatalf("failed to init client: %v", err)
-		}
-
-		params := &InvokeLegacyActionParams{
-			Version: "2011-08-01",
-			Action:  "",
-		}
-
-		queryValues := url.Values{
-			"title": []string{"example"},
-			"code":  []string{"ZWNobyAiSGVsbG8i"},
-		}
-
-		resp, err := client.InvokeLegacyAction(
-			context.Background(),
-			params,
-			EncodeQueryRequestEditor(queryValues),
-		)
-		if err != nil {
-			t.Fatalf("InvokeLegacyAction returned error: %v", err)
-		}
-		defer resp.Body.Close()
-
-		if resp.StatusCode != http.StatusBadRequest {
-			t.Fatalf("expected HTTP 400 when action missing, got %d", resp.StatusCode)
-		}
-	})
-
 	t.Run("create script raw response", func(t *testing.T) {
-		values := url.Values{
-			"title": []string{"new script"},
-			"code":  []string{"ZWNobyAiSGVsbG8i"},
-		}
-
 		client, err := NewClient(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
 		if err != nil {
 			t.Fatalf("failed to init client: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyAction(context.Background(), LegacyActionParams("CreateScript"), EncodeQueryRequestEditor(values))
+		resp, err := client.CreateScript(context.Background(), &CreateScriptParams{
+			Version: "2011-08-01",
+			Action:  "CreateScript",
+			Title:   "new script",
+			Code:    "ZWNobyAiSGVsbG8i",
+		})
 		if err != nil {
-			t.Fatalf("InvokeLegacyAction failed: %v", err)
+			t.Fatalf("CreateScript failed: %v", err)
 		}
 		defer resp.Body.Close()
 
@@ -270,19 +220,19 @@ func TestInvokeLegacyAction(t *testing.T) {
 	})
 
 	t.Run("create script typed response", func(t *testing.T) {
-		values := url.Values{
-			"title": []string{"new script"},
-			"code":  []string{"ZWNobyAiSGVsbG8i"},
-		}
-
 		client, err := NewClientWithResponses(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
 		if err != nil {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), LegacyActionParams("CreateScript"), EncodeQueryRequestEditor(values))
+		resp, err := client.CreateScriptWithResponse(context.Background(), &CreateScriptParams{
+			Version: "2011-08-01",
+			Action:  "CreateScript",
+			Title:   "new script",
+			Code:    "ZWNobyAiSGVsbG8i",
+		})
 		if err != nil {
-			t.Fatalf("InvokeLegacyActionWithResponse failed: %v", err)
+			t.Fatalf("CreateScriptWithResponse failed: %v", err)
 		}
 
 		if resp.StatusCode() != http.StatusOK {
@@ -309,19 +259,20 @@ func TestInvokeLegacyAction(t *testing.T) {
 	})
 
 	t.Run("edit script typed response", func(t *testing.T) {
-		values := url.Values{
-			"script_id": []string{"42"},
-			"title":     []string{"edited title"},
-		}
-
+		title := "edited title"
 		client, err := NewClientWithResponses(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
 		if err != nil {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), LegacyActionParams("EditScript"), EncodeQueryRequestEditor(values))
+		resp, err := client.EditScriptWithResponse(context.Background(), &EditScriptParams{
+			Version:  "2011-08-01",
+			Action:   "EditScript",
+			ScriptId: 42,
+			Title:    &title,
+		})
 		if err != nil {
-			t.Fatalf("InvokeLegacyActionWithResponse failed: %v", err)
+			t.Fatalf("EditScriptWithResponse failed: %v", err)
 		}
 
 		if resp.StatusCode() != http.StatusOK {
@@ -348,19 +299,19 @@ func TestInvokeLegacyAction(t *testing.T) {
 	})
 
 	t.Run("copy script typed response", func(t *testing.T) {
-		values := url.Values{
-			"script_id":         []string{"42"},
-			"destination_title": []string{"copy title"},
-		}
-
 		client, err := NewClientWithResponses(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
 		if err != nil {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), LegacyActionParams("CopyScript"), EncodeQueryRequestEditor(values))
+		resp, err := client.CopyScriptWithResponse(context.Background(), &CopyScriptParams{
+			Version:          "2011-08-01",
+			Action:           "CopyScript",
+			ScriptId:         42,
+			DestinationTitle: "copy title",
+		})
 		if err != nil {
-			t.Fatalf("InvokeLegacyActionWithResponse failed: %v", err)
+			t.Fatalf("CopyScriptWithResponse failed: %v", err)
 		}
 
 		if resp.StatusCode() != http.StatusOK {
@@ -387,18 +338,18 @@ func TestInvokeLegacyAction(t *testing.T) {
 	})
 
 	t.Run("remove script raw response", func(t *testing.T) {
-		values := url.Values{
-			"script_id": []string{"42"},
-		}
-
 		client, err := NewClient(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
 		if err != nil {
 			t.Fatalf("failed to init client: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyAction(context.Background(), LegacyActionParams("RemoveScript"), EncodeQueryRequestEditor(values))
+		resp, err := client.RemoveScript(context.Background(), &RemoveScriptParams{
+			Version:  "2011-08-01",
+			Action:   "RemoveScript",
+			ScriptId: 42,
+		})
 		if err != nil {
-			t.Fatalf("InvokeLegacyAction failed: %v", err)
+			t.Fatalf("RemoveScript failed: %v", err)
 		}
 		defer resp.Body.Close()
 
@@ -408,19 +359,19 @@ func TestInvokeLegacyAction(t *testing.T) {
 	})
 
 	t.Run("remove attachment typed response", func(t *testing.T) {
-		values := url.Values{
-			"script_id": []string{"42"},
-			"filename":  []string{"note.txt"},
-		}
-
 		client, err := NewClientWithResponses(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
 		if err != nil {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), LegacyActionParams("RemoveScriptAttachment"), EncodeQueryRequestEditor(values))
+		resp, err := client.RemoveScriptAttachmentWithResponse(context.Background(), &RemoveScriptAttachmentParams{
+			Version:  "2011-08-01",
+			Action:   "RemoveScriptAttachment",
+			ScriptId: 42,
+			Filename: "note.txt",
+		})
 		if err != nil {
-			t.Fatalf("InvokeLegacyActionWithResponse failed: %v", err)
+			t.Fatalf("RemoveScriptAttachmentWithResponse failed: %v", err)
 		}
 
 		if resp.StatusCode() != http.StatusNoContent {
@@ -433,19 +384,19 @@ func TestInvokeLegacyAction(t *testing.T) {
 	})
 
 	t.Run("create attachment typed response", func(t *testing.T) {
-		values := url.Values{
-			"script_id": []string{"42"},
-			"file":      []string{"note.txt$$Zm9v"},
-		}
-
 		client, err := NewClientWithResponses(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
 		if err != nil {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.InvokeLegacyActionWithResponse(context.Background(), LegacyActionParams("CreateScriptAttachment"), EncodeQueryRequestEditor(values))
+		resp, err := client.CreateScriptAttachmentWithResponse(context.Background(), &CreateScriptAttachmentParams{
+			Version:  "2011-08-01",
+			Action:   "CreateScriptAttachment",
+			ScriptId: 42,
+			File:     "note.txt$$Zm9v",
+		})
 		if err != nil {
-			t.Fatalf("InvokeLegacyActionWithResponse failed: %v", err)
+			t.Fatalf("CreateScriptAttachmentWithResponse failed: %v", err)
 		}
 
 		if resp.StatusCode() != http.StatusOK {

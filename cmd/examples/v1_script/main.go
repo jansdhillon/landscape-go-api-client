@@ -7,9 +7,7 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"log"
-	"net/url"
 	"os"
-	"strconv"
 
 	"github.com/jansdhillon/landscape-go-api-client/client"
 )
@@ -42,15 +40,17 @@ func main() {
 	}
 
 	// Create a V1 script
-	createParams := client.LegacyActionParams("CreateScript")
 	rawCode := "#!/bin/bash\n \"hello\" > /home/ubuntu/hello.txt"
 	enc := base64.StdEncoding.EncodeToString([]byte(rawCode))
-	queryArgsEditorFn := client.EncodeQueryRequestEditor(url.Values{
-		"title":       []string{rand.Text()},
-		"code":        []string{enc},
-		"script_type": []string{"V1"},
-	})
-	createdScriptRes, err := landscapeAPIClient.InvokeLegacyActionWithResponse(ctx, createParams, queryArgsEditorFn)
+	scriptType := "V1"
+	createParams := &client.CreateScriptParams{
+		Version:    "2011-08-01",
+		Action:     "CreateScript",
+		Title:      rand.Text(),
+		Code:       enc,
+		ScriptType: &scriptType,
+	}
+	createdScriptRes, err := landscapeAPIClient.CreateScriptWithResponse(ctx, createParams)
 
 	if err != nil {
 		log.Fatalf("failed to invoke legacy action: %v", err)
@@ -58,9 +58,7 @@ func main() {
 
 	log.Printf("raw create script response: %s", createdScriptRes.Body)
 	if createdScriptRes.JSON200 == nil {
-		if createdScriptRes.JSON404 != nil {
-			log.Fatalf("error getting script: %s", createdScriptRes.Status())
-		}
+		log.Fatalf("error creating script: %s", createdScriptRes.Status())
 	}
 
 	script, err := createdScriptRes.JSON200.AsScriptResult()
@@ -73,16 +71,18 @@ func main() {
 		log.Fatalf("failed to parse response as V1 script: %v", err)
 	}
 
-	editParams := client.LegacyActionParams("EditScript")
 	raw := "#!/bin/bash\necho \"newcode\" > /home/ubuntu/goodbyeworld2.txt"
 	enc = base64.StdEncoding.EncodeToString([]byte(raw))
-	queryArgsEditorFn = client.EncodeQueryRequestEditor(url.Values{
-		"script_id": []string{strconv.Itoa(createdScript.Id)},
-		"username":  []string{"jim"},
-		"code":      []string{enc},
-	})
+	username := "jim"
+	editParams := &client.EditScriptParams{
+		Version:  "2011-08-01",
+		Action:   "EditScript",
+		ScriptId: createdScript.Id,
+		Username: &username,
+		Code:     &enc,
+	}
 
-	res, err := landscapeAPIClient.InvokeLegacyActionWithResponse(ctx, editParams, queryArgsEditorFn)
+	res, err := landscapeAPIClient.EditScriptWithResponse(ctx, editParams)
 	if err != nil {
 		log.Fatalf("failed to invoke legacy action: %v", err)
 	}

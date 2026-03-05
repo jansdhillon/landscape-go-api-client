@@ -107,16 +107,6 @@ func NewLandscapeAPIClient(baseURL string, loginProvider LoginProvider) (*Client
 	return NewClientWithResponses(baseURL, WithRequestEditorFn(authEditor))
 }
 
-// LegacyActionParams is a helper to call legacy API
-// actions by creating a pointer to a InvokeLegacyActionParams with
-// the hardcoded version, as well as the provided action.
-func LegacyActionParams(action string) *InvokeLegacyActionParams {
-	return &InvokeLegacyActionParams{
-		Action:  action,
-		Version: "2011-08-01",
-	}
-}
-
 // EncodeQueryRequestEditor returns a RequestEditorFn that
 // adds the given url.Values as query arguments in the request
 // URL.

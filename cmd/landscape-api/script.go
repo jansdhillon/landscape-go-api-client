@@ -6,7 +6,6 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"net/url"
 	"strconv"
 
 	"github.com/jansdhillon/landscape-go-api-client/client"
@@ -132,14 +131,13 @@ func createScriptAction(ctx context.Context, cmd *cli.Command) error {
 
 	enc := base64.StdEncoding.EncodeToString([]byte(code))
 
-	params := client.LegacyActionParams("CreateScript")
-	edit := client.EncodeQueryRequestEditor(url.Values{
-		"title":       []string{title},
-		"code":        []string{enc},
-		"script_type": []string{scriptType},
+	res, err := api.CreateScript(ctx, &client.CreateScriptParams{
+		Version:    "2011-08-01",
+		Action:     "CreateScript",
+		Title:      title,
+		Code:       enc,
+		ScriptType: &scriptType,
 	})
-
-	res, err := api.InvokeLegacyAction(ctx, params, edit)
 	if err != nil {
 		return err
 	}
@@ -168,14 +166,13 @@ func editScriptAction(ctx context.Context, cmd *cli.Command) error {
 
 	enc := base64.StdEncoding.EncodeToString([]byte(code))
 
-	params := client.LegacyActionParams("EditScript")
-	edit := client.EncodeQueryRequestEditor(url.Values{
-		"title":     []string{title},
-		"code":      []string{enc},
-		"script_id": []string{strconv.Itoa(scriptID)},
+	res, err := api.EditScript(ctx, &client.EditScriptParams{
+		Version:  "2011-08-01",
+		Action:   "EditScript",
+		ScriptId: scriptID,
+		Title:    &title,
+		Code:     &enc,
 	})
-
-	res, err := api.InvokeLegacyAction(ctx, params, edit)
 	if err != nil {
 		return err
 	}
@@ -233,13 +230,12 @@ func createScriptAttachmentAction(ctx context.Context, cmd *cli.Command) error {
 	scriptID := cmd.Int64(scriptIDFlag)
 	file := cmd.String(fileFlag)
 
-	params := client.LegacyActionParams("CreateScriptAttachment")
-	edit := client.EncodeQueryRequestEditor(url.Values{
-		"script_id": []string{fmt.Sprintf("%d", scriptID)},
-		"file":      []string{file},
+	res, err := api.CreateScriptAttachment(ctx, &client.CreateScriptAttachmentParams{
+		Version:  "2011-08-01",
+		Action:   "CreateScriptAttachment",
+		ScriptId: int(scriptID),
+		File:     file,
 	})
-
-	res, err := api.InvokeLegacyAction(ctx, params, edit)
 	if err != nil {
 		return err
 	}
