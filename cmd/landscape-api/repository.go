@@ -262,9 +262,7 @@ func importGPGKeyAction(ctx context.Context, cmd *cli.Command) error {
 		return fmt.Errorf("one of --file or --material must be provided")
 	}
 
-	res, err := api.ImportGPGKey(ctx, &client.ImportGPGKeyParams{
-		Version:  "2011-08-01",
-		Action:   "ImportGPGKey",
+	res, err := api.LegacyImportGPGKey(ctx, &client.LegacyImportGPGKeyParams{
 		Name:     cmd.String(nameFlag),
 		Material: material,
 	})
@@ -280,17 +278,15 @@ func createDistributionAction(ctx context.Context, cmd *cli.Command) error {
 		return fmt.Errorf("api client not initialized")
 	}
 
-	params := &client.CreateDistributionParams{
-		Version: "2011-08-01",
-		Action:  "CreateDistribution",
-		Name:    cmd.String(nameFlag),
+	params := &client.LegacyCreateDistributionParams{
+		Name: cmd.String(nameFlag),
 	}
 
 	if ag := cmd.String(accessGroupFlag); ag != "" {
 		params.AccessGroup = &ag
 	}
 
-	res, err := api.CreateDistribution(ctx, params)
+	res, err := api.LegacyCreateDistribution(ctx, params)
 	if err != nil {
 		return err
 	}
@@ -303,9 +299,7 @@ func createPocketAction(ctx context.Context, cmd *cli.Command) error {
 		return fmt.Errorf("api client not initialized")
 	}
 
-	params := &client.CreatePocketParams{
-		Version:       "2011-08-01",
-		Action:        "CreatePocket",
+	params := &client.LegacyCreatePocketParams{
 		Name:          cmd.String(nameFlag),
 		Series:        cmd.String(seriesFlag),
 		Distribution:  cmd.String(distributionFlag),
@@ -328,7 +322,7 @@ func createPocketAction(ctx context.Context, cmd *cli.Command) error {
 		params.Origin = &v
 	}
 
-	res, err := api.CreatePocket(ctx, params)
+	res, err := api.LegacyCreatePocket(ctx, params)
 	if err != nil {
 		return err
 	}
@@ -341,9 +335,7 @@ func createMirrorAction(ctx context.Context, cmd *cli.Command) error {
 		return fmt.Errorf("api client not initialized")
 	}
 
-	params := &client.CreatePocketParams{
-		Version:       "2011-08-01",
-		Action:        "CreatePocket",
+	params := &client.LegacyCreatePocketParams{
 		Name:          cmd.String(nameFlag),
 		Series:        cmd.String(seriesFlag),
 		Distribution:  cmd.String(distributionFlag),
@@ -363,7 +355,7 @@ func createMirrorAction(ctx context.Context, cmd *cli.Command) error {
 		params.MirrorGpgKey = &v
 	}
 
-	res, err := api.CreatePocket(ctx, params)
+	res, err := api.LegacyCreatePocket(ctx, params)
 	if err != nil {
 		return err
 	}
@@ -432,9 +424,7 @@ func createSeriesAction(ctx context.Context, cmd *cli.Command) error {
 		return fmt.Errorf("api client not initialized")
 	}
 
-	params := &client.CreateSeriesParams{
-		Version:      "2011-08-01",
-		Action:       "CreateSeries",
+	params := &client.LegacyCreateSeriesParams{
 		Name:         cmd.String(nameFlag),
 		Distribution: cmd.String(distributionFlag),
 	}
@@ -461,7 +451,7 @@ func createSeriesAction(ctx context.Context, cmd *cli.Command) error {
 		params.MirrorGpgKey = &v
 	}
 
-	res, err := api.CreateSeries(ctx, params)
+	res, err := api.LegacyCreateSeries(ctx, params)
 	if err != nil {
 		return err
 	}
@@ -474,9 +464,7 @@ func syncMirrorAction(ctx context.Context, cmd *cli.Command) error {
 		return fmt.Errorf("api client not initialized")
 	}
 
-	res, err := api.SyncMirrorPocket(ctx, &client.SyncMirrorPocketParams{
-		Version:      "2011-08-01",
-		Action:       "SyncMirrorPocket",
+	res, err := api.LegacySyncMirrorPocket(ctx, &client.LegacySyncMirrorPocketParams{
 		Name:         cmd.String(nameFlag),
 		Series:       cmd.String(seriesFlag),
 		Distribution: cmd.String(distributionFlag),

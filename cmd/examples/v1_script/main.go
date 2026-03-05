@@ -44,14 +44,12 @@ func main() {
 	rawCode := "#!/bin/bash\n \"hello\" > /home/ubuntu/hello.txt"
 	enc := base64.StdEncoding.EncodeToString([]byte(rawCode))
 	scriptType := "V1"
-	createParams := &client.CreateScriptParams{
-		Version:    "2011-08-01",
-		Action:     "CreateScript",
+	createParams := &client.LegacyCreateScriptParams{
 		Title:      rand.Text(),
 		Code:       enc,
 		ScriptType: &scriptType,
 	}
-	createdScriptRes, err := landscapeAPIClient.CreateScriptWithResponse(ctx, createParams)
+	createdScriptRes, err := landscapeAPIClient.LegacyCreateScriptWithResponse(ctx, createParams)
 
 	if err != nil {
 		log.Fatalf("failed to invoke legacy action: %v", err)

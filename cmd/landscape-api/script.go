@@ -131,9 +131,7 @@ func createScriptAction(ctx context.Context, cmd *cli.Command) error {
 
 	enc := base64.StdEncoding.EncodeToString([]byte(code))
 
-	res, err := api.CreateScript(ctx, &client.CreateScriptParams{
-		Version:    "2011-08-01",
-		Action:     "CreateScript",
+	res, err := api.LegacyCreateScript(ctx, &client.LegacyCreateScriptParams{
 		Title:      title,
 		Code:       enc,
 		ScriptType: &scriptType,
@@ -166,9 +164,7 @@ func editScriptAction(ctx context.Context, cmd *cli.Command) error {
 
 	enc := base64.StdEncoding.EncodeToString([]byte(code))
 
-	res, err := api.EditScript(ctx, &client.EditScriptParams{
-		Version:  "2011-08-01",
-		Action:   "EditScript",
+	res, err := api.LegacyEditScript(ctx, &client.LegacyEditScriptParams{
 		ScriptId: scriptID,
 		Title:    &title,
 		Code:     &enc,
@@ -230,9 +226,7 @@ func createScriptAttachmentAction(ctx context.Context, cmd *cli.Command) error {
 	scriptID := cmd.Int64(scriptIDFlag)
 	file := cmd.String(fileFlag)
 
-	res, err := api.CreateScriptAttachment(ctx, &client.CreateScriptAttachmentParams{
-		Version:  "2011-08-01",
-		Action:   "CreateScriptAttachment",
+	res, err := api.LegacyCreateScriptAttachment(ctx, &client.LegacyCreateScriptAttachmentParams{
 		ScriptId: int(scriptID),
 		File:     file,
 	})

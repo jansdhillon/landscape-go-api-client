@@ -43,9 +43,7 @@ func main() {
 	rawCode := "#!/bin/bash\n \"hello\" > /home/ubuntu/hello.txt"
 	enc := base64.StdEncoding.EncodeToString([]byte(rawCode))
 	scriptType := "V2"
-	createdScriptRes, err := landscapeAPIClient.CreateScriptWithResponse(ctx, &client.CreateScriptParams{
-		Version:    "2011-08-01",
-		Action:     "CreateScript",
+	createdScriptRes, err := landscapeAPIClient.LegacyCreateScriptWithResponse(ctx, &client.LegacyCreateScriptParams{
 		Title:      rand.Text(),
 		Code:       enc,
 		ScriptType: &scriptType,
@@ -68,9 +66,7 @@ func main() {
 	enc = base64.StdEncoding.EncodeToString([]byte(raw))
 	username := "jim"
 
-	res, err := landscapeAPIClient.EditScriptWithResponse(ctx, &client.EditScriptParams{
-		Version:  "2011-08-01",
-		Action:   "EditScript",
+	res, err := landscapeAPIClient.LegacyEditScriptWithResponse(ctx, &client.LegacyEditScriptParams{
 		ScriptId: createdScript.Id,
 		Username: &username,
 		Code:     &enc,

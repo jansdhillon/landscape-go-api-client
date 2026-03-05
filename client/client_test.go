@@ -166,39 +166,15 @@ func TestLegacyScriptActions(t *testing.T) {
 
 	baseURL := server.URL
 
-	t.Run("missing version", func(t *testing.T) {
-		client, err := NewClient(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
-		if err != nil {
-			t.Fatalf("failed to init client: %v", err)
-		}
-
-		resp, err := client.CreateScript(context.Background(), &CreateScriptParams{
-			Version: "",
-			Action:  "CreateScript",
-			Title:   "example",
-			Code:    "ZWNobyAiSGVsbG8i",
-		})
-		if err != nil {
-			t.Fatalf("CreateScript returned error: %v", err)
-		}
-		defer resp.Body.Close()
-
-		if resp.StatusCode != http.StatusBadRequest {
-			t.Fatalf("expected HTTP 400 when version missing, got %d", resp.StatusCode)
-		}
-	})
-
 	t.Run("create script raw response", func(t *testing.T) {
 		client, err := NewClient(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
 		if err != nil {
 			t.Fatalf("failed to init client: %v", err)
 		}
 
-		resp, err := client.CreateScript(context.Background(), &CreateScriptParams{
-			Version: "2011-08-01",
-			Action:  "CreateScript",
-			Title:   "new script",
-			Code:    "ZWNobyAiSGVsbG8i",
+		resp, err := client.LegacyCreateScript(context.Background(), &LegacyCreateScriptParams{
+			Title: "new script",
+			Code:  "ZWNobyAiSGVsbG8i",
 		})
 		if err != nil {
 			t.Fatalf("CreateScript failed: %v", err)
@@ -225,11 +201,9 @@ func TestLegacyScriptActions(t *testing.T) {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.CreateScriptWithResponse(context.Background(), &CreateScriptParams{
-			Version: "2011-08-01",
-			Action:  "CreateScript",
-			Title:   "new script",
-			Code:    "ZWNobyAiSGVsbG8i",
+		resp, err := client.LegacyCreateScriptWithResponse(context.Background(), &LegacyCreateScriptParams{
+			Title: "new script",
+			Code:  "ZWNobyAiSGVsbG8i",
 		})
 		if err != nil {
 			t.Fatalf("CreateScriptWithResponse failed: %v", err)
@@ -260,9 +234,7 @@ func TestLegacyScriptActions(t *testing.T) {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.EditScriptWithResponse(context.Background(), &EditScriptParams{
-			Version:  "2011-08-01",
-			Action:   "EditScript",
+		resp, err := client.LegacyEditScriptWithResponse(context.Background(), &LegacyEditScriptParams{
 			ScriptId: 42,
 			Title:    &title,
 		})
@@ -294,9 +266,7 @@ func TestLegacyScriptActions(t *testing.T) {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.CopyScriptWithResponse(context.Background(), &CopyScriptParams{
-			Version:          "2011-08-01",
-			Action:           "CopyScript",
+		resp, err := client.LegacyCopyScriptWithResponse(context.Background(), &LegacyCopyScriptParams{
 			ScriptId:         42,
 			DestinationTitle: "copy title",
 		})
@@ -328,9 +298,7 @@ func TestLegacyScriptActions(t *testing.T) {
 			t.Fatalf("failed to init client: %v", err)
 		}
 
-		resp, err := client.RemoveScript(context.Background(), &RemoveScriptParams{
-			Version:  "2011-08-01",
-			Action:   "RemoveScript",
+		resp, err := client.LegacyRemoveScript(context.Background(), &LegacyRemoveScriptParams{
 			ScriptId: 42,
 		})
 		if err != nil {
@@ -349,9 +317,7 @@ func TestLegacyScriptActions(t *testing.T) {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.RemoveScriptAttachmentWithResponse(context.Background(), &RemoveScriptAttachmentParams{
-			Version:  "2011-08-01",
-			Action:   "RemoveScriptAttachment",
+		resp, err := client.LegacyRemoveScriptAttachmentWithResponse(context.Background(), &LegacyRemoveScriptAttachmentParams{
 			ScriptId: 42,
 			Filename: "note.txt",
 		})
@@ -374,9 +340,7 @@ func TestLegacyScriptActions(t *testing.T) {
 			t.Fatalf("failed to init client with responses: %v", err)
 		}
 
-		resp, err := client.CreateScriptAttachmentWithResponse(context.Background(), &CreateScriptAttachmentParams{
-			Version:  "2011-08-01",
-			Action:   "CreateScriptAttachment",
+		resp, err := client.LegacyCreateScriptAttachmentWithResponse(context.Background(), &LegacyCreateScriptAttachmentParams{
 			ScriptId: 42,
 			File:     "note.txt$$Zm9v",
 		})
