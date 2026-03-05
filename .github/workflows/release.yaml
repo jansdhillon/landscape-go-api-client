@@ -1,0 +1,114 @@
+# SPDX-License-Identifier: Apache-2.0
+
+name: Get the bundled OpenAPI spec, regenerate the client, tag it, and publish a GitHub release
+
+on:
+    push:
+        branches: [main]
+    repository_dispatch:
+        types: [openapi-released]
+    workflow_dispatch:
+
+permissions:
+    contents: read
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    regen-client-and-release:
+        if: github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch'
+        runs-on: ubuntu-latest
+        permissions:
+            contents: write
+        steps:
+            - name: Get latest OpenAPI spec release
+              id: openapi-release
+              env:
+                  GH_TOKEN: ${{ secrets.REGENERATE_CLIENT_TOKEN }}
+              run: |
+                  TAG=$(gh release view --repo jansdhillon/landscape-openapi-spec --json tagName -q '.tagName')
+                  VERSION="${TAG#v}"
+                  echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+                  echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+            - name: Download OpenAPI bundle from release
+              env:
+                  GH_TOKEN: ${{ secrets.REGENERATE_CLIENT_TOKEN }}
+                  TAG: ${{ steps.openapi-release.outputs.tag }}
+              run: |
+                  mkdir -p bundle
+                  gh release download "$TAG" \
+                  --repo jansdhillon/landscape-openapi-spec \
+                  --pattern "landscape_api.bundle.yaml" \
+                  --dir bundle --clobber
+
+            - uses: actions/checkout@v4
+              with:
+                  repository: jansdhillon/landscape-go-api-client
+                  path: clientrepo
+                  token: ${{ secrets.REGENERATE_CLIENT_TOKEN }}
+
+            - uses: actions/setup-go@v5
+              with:
+                  go-version: "1.25"
+
+            - name: Generate client
+              working-directory: clientrepo/client
+              env:
+                  OPENAPI_SPEC: ${{ github.workspace }}/bundle/landscape_api.bundle.yaml
+              run: |
+                  go generate ./...
+                  go mod tidy
+
+            - name: Create/Update PR
+              uses: peter-evans/create-pull-request@v6
+              with:
+                  token: ${{ secrets.REGENERATE_CLIENT_TOKEN }}
+                  path: clientrepo
+                  branch: build/regen-landscape-go-api-client
+                  commit-message: "build: regenerate client from Landscape OpenAPI ${{ steps.openapi-release.outputs.version }}"
+                  title: "build: regenerate client from Landscape OpenAPI ${{ steps.openapi-release.outputs.version }}"
+                  body: "Automated regeneration from Landscape OpenAPI ${{ steps.openapi-release.outputs.version }}."
+                  labels: automated, generated
+                  author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+                  signoff: false
+
+            - name: Tag client repo at regen branch head
+              working-directory: clientrepo
+              env:
+                  REGENERATE_CLIENT_TOKEN: ${{ secrets.REGENERATE_CLIENT_TOKEN }}
+                  TAG: ${{ steps.openapi-release.outputs.tag }}
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git remote set-url origin "https://x-access-token:${REGENERATE_CLIENT_TOKEN}@github.com/jansdhillon/landscape-go-api-client.git"
+                  git fetch origin build/regen-landscape-go-api-client
+                  git checkout build/regen-landscape-go-api-client
+                  git fetch --tags
+                  git tag -fa "$TAG" -m "Automated regen from OpenAPI ${{ steps.openapi-release.outputs.version }}"
+                  git push origin "$TAG" --force
+
+            - name: Create/Update release (client)
+              env:
+                  GH_TOKEN: ${{ secrets.REGENERATE_CLIENT_TOKEN }}
+                  TAG: ${{ steps.openapi-release.outputs.tag }}
+              run: |
+                  if gh release view "$TAG" --repo jansdhillon/landscape-go-api-client; then
+                  gh release upload "$TAG" "$GITHUB_WORKSPACE/bundle/landscape_api.bundle.yaml" \
+                      --repo jansdhillon/landscape-go-api-client --clobber
+                  else
+                  gh release create "$TAG" \
+                      --repo jansdhillon/landscape-go-api-client \
+                      --title "$TAG" \
+                      --notes "Automated regeneration from OpenAPI ${{ steps.openapi-release.outputs.version }}." \
+                      "$GITHUB_WORKSPACE/bundle/landscape_api.bundle.yaml"
+                  fi
+
+            - name: Trigger Go module proxy indexing
+              env:
+                  TAG: ${{ steps.openapi-release.outputs.tag }}
+              run: |
+                  MOD="github.com/jansdhillon/landscape-go-api-client"
+                  GOPROXY=https://proxy.golang.org GO111MODULE=on go list -m "${MOD}@${TAG}"
