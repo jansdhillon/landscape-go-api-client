@@ -105,9 +105,6 @@ type Error struct {
 // LegacyScriptAttachment The response from creating a legacy script attachment.
 type LegacyScriptAttachment = string
 
-// LegacyScriptCode The response of getting a legacy script's code (raw, doesn't split code and interpreter).
-type LegacyScriptCode = string
-
 // LegacyScriptCreator Information about the creator of a V1 legacy script.
 type LegacyScriptCreator struct {
 	// Email The email address of the person who created the script.
@@ -603,10 +600,8 @@ type GetScriptProfileActivitiesResponse = ScriptProfileActivitiesListResponse
 // GetScriptProfileComputersResponse Paginated list of computers associated with a script profile.
 type GetScriptProfileComputersResponse = ScriptProfileComputersListResponse
 
-// LegacyActionResponse defines model for LegacyActionResponse.
-type LegacyActionResponse struct {
-	union json.RawMessage
-}
+// LegacyActionResponse The response body varies by action.
+type LegacyActionResponse = map[string]interface{}
 
 // ScriptNotFound defines model for ScriptNotFound.
 type ScriptNotFound = Error
@@ -3684,94 +3679,6 @@ func (t ScriptResult) MarshalJSON() ([]byte, error) {
 }
 
 func (t *ScriptResult) UnmarshalJSON(b []byte) error {
-	err := t.union.UnmarshalJSON(b)
-	return err
-}
-
-// AsScriptResult returns the union data inside the LegacyActionResponse as a ScriptResult
-func (t LegacyActionResponse) AsScriptResult() (ScriptResult, error) {
-	var body ScriptResult
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromScriptResult overwrites any union data inside the LegacyActionResponse as the provided ScriptResult
-func (t *LegacyActionResponse) FromScriptResult(v ScriptResult) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeScriptResult performs a merge with any union data inside the LegacyActionResponse, using the provided ScriptResult
-func (t *LegacyActionResponse) MergeScriptResult(v ScriptResult) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsLegacyScriptAttachment returns the union data inside the LegacyActionResponse as a LegacyScriptAttachment
-func (t LegacyActionResponse) AsLegacyScriptAttachment() (LegacyScriptAttachment, error) {
-	var body LegacyScriptAttachment
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromLegacyScriptAttachment overwrites any union data inside the LegacyActionResponse as the provided LegacyScriptAttachment
-func (t *LegacyActionResponse) FromLegacyScriptAttachment(v LegacyScriptAttachment) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeLegacyScriptAttachment performs a merge with any union data inside the LegacyActionResponse, using the provided LegacyScriptAttachment
-func (t *LegacyActionResponse) MergeLegacyScriptAttachment(v LegacyScriptAttachment) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-// AsLegacyScriptCode returns the union data inside the LegacyActionResponse as a LegacyScriptCode
-func (t LegacyActionResponse) AsLegacyScriptCode() (LegacyScriptCode, error) {
-	var body LegacyScriptCode
-	err := json.Unmarshal(t.union, &body)
-	return body, err
-}
-
-// FromLegacyScriptCode overwrites any union data inside the LegacyActionResponse as the provided LegacyScriptCode
-func (t *LegacyActionResponse) FromLegacyScriptCode(v LegacyScriptCode) error {
-	b, err := json.Marshal(v)
-	t.union = b
-	return err
-}
-
-// MergeLegacyScriptCode performs a merge with any union data inside the LegacyActionResponse, using the provided LegacyScriptCode
-func (t *LegacyActionResponse) MergeLegacyScriptCode(v LegacyScriptCode) error {
-	b, err := json.Marshal(v)
-	if err != nil {
-		return err
-	}
-
-	merged, err := runtime.JSONMerge(t.union, b)
-	t.union = merged
-	return err
-}
-
-func (t LegacyActionResponse) MarshalJSON() ([]byte, error) {
-	b, err := t.union.MarshalJSON()
-	return b, err
-}
-
-func (t *LegacyActionResponse) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
