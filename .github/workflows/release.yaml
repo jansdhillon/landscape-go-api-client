@@ -18,7 +18,6 @@ concurrency:
 
 jobs:
     regen-client-and-release:
-        if: github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch'
         runs-on: ubuntu-latest
         permissions:
             contents: write
