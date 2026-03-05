@@ -35,6 +35,11 @@ func main() {
 		Usage: "Interact with the Landscape API.",
 		Commands: []*cli.Command{
 			scriptCmd,
+			gpgKeyCmd,
+			distributionCmd,
+			seriesCmd,
+			pocketCmd,
+			mirrorCmd,
 		},
 		Flags: []cli.Flag{
 			&cli.StringFlag{

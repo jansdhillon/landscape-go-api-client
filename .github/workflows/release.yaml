@@ -74,40 +74,55 @@ jobs:
                   author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
                   signoff: false
 
-            - name: Tag client repo at regen branch head
+            - name: Resolve tag (increment patch if already exists)
+              id: resolve-tag
               working-directory: clientrepo
               env:
                   REGENERATE_CLIENT_TOKEN: ${{ secrets.REGENERATE_CLIENT_TOKEN }}
                   TAG: ${{ steps.openapi-release.outputs.tag }}
+              run: |
+                  git remote set-url origin "https://x-access-token:${REGENERATE_CLIENT_TOKEN}@github.com/jansdhillon/landscape-go-api-client.git"
+                  git fetch --tags
+                  FINAL_TAG="$TAG"
+                  while git rev-parse "refs/tags/$FINAL_TAG" >/dev/null 2>&1; do
+                      VERSION="${FINAL_TAG#v}"
+                      MAJOR="${VERSION%%.*}"
+                      REST="${VERSION#*.}"
+                      MINOR="${REST%%.*}"
+                      PATCH="${REST##*.}"
+                      PATCH=$((PATCH + 1))
+                      FINAL_TAG="v${MAJOR}.${MINOR}.${PATCH}"
+                  done
+                  echo "final_tag=$FINAL_TAG" >> "$GITHUB_OUTPUT"
+
+            - name: Tag client repo at regen branch head
+              working-directory: clientrepo
+              env:
+                  REGENERATE_CLIENT_TOKEN: ${{ secrets.REGENERATE_CLIENT_TOKEN }}
+                  FINAL_TAG: ${{ steps.resolve-tag.outputs.final_tag }}
               run: |
                   git config user.name "github-actions[bot]"
                   git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
                   git remote set-url origin "https://x-access-token:${REGENERATE_CLIENT_TOKEN}@github.com/jansdhillon/landscape-go-api-client.git"
                   git fetch origin build/regen-landscape-go-api-client
                   git checkout build/regen-landscape-go-api-client
-                  git fetch --tags
-                  git tag -fa "$TAG" -m "Automated regen from OpenAPI ${{ steps.openapi-release.outputs.version }}"
-                  git push origin "$TAG" --force
+                  git tag -a "$FINAL_TAG" -m "Automated regen from OpenAPI ${{ steps.openapi-release.outputs.version }}"
+                  git push origin "$FINAL_TAG"
 
-            - name: Create/Update release (client)
+            - name: Create release (client)
               env:
                   GH_TOKEN: ${{ secrets.REGENERATE_CLIENT_TOKEN }}
-                  TAG: ${{ steps.openapi-release.outputs.tag }}
+                  FINAL_TAG: ${{ steps.resolve-tag.outputs.final_tag }}
               run: |
-                  if gh release view "$TAG" --repo jansdhillon/landscape-go-api-client; then
-                  gh release upload "$TAG" "$GITHUB_WORKSPACE/bundle/landscape_api.bundle.yaml" \
-                      --repo jansdhillon/landscape-go-api-client --clobber
-                  else
-                  gh release create "$TAG" \
+                  gh release create "$FINAL_TAG" \
                       --repo jansdhillon/landscape-go-api-client \
-                      --title "$TAG" \
+                      --title "$FINAL_TAG" \
                       --notes "Automated regeneration from OpenAPI ${{ steps.openapi-release.outputs.version }}." \
                       "$GITHUB_WORKSPACE/bundle/landscape_api.bundle.yaml"
-                  fi
 
             - name: Trigger Go module proxy indexing
               env:
-                  TAG: ${{ steps.openapi-release.outputs.tag }}
+                  FINAL_TAG: ${{ steps.resolve-tag.outputs.final_tag }}
               run: |
                   MOD="github.com/jansdhillon/landscape-go-api-client"
-                  GOPROXY=https://proxy.golang.org GO111MODULE=on go list -m "${MOD}@${TAG}"
+                  GOPROXY=https://proxy.golang.org GO111MODULE=on go list -m "${MOD}@${FINAL_TAG}"
