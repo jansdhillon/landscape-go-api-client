@@ -570,9 +570,6 @@ type V2Script struct {
 // V2ScriptStatus The current status of the script.
 type V2ScriptStatus string
 
-// LegacyVersionParam defines model for LegacyVersionParam.
-type LegacyVersionParam = string
-
 // ScriptAttachmentIdPathParam defines model for ScriptAttachmentIdPathParam.
 type ScriptAttachmentIdPathParam = int
 
@@ -639,11 +636,8 @@ type ScriptProfilesByScriptResult = []ScriptProfile
 // Unauthorized defines model for Unauthorized.
 type Unauthorized = Error
 
-// AcceptPendingComputersParams defines parameters for AcceptPendingComputers.
-type AcceptPendingComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAcceptPendingComputersParams defines parameters for LegacyAcceptPendingComputers.
+type LegacyAcceptPendingComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -657,11 +651,8 @@ type AcceptPendingComputersParams struct {
 	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
 }
 
-// AddAPTSourcesToRepositoryProfileParams defines parameters for AddAPTSourcesToRepositoryProfile.
-type AddAPTSourcesToRepositoryProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAddAPTSourcesToRepositoryProfileParams defines parameters for LegacyAddAPTSourcesToRepositoryProfile.
+type LegacyAddAPTSourcesToRepositoryProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -672,11 +663,8 @@ type AddAPTSourcesToRepositoryProfileParams struct {
 	AptSources []string `form:"apt_sources" json:"apt_sources"`
 }
 
-// AddAccessGroupsToRoleParams defines parameters for AddAccessGroupsToRole.
-type AddAccessGroupsToRoleParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAddAccessGroupsToRoleParams defines parameters for LegacyAddAccessGroupsToRole.
+type LegacyAddAccessGroupsToRoleParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -687,11 +675,8 @@ type AddAccessGroupsToRoleParams struct {
 	AccessGroups []string `form:"access_groups" json:"access_groups"`
 }
 
-// AddAnnotationToComputersParams defines parameters for AddAnnotationToComputers.
-type AddAnnotationToComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAddAnnotationToComputersParams defines parameters for LegacyAddAnnotationToComputers.
+type LegacyAddAnnotationToComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -705,11 +690,8 @@ type AddAnnotationToComputersParams struct {
 	Value *string `form:"value,omitempty" json:"value,omitempty"`
 }
 
-// AddPackageFiltersToPocketParams defines parameters for AddPackageFiltersToPocket.
-type AddPackageFiltersToPocketParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAddPackageFiltersToPocketParams defines parameters for LegacyAddPackageFiltersToPocket.
+type LegacyAddPackageFiltersToPocketParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -726,11 +708,8 @@ type AddPackageFiltersToPocketParams struct {
 	Packages []string `form:"packages" json:"packages"`
 }
 
-// AddPermissionsToRoleParams defines parameters for AddPermissionsToRole.
-type AddPermissionsToRoleParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAddPermissionsToRoleParams defines parameters for LegacyAddPermissionsToRole.
+type LegacyAddPermissionsToRoleParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -741,11 +720,8 @@ type AddPermissionsToRoleParams struct {
 	Permissions []string `form:"permissions" json:"permissions"`
 }
 
-// AddPersonsToRoleParams defines parameters for AddPersonsToRole.
-type AddPersonsToRoleParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAddPersonsToRoleParams defines parameters for LegacyAddPersonsToRole.
+type LegacyAddPersonsToRoleParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -756,11 +732,8 @@ type AddPersonsToRoleParams struct {
 	Persons []string `form:"persons" json:"persons"`
 }
 
-// AddPocketsToRepositoryProfileParams defines parameters for AddPocketsToRepositoryProfile.
-type AddPocketsToRepositoryProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAddPocketsToRepositoryProfileParams defines parameters for LegacyAddPocketsToRepositoryProfile.
+type LegacyAddPocketsToRepositoryProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -777,11 +750,8 @@ type AddPocketsToRepositoryProfileParams struct {
 	Distribution string `form:"distribution" json:"distribution"`
 }
 
-// AddTagsToComputersParams defines parameters for AddTagsToComputers.
-type AddTagsToComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAddTagsToComputersParams defines parameters for LegacyAddTagsToComputers.
+type LegacyAddTagsToComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -792,11 +762,8 @@ type AddTagsToComputersParams struct {
 	Tags []string `form:"tags" json:"tags"`
 }
 
-// AddUploaderGPGKeysToPocketParams defines parameters for AddUploaderGPGKeysToPocket.
-type AddUploaderGPGKeysToPocketParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAddUploaderGPGKeysToPocketParams defines parameters for LegacyAddUploaderGPGKeysToPocket.
+type LegacyAddUploaderGPGKeysToPocketParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -813,11 +780,8 @@ type AddUploaderGPGKeysToPocketParams struct {
 	GpgKeys []string `form:"gpg_keys" json:"gpg_keys"`
 }
 
-// ApproveActivitiesParams defines parameters for ApproveActivities.
-type ApproveActivitiesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyApproveActivitiesParams defines parameters for LegacyApproveActivities.
+type LegacyApproveActivitiesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -825,11 +789,8 @@ type ApproveActivitiesParams struct {
 	Query string `form:"query" json:"query"`
 }
 
-// AssociateAlertParams defines parameters for AssociateAlert.
-type AssociateAlertParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAssociateAlertParams defines parameters for LegacyAssociateAlert.
+type LegacyAssociateAlertParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -843,11 +804,8 @@ type AssociateAlertParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// AssociatePackageProfileParams defines parameters for AssociatePackageProfile.
-type AssociatePackageProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAssociatePackageProfileParams defines parameters for LegacyAssociatePackageProfile.
+type LegacyAssociatePackageProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -861,11 +819,8 @@ type AssociatePackageProfileParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// AssociateRemovalProfileParams defines parameters for AssociateRemovalProfile.
-type AssociateRemovalProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAssociateRemovalProfileParams defines parameters for LegacyAssociateRemovalProfile.
+type LegacyAssociateRemovalProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -879,11 +834,8 @@ type AssociateRemovalProfileParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// AssociateRepositoryProfileParams defines parameters for AssociateRepositoryProfile.
-type AssociateRepositoryProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAssociateRepositoryProfileParams defines parameters for LegacyAssociateRepositoryProfile.
+type LegacyAssociateRepositoryProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -897,11 +849,8 @@ type AssociateRepositoryProfileParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// AssociateUpgradeProfileParams defines parameters for AssociateUpgradeProfile.
-type AssociateUpgradeProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyAssociateUpgradeProfileParams defines parameters for LegacyAssociateUpgradeProfile.
+type LegacyAssociateUpgradeProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -915,11 +864,8 @@ type AssociateUpgradeProfileParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// CancelActivitiesParams defines parameters for CancelActivities.
-type CancelActivitiesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCancelActivitiesParams defines parameters for LegacyCancelActivities.
+type LegacyCancelActivitiesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -927,11 +873,8 @@ type CancelActivitiesParams struct {
 	Query string `form:"query" json:"query"`
 }
 
-// ChangeComputersAccessGroupParams defines parameters for ChangeComputersAccessGroup.
-type ChangeComputersAccessGroupParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyChangeComputersAccessGroupParams defines parameters for LegacyChangeComputersAccessGroup.
+type LegacyChangeComputersAccessGroupParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -942,11 +885,8 @@ type ChangeComputersAccessGroupParams struct {
 	AccessGroup string `form:"access_group" json:"access_group"`
 }
 
-// CopyPackageProfileParams defines parameters for CopyPackageProfile.
-type CopyPackageProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCopyPackageProfileParams defines parameters for LegacyCopyPackageProfile.
+type LegacyCopyPackageProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -966,11 +906,8 @@ type CopyPackageProfileParams struct {
 	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
 }
 
-// CopyRoleParams defines parameters for CopyRole.
-type CopyRoleParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCopyRoleParams defines parameters for LegacyCopyRole.
+type LegacyCopyRoleParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -984,11 +921,8 @@ type CopyRoleParams struct {
 	Description *string `form:"description,omitempty" json:"description,omitempty"`
 }
 
-// CopyScriptParams defines parameters for CopyScript.
-type CopyScriptParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCopyScriptParams defines parameters for LegacyCopyScript.
+type LegacyCopyScriptParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1002,11 +936,8 @@ type CopyScriptParams struct {
 	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
 }
 
-// CreateAPTSourceParams defines parameters for CreateAPTSource.
-type CreateAPTSourceParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateAPTSourceParams defines parameters for LegacyCreateAPTSource.
+type LegacyCreateAPTSourceParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1023,11 +954,8 @@ type CreateAPTSourceParams struct {
 	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
 }
 
-// CreateAccessGroupParams defines parameters for CreateAccessGroup.
-type CreateAccessGroupParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateAccessGroupParams defines parameters for LegacyCreateAccessGroup.
+type LegacyCreateAccessGroupParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1038,11 +966,8 @@ type CreateAccessGroupParams struct {
 	Parent *string `form:"parent,omitempty" json:"parent,omitempty"`
 }
 
-// CreateChildComputerParams defines parameters for CreateChildComputer.
-type CreateChildComputerParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateChildComputerParams defines parameters for LegacyCreateChildComputer.
+type LegacyCreateChildComputerParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1059,11 +984,8 @@ type CreateChildComputerParams struct {
 	ParentId int `form:"parent_id" json:"parent_id"`
 }
 
-// CreateDistributionParams defines parameters for CreateDistribution.
-type CreateDistributionParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateDistributionParams defines parameters for LegacyCreateDistribution.
+type LegacyCreateDistributionParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1074,11 +996,8 @@ type CreateDistributionParams struct {
 	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
 }
 
-// CreatePackageProfileParams defines parameters for CreatePackageProfile.
-type CreatePackageProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreatePackageProfileParams defines parameters for LegacyCreatePackageProfile.
+type LegacyCreatePackageProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1101,11 +1020,8 @@ type CreatePackageProfileParams struct {
 	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
 }
 
-// CreatePocketParams defines parameters for CreatePocket.
-type CreatePocketParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreatePocketParams defines parameters for LegacyCreatePocket.
+type LegacyCreatePocketParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1161,11 +1077,8 @@ type CreatePocketParams struct {
 	Origin *string `form:"origin,omitempty" json:"origin,omitempty"`
 }
 
-// CreateRemovalProfileParams defines parameters for CreateRemovalProfile.
-type CreateRemovalProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateRemovalProfileParams defines parameters for LegacyCreateRemovalProfile.
+type LegacyCreateRemovalProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1188,11 +1101,8 @@ type CreateRemovalProfileParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// CreateRepositoryProfileParams defines parameters for CreateRepositoryProfile.
-type CreateRepositoryProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateRepositoryProfileParams defines parameters for LegacyCreateRepositoryProfile.
+type LegacyCreateRepositoryProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1206,11 +1116,8 @@ type CreateRepositoryProfileParams struct {
 	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
 }
 
-// CreateRoleParams defines parameters for CreateRole.
-type CreateRoleParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateRoleParams defines parameters for LegacyCreateRole.
+type LegacyCreateRoleParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1221,11 +1128,8 @@ type CreateRoleParams struct {
 	Description *string `form:"description,omitempty" json:"description,omitempty"`
 }
 
-// CreateSavedSearchParams defines parameters for CreateSavedSearch.
-type CreateSavedSearchParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateSavedSearchParams defines parameters for LegacyCreateSavedSearch.
+type LegacyCreateSavedSearchParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1239,11 +1143,8 @@ type CreateSavedSearchParams struct {
 	Search string `form:"search" json:"search"`
 }
 
-// CreateScriptParams defines parameters for CreateScript.
-type CreateScriptParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateScriptParams defines parameters for LegacyCreateScript.
+type LegacyCreateScriptParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1266,11 +1167,8 @@ type CreateScriptParams struct {
 	ScriptType *string `form:"script_type,omitempty" json:"script_type,omitempty"`
 }
 
-// CreateScriptAttachmentParams defines parameters for CreateScriptAttachment.
-type CreateScriptAttachmentParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateScriptAttachmentParams defines parameters for LegacyCreateScriptAttachment.
+type LegacyCreateScriptAttachmentParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1281,11 +1179,8 @@ type CreateScriptAttachmentParams struct {
 	File string `form:"file" json:"file"`
 }
 
-// CreateSeriesParams defines parameters for CreateSeries.
-type CreateSeriesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateSeriesParams defines parameters for LegacyCreateSeries.
+type LegacyCreateSeriesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1323,11 +1218,8 @@ type CreateSeriesParams struct {
 	Origin *string `form:"origin,omitempty" json:"origin,omitempty"`
 }
 
-// CreateUpgradeProfileParams defines parameters for CreateUpgradeProfile.
-type CreateUpgradeProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateUpgradeProfileParams defines parameters for LegacyCreateUpgradeProfile.
+type LegacyCreateUpgradeProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1371,11 +1263,8 @@ type CreateUpgradeProfileParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// CreateUserParams defines parameters for CreateUser.
-type CreateUserParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyCreateUserParams defines parameters for LegacyCreateUser.
+type LegacyCreateUserParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1407,11 +1296,8 @@ type CreateUserParams struct {
 	WorkPhone *string `form:"work_phone,omitempty" json:"work_phone,omitempty"`
 }
 
-// DeleteChildComputersParams defines parameters for DeleteChildComputers.
-type DeleteChildComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyDeleteChildComputersParams defines parameters for LegacyDeleteChildComputers.
+type LegacyDeleteChildComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1419,11 +1305,8 @@ type DeleteChildComputersParams struct {
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 }
 
-// DeriveSeriesParams defines parameters for DeriveSeries.
-type DeriveSeriesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyDeriveSeriesParams defines parameters for LegacyDeriveSeries.
+type LegacyDeriveSeriesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1437,11 +1320,8 @@ type DeriveSeriesParams struct {
 	Distribution string `form:"distribution" json:"distribution"`
 }
 
-// DiffPullPocketParams defines parameters for DiffPullPocket.
-type DiffPullPocketParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyDiffPullPocketParams defines parameters for LegacyDiffPullPocket.
+type LegacyDiffPullPocketParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1455,11 +1335,8 @@ type DiffPullPocketParams struct {
 	Distribution string `form:"distribution" json:"distribution"`
 }
 
-// DisableAdministratorParams defines parameters for DisableAdministrator.
-type DisableAdministratorParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyDisableAdministratorParams defines parameters for LegacyDisableAdministrator.
+type LegacyDisableAdministratorParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1467,11 +1344,8 @@ type DisableAdministratorParams struct {
 	Email string `form:"email" json:"email"`
 }
 
-// DisassociateAlertParams defines parameters for DisassociateAlert.
-type DisassociateAlertParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyDisassociateAlertParams defines parameters for LegacyDisassociateAlert.
+type LegacyDisassociateAlertParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1485,11 +1359,8 @@ type DisassociateAlertParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// DisassociatePackageProfileParams defines parameters for DisassociatePackageProfile.
-type DisassociatePackageProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyDisassociatePackageProfileParams defines parameters for LegacyDisassociatePackageProfile.
+type LegacyDisassociatePackageProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1503,11 +1374,8 @@ type DisassociatePackageProfileParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// DisassociateRemovalProfileParams defines parameters for DisassociateRemovalProfile.
-type DisassociateRemovalProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyDisassociateRemovalProfileParams defines parameters for LegacyDisassociateRemovalProfile.
+type LegacyDisassociateRemovalProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1521,11 +1389,8 @@ type DisassociateRemovalProfileParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// DisassociateRepositoryProfileParams defines parameters for DisassociateRepositoryProfile.
-type DisassociateRepositoryProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyDisassociateRepositoryProfileParams defines parameters for LegacyDisassociateRepositoryProfile.
+type LegacyDisassociateRepositoryProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1539,11 +1404,8 @@ type DisassociateRepositoryProfileParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// DisassociateUpgradeProfileParams defines parameters for DisassociateUpgradeProfile.
-type DisassociateUpgradeProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyDisassociateUpgradeProfileParams defines parameters for LegacyDisassociateUpgradeProfile.
+type LegacyDisassociateUpgradeProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1557,11 +1419,8 @@ type DisassociateUpgradeProfileParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// EditPackageProfileParams defines parameters for EditPackageProfile.
-type EditPackageProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyEditPackageProfileParams defines parameters for LegacyEditPackageProfile.
+type LegacyEditPackageProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1578,11 +1437,8 @@ type EditPackageProfileParams struct {
 	RemoveConstraints *[]string `form:"remove_constraints,omitempty" json:"remove_constraints,omitempty"`
 }
 
-// EditPocketParams defines parameters for EditPocket.
-type EditPocketParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyEditPocketParams defines parameters for LegacyEditPocket.
+type LegacyEditPocketParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1620,11 +1476,8 @@ type EditPocketParams struct {
 	IncludeUdeb *bool `form:"include_udeb,omitempty" json:"include_udeb,omitempty"`
 }
 
-// EditRemovalProfileParams defines parameters for EditRemovalProfile.
-type EditRemovalProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyEditRemovalProfileParams defines parameters for LegacyEditRemovalProfile.
+type LegacyEditRemovalProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1644,11 +1497,8 @@ type EditRemovalProfileParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// EditRepositoryProfileParams defines parameters for EditRepositoryProfile.
-type EditRepositoryProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyEditRepositoryProfileParams defines parameters for LegacyEditRepositoryProfile.
+type LegacyEditRepositoryProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1662,11 +1512,8 @@ type EditRepositoryProfileParams struct {
 	Description *string `form:"description,omitempty" json:"description,omitempty"`
 }
 
-// EditSavedSearchParams defines parameters for EditSavedSearch.
-type EditSavedSearchParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyEditSavedSearchParams defines parameters for LegacyEditSavedSearch.
+type LegacyEditSavedSearchParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1680,11 +1527,8 @@ type EditSavedSearchParams struct {
 	Search *string `form:"search,omitempty" json:"search,omitempty"`
 }
 
-// EditScriptParams defines parameters for EditScript.
-type EditScriptParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyEditScriptParams defines parameters for LegacyEditScript.
+type LegacyEditScriptParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1704,11 +1548,8 @@ type EditScriptParams struct {
 	Username *string `form:"username,omitempty" json:"username,omitempty"`
 }
 
-// EditUpgradeProfileParams defines parameters for EditUpgradeProfile.
-type EditUpgradeProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyEditUpgradeProfileParams defines parameters for LegacyEditUpgradeProfile.
+type LegacyEditUpgradeProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1752,11 +1593,8 @@ type EditUpgradeProfileParams struct {
 	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
 }
 
-// EditUserParams defines parameters for EditUser.
-type EditUserParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyEditUserParams defines parameters for LegacyEditUser.
+type LegacyEditUserParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1785,11 +1623,8 @@ type EditUserParams struct {
 	WorkPhone *string `form:"work_phone,omitempty" json:"work_phone,omitempty"`
 }
 
-// ExecuteScriptParams defines parameters for ExecuteScript.
-type ExecuteScriptParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyExecuteScriptParams defines parameters for LegacyExecuteScript.
+type LegacyExecuteScriptParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1812,11 +1647,8 @@ type ExecuteScriptParams struct {
 	InAccessGroup *string `form:"in_access_group,omitempty" json:"in_access_group,omitempty"`
 }
 
-// GetAPTSourcesParams defines parameters for GetAPTSources.
-type GetAPTSourcesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetAPTSourcesParams defines parameters for LegacyGetAPTSources.
+type LegacyGetAPTSourcesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1824,11 +1656,8 @@ type GetAPTSourcesParams struct {
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 }
 
-// GetAccessGroupsParams defines parameters for GetAccessGroups.
-type GetAccessGroupsParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetAccessGroupsParams defines parameters for LegacyGetAccessGroups.
+type LegacyGetAccessGroupsParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1836,11 +1665,8 @@ type GetAccessGroupsParams struct {
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 }
 
-// GetActivitiesParams defines parameters for GetActivities.
-type GetActivitiesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetActivitiesParams defines parameters for LegacyGetActivities.
+type LegacyGetActivitiesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1854,29 +1680,20 @@ type GetActivitiesParams struct {
 	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// GetActivityTypesParams defines parameters for GetActivityTypes.
-type GetActivityTypesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetActivityTypesParams defines parameters for LegacyGetActivityTypes.
+type LegacyGetActivityTypesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 }
 
-// GetAdministratorsParams defines parameters for GetAdministrators.
-type GetAdministratorsParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetAdministratorsParams defines parameters for LegacyGetAdministrators.
+type LegacyGetAdministratorsParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 }
 
-// GetAlertSubscribersParams defines parameters for GetAlertSubscribers.
-type GetAlertSubscribersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetAlertSubscribersParams defines parameters for LegacyGetAlertSubscribers.
+type LegacyGetAlertSubscribersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1884,20 +1701,14 @@ type GetAlertSubscribersParams struct {
 	AlertType string `form:"alert_type" json:"alert_type"`
 }
 
-// GetAlertsParams defines parameters for GetAlerts.
-type GetAlertsParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetAlertsParams defines parameters for LegacyGetAlerts.
+type LegacyGetAlertsParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 }
 
-// GetCSVComplianceDataParams defines parameters for GetCSVComplianceData.
-type GetCSVComplianceDataParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetCSVComplianceDataParams defines parameters for LegacyGetCSVComplianceData.
+type LegacyGetCSVComplianceDataParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1917,11 +1728,8 @@ type GetCSVComplianceDataParams struct {
 	ByCve *bool `form:"by_cve,omitempty" json:"by_cve,omitempty"`
 }
 
-// GetComputerProcessesParams defines parameters for GetComputerProcesses.
-type GetComputerProcessesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetComputerProcessesParams defines parameters for LegacyGetComputerProcesses.
+type LegacyGetComputerProcessesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1935,11 +1743,8 @@ type GetComputerProcessesParams struct {
 	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
 }
 
-// GetComputersParams defines parameters for GetComputers.
-type GetComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetComputersParams defines parameters for LegacyGetComputers.
+type LegacyGetComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1968,11 +1773,8 @@ type GetComputersParams struct {
 	WithGroupedHardware *bool `form:"with_grouped_hardware,omitempty" json:"with_grouped_hardware,omitempty"`
 }
 
-// GetComputersNotUpgradedParams defines parameters for GetComputersNotUpgraded.
-type GetComputersNotUpgradedParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetComputersNotUpgradedParams defines parameters for LegacyGetComputersNotUpgraded.
+type LegacyGetComputersNotUpgradedParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -1986,11 +1788,8 @@ type GetComputersNotUpgradedParams struct {
 	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// GetDistributionsParams defines parameters for GetDistributions.
-type GetDistributionsParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetDistributionsParams defines parameters for LegacyGetDistributions.
+type LegacyGetDistributionsParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2001,11 +1800,8 @@ type GetDistributionsParams struct {
 	IncludeLatestSync *bool `form:"include_latest_sync,omitempty" json:"include_latest_sync,omitempty"`
 }
 
-// GetEventLogParams defines parameters for GetEventLog.
-type GetEventLogParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetEventLogParams defines parameters for LegacyGetEventLog.
+type LegacyGetEventLogParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2019,11 +1815,8 @@ type GetEventLogParams struct {
 	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// GetGPGKeysParams defines parameters for GetGPGKeys.
-type GetGPGKeysParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetGPGKeysParams defines parameters for LegacyGetGPGKeys.
+type LegacyGetGPGKeysParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2031,11 +1824,8 @@ type GetGPGKeysParams struct {
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 }
 
-// GetNotPingingComputersParams defines parameters for GetNotPingingComputers.
-type GetNotPingingComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetNotPingingComputersParams defines parameters for LegacyGetNotPingingComputers.
+type LegacyGetNotPingingComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2052,11 +1842,8 @@ type GetNotPingingComputersParams struct {
 	SinceMinutes int `form:"since_minutes" json:"since_minutes"`
 }
 
-// GetPackageProfilesParams defines parameters for GetPackageProfiles.
-type GetPackageProfilesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetPackageProfilesParams defines parameters for LegacyGetPackageProfiles.
+type LegacyGetPackageProfilesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2064,11 +1851,8 @@ type GetPackageProfilesParams struct {
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 }
 
-// GetPackagesParams defines parameters for GetPackages.
-type GetPackagesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetPackagesParams defines parameters for LegacyGetPackages.
+type LegacyGetPackagesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2100,38 +1884,26 @@ type GetPackagesParams struct {
 	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
 }
 
-// GetPendingComputersParams defines parameters for GetPendingComputers.
-type GetPendingComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetPendingComputersParams defines parameters for LegacyGetPendingComputers.
+type LegacyGetPendingComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 }
 
-// GetPermissionsParams defines parameters for GetPermissions.
-type GetPermissionsParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetPermissionsParams defines parameters for LegacyGetPermissions.
+type LegacyGetPermissionsParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 }
 
-// GetRemovalProfilesParams defines parameters for GetRemovalProfiles.
-type GetRemovalProfilesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetRemovalProfilesParams defines parameters for LegacyGetRemovalProfiles.
+type LegacyGetRemovalProfilesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 }
 
-// GetRepoInfoParams defines parameters for GetRepoInfo.
-type GetRepoInfoParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetRepoInfoParams defines parameters for LegacyGetRepoInfo.
+type LegacyGetRepoInfoParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2139,11 +1911,8 @@ type GetRepoInfoParams struct {
 	MirrorUri string `form:"mirror_uri" json:"mirror_uri"`
 }
 
-// GetRepositoryProfilesParams defines parameters for GetRepositoryProfiles.
-type GetRepositoryProfilesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetRepositoryProfilesParams defines parameters for LegacyGetRepositoryProfiles.
+type LegacyGetRepositoryProfilesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2151,11 +1920,8 @@ type GetRepositoryProfilesParams struct {
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 }
 
-// GetRolesParams defines parameters for GetRoles.
-type GetRolesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetRolesParams defines parameters for LegacyGetRoles.
+type LegacyGetRolesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2163,11 +1929,8 @@ type GetRolesParams struct {
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 }
 
-// GetSavedSearchesParams defines parameters for GetSavedSearches.
-type GetSavedSearchesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetSavedSearchesParams defines parameters for LegacyGetSavedSearches.
+type LegacyGetSavedSearchesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2178,11 +1941,8 @@ type GetSavedSearchesParams struct {
 	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
 }
 
-// GetScriptCodeParams defines parameters for GetScriptCode.
-type GetScriptCodeParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetScriptCodeParams defines parameters for LegacyGetScriptCode.
+type LegacyGetScriptCodeParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2190,11 +1950,8 @@ type GetScriptCodeParams struct {
 	ScriptId int `form:"script_id" json:"script_id"`
 }
 
-// GetScriptsParams defines parameters for GetScripts.
-type GetScriptsParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetScriptsParams defines parameters for LegacyGetScripts.
+type LegacyGetScriptsParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2208,20 +1965,14 @@ type GetScriptsParams struct {
 	ScriptType *string `form:"script_type,omitempty" json:"script_type,omitempty"`
 }
 
-// GetSettingsParams defines parameters for GetSettings.
-type GetSettingsParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetSettingsParams defines parameters for LegacyGetSettings.
+type LegacyGetSettingsParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 }
 
-// GetUSNTimeToFixParams defines parameters for GetUSNTimeToFix.
-type GetUSNTimeToFixParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetUSNTimeToFixParams defines parameters for LegacyGetUSNTimeToFix.
+type LegacyGetUSNTimeToFixParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2244,11 +1995,8 @@ type GetUSNTimeToFixParams struct {
 	InLast *int `form:"in_last,omitempty" json:"in_last,omitempty"`
 }
 
-// GetUpgradeProfilesParams defines parameters for GetUpgradeProfiles.
-type GetUpgradeProfilesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetUpgradeProfilesParams defines parameters for LegacyGetUpgradeProfiles.
+type LegacyGetUpgradeProfilesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2256,11 +2004,8 @@ type GetUpgradeProfilesParams struct {
 	UpgradeType *string `form:"upgrade_type,omitempty" json:"upgrade_type,omitempty"`
 }
 
-// GetUpgradedComputersByFrequencyParams defines parameters for GetUpgradedComputersByFrequency.
-type GetUpgradedComputersByFrequencyParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetUpgradedComputersByFrequencyParams defines parameters for LegacyGetUpgradedComputersByFrequency.
+type LegacyGetUpgradedComputersByFrequencyParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2274,11 +2019,8 @@ type GetUpgradedComputersByFrequencyParams struct {
 	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// GetUsersParams defines parameters for GetUsers.
-type GetUsersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetUsersParams defines parameters for LegacyGetUsers.
+type LegacyGetUsersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2286,11 +2028,8 @@ type GetUsersParams struct {
 	ComputerId int `form:"computer_id" json:"computer_id"`
 }
 
-// GetWSLHostsParams defines parameters for GetWSLHosts.
-type GetWSLHostsParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyGetWSLHostsParams defines parameters for LegacyGetWSLHosts.
+type LegacyGetWSLHostsParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2304,11 +2043,8 @@ type GetWSLHostsParams struct {
 	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// ImportGPGKeyParams defines parameters for ImportGPGKey.
-type ImportGPGKeyParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyImportGPGKeyParams defines parameters for LegacyImportGPGKey.
+type LegacyImportGPGKeyParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2319,11 +2055,8 @@ type ImportGPGKeyParams struct {
 	Material string `form:"material" json:"material"`
 }
 
-// InstallPackagesParams defines parameters for InstallPackages.
-type InstallPackagesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyInstallPackagesParams defines parameters for LegacyInstallPackages.
+type LegacyInstallPackagesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2340,11 +2073,8 @@ type InstallPackagesParams struct {
 	DeliverDelayWindow *int `form:"deliver_delay_window,omitempty" json:"deliver_delay_window,omitempty"`
 }
 
-// InviteAdministratorParams defines parameters for InviteAdministrator.
-type InviteAdministratorParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyInviteAdministratorParams defines parameters for LegacyInviteAdministrator.
+type LegacyInviteAdministratorParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2358,11 +2088,8 @@ type InviteAdministratorParams struct {
 	Roles *[]string `form:"roles,omitempty" json:"roles,omitempty"`
 }
 
-// KillComputerProcessesParams defines parameters for KillComputerProcesses.
-type KillComputerProcessesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyKillComputerProcessesParams defines parameters for LegacyKillComputerProcesses.
+type LegacyKillComputerProcessesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2373,11 +2100,8 @@ type KillComputerProcessesParams struct {
 	Pids []int `form:"pids" json:"pids"`
 }
 
-// ListPocketParams defines parameters for ListPocket.
-type ListPocketParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyListPocketParams defines parameters for LegacyListPocket.
+type LegacyListPocketParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2400,11 +2124,8 @@ type ListPocketParams struct {
 	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
 }
 
-// ModifyPackageProfileParams defines parameters for ModifyPackageProfile.
-type ModifyPackageProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyModifyPackageProfileParams defines parameters for LegacyModifyPackageProfile.
+type LegacyModifyPackageProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2421,11 +2142,8 @@ type ModifyPackageProfileParams struct {
 	RemoveConstraints *[]string `form:"remove_constraints,omitempty" json:"remove_constraints,omitempty"`
 }
 
-// PullPackagesToPocketParams defines parameters for PullPackagesToPocket.
-type PullPackagesToPocketParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyPullPackagesToPocketParams defines parameters for LegacyPullPackagesToPocket.
+type LegacyPullPackagesToPocketParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2439,11 +2157,8 @@ type PullPackagesToPocketParams struct {
 	Distribution string `form:"distribution" json:"distribution"`
 }
 
-// RebootComputersParams defines parameters for RebootComputers.
-type RebootComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRebootComputersParams defines parameters for LegacyRebootComputers.
+type LegacyRebootComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2454,11 +2169,8 @@ type RebootComputersParams struct {
 	DeliverAfter *string `form:"deliver_after,omitempty" json:"deliver_after,omitempty"`
 }
 
-// RejectPendingComputersParams defines parameters for RejectPendingComputers.
-type RejectPendingComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRejectPendingComputersParams defines parameters for LegacyRejectPendingComputers.
+type LegacyRejectPendingComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2466,11 +2178,8 @@ type RejectPendingComputersParams struct {
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 }
 
-// RemoveAPTSourceParams defines parameters for RemoveAPTSource.
-type RemoveAPTSourceParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveAPTSourceParams defines parameters for LegacyRemoveAPTSource.
+type LegacyRemoveAPTSourceParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2478,11 +2187,8 @@ type RemoveAPTSourceParams struct {
 	Name string `form:"name" json:"name"`
 }
 
-// RemoveAPTSourceFromRepositoryProfileParams defines parameters for RemoveAPTSourceFromRepositoryProfile.
-type RemoveAPTSourceFromRepositoryProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveAPTSourceFromRepositoryProfileParams defines parameters for LegacyRemoveAPTSourceFromRepositoryProfile.
+type LegacyRemoveAPTSourceFromRepositoryProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2493,11 +2199,8 @@ type RemoveAPTSourceFromRepositoryProfileParams struct {
 	AptSource string `form:"apt_source" json:"apt_source"`
 }
 
-// RemoveAPTSourcesParams defines parameters for RemoveAPTSources.
-type RemoveAPTSourcesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveAPTSourcesParams defines parameters for LegacyRemoveAPTSources.
+type LegacyRemoveAPTSourcesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2505,11 +2208,8 @@ type RemoveAPTSourcesParams struct {
 	Names []string `form:"names" json:"names"`
 }
 
-// RemoveAPTSourcesFromRepositoryProfileParams defines parameters for RemoveAPTSourcesFromRepositoryProfile.
-type RemoveAPTSourcesFromRepositoryProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveAPTSourcesFromRepositoryProfileParams defines parameters for LegacyRemoveAPTSourcesFromRepositoryProfile.
+type LegacyRemoveAPTSourcesFromRepositoryProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2520,11 +2220,8 @@ type RemoveAPTSourcesFromRepositoryProfileParams struct {
 	AptSources []string `form:"apt_sources" json:"apt_sources"`
 }
 
-// RemoveAccessGroupParams defines parameters for RemoveAccessGroup.
-type RemoveAccessGroupParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveAccessGroupParams defines parameters for LegacyRemoveAccessGroup.
+type LegacyRemoveAccessGroupParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2532,11 +2229,8 @@ type RemoveAccessGroupParams struct {
 	Name string `form:"name" json:"name"`
 }
 
-// RemoveAccessGroupsFromRoleParams defines parameters for RemoveAccessGroupsFromRole.
-type RemoveAccessGroupsFromRoleParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveAccessGroupsFromRoleParams defines parameters for LegacyRemoveAccessGroupsFromRole.
+type LegacyRemoveAccessGroupsFromRoleParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2547,11 +2241,8 @@ type RemoveAccessGroupsFromRoleParams struct {
 	AccessGroups []string `form:"access_groups" json:"access_groups"`
 }
 
-// RemoveAnnotationFromComputersParams defines parameters for RemoveAnnotationFromComputers.
-type RemoveAnnotationFromComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveAnnotationFromComputersParams defines parameters for LegacyRemoveAnnotationFromComputers.
+type LegacyRemoveAnnotationFromComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2562,11 +2253,8 @@ type RemoveAnnotationFromComputersParams struct {
 	Key string `form:"key" json:"key"`
 }
 
-// RemoveComputersParams defines parameters for RemoveComputers.
-type RemoveComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveComputersParams defines parameters for LegacyRemoveComputers.
+type LegacyRemoveComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2574,11 +2262,8 @@ type RemoveComputersParams struct {
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 }
 
-// RemoveDistributionParams defines parameters for RemoveDistribution.
-type RemoveDistributionParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveDistributionParams defines parameters for LegacyRemoveDistribution.
+type LegacyRemoveDistributionParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2586,11 +2271,8 @@ type RemoveDistributionParams struct {
 	Name string `form:"name" json:"name"`
 }
 
-// RemoveGPGKeyParams defines parameters for RemoveGPGKey.
-type RemoveGPGKeyParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveGPGKeyParams defines parameters for LegacyRemoveGPGKey.
+type LegacyRemoveGPGKeyParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2598,11 +2280,8 @@ type RemoveGPGKeyParams struct {
 	Name string `form:"name" json:"name"`
 }
 
-// RemovePackageFiltersFromPocketParams defines parameters for RemovePackageFiltersFromPocket.
-type RemovePackageFiltersFromPocketParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemovePackageFiltersFromPocketParams defines parameters for LegacyRemovePackageFiltersFromPocket.
+type LegacyRemovePackageFiltersFromPocketParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2619,11 +2298,8 @@ type RemovePackageFiltersFromPocketParams struct {
 	Packages []string `form:"packages" json:"packages"`
 }
 
-// RemovePackageProfileParams defines parameters for RemovePackageProfile.
-type RemovePackageProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemovePackageProfileParams defines parameters for LegacyRemovePackageProfile.
+type LegacyRemovePackageProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2631,11 +2307,8 @@ type RemovePackageProfileParams struct {
 	Name string `form:"name" json:"name"`
 }
 
-// RemovePackagesParams defines parameters for RemovePackages.
-type RemovePackagesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemovePackagesParams defines parameters for LegacyRemovePackages.
+type LegacyRemovePackagesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2652,11 +2325,8 @@ type RemovePackagesParams struct {
 	DeliverDelayWindow *int `form:"deliver_delay_window,omitempty" json:"deliver_delay_window,omitempty"`
 }
 
-// RemovePackagesFromPocketParams defines parameters for RemovePackagesFromPocket.
-type RemovePackagesFromPocketParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemovePackagesFromPocketParams defines parameters for LegacyRemovePackagesFromPocket.
+type LegacyRemovePackagesFromPocketParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2673,11 +2343,8 @@ type RemovePackagesFromPocketParams struct {
 	Packages []string `form:"packages" json:"packages"`
 }
 
-// RemovePermissionsFromRoleParams defines parameters for RemovePermissionsFromRole.
-type RemovePermissionsFromRoleParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemovePermissionsFromRoleParams defines parameters for LegacyRemovePermissionsFromRole.
+type LegacyRemovePermissionsFromRoleParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2688,11 +2355,8 @@ type RemovePermissionsFromRoleParams struct {
 	Permissions []string `form:"permissions" json:"permissions"`
 }
 
-// RemovePersonsFromRoleParams defines parameters for RemovePersonsFromRole.
-type RemovePersonsFromRoleParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemovePersonsFromRoleParams defines parameters for LegacyRemovePersonsFromRole.
+type LegacyRemovePersonsFromRoleParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2703,11 +2367,8 @@ type RemovePersonsFromRoleParams struct {
 	Persons []string `form:"persons" json:"persons"`
 }
 
-// RemovePocketParams defines parameters for RemovePocket.
-type RemovePocketParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemovePocketParams defines parameters for LegacyRemovePocket.
+type LegacyRemovePocketParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2721,11 +2382,8 @@ type RemovePocketParams struct {
 	Distribution string `form:"distribution" json:"distribution"`
 }
 
-// RemovePocketsFromRepositoryProfileParams defines parameters for RemovePocketsFromRepositoryProfile.
-type RemovePocketsFromRepositoryProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemovePocketsFromRepositoryProfileParams defines parameters for LegacyRemovePocketsFromRepositoryProfile.
+type LegacyRemovePocketsFromRepositoryProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2742,11 +2400,8 @@ type RemovePocketsFromRepositoryProfileParams struct {
 	Distribution string `form:"distribution" json:"distribution"`
 }
 
-// RemoveRemovalProfileParams defines parameters for RemoveRemovalProfile.
-type RemoveRemovalProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveRemovalProfileParams defines parameters for LegacyRemoveRemovalProfile.
+type LegacyRemoveRemovalProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2754,11 +2409,8 @@ type RemoveRemovalProfileParams struct {
 	Name string `form:"name" json:"name"`
 }
 
-// RemoveRepositoryProfileParams defines parameters for RemoveRepositoryProfile.
-type RemoveRepositoryProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveRepositoryProfileParams defines parameters for LegacyRemoveRepositoryProfile.
+type LegacyRemoveRepositoryProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2766,11 +2418,8 @@ type RemoveRepositoryProfileParams struct {
 	Name string `form:"name" json:"name"`
 }
 
-// RemoveRepositoryProfilesParams defines parameters for RemoveRepositoryProfiles.
-type RemoveRepositoryProfilesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveRepositoryProfilesParams defines parameters for LegacyRemoveRepositoryProfiles.
+type LegacyRemoveRepositoryProfilesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2778,11 +2427,8 @@ type RemoveRepositoryProfilesParams struct {
 	Names []string `form:"names" json:"names"`
 }
 
-// RemoveRoleParams defines parameters for RemoveRole.
-type RemoveRoleParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveRoleParams defines parameters for LegacyRemoveRole.
+type LegacyRemoveRoleParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2790,11 +2436,8 @@ type RemoveRoleParams struct {
 	Name string `form:"name" json:"name"`
 }
 
-// RemoveSavedSearchParams defines parameters for RemoveSavedSearch.
-type RemoveSavedSearchParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveSavedSearchParams defines parameters for LegacyRemoveSavedSearch.
+type LegacyRemoveSavedSearchParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2802,11 +2445,8 @@ type RemoveSavedSearchParams struct {
 	Name string `form:"name" json:"name"`
 }
 
-// RemoveScriptParams defines parameters for RemoveScript.
-type RemoveScriptParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveScriptParams defines parameters for LegacyRemoveScript.
+type LegacyRemoveScriptParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2814,11 +2454,8 @@ type RemoveScriptParams struct {
 	ScriptId int `form:"script_id" json:"script_id"`
 }
 
-// RemoveScriptAttachmentParams defines parameters for RemoveScriptAttachment.
-type RemoveScriptAttachmentParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveScriptAttachmentParams defines parameters for LegacyRemoveScriptAttachment.
+type LegacyRemoveScriptAttachmentParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2829,11 +2466,8 @@ type RemoveScriptAttachmentParams struct {
 	Filename string `form:"filename" json:"filename"`
 }
 
-// RemoveSeriesParams defines parameters for RemoveSeries.
-type RemoveSeriesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveSeriesParams defines parameters for LegacyRemoveSeries.
+type LegacyRemoveSeriesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2844,11 +2478,8 @@ type RemoveSeriesParams struct {
 	Distribution string `form:"distribution" json:"distribution"`
 }
 
-// RemoveTagsFromComputersParams defines parameters for RemoveTagsFromComputers.
-type RemoveTagsFromComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveTagsFromComputersParams defines parameters for LegacyRemoveTagsFromComputers.
+type LegacyRemoveTagsFromComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2859,11 +2490,8 @@ type RemoveTagsFromComputersParams struct {
 	Tags []string `form:"tags" json:"tags"`
 }
 
-// RemoveUpgradeProfileParams defines parameters for RemoveUpgradeProfile.
-type RemoveUpgradeProfileParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveUpgradeProfileParams defines parameters for LegacyRemoveUpgradeProfile.
+type LegacyRemoveUpgradeProfileParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2871,11 +2499,8 @@ type RemoveUpgradeProfileParams struct {
 	Name string `form:"name" json:"name"`
 }
 
-// RemoveUploaderGPGKeysFromPocketParams defines parameters for RemoveUploaderGPGKeysFromPocket.
-type RemoveUploaderGPGKeysFromPocketParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveUploaderGPGKeysFromPocketParams defines parameters for LegacyRemoveUploaderGPGKeysFromPocket.
+type LegacyRemoveUploaderGPGKeysFromPocketParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2892,11 +2517,8 @@ type RemoveUploaderGPGKeysFromPocketParams struct {
 	GpgKeys []string `form:"gpg_keys" json:"gpg_keys"`
 }
 
-// RemoveWSLHostsParams defines parameters for RemoveWSLHosts.
-type RemoveWSLHostsParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRemoveWSLHostsParams defines parameters for LegacyRemoveWSLHosts.
+type LegacyRemoveWSLHostsParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2907,11 +2529,8 @@ type RemoveWSLHostsParams struct {
 	CascadeToChildren *bool `form:"cascade_to_children,omitempty" json:"cascade_to_children,omitempty"`
 }
 
-// RenameComputersParams defines parameters for RenameComputers.
-type RenameComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyRenameComputersParams defines parameters for LegacyRenameComputers.
+type LegacyRenameComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2919,11 +2538,8 @@ type RenameComputersParams struct {
 	ComputerTitles map[string]string `form:"computer_titles" json:"computer_titles"`
 }
 
-// SetDefaultChildComputerParams defines parameters for SetDefaultChildComputer.
-type SetDefaultChildComputerParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacySetDefaultChildComputerParams defines parameters for LegacySetDefaultChildComputer.
+type LegacySetDefaultChildComputerParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2934,11 +2550,8 @@ type SetDefaultChildComputerParams struct {
 	ChildId int `form:"child_id" json:"child_id"`
 }
 
-// SetSettingsParams defines parameters for SetSettings.
-type SetSettingsParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacySetSettingsParams defines parameters for LegacySetSettings.
+type LegacySetSettingsParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2946,11 +2559,8 @@ type SetSettingsParams struct {
 	KeyValues []string `form:"key_values" json:"key_values"`
 }
 
-// ShutdownComputersParams defines parameters for ShutdownComputers.
-type ShutdownComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyShutdownComputersParams defines parameters for LegacyShutdownComputers.
+type LegacyShutdownComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2961,11 +2571,8 @@ type ShutdownComputersParams struct {
 	DeliverAfter *string `form:"deliver_after,omitempty" json:"deliver_after,omitempty"`
 }
 
-// ShutdownHostComputerParams defines parameters for ShutdownHostComputer.
-type ShutdownHostComputerParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyShutdownHostComputerParams defines parameters for LegacyShutdownHostComputer.
+type LegacyShutdownHostComputerParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2973,11 +2580,8 @@ type ShutdownHostComputerParams struct {
 	ParentId int `form:"parent_id" json:"parent_id"`
 }
 
-// StartChildComputersParams defines parameters for StartChildComputers.
-type StartChildComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyStartChildComputersParams defines parameters for LegacyStartChildComputers.
+type LegacyStartChildComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2985,11 +2589,8 @@ type StartChildComputersParams struct {
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 }
 
-// StopChildComputersParams defines parameters for StopChildComputers.
-type StopChildComputersParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyStopChildComputersParams defines parameters for LegacyStopChildComputers.
+type LegacyStopChildComputersParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -2997,23 +2598,14 @@ type StopChildComputersParams struct {
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 }
 
-// SubscribeToAlertParams defines parameters for SubscribeToAlert.
-type SubscribeToAlertParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
-	// Action API action
-	Action string `form:"action" json:"action"`
-
+// LegacySubscribeToAlertParams defines parameters for LegacySubscribeToAlert.
+type LegacySubscribeToAlertParams struct {
 	// AlertType The alert type to add a subscription to.
 	AlertType string `form:"alert_type" json:"alert_type"`
 }
 
-// SyncMirrorPocketParams defines parameters for SyncMirrorPocket.
-type SyncMirrorPocketParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacySyncMirrorPocketParams defines parameters for LegacySyncMirrorPocket.
+type LegacySyncMirrorPocketParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -3027,11 +2619,8 @@ type SyncMirrorPocketParams struct {
 	Distribution string `form:"distribution" json:"distribution"`
 }
 
-// TerminateComputerProcessesParams defines parameters for TerminateComputerProcesses.
-type TerminateComputerProcessesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyTerminateComputerProcessesParams defines parameters for LegacyTerminateComputerProcesses.
+type LegacyTerminateComputerProcessesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -3042,11 +2631,8 @@ type TerminateComputerProcessesParams struct {
 	Pids []int `form:"pids" json:"pids"`
 }
 
-// UnsubscribeFromAlertParams defines parameters for UnsubscribeFromAlert.
-type UnsubscribeFromAlertParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyUnsubscribeFromAlertParams defines parameters for LegacyUnsubscribeFromAlert.
+type LegacyUnsubscribeFromAlertParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -3054,11 +2640,8 @@ type UnsubscribeFromAlertParams struct {
 	AlertType string `form:"alert_type" json:"alert_type"`
 }
 
-// UpgradePackagesParams defines parameters for UpgradePackages.
-type UpgradePackagesParams struct {
-	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
-	Version LegacyVersionParam `form:"version" json:"version"`
-
+// LegacyUpgradePackagesParams defines parameters for LegacyUpgradePackages.
+type LegacyUpgradePackagesParams struct {
 	// Action API action
 	Action string `form:"action" json:"action"`
 
@@ -3756,416 +3339,416 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
-	// AcceptPendingComputers request
-	AcceptPendingComputers(ctx context.Context, params *AcceptPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAcceptPendingComputers request
+	LegacyAcceptPendingComputers(ctx context.Context, params *LegacyAcceptPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AddAPTSourcesToRepositoryProfile request
-	AddAPTSourcesToRepositoryProfile(ctx context.Context, params *AddAPTSourcesToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAddAPTSourcesToRepositoryProfile request
+	LegacyAddAPTSourcesToRepositoryProfile(ctx context.Context, params *LegacyAddAPTSourcesToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AddAccessGroupsToRole request
-	AddAccessGroupsToRole(ctx context.Context, params *AddAccessGroupsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAddAccessGroupsToRole request
+	LegacyAddAccessGroupsToRole(ctx context.Context, params *LegacyAddAccessGroupsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AddAnnotationToComputers request
-	AddAnnotationToComputers(ctx context.Context, params *AddAnnotationToComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAddAnnotationToComputers request
+	LegacyAddAnnotationToComputers(ctx context.Context, params *LegacyAddAnnotationToComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AddPackageFiltersToPocket request
-	AddPackageFiltersToPocket(ctx context.Context, params *AddPackageFiltersToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAddPackageFiltersToPocket request
+	LegacyAddPackageFiltersToPocket(ctx context.Context, params *LegacyAddPackageFiltersToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AddPermissionsToRole request
-	AddPermissionsToRole(ctx context.Context, params *AddPermissionsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAddPermissionsToRole request
+	LegacyAddPermissionsToRole(ctx context.Context, params *LegacyAddPermissionsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AddPersonsToRole request
-	AddPersonsToRole(ctx context.Context, params *AddPersonsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAddPersonsToRole request
+	LegacyAddPersonsToRole(ctx context.Context, params *LegacyAddPersonsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AddPocketsToRepositoryProfile request
-	AddPocketsToRepositoryProfile(ctx context.Context, params *AddPocketsToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAddPocketsToRepositoryProfile request
+	LegacyAddPocketsToRepositoryProfile(ctx context.Context, params *LegacyAddPocketsToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AddTagsToComputers request
-	AddTagsToComputers(ctx context.Context, params *AddTagsToComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAddTagsToComputers request
+	LegacyAddTagsToComputers(ctx context.Context, params *LegacyAddTagsToComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AddUploaderGPGKeysToPocket request
-	AddUploaderGPGKeysToPocket(ctx context.Context, params *AddUploaderGPGKeysToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAddUploaderGPGKeysToPocket request
+	LegacyAddUploaderGPGKeysToPocket(ctx context.Context, params *LegacyAddUploaderGPGKeysToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ApproveActivities request
-	ApproveActivities(ctx context.Context, params *ApproveActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyApproveActivities request
+	LegacyApproveActivities(ctx context.Context, params *LegacyApproveActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AssociateAlert request
-	AssociateAlert(ctx context.Context, params *AssociateAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAssociateAlert request
+	LegacyAssociateAlert(ctx context.Context, params *LegacyAssociateAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AssociatePackageProfile request
-	AssociatePackageProfile(ctx context.Context, params *AssociatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAssociatePackageProfile request
+	LegacyAssociatePackageProfile(ctx context.Context, params *LegacyAssociatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AssociateRemovalProfile request
-	AssociateRemovalProfile(ctx context.Context, params *AssociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAssociateRemovalProfile request
+	LegacyAssociateRemovalProfile(ctx context.Context, params *LegacyAssociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AssociateRepositoryProfile request
-	AssociateRepositoryProfile(ctx context.Context, params *AssociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAssociateRepositoryProfile request
+	LegacyAssociateRepositoryProfile(ctx context.Context, params *LegacyAssociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// AssociateUpgradeProfile request
-	AssociateUpgradeProfile(ctx context.Context, params *AssociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyAssociateUpgradeProfile request
+	LegacyAssociateUpgradeProfile(ctx context.Context, params *LegacyAssociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CancelActivities request
-	CancelActivities(ctx context.Context, params *CancelActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCancelActivities request
+	LegacyCancelActivities(ctx context.Context, params *LegacyCancelActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ChangeComputersAccessGroup request
-	ChangeComputersAccessGroup(ctx context.Context, params *ChangeComputersAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyChangeComputersAccessGroup request
+	LegacyChangeComputersAccessGroup(ctx context.Context, params *LegacyChangeComputersAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CopyPackageProfile request
-	CopyPackageProfile(ctx context.Context, params *CopyPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCopyPackageProfile request
+	LegacyCopyPackageProfile(ctx context.Context, params *LegacyCopyPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CopyRole request
-	CopyRole(ctx context.Context, params *CopyRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCopyRole request
+	LegacyCopyRole(ctx context.Context, params *LegacyCopyRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CopyScript request
-	CopyScript(ctx context.Context, params *CopyScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCopyScript request
+	LegacyCopyScript(ctx context.Context, params *LegacyCopyScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateAPTSource request
-	CreateAPTSource(ctx context.Context, params *CreateAPTSourceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateAPTSource request
+	LegacyCreateAPTSource(ctx context.Context, params *LegacyCreateAPTSourceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateAccessGroup request
-	CreateAccessGroup(ctx context.Context, params *CreateAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateAccessGroup request
+	LegacyCreateAccessGroup(ctx context.Context, params *LegacyCreateAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateChildComputer request
-	CreateChildComputer(ctx context.Context, params *CreateChildComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateChildComputer request
+	LegacyCreateChildComputer(ctx context.Context, params *LegacyCreateChildComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateDistribution request
-	CreateDistribution(ctx context.Context, params *CreateDistributionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateDistribution request
+	LegacyCreateDistribution(ctx context.Context, params *LegacyCreateDistributionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreatePackageProfile request
-	CreatePackageProfile(ctx context.Context, params *CreatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreatePackageProfile request
+	LegacyCreatePackageProfile(ctx context.Context, params *LegacyCreatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreatePocket request
-	CreatePocket(ctx context.Context, params *CreatePocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreatePocket request
+	LegacyCreatePocket(ctx context.Context, params *LegacyCreatePocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateRemovalProfile request
-	CreateRemovalProfile(ctx context.Context, params *CreateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateRemovalProfile request
+	LegacyCreateRemovalProfile(ctx context.Context, params *LegacyCreateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateRepositoryProfile request
-	CreateRepositoryProfile(ctx context.Context, params *CreateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateRepositoryProfile request
+	LegacyCreateRepositoryProfile(ctx context.Context, params *LegacyCreateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateRole request
-	CreateRole(ctx context.Context, params *CreateRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateRole request
+	LegacyCreateRole(ctx context.Context, params *LegacyCreateRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateSavedSearch request
-	CreateSavedSearch(ctx context.Context, params *CreateSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateSavedSearch request
+	LegacyCreateSavedSearch(ctx context.Context, params *LegacyCreateSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateScript request
-	CreateScript(ctx context.Context, params *CreateScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateScript request
+	LegacyCreateScript(ctx context.Context, params *LegacyCreateScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateScriptAttachment request
-	CreateScriptAttachment(ctx context.Context, params *CreateScriptAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateScriptAttachment request
+	LegacyCreateScriptAttachment(ctx context.Context, params *LegacyCreateScriptAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateSeries request
-	CreateSeries(ctx context.Context, params *CreateSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateSeries request
+	LegacyCreateSeries(ctx context.Context, params *LegacyCreateSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateUpgradeProfile request
-	CreateUpgradeProfile(ctx context.Context, params *CreateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateUpgradeProfile request
+	LegacyCreateUpgradeProfile(ctx context.Context, params *LegacyCreateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// CreateUser request
-	CreateUser(ctx context.Context, params *CreateUserParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyCreateUser request
+	LegacyCreateUser(ctx context.Context, params *LegacyCreateUserParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeleteChildComputers request
-	DeleteChildComputers(ctx context.Context, params *DeleteChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyDeleteChildComputers request
+	LegacyDeleteChildComputers(ctx context.Context, params *LegacyDeleteChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DeriveSeries request
-	DeriveSeries(ctx context.Context, params *DeriveSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyDeriveSeries request
+	LegacyDeriveSeries(ctx context.Context, params *LegacyDeriveSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DiffPullPocket request
-	DiffPullPocket(ctx context.Context, params *DiffPullPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyDiffPullPocket request
+	LegacyDiffPullPocket(ctx context.Context, params *LegacyDiffPullPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DisableAdministrator request
-	DisableAdministrator(ctx context.Context, params *DisableAdministratorParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyDisableAdministrator request
+	LegacyDisableAdministrator(ctx context.Context, params *LegacyDisableAdministratorParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DisassociateAlert request
-	DisassociateAlert(ctx context.Context, params *DisassociateAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyDisassociateAlert request
+	LegacyDisassociateAlert(ctx context.Context, params *LegacyDisassociateAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DisassociatePackageProfile request
-	DisassociatePackageProfile(ctx context.Context, params *DisassociatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyDisassociatePackageProfile request
+	LegacyDisassociatePackageProfile(ctx context.Context, params *LegacyDisassociatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DisassociateRemovalProfile request
-	DisassociateRemovalProfile(ctx context.Context, params *DisassociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyDisassociateRemovalProfile request
+	LegacyDisassociateRemovalProfile(ctx context.Context, params *LegacyDisassociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DisassociateRepositoryProfile request
-	DisassociateRepositoryProfile(ctx context.Context, params *DisassociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyDisassociateRepositoryProfile request
+	LegacyDisassociateRepositoryProfile(ctx context.Context, params *LegacyDisassociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// DisassociateUpgradeProfile request
-	DisassociateUpgradeProfile(ctx context.Context, params *DisassociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyDisassociateUpgradeProfile request
+	LegacyDisassociateUpgradeProfile(ctx context.Context, params *LegacyDisassociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EditPackageProfile request
-	EditPackageProfile(ctx context.Context, params *EditPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyEditPackageProfile request
+	LegacyEditPackageProfile(ctx context.Context, params *LegacyEditPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EditPocket request
-	EditPocket(ctx context.Context, params *EditPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyEditPocket request
+	LegacyEditPocket(ctx context.Context, params *LegacyEditPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EditRemovalProfile request
-	EditRemovalProfile(ctx context.Context, params *EditRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyEditRemovalProfile request
+	LegacyEditRemovalProfile(ctx context.Context, params *LegacyEditRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EditRepositoryProfile request
-	EditRepositoryProfile(ctx context.Context, params *EditRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyEditRepositoryProfile request
+	LegacyEditRepositoryProfile(ctx context.Context, params *LegacyEditRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EditSavedSearch request
-	EditSavedSearch(ctx context.Context, params *EditSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyEditSavedSearch request
+	LegacyEditSavedSearch(ctx context.Context, params *LegacyEditSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EditScript request
-	EditScript(ctx context.Context, params *EditScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyEditScript request
+	LegacyEditScript(ctx context.Context, params *LegacyEditScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EditUpgradeProfile request
-	EditUpgradeProfile(ctx context.Context, params *EditUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyEditUpgradeProfile request
+	LegacyEditUpgradeProfile(ctx context.Context, params *LegacyEditUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// EditUser request
-	EditUser(ctx context.Context, params *EditUserParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyEditUser request
+	LegacyEditUser(ctx context.Context, params *LegacyEditUserParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ExecuteScript request
-	ExecuteScript(ctx context.Context, params *ExecuteScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyExecuteScript request
+	LegacyExecuteScript(ctx context.Context, params *LegacyExecuteScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetAPTSources request
-	GetAPTSources(ctx context.Context, params *GetAPTSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetAPTSources request
+	LegacyGetAPTSources(ctx context.Context, params *LegacyGetAPTSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetAccessGroups request
-	GetAccessGroups(ctx context.Context, params *GetAccessGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetAccessGroups request
+	LegacyGetAccessGroups(ctx context.Context, params *LegacyGetAccessGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetActivities request
-	GetActivities(ctx context.Context, params *GetActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetActivities request
+	LegacyGetActivities(ctx context.Context, params *LegacyGetActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetActivityTypes request
-	GetActivityTypes(ctx context.Context, params *GetActivityTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetActivityTypes request
+	LegacyGetActivityTypes(ctx context.Context, params *LegacyGetActivityTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetAdministrators request
-	GetAdministrators(ctx context.Context, params *GetAdministratorsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetAdministrators request
+	LegacyGetAdministrators(ctx context.Context, params *LegacyGetAdministratorsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetAlertSubscribers request
-	GetAlertSubscribers(ctx context.Context, params *GetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetAlertSubscribers request
+	LegacyGetAlertSubscribers(ctx context.Context, params *LegacyGetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetAlerts request
-	GetAlerts(ctx context.Context, params *GetAlertsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetAlerts request
+	LegacyGetAlerts(ctx context.Context, params *LegacyGetAlertsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetCSVComplianceData request
-	GetCSVComplianceData(ctx context.Context, params *GetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetCSVComplianceData request
+	LegacyGetCSVComplianceData(ctx context.Context, params *LegacyGetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetComputerProcesses request
-	GetComputerProcesses(ctx context.Context, params *GetComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetComputerProcesses request
+	LegacyGetComputerProcesses(ctx context.Context, params *LegacyGetComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetComputers request
-	GetComputers(ctx context.Context, params *GetComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetComputers request
+	LegacyGetComputers(ctx context.Context, params *LegacyGetComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetComputersNotUpgraded request
-	GetComputersNotUpgraded(ctx context.Context, params *GetComputersNotUpgradedParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetComputersNotUpgraded request
+	LegacyGetComputersNotUpgraded(ctx context.Context, params *LegacyGetComputersNotUpgradedParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetDistributions request
-	GetDistributions(ctx context.Context, params *GetDistributionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetDistributions request
+	LegacyGetDistributions(ctx context.Context, params *LegacyGetDistributionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetEventLog request
-	GetEventLog(ctx context.Context, params *GetEventLogParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetEventLog request
+	LegacyGetEventLog(ctx context.Context, params *LegacyGetEventLogParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetGPGKeys request
-	GetGPGKeys(ctx context.Context, params *GetGPGKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetGPGKeys request
+	LegacyGetGPGKeys(ctx context.Context, params *LegacyGetGPGKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetNotPingingComputers request
-	GetNotPingingComputers(ctx context.Context, params *GetNotPingingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetNotPingingComputers request
+	LegacyGetNotPingingComputers(ctx context.Context, params *LegacyGetNotPingingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetPackageProfiles request
-	GetPackageProfiles(ctx context.Context, params *GetPackageProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetPackageProfiles request
+	LegacyGetPackageProfiles(ctx context.Context, params *LegacyGetPackageProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetPackages request
-	GetPackages(ctx context.Context, params *GetPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetPackages request
+	LegacyGetPackages(ctx context.Context, params *LegacyGetPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetPendingComputers request
-	GetPendingComputers(ctx context.Context, params *GetPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetPendingComputers request
+	LegacyGetPendingComputers(ctx context.Context, params *LegacyGetPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetPermissions request
-	GetPermissions(ctx context.Context, params *GetPermissionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetPermissions request
+	LegacyGetPermissions(ctx context.Context, params *LegacyGetPermissionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetRemovalProfiles request
-	GetRemovalProfiles(ctx context.Context, params *GetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetRemovalProfiles request
+	LegacyGetRemovalProfiles(ctx context.Context, params *LegacyGetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetRepoInfo request
-	GetRepoInfo(ctx context.Context, params *GetRepoInfoParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetRepoInfo request
+	LegacyGetRepoInfo(ctx context.Context, params *LegacyGetRepoInfoParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetRepositoryProfiles request
-	GetRepositoryProfiles(ctx context.Context, params *GetRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetRepositoryProfiles request
+	LegacyGetRepositoryProfiles(ctx context.Context, params *LegacyGetRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetRoles request
-	GetRoles(ctx context.Context, params *GetRolesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetRoles request
+	LegacyGetRoles(ctx context.Context, params *LegacyGetRolesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetSavedSearches request
-	GetSavedSearches(ctx context.Context, params *GetSavedSearchesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetSavedSearches request
+	LegacyGetSavedSearches(ctx context.Context, params *LegacyGetSavedSearchesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetScriptCode request
-	GetScriptCode(ctx context.Context, params *GetScriptCodeParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetScriptCode request
+	LegacyGetScriptCode(ctx context.Context, params *LegacyGetScriptCodeParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetScripts request
-	GetScripts(ctx context.Context, params *GetScriptsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetScripts request
+	LegacyGetScripts(ctx context.Context, params *LegacyGetScriptsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetSettings request
-	GetSettings(ctx context.Context, params *GetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetSettings request
+	LegacyGetSettings(ctx context.Context, params *LegacyGetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetUSNTimeToFix request
-	GetUSNTimeToFix(ctx context.Context, params *GetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetUSNTimeToFix request
+	LegacyGetUSNTimeToFix(ctx context.Context, params *LegacyGetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetUpgradeProfiles request
-	GetUpgradeProfiles(ctx context.Context, params *GetUpgradeProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetUpgradeProfiles request
+	LegacyGetUpgradeProfiles(ctx context.Context, params *LegacyGetUpgradeProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetUpgradedComputersByFrequency request
-	GetUpgradedComputersByFrequency(ctx context.Context, params *GetUpgradedComputersByFrequencyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetUpgradedComputersByFrequency request
+	LegacyGetUpgradedComputersByFrequency(ctx context.Context, params *LegacyGetUpgradedComputersByFrequencyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetUsers request
-	GetUsers(ctx context.Context, params *GetUsersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetUsers request
+	LegacyGetUsers(ctx context.Context, params *LegacyGetUsersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GetWSLHosts request
-	GetWSLHosts(ctx context.Context, params *GetWSLHostsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyGetWSLHosts request
+	LegacyGetWSLHosts(ctx context.Context, params *LegacyGetWSLHostsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ImportGPGKey request
-	ImportGPGKey(ctx context.Context, params *ImportGPGKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyImportGPGKey request
+	LegacyImportGPGKey(ctx context.Context, params *LegacyImportGPGKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// InstallPackages request
-	InstallPackages(ctx context.Context, params *InstallPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyInstallPackages request
+	LegacyInstallPackages(ctx context.Context, params *LegacyInstallPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// InviteAdministrator request
-	InviteAdministrator(ctx context.Context, params *InviteAdministratorParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyInviteAdministrator request
+	LegacyInviteAdministrator(ctx context.Context, params *LegacyInviteAdministratorParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// KillComputerProcesses request
-	KillComputerProcesses(ctx context.Context, params *KillComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyKillComputerProcesses request
+	LegacyKillComputerProcesses(ctx context.Context, params *LegacyKillComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ListPocket request
-	ListPocket(ctx context.Context, params *ListPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyListPocket request
+	LegacyListPocket(ctx context.Context, params *LegacyListPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ModifyPackageProfile request
-	ModifyPackageProfile(ctx context.Context, params *ModifyPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyModifyPackageProfile request
+	LegacyModifyPackageProfile(ctx context.Context, params *LegacyModifyPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// PullPackagesToPocket request
-	PullPackagesToPocket(ctx context.Context, params *PullPackagesToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyPullPackagesToPocket request
+	LegacyPullPackagesToPocket(ctx context.Context, params *LegacyPullPackagesToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RebootComputers request
-	RebootComputers(ctx context.Context, params *RebootComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRebootComputers request
+	LegacyRebootComputers(ctx context.Context, params *LegacyRebootComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RejectPendingComputers request
-	RejectPendingComputers(ctx context.Context, params *RejectPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRejectPendingComputers request
+	LegacyRejectPendingComputers(ctx context.Context, params *LegacyRejectPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveAPTSource request
-	RemoveAPTSource(ctx context.Context, params *RemoveAPTSourceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveAPTSource request
+	LegacyRemoveAPTSource(ctx context.Context, params *LegacyRemoveAPTSourceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveAPTSourceFromRepositoryProfile request
-	RemoveAPTSourceFromRepositoryProfile(ctx context.Context, params *RemoveAPTSourceFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveAPTSourceFromRepositoryProfile request
+	LegacyRemoveAPTSourceFromRepositoryProfile(ctx context.Context, params *LegacyRemoveAPTSourceFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveAPTSources request
-	RemoveAPTSources(ctx context.Context, params *RemoveAPTSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveAPTSources request
+	LegacyRemoveAPTSources(ctx context.Context, params *LegacyRemoveAPTSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveAPTSourcesFromRepositoryProfile request
-	RemoveAPTSourcesFromRepositoryProfile(ctx context.Context, params *RemoveAPTSourcesFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveAPTSourcesFromRepositoryProfile request
+	LegacyRemoveAPTSourcesFromRepositoryProfile(ctx context.Context, params *LegacyRemoveAPTSourcesFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveAccessGroup request
-	RemoveAccessGroup(ctx context.Context, params *RemoveAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveAccessGroup request
+	LegacyRemoveAccessGroup(ctx context.Context, params *LegacyRemoveAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveAccessGroupsFromRole request
-	RemoveAccessGroupsFromRole(ctx context.Context, params *RemoveAccessGroupsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveAccessGroupsFromRole request
+	LegacyRemoveAccessGroupsFromRole(ctx context.Context, params *LegacyRemoveAccessGroupsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveAnnotationFromComputers request
-	RemoveAnnotationFromComputers(ctx context.Context, params *RemoveAnnotationFromComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveAnnotationFromComputers request
+	LegacyRemoveAnnotationFromComputers(ctx context.Context, params *LegacyRemoveAnnotationFromComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveComputers request
-	RemoveComputers(ctx context.Context, params *RemoveComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveComputers request
+	LegacyRemoveComputers(ctx context.Context, params *LegacyRemoveComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveDistribution request
-	RemoveDistribution(ctx context.Context, params *RemoveDistributionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveDistribution request
+	LegacyRemoveDistribution(ctx context.Context, params *LegacyRemoveDistributionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveGPGKey request
-	RemoveGPGKey(ctx context.Context, params *RemoveGPGKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveGPGKey request
+	LegacyRemoveGPGKey(ctx context.Context, params *LegacyRemoveGPGKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemovePackageFiltersFromPocket request
-	RemovePackageFiltersFromPocket(ctx context.Context, params *RemovePackageFiltersFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemovePackageFiltersFromPocket request
+	LegacyRemovePackageFiltersFromPocket(ctx context.Context, params *LegacyRemovePackageFiltersFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemovePackageProfile request
-	RemovePackageProfile(ctx context.Context, params *RemovePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemovePackageProfile request
+	LegacyRemovePackageProfile(ctx context.Context, params *LegacyRemovePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemovePackages request
-	RemovePackages(ctx context.Context, params *RemovePackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemovePackages request
+	LegacyRemovePackages(ctx context.Context, params *LegacyRemovePackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemovePackagesFromPocket request
-	RemovePackagesFromPocket(ctx context.Context, params *RemovePackagesFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemovePackagesFromPocket request
+	LegacyRemovePackagesFromPocket(ctx context.Context, params *LegacyRemovePackagesFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemovePermissionsFromRole request
-	RemovePermissionsFromRole(ctx context.Context, params *RemovePermissionsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemovePermissionsFromRole request
+	LegacyRemovePermissionsFromRole(ctx context.Context, params *LegacyRemovePermissionsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemovePersonsFromRole request
-	RemovePersonsFromRole(ctx context.Context, params *RemovePersonsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemovePersonsFromRole request
+	LegacyRemovePersonsFromRole(ctx context.Context, params *LegacyRemovePersonsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemovePocket request
-	RemovePocket(ctx context.Context, params *RemovePocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemovePocket request
+	LegacyRemovePocket(ctx context.Context, params *LegacyRemovePocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemovePocketsFromRepositoryProfile request
-	RemovePocketsFromRepositoryProfile(ctx context.Context, params *RemovePocketsFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemovePocketsFromRepositoryProfile request
+	LegacyRemovePocketsFromRepositoryProfile(ctx context.Context, params *LegacyRemovePocketsFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveRemovalProfile request
-	RemoveRemovalProfile(ctx context.Context, params *RemoveRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveRemovalProfile request
+	LegacyRemoveRemovalProfile(ctx context.Context, params *LegacyRemoveRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveRepositoryProfile request
-	RemoveRepositoryProfile(ctx context.Context, params *RemoveRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveRepositoryProfile request
+	LegacyRemoveRepositoryProfile(ctx context.Context, params *LegacyRemoveRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveRepositoryProfiles request
-	RemoveRepositoryProfiles(ctx context.Context, params *RemoveRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveRepositoryProfiles request
+	LegacyRemoveRepositoryProfiles(ctx context.Context, params *LegacyRemoveRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveRole request
-	RemoveRole(ctx context.Context, params *RemoveRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveRole request
+	LegacyRemoveRole(ctx context.Context, params *LegacyRemoveRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveSavedSearch request
-	RemoveSavedSearch(ctx context.Context, params *RemoveSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveSavedSearch request
+	LegacyRemoveSavedSearch(ctx context.Context, params *LegacyRemoveSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveScript request
-	RemoveScript(ctx context.Context, params *RemoveScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveScript request
+	LegacyRemoveScript(ctx context.Context, params *LegacyRemoveScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveScriptAttachment request
-	RemoveScriptAttachment(ctx context.Context, params *RemoveScriptAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveScriptAttachment request
+	LegacyRemoveScriptAttachment(ctx context.Context, params *LegacyRemoveScriptAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveSeries request
-	RemoveSeries(ctx context.Context, params *RemoveSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveSeries request
+	LegacyRemoveSeries(ctx context.Context, params *LegacyRemoveSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveTagsFromComputers request
-	RemoveTagsFromComputers(ctx context.Context, params *RemoveTagsFromComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveTagsFromComputers request
+	LegacyRemoveTagsFromComputers(ctx context.Context, params *LegacyRemoveTagsFromComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveUpgradeProfile request
-	RemoveUpgradeProfile(ctx context.Context, params *RemoveUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveUpgradeProfile request
+	LegacyRemoveUpgradeProfile(ctx context.Context, params *LegacyRemoveUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveUploaderGPGKeysFromPocket request
-	RemoveUploaderGPGKeysFromPocket(ctx context.Context, params *RemoveUploaderGPGKeysFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveUploaderGPGKeysFromPocket request
+	LegacyRemoveUploaderGPGKeysFromPocket(ctx context.Context, params *LegacyRemoveUploaderGPGKeysFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RemoveWSLHosts request
-	RemoveWSLHosts(ctx context.Context, params *RemoveWSLHostsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRemoveWSLHosts request
+	LegacyRemoveWSLHosts(ctx context.Context, params *LegacyRemoveWSLHostsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RenameComputers request
-	RenameComputers(ctx context.Context, params *RenameComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyRenameComputers request
+	LegacyRenameComputers(ctx context.Context, params *LegacyRenameComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// SetDefaultChildComputer request
-	SetDefaultChildComputer(ctx context.Context, params *SetDefaultChildComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacySetDefaultChildComputer request
+	LegacySetDefaultChildComputer(ctx context.Context, params *LegacySetDefaultChildComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// SetSettings request
-	SetSettings(ctx context.Context, params *SetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacySetSettings request
+	LegacySetSettings(ctx context.Context, params *LegacySetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ShutdownComputers request
-	ShutdownComputers(ctx context.Context, params *ShutdownComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyShutdownComputers request
+	LegacyShutdownComputers(ctx context.Context, params *LegacyShutdownComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// ShutdownHostComputer request
-	ShutdownHostComputer(ctx context.Context, params *ShutdownHostComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyShutdownHostComputer request
+	LegacyShutdownHostComputer(ctx context.Context, params *LegacyShutdownHostComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// StartChildComputers request
-	StartChildComputers(ctx context.Context, params *StartChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyStartChildComputers request
+	LegacyStartChildComputers(ctx context.Context, params *LegacyStartChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// StopChildComputers request
-	StopChildComputers(ctx context.Context, params *StopChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyStopChildComputers request
+	LegacyStopChildComputers(ctx context.Context, params *LegacyStopChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// SubscribeToAlert request
-	SubscribeToAlert(ctx context.Context, params *SubscribeToAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacySubscribeToAlert request
+	LegacySubscribeToAlert(ctx context.Context, params *LegacySubscribeToAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// SyncMirrorPocket request
-	SyncMirrorPocket(ctx context.Context, params *SyncMirrorPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacySyncMirrorPocket request
+	LegacySyncMirrorPocket(ctx context.Context, params *LegacySyncMirrorPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// TerminateComputerProcesses request
-	TerminateComputerProcesses(ctx context.Context, params *TerminateComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyTerminateComputerProcesses request
+	LegacyTerminateComputerProcesses(ctx context.Context, params *LegacyTerminateComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// UnsubscribeFromAlert request
-	UnsubscribeFromAlert(ctx context.Context, params *UnsubscribeFromAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyUnsubscribeFromAlert request
+	LegacyUnsubscribeFromAlert(ctx context.Context, params *LegacyUnsubscribeFromAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// UpgradePackages request
-	UpgradePackages(ctx context.Context, params *UpgradePackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// LegacyUpgradePackages request
+	LegacyUpgradePackages(ctx context.Context, params *LegacyUpgradePackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LoginWithPasswordWithBody request with any body
 	LoginWithPasswordWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -4221,8 +3804,8 @@ type ClientInterface interface {
 	RedactScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *Client) AcceptPendingComputers(ctx context.Context, params *AcceptPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAcceptPendingComputersRequest(c.Server, params)
+func (c *Client) LegacyAcceptPendingComputers(ctx context.Context, params *LegacyAcceptPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAcceptPendingComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4233,8 +3816,8 @@ func (c *Client) AcceptPendingComputers(ctx context.Context, params *AcceptPendi
 	return c.Client.Do(req)
 }
 
-func (c *Client) AddAPTSourcesToRepositoryProfile(ctx context.Context, params *AddAPTSourcesToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAddAPTSourcesToRepositoryProfileRequest(c.Server, params)
+func (c *Client) LegacyAddAPTSourcesToRepositoryProfile(ctx context.Context, params *LegacyAddAPTSourcesToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAddAPTSourcesToRepositoryProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4245,8 +3828,8 @@ func (c *Client) AddAPTSourcesToRepositoryProfile(ctx context.Context, params *A
 	return c.Client.Do(req)
 }
 
-func (c *Client) AddAccessGroupsToRole(ctx context.Context, params *AddAccessGroupsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAddAccessGroupsToRoleRequest(c.Server, params)
+func (c *Client) LegacyAddAccessGroupsToRole(ctx context.Context, params *LegacyAddAccessGroupsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAddAccessGroupsToRoleRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4257,8 +3840,8 @@ func (c *Client) AddAccessGroupsToRole(ctx context.Context, params *AddAccessGro
 	return c.Client.Do(req)
 }
 
-func (c *Client) AddAnnotationToComputers(ctx context.Context, params *AddAnnotationToComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAddAnnotationToComputersRequest(c.Server, params)
+func (c *Client) LegacyAddAnnotationToComputers(ctx context.Context, params *LegacyAddAnnotationToComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAddAnnotationToComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4269,8 +3852,8 @@ func (c *Client) AddAnnotationToComputers(ctx context.Context, params *AddAnnota
 	return c.Client.Do(req)
 }
 
-func (c *Client) AddPackageFiltersToPocket(ctx context.Context, params *AddPackageFiltersToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAddPackageFiltersToPocketRequest(c.Server, params)
+func (c *Client) LegacyAddPackageFiltersToPocket(ctx context.Context, params *LegacyAddPackageFiltersToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAddPackageFiltersToPocketRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4281,8 +3864,8 @@ func (c *Client) AddPackageFiltersToPocket(ctx context.Context, params *AddPacka
 	return c.Client.Do(req)
 }
 
-func (c *Client) AddPermissionsToRole(ctx context.Context, params *AddPermissionsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAddPermissionsToRoleRequest(c.Server, params)
+func (c *Client) LegacyAddPermissionsToRole(ctx context.Context, params *LegacyAddPermissionsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAddPermissionsToRoleRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4293,8 +3876,8 @@ func (c *Client) AddPermissionsToRole(ctx context.Context, params *AddPermission
 	return c.Client.Do(req)
 }
 
-func (c *Client) AddPersonsToRole(ctx context.Context, params *AddPersonsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAddPersonsToRoleRequest(c.Server, params)
+func (c *Client) LegacyAddPersonsToRole(ctx context.Context, params *LegacyAddPersonsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAddPersonsToRoleRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4305,8 +3888,8 @@ func (c *Client) AddPersonsToRole(ctx context.Context, params *AddPersonsToRoleP
 	return c.Client.Do(req)
 }
 
-func (c *Client) AddPocketsToRepositoryProfile(ctx context.Context, params *AddPocketsToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAddPocketsToRepositoryProfileRequest(c.Server, params)
+func (c *Client) LegacyAddPocketsToRepositoryProfile(ctx context.Context, params *LegacyAddPocketsToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAddPocketsToRepositoryProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4317,8 +3900,8 @@ func (c *Client) AddPocketsToRepositoryProfile(ctx context.Context, params *AddP
 	return c.Client.Do(req)
 }
 
-func (c *Client) AddTagsToComputers(ctx context.Context, params *AddTagsToComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAddTagsToComputersRequest(c.Server, params)
+func (c *Client) LegacyAddTagsToComputers(ctx context.Context, params *LegacyAddTagsToComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAddTagsToComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4329,8 +3912,8 @@ func (c *Client) AddTagsToComputers(ctx context.Context, params *AddTagsToComput
 	return c.Client.Do(req)
 }
 
-func (c *Client) AddUploaderGPGKeysToPocket(ctx context.Context, params *AddUploaderGPGKeysToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAddUploaderGPGKeysToPocketRequest(c.Server, params)
+func (c *Client) LegacyAddUploaderGPGKeysToPocket(ctx context.Context, params *LegacyAddUploaderGPGKeysToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAddUploaderGPGKeysToPocketRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4341,8 +3924,8 @@ func (c *Client) AddUploaderGPGKeysToPocket(ctx context.Context, params *AddUplo
 	return c.Client.Do(req)
 }
 
-func (c *Client) ApproveActivities(ctx context.Context, params *ApproveActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewApproveActivitiesRequest(c.Server, params)
+func (c *Client) LegacyApproveActivities(ctx context.Context, params *LegacyApproveActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyApproveActivitiesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4353,8 +3936,8 @@ func (c *Client) ApproveActivities(ctx context.Context, params *ApproveActivitie
 	return c.Client.Do(req)
 }
 
-func (c *Client) AssociateAlert(ctx context.Context, params *AssociateAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAssociateAlertRequest(c.Server, params)
+func (c *Client) LegacyAssociateAlert(ctx context.Context, params *LegacyAssociateAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAssociateAlertRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4365,8 +3948,8 @@ func (c *Client) AssociateAlert(ctx context.Context, params *AssociateAlertParam
 	return c.Client.Do(req)
 }
 
-func (c *Client) AssociatePackageProfile(ctx context.Context, params *AssociatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAssociatePackageProfileRequest(c.Server, params)
+func (c *Client) LegacyAssociatePackageProfile(ctx context.Context, params *LegacyAssociatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAssociatePackageProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4377,8 +3960,8 @@ func (c *Client) AssociatePackageProfile(ctx context.Context, params *AssociateP
 	return c.Client.Do(req)
 }
 
-func (c *Client) AssociateRemovalProfile(ctx context.Context, params *AssociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAssociateRemovalProfileRequest(c.Server, params)
+func (c *Client) LegacyAssociateRemovalProfile(ctx context.Context, params *LegacyAssociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAssociateRemovalProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4389,8 +3972,8 @@ func (c *Client) AssociateRemovalProfile(ctx context.Context, params *AssociateR
 	return c.Client.Do(req)
 }
 
-func (c *Client) AssociateRepositoryProfile(ctx context.Context, params *AssociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAssociateRepositoryProfileRequest(c.Server, params)
+func (c *Client) LegacyAssociateRepositoryProfile(ctx context.Context, params *LegacyAssociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAssociateRepositoryProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4401,8 +3984,8 @@ func (c *Client) AssociateRepositoryProfile(ctx context.Context, params *Associa
 	return c.Client.Do(req)
 }
 
-func (c *Client) AssociateUpgradeProfile(ctx context.Context, params *AssociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAssociateUpgradeProfileRequest(c.Server, params)
+func (c *Client) LegacyAssociateUpgradeProfile(ctx context.Context, params *LegacyAssociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyAssociateUpgradeProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4413,8 +3996,8 @@ func (c *Client) AssociateUpgradeProfile(ctx context.Context, params *AssociateU
 	return c.Client.Do(req)
 }
 
-func (c *Client) CancelActivities(ctx context.Context, params *CancelActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCancelActivitiesRequest(c.Server, params)
+func (c *Client) LegacyCancelActivities(ctx context.Context, params *LegacyCancelActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCancelActivitiesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4425,8 +4008,8 @@ func (c *Client) CancelActivities(ctx context.Context, params *CancelActivitiesP
 	return c.Client.Do(req)
 }
 
-func (c *Client) ChangeComputersAccessGroup(ctx context.Context, params *ChangeComputersAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewChangeComputersAccessGroupRequest(c.Server, params)
+func (c *Client) LegacyChangeComputersAccessGroup(ctx context.Context, params *LegacyChangeComputersAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyChangeComputersAccessGroupRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4437,8 +4020,8 @@ func (c *Client) ChangeComputersAccessGroup(ctx context.Context, params *ChangeC
 	return c.Client.Do(req)
 }
 
-func (c *Client) CopyPackageProfile(ctx context.Context, params *CopyPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCopyPackageProfileRequest(c.Server, params)
+func (c *Client) LegacyCopyPackageProfile(ctx context.Context, params *LegacyCopyPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCopyPackageProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4449,8 +4032,8 @@ func (c *Client) CopyPackageProfile(ctx context.Context, params *CopyPackageProf
 	return c.Client.Do(req)
 }
 
-func (c *Client) CopyRole(ctx context.Context, params *CopyRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCopyRoleRequest(c.Server, params)
+func (c *Client) LegacyCopyRole(ctx context.Context, params *LegacyCopyRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCopyRoleRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4461,8 +4044,8 @@ func (c *Client) CopyRole(ctx context.Context, params *CopyRoleParams, reqEditor
 	return c.Client.Do(req)
 }
 
-func (c *Client) CopyScript(ctx context.Context, params *CopyScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCopyScriptRequest(c.Server, params)
+func (c *Client) LegacyCopyScript(ctx context.Context, params *LegacyCopyScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCopyScriptRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4473,8 +4056,8 @@ func (c *Client) CopyScript(ctx context.Context, params *CopyScriptParams, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateAPTSource(ctx context.Context, params *CreateAPTSourceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateAPTSourceRequest(c.Server, params)
+func (c *Client) LegacyCreateAPTSource(ctx context.Context, params *LegacyCreateAPTSourceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateAPTSourceRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4485,8 +4068,8 @@ func (c *Client) CreateAPTSource(ctx context.Context, params *CreateAPTSourcePar
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateAccessGroup(ctx context.Context, params *CreateAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateAccessGroupRequest(c.Server, params)
+func (c *Client) LegacyCreateAccessGroup(ctx context.Context, params *LegacyCreateAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateAccessGroupRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4497,8 +4080,8 @@ func (c *Client) CreateAccessGroup(ctx context.Context, params *CreateAccessGrou
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateChildComputer(ctx context.Context, params *CreateChildComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateChildComputerRequest(c.Server, params)
+func (c *Client) LegacyCreateChildComputer(ctx context.Context, params *LegacyCreateChildComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateChildComputerRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4509,8 +4092,8 @@ func (c *Client) CreateChildComputer(ctx context.Context, params *CreateChildCom
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistributionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateDistributionRequest(c.Server, params)
+func (c *Client) LegacyCreateDistribution(ctx context.Context, params *LegacyCreateDistributionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateDistributionRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4521,8 +4104,8 @@ func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistribut
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreatePackageProfile(ctx context.Context, params *CreatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreatePackageProfileRequest(c.Server, params)
+func (c *Client) LegacyCreatePackageProfile(ctx context.Context, params *LegacyCreatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreatePackageProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4533,8 +4116,8 @@ func (c *Client) CreatePackageProfile(ctx context.Context, params *CreatePackage
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreatePocket(ctx context.Context, params *CreatePocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreatePocketRequest(c.Server, params)
+func (c *Client) LegacyCreatePocket(ctx context.Context, params *LegacyCreatePocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreatePocketRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4545,8 +4128,8 @@ func (c *Client) CreatePocket(ctx context.Context, params *CreatePocketParams, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateRemovalProfile(ctx context.Context, params *CreateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateRemovalProfileRequest(c.Server, params)
+func (c *Client) LegacyCreateRemovalProfile(ctx context.Context, params *LegacyCreateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateRemovalProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4557,8 +4140,8 @@ func (c *Client) CreateRemovalProfile(ctx context.Context, params *CreateRemoval
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateRepositoryProfile(ctx context.Context, params *CreateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateRepositoryProfileRequest(c.Server, params)
+func (c *Client) LegacyCreateRepositoryProfile(ctx context.Context, params *LegacyCreateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateRepositoryProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4569,8 +4152,8 @@ func (c *Client) CreateRepositoryProfile(ctx context.Context, params *CreateRepo
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateRole(ctx context.Context, params *CreateRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateRoleRequest(c.Server, params)
+func (c *Client) LegacyCreateRole(ctx context.Context, params *LegacyCreateRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateRoleRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4581,8 +4164,8 @@ func (c *Client) CreateRole(ctx context.Context, params *CreateRoleParams, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateSavedSearch(ctx context.Context, params *CreateSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateSavedSearchRequest(c.Server, params)
+func (c *Client) LegacyCreateSavedSearch(ctx context.Context, params *LegacyCreateSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateSavedSearchRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4593,8 +4176,8 @@ func (c *Client) CreateSavedSearch(ctx context.Context, params *CreateSavedSearc
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateScript(ctx context.Context, params *CreateScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateScriptRequest(c.Server, params)
+func (c *Client) LegacyCreateScript(ctx context.Context, params *LegacyCreateScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateScriptRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4605,8 +4188,8 @@ func (c *Client) CreateScript(ctx context.Context, params *CreateScriptParams, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateScriptAttachment(ctx context.Context, params *CreateScriptAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateScriptAttachmentRequest(c.Server, params)
+func (c *Client) LegacyCreateScriptAttachment(ctx context.Context, params *LegacyCreateScriptAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateScriptAttachmentRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4617,8 +4200,8 @@ func (c *Client) CreateScriptAttachment(ctx context.Context, params *CreateScrip
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateSeries(ctx context.Context, params *CreateSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateSeriesRequest(c.Server, params)
+func (c *Client) LegacyCreateSeries(ctx context.Context, params *LegacyCreateSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateSeriesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4629,8 +4212,8 @@ func (c *Client) CreateSeries(ctx context.Context, params *CreateSeriesParams, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateUpgradeProfile(ctx context.Context, params *CreateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateUpgradeProfileRequest(c.Server, params)
+func (c *Client) LegacyCreateUpgradeProfile(ctx context.Context, params *LegacyCreateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateUpgradeProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4641,8 +4224,8 @@ func (c *Client) CreateUpgradeProfile(ctx context.Context, params *CreateUpgrade
 	return c.Client.Do(req)
 }
 
-func (c *Client) CreateUser(ctx context.Context, params *CreateUserParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateUserRequest(c.Server, params)
+func (c *Client) LegacyCreateUser(ctx context.Context, params *LegacyCreateUserParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyCreateUserRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4653,8 +4236,8 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserParams, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeleteChildComputers(ctx context.Context, params *DeleteChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteChildComputersRequest(c.Server, params)
+func (c *Client) LegacyDeleteChildComputers(ctx context.Context, params *LegacyDeleteChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyDeleteChildComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4665,8 +4248,8 @@ func (c *Client) DeleteChildComputers(ctx context.Context, params *DeleteChildCo
 	return c.Client.Do(req)
 }
 
-func (c *Client) DeriveSeries(ctx context.Context, params *DeriveSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeriveSeriesRequest(c.Server, params)
+func (c *Client) LegacyDeriveSeries(ctx context.Context, params *LegacyDeriveSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyDeriveSeriesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4677,8 +4260,8 @@ func (c *Client) DeriveSeries(ctx context.Context, params *DeriveSeriesParams, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) DiffPullPocket(ctx context.Context, params *DiffPullPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDiffPullPocketRequest(c.Server, params)
+func (c *Client) LegacyDiffPullPocket(ctx context.Context, params *LegacyDiffPullPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyDiffPullPocketRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4689,8 +4272,8 @@ func (c *Client) DiffPullPocket(ctx context.Context, params *DiffPullPocketParam
 	return c.Client.Do(req)
 }
 
-func (c *Client) DisableAdministrator(ctx context.Context, params *DisableAdministratorParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDisableAdministratorRequest(c.Server, params)
+func (c *Client) LegacyDisableAdministrator(ctx context.Context, params *LegacyDisableAdministratorParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyDisableAdministratorRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4701,8 +4284,8 @@ func (c *Client) DisableAdministrator(ctx context.Context, params *DisableAdmini
 	return c.Client.Do(req)
 }
 
-func (c *Client) DisassociateAlert(ctx context.Context, params *DisassociateAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDisassociateAlertRequest(c.Server, params)
+func (c *Client) LegacyDisassociateAlert(ctx context.Context, params *LegacyDisassociateAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyDisassociateAlertRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4713,8 +4296,8 @@ func (c *Client) DisassociateAlert(ctx context.Context, params *DisassociateAler
 	return c.Client.Do(req)
 }
 
-func (c *Client) DisassociatePackageProfile(ctx context.Context, params *DisassociatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDisassociatePackageProfileRequest(c.Server, params)
+func (c *Client) LegacyDisassociatePackageProfile(ctx context.Context, params *LegacyDisassociatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyDisassociatePackageProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4725,8 +4308,8 @@ func (c *Client) DisassociatePackageProfile(ctx context.Context, params *Disasso
 	return c.Client.Do(req)
 }
 
-func (c *Client) DisassociateRemovalProfile(ctx context.Context, params *DisassociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDisassociateRemovalProfileRequest(c.Server, params)
+func (c *Client) LegacyDisassociateRemovalProfile(ctx context.Context, params *LegacyDisassociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyDisassociateRemovalProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4737,8 +4320,8 @@ func (c *Client) DisassociateRemovalProfile(ctx context.Context, params *Disasso
 	return c.Client.Do(req)
 }
 
-func (c *Client) DisassociateRepositoryProfile(ctx context.Context, params *DisassociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDisassociateRepositoryProfileRequest(c.Server, params)
+func (c *Client) LegacyDisassociateRepositoryProfile(ctx context.Context, params *LegacyDisassociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyDisassociateRepositoryProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4749,8 +4332,8 @@ func (c *Client) DisassociateRepositoryProfile(ctx context.Context, params *Disa
 	return c.Client.Do(req)
 }
 
-func (c *Client) DisassociateUpgradeProfile(ctx context.Context, params *DisassociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDisassociateUpgradeProfileRequest(c.Server, params)
+func (c *Client) LegacyDisassociateUpgradeProfile(ctx context.Context, params *LegacyDisassociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyDisassociateUpgradeProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4761,8 +4344,8 @@ func (c *Client) DisassociateUpgradeProfile(ctx context.Context, params *Disasso
 	return c.Client.Do(req)
 }
 
-func (c *Client) EditPackageProfile(ctx context.Context, params *EditPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEditPackageProfileRequest(c.Server, params)
+func (c *Client) LegacyEditPackageProfile(ctx context.Context, params *LegacyEditPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyEditPackageProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4773,8 +4356,8 @@ func (c *Client) EditPackageProfile(ctx context.Context, params *EditPackageProf
 	return c.Client.Do(req)
 }
 
-func (c *Client) EditPocket(ctx context.Context, params *EditPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEditPocketRequest(c.Server, params)
+func (c *Client) LegacyEditPocket(ctx context.Context, params *LegacyEditPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyEditPocketRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4785,8 +4368,8 @@ func (c *Client) EditPocket(ctx context.Context, params *EditPocketParams, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) EditRemovalProfile(ctx context.Context, params *EditRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEditRemovalProfileRequest(c.Server, params)
+func (c *Client) LegacyEditRemovalProfile(ctx context.Context, params *LegacyEditRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyEditRemovalProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4797,8 +4380,8 @@ func (c *Client) EditRemovalProfile(ctx context.Context, params *EditRemovalProf
 	return c.Client.Do(req)
 }
 
-func (c *Client) EditRepositoryProfile(ctx context.Context, params *EditRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEditRepositoryProfileRequest(c.Server, params)
+func (c *Client) LegacyEditRepositoryProfile(ctx context.Context, params *LegacyEditRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyEditRepositoryProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4809,8 +4392,8 @@ func (c *Client) EditRepositoryProfile(ctx context.Context, params *EditReposito
 	return c.Client.Do(req)
 }
 
-func (c *Client) EditSavedSearch(ctx context.Context, params *EditSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEditSavedSearchRequest(c.Server, params)
+func (c *Client) LegacyEditSavedSearch(ctx context.Context, params *LegacyEditSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyEditSavedSearchRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4821,8 +4404,8 @@ func (c *Client) EditSavedSearch(ctx context.Context, params *EditSavedSearchPar
 	return c.Client.Do(req)
 }
 
-func (c *Client) EditScript(ctx context.Context, params *EditScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEditScriptRequest(c.Server, params)
+func (c *Client) LegacyEditScript(ctx context.Context, params *LegacyEditScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyEditScriptRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4833,8 +4416,8 @@ func (c *Client) EditScript(ctx context.Context, params *EditScriptParams, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) EditUpgradeProfile(ctx context.Context, params *EditUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEditUpgradeProfileRequest(c.Server, params)
+func (c *Client) LegacyEditUpgradeProfile(ctx context.Context, params *LegacyEditUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyEditUpgradeProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4845,8 +4428,8 @@ func (c *Client) EditUpgradeProfile(ctx context.Context, params *EditUpgradeProf
 	return c.Client.Do(req)
 }
 
-func (c *Client) EditUser(ctx context.Context, params *EditUserParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewEditUserRequest(c.Server, params)
+func (c *Client) LegacyEditUser(ctx context.Context, params *LegacyEditUserParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyEditUserRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4857,8 +4440,8 @@ func (c *Client) EditUser(ctx context.Context, params *EditUserParams, reqEditor
 	return c.Client.Do(req)
 }
 
-func (c *Client) ExecuteScript(ctx context.Context, params *ExecuteScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewExecuteScriptRequest(c.Server, params)
+func (c *Client) LegacyExecuteScript(ctx context.Context, params *LegacyExecuteScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyExecuteScriptRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4869,8 +4452,8 @@ func (c *Client) ExecuteScript(ctx context.Context, params *ExecuteScriptParams,
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetAPTSources(ctx context.Context, params *GetAPTSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetAPTSourcesRequest(c.Server, params)
+func (c *Client) LegacyGetAPTSources(ctx context.Context, params *LegacyGetAPTSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetAPTSourcesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4881,8 +4464,8 @@ func (c *Client) GetAPTSources(ctx context.Context, params *GetAPTSourcesParams,
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetAccessGroups(ctx context.Context, params *GetAccessGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetAccessGroupsRequest(c.Server, params)
+func (c *Client) LegacyGetAccessGroups(ctx context.Context, params *LegacyGetAccessGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetAccessGroupsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4893,8 +4476,8 @@ func (c *Client) GetAccessGroups(ctx context.Context, params *GetAccessGroupsPar
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetActivities(ctx context.Context, params *GetActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetActivitiesRequest(c.Server, params)
+func (c *Client) LegacyGetActivities(ctx context.Context, params *LegacyGetActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetActivitiesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4905,8 +4488,8 @@ func (c *Client) GetActivities(ctx context.Context, params *GetActivitiesParams,
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetActivityTypes(ctx context.Context, params *GetActivityTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetActivityTypesRequest(c.Server, params)
+func (c *Client) LegacyGetActivityTypes(ctx context.Context, params *LegacyGetActivityTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetActivityTypesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4917,8 +4500,8 @@ func (c *Client) GetActivityTypes(ctx context.Context, params *GetActivityTypesP
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetAdministrators(ctx context.Context, params *GetAdministratorsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetAdministratorsRequest(c.Server, params)
+func (c *Client) LegacyGetAdministrators(ctx context.Context, params *LegacyGetAdministratorsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetAdministratorsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4929,8 +4512,8 @@ func (c *Client) GetAdministrators(ctx context.Context, params *GetAdministrator
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetAlertSubscribers(ctx context.Context, params *GetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetAlertSubscribersRequest(c.Server, params)
+func (c *Client) LegacyGetAlertSubscribers(ctx context.Context, params *LegacyGetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetAlertSubscribersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4941,8 +4524,8 @@ func (c *Client) GetAlertSubscribers(ctx context.Context, params *GetAlertSubscr
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetAlerts(ctx context.Context, params *GetAlertsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetAlertsRequest(c.Server, params)
+func (c *Client) LegacyGetAlerts(ctx context.Context, params *LegacyGetAlertsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetAlertsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4953,8 +4536,8 @@ func (c *Client) GetAlerts(ctx context.Context, params *GetAlertsParams, reqEdit
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetCSVComplianceData(ctx context.Context, params *GetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetCSVComplianceDataRequest(c.Server, params)
+func (c *Client) LegacyGetCSVComplianceData(ctx context.Context, params *LegacyGetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetCSVComplianceDataRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4965,8 +4548,8 @@ func (c *Client) GetCSVComplianceData(ctx context.Context, params *GetCSVComplia
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetComputerProcesses(ctx context.Context, params *GetComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetComputerProcessesRequest(c.Server, params)
+func (c *Client) LegacyGetComputerProcesses(ctx context.Context, params *LegacyGetComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetComputerProcessesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4977,8 +4560,8 @@ func (c *Client) GetComputerProcesses(ctx context.Context, params *GetComputerPr
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetComputers(ctx context.Context, params *GetComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetComputersRequest(c.Server, params)
+func (c *Client) LegacyGetComputers(ctx context.Context, params *LegacyGetComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4989,8 +4572,8 @@ func (c *Client) GetComputers(ctx context.Context, params *GetComputersParams, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetComputersNotUpgraded(ctx context.Context, params *GetComputersNotUpgradedParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetComputersNotUpgradedRequest(c.Server, params)
+func (c *Client) LegacyGetComputersNotUpgraded(ctx context.Context, params *LegacyGetComputersNotUpgradedParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetComputersNotUpgradedRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5001,8 +4584,8 @@ func (c *Client) GetComputersNotUpgraded(ctx context.Context, params *GetCompute
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetDistributions(ctx context.Context, params *GetDistributionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetDistributionsRequest(c.Server, params)
+func (c *Client) LegacyGetDistributions(ctx context.Context, params *LegacyGetDistributionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetDistributionsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5013,8 +4596,8 @@ func (c *Client) GetDistributions(ctx context.Context, params *GetDistributionsP
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetEventLog(ctx context.Context, params *GetEventLogParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetEventLogRequest(c.Server, params)
+func (c *Client) LegacyGetEventLog(ctx context.Context, params *LegacyGetEventLogParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetEventLogRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5025,8 +4608,8 @@ func (c *Client) GetEventLog(ctx context.Context, params *GetEventLogParams, req
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetGPGKeys(ctx context.Context, params *GetGPGKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetGPGKeysRequest(c.Server, params)
+func (c *Client) LegacyGetGPGKeys(ctx context.Context, params *LegacyGetGPGKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetGPGKeysRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5037,8 +4620,8 @@ func (c *Client) GetGPGKeys(ctx context.Context, params *GetGPGKeysParams, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetNotPingingComputers(ctx context.Context, params *GetNotPingingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetNotPingingComputersRequest(c.Server, params)
+func (c *Client) LegacyGetNotPingingComputers(ctx context.Context, params *LegacyGetNotPingingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetNotPingingComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5049,8 +4632,8 @@ func (c *Client) GetNotPingingComputers(ctx context.Context, params *GetNotPingi
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetPackageProfiles(ctx context.Context, params *GetPackageProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetPackageProfilesRequest(c.Server, params)
+func (c *Client) LegacyGetPackageProfiles(ctx context.Context, params *LegacyGetPackageProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetPackageProfilesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5061,8 +4644,8 @@ func (c *Client) GetPackageProfiles(ctx context.Context, params *GetPackageProfi
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetPackages(ctx context.Context, params *GetPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetPackagesRequest(c.Server, params)
+func (c *Client) LegacyGetPackages(ctx context.Context, params *LegacyGetPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetPackagesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5073,8 +4656,8 @@ func (c *Client) GetPackages(ctx context.Context, params *GetPackagesParams, req
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetPendingComputers(ctx context.Context, params *GetPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetPendingComputersRequest(c.Server, params)
+func (c *Client) LegacyGetPendingComputers(ctx context.Context, params *LegacyGetPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetPendingComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5085,8 +4668,8 @@ func (c *Client) GetPendingComputers(ctx context.Context, params *GetPendingComp
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetPermissions(ctx context.Context, params *GetPermissionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetPermissionsRequest(c.Server, params)
+func (c *Client) LegacyGetPermissions(ctx context.Context, params *LegacyGetPermissionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetPermissionsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5097,8 +4680,8 @@ func (c *Client) GetPermissions(ctx context.Context, params *GetPermissionsParam
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetRemovalProfiles(ctx context.Context, params *GetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetRemovalProfilesRequest(c.Server, params)
+func (c *Client) LegacyGetRemovalProfiles(ctx context.Context, params *LegacyGetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetRemovalProfilesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5109,8 +4692,8 @@ func (c *Client) GetRemovalProfiles(ctx context.Context, params *GetRemovalProfi
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetRepoInfo(ctx context.Context, params *GetRepoInfoParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetRepoInfoRequest(c.Server, params)
+func (c *Client) LegacyGetRepoInfo(ctx context.Context, params *LegacyGetRepoInfoParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetRepoInfoRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5121,8 +4704,8 @@ func (c *Client) GetRepoInfo(ctx context.Context, params *GetRepoInfoParams, req
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetRepositoryProfiles(ctx context.Context, params *GetRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetRepositoryProfilesRequest(c.Server, params)
+func (c *Client) LegacyGetRepositoryProfiles(ctx context.Context, params *LegacyGetRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetRepositoryProfilesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5133,8 +4716,8 @@ func (c *Client) GetRepositoryProfiles(ctx context.Context, params *GetRepositor
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetRoles(ctx context.Context, params *GetRolesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetRolesRequest(c.Server, params)
+func (c *Client) LegacyGetRoles(ctx context.Context, params *LegacyGetRolesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetRolesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5145,8 +4728,8 @@ func (c *Client) GetRoles(ctx context.Context, params *GetRolesParams, reqEditor
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetSavedSearches(ctx context.Context, params *GetSavedSearchesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetSavedSearchesRequest(c.Server, params)
+func (c *Client) LegacyGetSavedSearches(ctx context.Context, params *LegacyGetSavedSearchesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetSavedSearchesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5157,8 +4740,8 @@ func (c *Client) GetSavedSearches(ctx context.Context, params *GetSavedSearchesP
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetScriptCode(ctx context.Context, params *GetScriptCodeParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetScriptCodeRequest(c.Server, params)
+func (c *Client) LegacyGetScriptCode(ctx context.Context, params *LegacyGetScriptCodeParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetScriptCodeRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5169,8 +4752,8 @@ func (c *Client) GetScriptCode(ctx context.Context, params *GetScriptCodeParams,
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetScripts(ctx context.Context, params *GetScriptsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetScriptsRequest(c.Server, params)
+func (c *Client) LegacyGetScripts(ctx context.Context, params *LegacyGetScriptsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetScriptsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5181,8 +4764,8 @@ func (c *Client) GetScripts(ctx context.Context, params *GetScriptsParams, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetSettings(ctx context.Context, params *GetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetSettingsRequest(c.Server, params)
+func (c *Client) LegacyGetSettings(ctx context.Context, params *LegacyGetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetSettingsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5193,8 +4776,8 @@ func (c *Client) GetSettings(ctx context.Context, params *GetSettingsParams, req
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetUSNTimeToFix(ctx context.Context, params *GetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetUSNTimeToFixRequest(c.Server, params)
+func (c *Client) LegacyGetUSNTimeToFix(ctx context.Context, params *LegacyGetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetUSNTimeToFixRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5205,8 +4788,8 @@ func (c *Client) GetUSNTimeToFix(ctx context.Context, params *GetUSNTimeToFixPar
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetUpgradeProfiles(ctx context.Context, params *GetUpgradeProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetUpgradeProfilesRequest(c.Server, params)
+func (c *Client) LegacyGetUpgradeProfiles(ctx context.Context, params *LegacyGetUpgradeProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetUpgradeProfilesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5217,8 +4800,8 @@ func (c *Client) GetUpgradeProfiles(ctx context.Context, params *GetUpgradeProfi
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetUpgradedComputersByFrequency(ctx context.Context, params *GetUpgradedComputersByFrequencyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetUpgradedComputersByFrequencyRequest(c.Server, params)
+func (c *Client) LegacyGetUpgradedComputersByFrequency(ctx context.Context, params *LegacyGetUpgradedComputersByFrequencyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetUpgradedComputersByFrequencyRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5229,8 +4812,8 @@ func (c *Client) GetUpgradedComputersByFrequency(ctx context.Context, params *Ge
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetUsers(ctx context.Context, params *GetUsersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetUsersRequest(c.Server, params)
+func (c *Client) LegacyGetUsers(ctx context.Context, params *LegacyGetUsersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetUsersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5241,8 +4824,8 @@ func (c *Client) GetUsers(ctx context.Context, params *GetUsersParams, reqEditor
 	return c.Client.Do(req)
 }
 
-func (c *Client) GetWSLHosts(ctx context.Context, params *GetWSLHostsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetWSLHostsRequest(c.Server, params)
+func (c *Client) LegacyGetWSLHosts(ctx context.Context, params *LegacyGetWSLHostsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetWSLHostsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5253,8 +4836,8 @@ func (c *Client) GetWSLHosts(ctx context.Context, params *GetWSLHostsParams, req
 	return c.Client.Do(req)
 }
 
-func (c *Client) ImportGPGKey(ctx context.Context, params *ImportGPGKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewImportGPGKeyRequest(c.Server, params)
+func (c *Client) LegacyImportGPGKey(ctx context.Context, params *LegacyImportGPGKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyImportGPGKeyRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5265,8 +4848,8 @@ func (c *Client) ImportGPGKey(ctx context.Context, params *ImportGPGKeyParams, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) InstallPackages(ctx context.Context, params *InstallPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewInstallPackagesRequest(c.Server, params)
+func (c *Client) LegacyInstallPackages(ctx context.Context, params *LegacyInstallPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyInstallPackagesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5277,8 +4860,8 @@ func (c *Client) InstallPackages(ctx context.Context, params *InstallPackagesPar
 	return c.Client.Do(req)
 }
 
-func (c *Client) InviteAdministrator(ctx context.Context, params *InviteAdministratorParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewInviteAdministratorRequest(c.Server, params)
+func (c *Client) LegacyInviteAdministrator(ctx context.Context, params *LegacyInviteAdministratorParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyInviteAdministratorRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5289,8 +4872,8 @@ func (c *Client) InviteAdministrator(ctx context.Context, params *InviteAdminist
 	return c.Client.Do(req)
 }
 
-func (c *Client) KillComputerProcesses(ctx context.Context, params *KillComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewKillComputerProcessesRequest(c.Server, params)
+func (c *Client) LegacyKillComputerProcesses(ctx context.Context, params *LegacyKillComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyKillComputerProcessesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5301,8 +4884,8 @@ func (c *Client) KillComputerProcesses(ctx context.Context, params *KillComputer
 	return c.Client.Do(req)
 }
 
-func (c *Client) ListPocket(ctx context.Context, params *ListPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListPocketRequest(c.Server, params)
+func (c *Client) LegacyListPocket(ctx context.Context, params *LegacyListPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyListPocketRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5313,8 +4896,8 @@ func (c *Client) ListPocket(ctx context.Context, params *ListPocketParams, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) ModifyPackageProfile(ctx context.Context, params *ModifyPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewModifyPackageProfileRequest(c.Server, params)
+func (c *Client) LegacyModifyPackageProfile(ctx context.Context, params *LegacyModifyPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyModifyPackageProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5325,8 +4908,8 @@ func (c *Client) ModifyPackageProfile(ctx context.Context, params *ModifyPackage
 	return c.Client.Do(req)
 }
 
-func (c *Client) PullPackagesToPocket(ctx context.Context, params *PullPackagesToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewPullPackagesToPocketRequest(c.Server, params)
+func (c *Client) LegacyPullPackagesToPocket(ctx context.Context, params *LegacyPullPackagesToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyPullPackagesToPocketRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5337,8 +4920,8 @@ func (c *Client) PullPackagesToPocket(ctx context.Context, params *PullPackagesT
 	return c.Client.Do(req)
 }
 
-func (c *Client) RebootComputers(ctx context.Context, params *RebootComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRebootComputersRequest(c.Server, params)
+func (c *Client) LegacyRebootComputers(ctx context.Context, params *LegacyRebootComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRebootComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5349,8 +4932,8 @@ func (c *Client) RebootComputers(ctx context.Context, params *RebootComputersPar
 	return c.Client.Do(req)
 }
 
-func (c *Client) RejectPendingComputers(ctx context.Context, params *RejectPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRejectPendingComputersRequest(c.Server, params)
+func (c *Client) LegacyRejectPendingComputers(ctx context.Context, params *LegacyRejectPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRejectPendingComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5361,8 +4944,8 @@ func (c *Client) RejectPendingComputers(ctx context.Context, params *RejectPendi
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveAPTSource(ctx context.Context, params *RemoveAPTSourceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveAPTSourceRequest(c.Server, params)
+func (c *Client) LegacyRemoveAPTSource(ctx context.Context, params *LegacyRemoveAPTSourceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveAPTSourceRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5373,8 +4956,8 @@ func (c *Client) RemoveAPTSource(ctx context.Context, params *RemoveAPTSourcePar
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveAPTSourceFromRepositoryProfile(ctx context.Context, params *RemoveAPTSourceFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveAPTSourceFromRepositoryProfileRequest(c.Server, params)
+func (c *Client) LegacyRemoveAPTSourceFromRepositoryProfile(ctx context.Context, params *LegacyRemoveAPTSourceFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveAPTSourceFromRepositoryProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5385,8 +4968,8 @@ func (c *Client) RemoveAPTSourceFromRepositoryProfile(ctx context.Context, param
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveAPTSources(ctx context.Context, params *RemoveAPTSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveAPTSourcesRequest(c.Server, params)
+func (c *Client) LegacyRemoveAPTSources(ctx context.Context, params *LegacyRemoveAPTSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveAPTSourcesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5397,8 +4980,8 @@ func (c *Client) RemoveAPTSources(ctx context.Context, params *RemoveAPTSourcesP
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveAPTSourcesFromRepositoryProfile(ctx context.Context, params *RemoveAPTSourcesFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveAPTSourcesFromRepositoryProfileRequest(c.Server, params)
+func (c *Client) LegacyRemoveAPTSourcesFromRepositoryProfile(ctx context.Context, params *LegacyRemoveAPTSourcesFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveAPTSourcesFromRepositoryProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5409,8 +4992,8 @@ func (c *Client) RemoveAPTSourcesFromRepositoryProfile(ctx context.Context, para
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveAccessGroup(ctx context.Context, params *RemoveAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveAccessGroupRequest(c.Server, params)
+func (c *Client) LegacyRemoveAccessGroup(ctx context.Context, params *LegacyRemoveAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveAccessGroupRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5421,8 +5004,8 @@ func (c *Client) RemoveAccessGroup(ctx context.Context, params *RemoveAccessGrou
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveAccessGroupsFromRole(ctx context.Context, params *RemoveAccessGroupsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveAccessGroupsFromRoleRequest(c.Server, params)
+func (c *Client) LegacyRemoveAccessGroupsFromRole(ctx context.Context, params *LegacyRemoveAccessGroupsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveAccessGroupsFromRoleRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5433,8 +5016,8 @@ func (c *Client) RemoveAccessGroupsFromRole(ctx context.Context, params *RemoveA
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveAnnotationFromComputers(ctx context.Context, params *RemoveAnnotationFromComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveAnnotationFromComputersRequest(c.Server, params)
+func (c *Client) LegacyRemoveAnnotationFromComputers(ctx context.Context, params *LegacyRemoveAnnotationFromComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveAnnotationFromComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5445,8 +5028,8 @@ func (c *Client) RemoveAnnotationFromComputers(ctx context.Context, params *Remo
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveComputers(ctx context.Context, params *RemoveComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveComputersRequest(c.Server, params)
+func (c *Client) LegacyRemoveComputers(ctx context.Context, params *LegacyRemoveComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5457,8 +5040,8 @@ func (c *Client) RemoveComputers(ctx context.Context, params *RemoveComputersPar
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveDistribution(ctx context.Context, params *RemoveDistributionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveDistributionRequest(c.Server, params)
+func (c *Client) LegacyRemoveDistribution(ctx context.Context, params *LegacyRemoveDistributionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveDistributionRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5469,8 +5052,8 @@ func (c *Client) RemoveDistribution(ctx context.Context, params *RemoveDistribut
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveGPGKey(ctx context.Context, params *RemoveGPGKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveGPGKeyRequest(c.Server, params)
+func (c *Client) LegacyRemoveGPGKey(ctx context.Context, params *LegacyRemoveGPGKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveGPGKeyRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5481,8 +5064,8 @@ func (c *Client) RemoveGPGKey(ctx context.Context, params *RemoveGPGKeyParams, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemovePackageFiltersFromPocket(ctx context.Context, params *RemovePackageFiltersFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemovePackageFiltersFromPocketRequest(c.Server, params)
+func (c *Client) LegacyRemovePackageFiltersFromPocket(ctx context.Context, params *LegacyRemovePackageFiltersFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemovePackageFiltersFromPocketRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5493,8 +5076,8 @@ func (c *Client) RemovePackageFiltersFromPocket(ctx context.Context, params *Rem
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemovePackageProfile(ctx context.Context, params *RemovePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemovePackageProfileRequest(c.Server, params)
+func (c *Client) LegacyRemovePackageProfile(ctx context.Context, params *LegacyRemovePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemovePackageProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5505,8 +5088,8 @@ func (c *Client) RemovePackageProfile(ctx context.Context, params *RemovePackage
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemovePackages(ctx context.Context, params *RemovePackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemovePackagesRequest(c.Server, params)
+func (c *Client) LegacyRemovePackages(ctx context.Context, params *LegacyRemovePackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemovePackagesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5517,8 +5100,8 @@ func (c *Client) RemovePackages(ctx context.Context, params *RemovePackagesParam
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemovePackagesFromPocket(ctx context.Context, params *RemovePackagesFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemovePackagesFromPocketRequest(c.Server, params)
+func (c *Client) LegacyRemovePackagesFromPocket(ctx context.Context, params *LegacyRemovePackagesFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemovePackagesFromPocketRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5529,8 +5112,8 @@ func (c *Client) RemovePackagesFromPocket(ctx context.Context, params *RemovePac
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemovePermissionsFromRole(ctx context.Context, params *RemovePermissionsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemovePermissionsFromRoleRequest(c.Server, params)
+func (c *Client) LegacyRemovePermissionsFromRole(ctx context.Context, params *LegacyRemovePermissionsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemovePermissionsFromRoleRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5541,8 +5124,8 @@ func (c *Client) RemovePermissionsFromRole(ctx context.Context, params *RemovePe
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemovePersonsFromRole(ctx context.Context, params *RemovePersonsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemovePersonsFromRoleRequest(c.Server, params)
+func (c *Client) LegacyRemovePersonsFromRole(ctx context.Context, params *LegacyRemovePersonsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemovePersonsFromRoleRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5553,8 +5136,8 @@ func (c *Client) RemovePersonsFromRole(ctx context.Context, params *RemovePerson
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemovePocket(ctx context.Context, params *RemovePocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemovePocketRequest(c.Server, params)
+func (c *Client) LegacyRemovePocket(ctx context.Context, params *LegacyRemovePocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemovePocketRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5565,8 +5148,8 @@ func (c *Client) RemovePocket(ctx context.Context, params *RemovePocketParams, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemovePocketsFromRepositoryProfile(ctx context.Context, params *RemovePocketsFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemovePocketsFromRepositoryProfileRequest(c.Server, params)
+func (c *Client) LegacyRemovePocketsFromRepositoryProfile(ctx context.Context, params *LegacyRemovePocketsFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemovePocketsFromRepositoryProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5577,8 +5160,8 @@ func (c *Client) RemovePocketsFromRepositoryProfile(ctx context.Context, params 
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveRemovalProfile(ctx context.Context, params *RemoveRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveRemovalProfileRequest(c.Server, params)
+func (c *Client) LegacyRemoveRemovalProfile(ctx context.Context, params *LegacyRemoveRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveRemovalProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5589,8 +5172,8 @@ func (c *Client) RemoveRemovalProfile(ctx context.Context, params *RemoveRemoval
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveRepositoryProfile(ctx context.Context, params *RemoveRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveRepositoryProfileRequest(c.Server, params)
+func (c *Client) LegacyRemoveRepositoryProfile(ctx context.Context, params *LegacyRemoveRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveRepositoryProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5601,8 +5184,8 @@ func (c *Client) RemoveRepositoryProfile(ctx context.Context, params *RemoveRepo
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveRepositoryProfiles(ctx context.Context, params *RemoveRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveRepositoryProfilesRequest(c.Server, params)
+func (c *Client) LegacyRemoveRepositoryProfiles(ctx context.Context, params *LegacyRemoveRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveRepositoryProfilesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5613,8 +5196,8 @@ func (c *Client) RemoveRepositoryProfiles(ctx context.Context, params *RemoveRep
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveRole(ctx context.Context, params *RemoveRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveRoleRequest(c.Server, params)
+func (c *Client) LegacyRemoveRole(ctx context.Context, params *LegacyRemoveRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveRoleRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5625,8 +5208,8 @@ func (c *Client) RemoveRole(ctx context.Context, params *RemoveRoleParams, reqEd
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveSavedSearch(ctx context.Context, params *RemoveSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveSavedSearchRequest(c.Server, params)
+func (c *Client) LegacyRemoveSavedSearch(ctx context.Context, params *LegacyRemoveSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveSavedSearchRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5637,8 +5220,8 @@ func (c *Client) RemoveSavedSearch(ctx context.Context, params *RemoveSavedSearc
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveScript(ctx context.Context, params *RemoveScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveScriptRequest(c.Server, params)
+func (c *Client) LegacyRemoveScript(ctx context.Context, params *LegacyRemoveScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveScriptRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5649,8 +5232,8 @@ func (c *Client) RemoveScript(ctx context.Context, params *RemoveScriptParams, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveScriptAttachment(ctx context.Context, params *RemoveScriptAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveScriptAttachmentRequest(c.Server, params)
+func (c *Client) LegacyRemoveScriptAttachment(ctx context.Context, params *LegacyRemoveScriptAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveScriptAttachmentRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5661,8 +5244,8 @@ func (c *Client) RemoveScriptAttachment(ctx context.Context, params *RemoveScrip
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveSeries(ctx context.Context, params *RemoveSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveSeriesRequest(c.Server, params)
+func (c *Client) LegacyRemoveSeries(ctx context.Context, params *LegacyRemoveSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveSeriesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5673,8 +5256,8 @@ func (c *Client) RemoveSeries(ctx context.Context, params *RemoveSeriesParams, r
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveTagsFromComputers(ctx context.Context, params *RemoveTagsFromComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveTagsFromComputersRequest(c.Server, params)
+func (c *Client) LegacyRemoveTagsFromComputers(ctx context.Context, params *LegacyRemoveTagsFromComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveTagsFromComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5685,8 +5268,8 @@ func (c *Client) RemoveTagsFromComputers(ctx context.Context, params *RemoveTags
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveUpgradeProfile(ctx context.Context, params *RemoveUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveUpgradeProfileRequest(c.Server, params)
+func (c *Client) LegacyRemoveUpgradeProfile(ctx context.Context, params *LegacyRemoveUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveUpgradeProfileRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5697,8 +5280,8 @@ func (c *Client) RemoveUpgradeProfile(ctx context.Context, params *RemoveUpgrade
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveUploaderGPGKeysFromPocket(ctx context.Context, params *RemoveUploaderGPGKeysFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveUploaderGPGKeysFromPocketRequest(c.Server, params)
+func (c *Client) LegacyRemoveUploaderGPGKeysFromPocket(ctx context.Context, params *LegacyRemoveUploaderGPGKeysFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveUploaderGPGKeysFromPocketRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5709,8 +5292,8 @@ func (c *Client) RemoveUploaderGPGKeysFromPocket(ctx context.Context, params *Re
 	return c.Client.Do(req)
 }
 
-func (c *Client) RemoveWSLHosts(ctx context.Context, params *RemoveWSLHostsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRemoveWSLHostsRequest(c.Server, params)
+func (c *Client) LegacyRemoveWSLHosts(ctx context.Context, params *LegacyRemoveWSLHostsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRemoveWSLHostsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5721,8 +5304,8 @@ func (c *Client) RemoveWSLHosts(ctx context.Context, params *RemoveWSLHostsParam
 	return c.Client.Do(req)
 }
 
-func (c *Client) RenameComputers(ctx context.Context, params *RenameComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRenameComputersRequest(c.Server, params)
+func (c *Client) LegacyRenameComputers(ctx context.Context, params *LegacyRenameComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyRenameComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5733,8 +5316,8 @@ func (c *Client) RenameComputers(ctx context.Context, params *RenameComputersPar
 	return c.Client.Do(req)
 }
 
-func (c *Client) SetDefaultChildComputer(ctx context.Context, params *SetDefaultChildComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewSetDefaultChildComputerRequest(c.Server, params)
+func (c *Client) LegacySetDefaultChildComputer(ctx context.Context, params *LegacySetDefaultChildComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacySetDefaultChildComputerRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5745,8 +5328,8 @@ func (c *Client) SetDefaultChildComputer(ctx context.Context, params *SetDefault
 	return c.Client.Do(req)
 }
 
-func (c *Client) SetSettings(ctx context.Context, params *SetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewSetSettingsRequest(c.Server, params)
+func (c *Client) LegacySetSettings(ctx context.Context, params *LegacySetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacySetSettingsRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5757,8 +5340,8 @@ func (c *Client) SetSettings(ctx context.Context, params *SetSettingsParams, req
 	return c.Client.Do(req)
 }
 
-func (c *Client) ShutdownComputers(ctx context.Context, params *ShutdownComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewShutdownComputersRequest(c.Server, params)
+func (c *Client) LegacyShutdownComputers(ctx context.Context, params *LegacyShutdownComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyShutdownComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5769,8 +5352,8 @@ func (c *Client) ShutdownComputers(ctx context.Context, params *ShutdownComputer
 	return c.Client.Do(req)
 }
 
-func (c *Client) ShutdownHostComputer(ctx context.Context, params *ShutdownHostComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewShutdownHostComputerRequest(c.Server, params)
+func (c *Client) LegacyShutdownHostComputer(ctx context.Context, params *LegacyShutdownHostComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyShutdownHostComputerRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5781,8 +5364,8 @@ func (c *Client) ShutdownHostComputer(ctx context.Context, params *ShutdownHostC
 	return c.Client.Do(req)
 }
 
-func (c *Client) StartChildComputers(ctx context.Context, params *StartChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewStartChildComputersRequest(c.Server, params)
+func (c *Client) LegacyStartChildComputers(ctx context.Context, params *LegacyStartChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyStartChildComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5793,8 +5376,8 @@ func (c *Client) StartChildComputers(ctx context.Context, params *StartChildComp
 	return c.Client.Do(req)
 }
 
-func (c *Client) StopChildComputers(ctx context.Context, params *StopChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewStopChildComputersRequest(c.Server, params)
+func (c *Client) LegacyStopChildComputers(ctx context.Context, params *LegacyStopChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyStopChildComputersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5805,8 +5388,8 @@ func (c *Client) StopChildComputers(ctx context.Context, params *StopChildComput
 	return c.Client.Do(req)
 }
 
-func (c *Client) SubscribeToAlert(ctx context.Context, params *SubscribeToAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewSubscribeToAlertRequest(c.Server, params)
+func (c *Client) LegacySubscribeToAlert(ctx context.Context, params *LegacySubscribeToAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacySubscribeToAlertRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5817,8 +5400,8 @@ func (c *Client) SubscribeToAlert(ctx context.Context, params *SubscribeToAlertP
 	return c.Client.Do(req)
 }
 
-func (c *Client) SyncMirrorPocket(ctx context.Context, params *SyncMirrorPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewSyncMirrorPocketRequest(c.Server, params)
+func (c *Client) LegacySyncMirrorPocket(ctx context.Context, params *LegacySyncMirrorPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacySyncMirrorPocketRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5829,8 +5412,8 @@ func (c *Client) SyncMirrorPocket(ctx context.Context, params *SyncMirrorPocketP
 	return c.Client.Do(req)
 }
 
-func (c *Client) TerminateComputerProcesses(ctx context.Context, params *TerminateComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewTerminateComputerProcessesRequest(c.Server, params)
+func (c *Client) LegacyTerminateComputerProcesses(ctx context.Context, params *LegacyTerminateComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyTerminateComputerProcessesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5841,8 +5424,8 @@ func (c *Client) TerminateComputerProcesses(ctx context.Context, params *Termina
 	return c.Client.Do(req)
 }
 
-func (c *Client) UnsubscribeFromAlert(ctx context.Context, params *UnsubscribeFromAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUnsubscribeFromAlertRequest(c.Server, params)
+func (c *Client) LegacyUnsubscribeFromAlert(ctx context.Context, params *LegacyUnsubscribeFromAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyUnsubscribeFromAlertRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -5853,8 +5436,8 @@ func (c *Client) UnsubscribeFromAlert(ctx context.Context, params *UnsubscribeFr
 	return c.Client.Do(req)
 }
 
-func (c *Client) UpgradePackages(ctx context.Context, params *UpgradePackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewUpgradePackagesRequest(c.Server, params)
+func (c *Client) LegacyUpgradePackages(ctx context.Context, params *LegacyUpgradePackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyUpgradePackagesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -6093,8 +5676,8 @@ func (c *Client) RedactScript(ctx context.Context, scriptId ScriptIdPathParam, r
 	return c.Client.Do(req)
 }
 
-// NewAcceptPendingComputersRequest generates requests for AcceptPendingComputers
-func NewAcceptPendingComputersRequest(server string, params *AcceptPendingComputersParams) (*http.Request, error) {
+// NewLegacyAcceptPendingComputersRequest generates requests for LegacyAcceptPendingComputers
+func NewLegacyAcceptPendingComputersRequest(server string, params *LegacyAcceptPendingComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -6102,7 +5685,7 @@ func NewAcceptPendingComputersRequest(server string, params *AcceptPendingComput
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AcceptPendingComputers")
+	operationPath := fmt.Sprintf("/api/?action=AcceptPendingComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -6114,18 +5697,6 @@ func NewAcceptPendingComputersRequest(server string, params *AcceptPendingComput
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -6194,8 +5765,8 @@ func NewAcceptPendingComputersRequest(server string, params *AcceptPendingComput
 	return req, nil
 }
 
-// NewAddAPTSourcesToRepositoryProfileRequest generates requests for AddAPTSourcesToRepositoryProfile
-func NewAddAPTSourcesToRepositoryProfileRequest(server string, params *AddAPTSourcesToRepositoryProfileParams) (*http.Request, error) {
+// NewLegacyAddAPTSourcesToRepositoryProfileRequest generates requests for LegacyAddAPTSourcesToRepositoryProfile
+func NewLegacyAddAPTSourcesToRepositoryProfileRequest(server string, params *LegacyAddAPTSourcesToRepositoryProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -6203,7 +5774,7 @@ func NewAddAPTSourcesToRepositoryProfileRequest(server string, params *AddAPTSou
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AddAPTSourcesToRepositoryProfile")
+	operationPath := fmt.Sprintf("/api/?action=AddAPTSourcesToRepositoryProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -6215,18 +5786,6 @@ func NewAddAPTSourcesToRepositoryProfileRequest(server string, params *AddAPTSou
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -6275,8 +5834,8 @@ func NewAddAPTSourcesToRepositoryProfileRequest(server string, params *AddAPTSou
 	return req, nil
 }
 
-// NewAddAccessGroupsToRoleRequest generates requests for AddAccessGroupsToRole
-func NewAddAccessGroupsToRoleRequest(server string, params *AddAccessGroupsToRoleParams) (*http.Request, error) {
+// NewLegacyAddAccessGroupsToRoleRequest generates requests for LegacyAddAccessGroupsToRole
+func NewLegacyAddAccessGroupsToRoleRequest(server string, params *LegacyAddAccessGroupsToRoleParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -6284,7 +5843,7 @@ func NewAddAccessGroupsToRoleRequest(server string, params *AddAccessGroupsToRol
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AddAccessGroupsToRole")
+	operationPath := fmt.Sprintf("/api/?action=AddAccessGroupsToRole&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -6296,18 +5855,6 @@ func NewAddAccessGroupsToRoleRequest(server string, params *AddAccessGroupsToRol
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -6356,8 +5903,8 @@ func NewAddAccessGroupsToRoleRequest(server string, params *AddAccessGroupsToRol
 	return req, nil
 }
 
-// NewAddAnnotationToComputersRequest generates requests for AddAnnotationToComputers
-func NewAddAnnotationToComputersRequest(server string, params *AddAnnotationToComputersParams) (*http.Request, error) {
+// NewLegacyAddAnnotationToComputersRequest generates requests for LegacyAddAnnotationToComputers
+func NewLegacyAddAnnotationToComputersRequest(server string, params *LegacyAddAnnotationToComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -6365,7 +5912,7 @@ func NewAddAnnotationToComputersRequest(server string, params *AddAnnotationToCo
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AddAnnotationToComputers")
+	operationPath := fmt.Sprintf("/api/?action=AddAnnotationToComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -6377,18 +5924,6 @@ func NewAddAnnotationToComputersRequest(server string, params *AddAnnotationToCo
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -6453,8 +5988,8 @@ func NewAddAnnotationToComputersRequest(server string, params *AddAnnotationToCo
 	return req, nil
 }
 
-// NewAddPackageFiltersToPocketRequest generates requests for AddPackageFiltersToPocket
-func NewAddPackageFiltersToPocketRequest(server string, params *AddPackageFiltersToPocketParams) (*http.Request, error) {
+// NewLegacyAddPackageFiltersToPocketRequest generates requests for LegacyAddPackageFiltersToPocket
+func NewLegacyAddPackageFiltersToPocketRequest(server string, params *LegacyAddPackageFiltersToPocketParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -6462,7 +5997,7 @@ func NewAddPackageFiltersToPocketRequest(server string, params *AddPackageFilter
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AddPackageFiltersToPocket")
+	operationPath := fmt.Sprintf("/api/?action=AddPackageFiltersToPocket&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -6474,18 +6009,6 @@ func NewAddPackageFiltersToPocketRequest(server string, params *AddPackageFilter
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -6558,8 +6081,8 @@ func NewAddPackageFiltersToPocketRequest(server string, params *AddPackageFilter
 	return req, nil
 }
 
-// NewAddPermissionsToRoleRequest generates requests for AddPermissionsToRole
-func NewAddPermissionsToRoleRequest(server string, params *AddPermissionsToRoleParams) (*http.Request, error) {
+// NewLegacyAddPermissionsToRoleRequest generates requests for LegacyAddPermissionsToRole
+func NewLegacyAddPermissionsToRoleRequest(server string, params *LegacyAddPermissionsToRoleParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -6567,7 +6090,7 @@ func NewAddPermissionsToRoleRequest(server string, params *AddPermissionsToRoleP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AddPermissionsToRole")
+	operationPath := fmt.Sprintf("/api/?action=AddPermissionsToRole&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -6579,18 +6102,6 @@ func NewAddPermissionsToRoleRequest(server string, params *AddPermissionsToRoleP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -6639,8 +6150,8 @@ func NewAddPermissionsToRoleRequest(server string, params *AddPermissionsToRoleP
 	return req, nil
 }
 
-// NewAddPersonsToRoleRequest generates requests for AddPersonsToRole
-func NewAddPersonsToRoleRequest(server string, params *AddPersonsToRoleParams) (*http.Request, error) {
+// NewLegacyAddPersonsToRoleRequest generates requests for LegacyAddPersonsToRole
+func NewLegacyAddPersonsToRoleRequest(server string, params *LegacyAddPersonsToRoleParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -6648,7 +6159,7 @@ func NewAddPersonsToRoleRequest(server string, params *AddPersonsToRoleParams) (
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AddPersonsToRole")
+	operationPath := fmt.Sprintf("/api/?action=AddPersonsToRole&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -6660,18 +6171,6 @@ func NewAddPersonsToRoleRequest(server string, params *AddPersonsToRoleParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -6720,8 +6219,8 @@ func NewAddPersonsToRoleRequest(server string, params *AddPersonsToRoleParams) (
 	return req, nil
 }
 
-// NewAddPocketsToRepositoryProfileRequest generates requests for AddPocketsToRepositoryProfile
-func NewAddPocketsToRepositoryProfileRequest(server string, params *AddPocketsToRepositoryProfileParams) (*http.Request, error) {
+// NewLegacyAddPocketsToRepositoryProfileRequest generates requests for LegacyAddPocketsToRepositoryProfile
+func NewLegacyAddPocketsToRepositoryProfileRequest(server string, params *LegacyAddPocketsToRepositoryProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -6729,7 +6228,7 @@ func NewAddPocketsToRepositoryProfileRequest(server string, params *AddPocketsTo
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AddPocketsToRepositoryProfile")
+	operationPath := fmt.Sprintf("/api/?action=AddPocketsToRepositoryProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -6741,18 +6240,6 @@ func NewAddPocketsToRepositoryProfileRequest(server string, params *AddPocketsTo
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -6825,8 +6312,8 @@ func NewAddPocketsToRepositoryProfileRequest(server string, params *AddPocketsTo
 	return req, nil
 }
 
-// NewAddTagsToComputersRequest generates requests for AddTagsToComputers
-func NewAddTagsToComputersRequest(server string, params *AddTagsToComputersParams) (*http.Request, error) {
+// NewLegacyAddTagsToComputersRequest generates requests for LegacyAddTagsToComputers
+func NewLegacyAddTagsToComputersRequest(server string, params *LegacyAddTagsToComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -6834,7 +6321,7 @@ func NewAddTagsToComputersRequest(server string, params *AddTagsToComputersParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AddTagsToComputers")
+	operationPath := fmt.Sprintf("/api/?action=AddTagsToComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -6846,18 +6333,6 @@ func NewAddTagsToComputersRequest(server string, params *AddTagsToComputersParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -6906,8 +6381,8 @@ func NewAddTagsToComputersRequest(server string, params *AddTagsToComputersParam
 	return req, nil
 }
 
-// NewAddUploaderGPGKeysToPocketRequest generates requests for AddUploaderGPGKeysToPocket
-func NewAddUploaderGPGKeysToPocketRequest(server string, params *AddUploaderGPGKeysToPocketParams) (*http.Request, error) {
+// NewLegacyAddUploaderGPGKeysToPocketRequest generates requests for LegacyAddUploaderGPGKeysToPocket
+func NewLegacyAddUploaderGPGKeysToPocketRequest(server string, params *LegacyAddUploaderGPGKeysToPocketParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -6915,7 +6390,7 @@ func NewAddUploaderGPGKeysToPocketRequest(server string, params *AddUploaderGPGK
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AddUploaderGPGKeysToPocket")
+	operationPath := fmt.Sprintf("/api/?action=AddUploaderGPGKeysToPocket&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -6927,18 +6402,6 @@ func NewAddUploaderGPGKeysToPocketRequest(server string, params *AddUploaderGPGK
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -7011,8 +6474,8 @@ func NewAddUploaderGPGKeysToPocketRequest(server string, params *AddUploaderGPGK
 	return req, nil
 }
 
-// NewApproveActivitiesRequest generates requests for ApproveActivities
-func NewApproveActivitiesRequest(server string, params *ApproveActivitiesParams) (*http.Request, error) {
+// NewLegacyApproveActivitiesRequest generates requests for LegacyApproveActivities
+func NewLegacyApproveActivitiesRequest(server string, params *LegacyApproveActivitiesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -7020,7 +6483,7 @@ func NewApproveActivitiesRequest(server string, params *ApproveActivitiesParams)
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=ApproveActivities")
+	operationPath := fmt.Sprintf("/api/?action=ApproveActivities&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -7032,18 +6495,6 @@ func NewApproveActivitiesRequest(server string, params *ApproveActivitiesParams)
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -7080,8 +6531,8 @@ func NewApproveActivitiesRequest(server string, params *ApproveActivitiesParams)
 	return req, nil
 }
 
-// NewAssociateAlertRequest generates requests for AssociateAlert
-func NewAssociateAlertRequest(server string, params *AssociateAlertParams) (*http.Request, error) {
+// NewLegacyAssociateAlertRequest generates requests for LegacyAssociateAlert
+func NewLegacyAssociateAlertRequest(server string, params *LegacyAssociateAlertParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -7089,7 +6540,7 @@ func NewAssociateAlertRequest(server string, params *AssociateAlertParams) (*htt
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AssociateAlert")
+	operationPath := fmt.Sprintf("/api/?action=AssociateAlert&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -7101,18 +6552,6 @@ func NewAssociateAlertRequest(server string, params *AssociateAlertParams) (*htt
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -7181,8 +6620,8 @@ func NewAssociateAlertRequest(server string, params *AssociateAlertParams) (*htt
 	return req, nil
 }
 
-// NewAssociatePackageProfileRequest generates requests for AssociatePackageProfile
-func NewAssociatePackageProfileRequest(server string, params *AssociatePackageProfileParams) (*http.Request, error) {
+// NewLegacyAssociatePackageProfileRequest generates requests for LegacyAssociatePackageProfile
+func NewLegacyAssociatePackageProfileRequest(server string, params *LegacyAssociatePackageProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -7190,7 +6629,7 @@ func NewAssociatePackageProfileRequest(server string, params *AssociatePackagePr
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AssociatePackageProfile")
+	operationPath := fmt.Sprintf("/api/?action=AssociatePackageProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -7202,18 +6641,6 @@ func NewAssociatePackageProfileRequest(server string, params *AssociatePackagePr
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -7282,8 +6709,8 @@ func NewAssociatePackageProfileRequest(server string, params *AssociatePackagePr
 	return req, nil
 }
 
-// NewAssociateRemovalProfileRequest generates requests for AssociateRemovalProfile
-func NewAssociateRemovalProfileRequest(server string, params *AssociateRemovalProfileParams) (*http.Request, error) {
+// NewLegacyAssociateRemovalProfileRequest generates requests for LegacyAssociateRemovalProfile
+func NewLegacyAssociateRemovalProfileRequest(server string, params *LegacyAssociateRemovalProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -7291,7 +6718,7 @@ func NewAssociateRemovalProfileRequest(server string, params *AssociateRemovalPr
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AssociateRemovalProfile")
+	operationPath := fmt.Sprintf("/api/?action=AssociateRemovalProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -7303,18 +6730,6 @@ func NewAssociateRemovalProfileRequest(server string, params *AssociateRemovalPr
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -7383,8 +6798,8 @@ func NewAssociateRemovalProfileRequest(server string, params *AssociateRemovalPr
 	return req, nil
 }
 
-// NewAssociateRepositoryProfileRequest generates requests for AssociateRepositoryProfile
-func NewAssociateRepositoryProfileRequest(server string, params *AssociateRepositoryProfileParams) (*http.Request, error) {
+// NewLegacyAssociateRepositoryProfileRequest generates requests for LegacyAssociateRepositoryProfile
+func NewLegacyAssociateRepositoryProfileRequest(server string, params *LegacyAssociateRepositoryProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -7392,7 +6807,7 @@ func NewAssociateRepositoryProfileRequest(server string, params *AssociateReposi
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AssociateRepositoryProfile")
+	operationPath := fmt.Sprintf("/api/?action=AssociateRepositoryProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -7404,18 +6819,6 @@ func NewAssociateRepositoryProfileRequest(server string, params *AssociateReposi
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -7484,8 +6887,8 @@ func NewAssociateRepositoryProfileRequest(server string, params *AssociateReposi
 	return req, nil
 }
 
-// NewAssociateUpgradeProfileRequest generates requests for AssociateUpgradeProfile
-func NewAssociateUpgradeProfileRequest(server string, params *AssociateUpgradeProfileParams) (*http.Request, error) {
+// NewLegacyAssociateUpgradeProfileRequest generates requests for LegacyAssociateUpgradeProfile
+func NewLegacyAssociateUpgradeProfileRequest(server string, params *LegacyAssociateUpgradeProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -7493,7 +6896,7 @@ func NewAssociateUpgradeProfileRequest(server string, params *AssociateUpgradePr
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=AssociateUpgradeProfile")
+	operationPath := fmt.Sprintf("/api/?action=AssociateUpgradeProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -7505,18 +6908,6 @@ func NewAssociateUpgradeProfileRequest(server string, params *AssociateUpgradePr
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -7585,8 +6976,8 @@ func NewAssociateUpgradeProfileRequest(server string, params *AssociateUpgradePr
 	return req, nil
 }
 
-// NewCancelActivitiesRequest generates requests for CancelActivities
-func NewCancelActivitiesRequest(server string, params *CancelActivitiesParams) (*http.Request, error) {
+// NewLegacyCancelActivitiesRequest generates requests for LegacyCancelActivities
+func NewLegacyCancelActivitiesRequest(server string, params *LegacyCancelActivitiesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -7594,7 +6985,7 @@ func NewCancelActivitiesRequest(server string, params *CancelActivitiesParams) (
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CancelActivities")
+	operationPath := fmt.Sprintf("/api/?action=CancelActivities&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -7606,18 +6997,6 @@ func NewCancelActivitiesRequest(server string, params *CancelActivitiesParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -7654,8 +7033,8 @@ func NewCancelActivitiesRequest(server string, params *CancelActivitiesParams) (
 	return req, nil
 }
 
-// NewChangeComputersAccessGroupRequest generates requests for ChangeComputersAccessGroup
-func NewChangeComputersAccessGroupRequest(server string, params *ChangeComputersAccessGroupParams) (*http.Request, error) {
+// NewLegacyChangeComputersAccessGroupRequest generates requests for LegacyChangeComputersAccessGroup
+func NewLegacyChangeComputersAccessGroupRequest(server string, params *LegacyChangeComputersAccessGroupParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -7663,7 +7042,7 @@ func NewChangeComputersAccessGroupRequest(server string, params *ChangeComputers
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=ChangeComputersAccessGroup")
+	operationPath := fmt.Sprintf("/api/?action=ChangeComputersAccessGroup&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -7675,18 +7054,6 @@ func NewChangeComputersAccessGroupRequest(server string, params *ChangeComputers
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -7735,8 +7102,8 @@ func NewChangeComputersAccessGroupRequest(server string, params *ChangeComputers
 	return req, nil
 }
 
-// NewCopyPackageProfileRequest generates requests for CopyPackageProfile
-func NewCopyPackageProfileRequest(server string, params *CopyPackageProfileParams) (*http.Request, error) {
+// NewLegacyCopyPackageProfileRequest generates requests for LegacyCopyPackageProfile
+func NewLegacyCopyPackageProfileRequest(server string, params *LegacyCopyPackageProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -7744,7 +7111,7 @@ func NewCopyPackageProfileRequest(server string, params *CopyPackageProfileParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CopyPackageProfile")
+	operationPath := fmt.Sprintf("/api/?action=CopyPackageProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -7756,18 +7123,6 @@ func NewCopyPackageProfileRequest(server string, params *CopyPackageProfileParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -7868,8 +7223,8 @@ func NewCopyPackageProfileRequest(server string, params *CopyPackageProfileParam
 	return req, nil
 }
 
-// NewCopyRoleRequest generates requests for CopyRole
-func NewCopyRoleRequest(server string, params *CopyRoleParams) (*http.Request, error) {
+// NewLegacyCopyRoleRequest generates requests for LegacyCopyRole
+func NewLegacyCopyRoleRequest(server string, params *LegacyCopyRoleParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -7877,7 +7232,7 @@ func NewCopyRoleRequest(server string, params *CopyRoleParams) (*http.Request, e
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CopyRole")
+	operationPath := fmt.Sprintf("/api/?action=CopyRole&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -7889,18 +7244,6 @@ func NewCopyRoleRequest(server string, params *CopyRoleParams) (*http.Request, e
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -7965,8 +7308,8 @@ func NewCopyRoleRequest(server string, params *CopyRoleParams) (*http.Request, e
 	return req, nil
 }
 
-// NewCopyScriptRequest generates requests for CopyScript
-func NewCopyScriptRequest(server string, params *CopyScriptParams) (*http.Request, error) {
+// NewLegacyCopyScriptRequest generates requests for LegacyCopyScript
+func NewLegacyCopyScriptRequest(server string, params *LegacyCopyScriptParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -7974,7 +7317,7 @@ func NewCopyScriptRequest(server string, params *CopyScriptParams) (*http.Reques
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CopyScript")
+	operationPath := fmt.Sprintf("/api/?action=CopyScript&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -7986,18 +7329,6 @@ func NewCopyScriptRequest(server string, params *CopyScriptParams) (*http.Reques
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -8062,8 +7393,8 @@ func NewCopyScriptRequest(server string, params *CopyScriptParams) (*http.Reques
 	return req, nil
 }
 
-// NewCreateAPTSourceRequest generates requests for CreateAPTSource
-func NewCreateAPTSourceRequest(server string, params *CreateAPTSourceParams) (*http.Request, error) {
+// NewLegacyCreateAPTSourceRequest generates requests for LegacyCreateAPTSource
+func NewLegacyCreateAPTSourceRequest(server string, params *LegacyCreateAPTSourceParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -8071,7 +7402,7 @@ func NewCreateAPTSourceRequest(server string, params *CreateAPTSourceParams) (*h
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateAPTSource")
+	operationPath := fmt.Sprintf("/api/?action=CreateAPTSource&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -8083,18 +7414,6 @@ func NewCreateAPTSourceRequest(server string, params *CreateAPTSourceParams) (*h
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -8175,8 +7494,8 @@ func NewCreateAPTSourceRequest(server string, params *CreateAPTSourceParams) (*h
 	return req, nil
 }
 
-// NewCreateAccessGroupRequest generates requests for CreateAccessGroup
-func NewCreateAccessGroupRequest(server string, params *CreateAccessGroupParams) (*http.Request, error) {
+// NewLegacyCreateAccessGroupRequest generates requests for LegacyCreateAccessGroup
+func NewLegacyCreateAccessGroupRequest(server string, params *LegacyCreateAccessGroupParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -8184,7 +7503,7 @@ func NewCreateAccessGroupRequest(server string, params *CreateAccessGroupParams)
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateAccessGroup")
+	operationPath := fmt.Sprintf("/api/?action=CreateAccessGroup&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -8196,18 +7515,6 @@ func NewCreateAccessGroupRequest(server string, params *CreateAccessGroupParams)
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -8260,8 +7567,8 @@ func NewCreateAccessGroupRequest(server string, params *CreateAccessGroupParams)
 	return req, nil
 }
 
-// NewCreateChildComputerRequest generates requests for CreateChildComputer
-func NewCreateChildComputerRequest(server string, params *CreateChildComputerParams) (*http.Request, error) {
+// NewLegacyCreateChildComputerRequest generates requests for LegacyCreateChildComputer
+func NewLegacyCreateChildComputerRequest(server string, params *LegacyCreateChildComputerParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -8269,7 +7576,7 @@ func NewCreateChildComputerRequest(server string, params *CreateChildComputerPar
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateChildComputer")
+	operationPath := fmt.Sprintf("/api/?action=CreateChildComputer&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -8281,18 +7588,6 @@ func NewCreateChildComputerRequest(server string, params *CreateChildComputerPar
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -8373,8 +7668,8 @@ func NewCreateChildComputerRequest(server string, params *CreateChildComputerPar
 	return req, nil
 }
 
-// NewCreateDistributionRequest generates requests for CreateDistribution
-func NewCreateDistributionRequest(server string, params *CreateDistributionParams) (*http.Request, error) {
+// NewLegacyCreateDistributionRequest generates requests for LegacyCreateDistribution
+func NewLegacyCreateDistributionRequest(server string, params *LegacyCreateDistributionParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -8382,7 +7677,7 @@ func NewCreateDistributionRequest(server string, params *CreateDistributionParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateDistribution")
+	operationPath := fmt.Sprintf("/api/?action=CreateDistribution&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -8394,18 +7689,6 @@ func NewCreateDistributionRequest(server string, params *CreateDistributionParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -8458,8 +7741,8 @@ func NewCreateDistributionRequest(server string, params *CreateDistributionParam
 	return req, nil
 }
 
-// NewCreatePackageProfileRequest generates requests for CreatePackageProfile
-func NewCreatePackageProfileRequest(server string, params *CreatePackageProfileParams) (*http.Request, error) {
+// NewLegacyCreatePackageProfileRequest generates requests for LegacyCreatePackageProfile
+func NewLegacyCreatePackageProfileRequest(server string, params *LegacyCreatePackageProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -8467,7 +7750,7 @@ func NewCreatePackageProfileRequest(server string, params *CreatePackageProfileP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreatePackageProfile")
+	operationPath := fmt.Sprintf("/api/?action=CreatePackageProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -8479,18 +7762,6 @@ func NewCreatePackageProfileRequest(server string, params *CreatePackageProfileP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -8603,8 +7874,8 @@ func NewCreatePackageProfileRequest(server string, params *CreatePackageProfileP
 	return req, nil
 }
 
-// NewCreatePocketRequest generates requests for CreatePocket
-func NewCreatePocketRequest(server string, params *CreatePocketParams) (*http.Request, error) {
+// NewLegacyCreatePocketRequest generates requests for LegacyCreatePocket
+func NewLegacyCreatePocketRequest(server string, params *LegacyCreatePocketParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -8612,7 +7883,7 @@ func NewCreatePocketRequest(server string, params *CreatePocketParams) (*http.Re
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreatePocket")
+	operationPath := fmt.Sprintf("/api/?action=CreatePocket&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -8624,18 +7895,6 @@ func NewCreatePocketRequest(server string, params *CreatePocketParams) (*http.Re
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -8904,8 +8163,8 @@ func NewCreatePocketRequest(server string, params *CreatePocketParams) (*http.Re
 	return req, nil
 }
 
-// NewCreateRemovalProfileRequest generates requests for CreateRemovalProfile
-func NewCreateRemovalProfileRequest(server string, params *CreateRemovalProfileParams) (*http.Request, error) {
+// NewLegacyCreateRemovalProfileRequest generates requests for LegacyCreateRemovalProfile
+func NewLegacyCreateRemovalProfileRequest(server string, params *LegacyCreateRemovalProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -8913,7 +8172,7 @@ func NewCreateRemovalProfileRequest(server string, params *CreateRemovalProfileP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateRemovalProfile")
+	operationPath := fmt.Sprintf("/api/?action=CreateRemovalProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -8925,18 +8184,6 @@ func NewCreateRemovalProfileRequest(server string, params *CreateRemovalProfileP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -9049,8 +8296,8 @@ func NewCreateRemovalProfileRequest(server string, params *CreateRemovalProfileP
 	return req, nil
 }
 
-// NewCreateRepositoryProfileRequest generates requests for CreateRepositoryProfile
-func NewCreateRepositoryProfileRequest(server string, params *CreateRepositoryProfileParams) (*http.Request, error) {
+// NewLegacyCreateRepositoryProfileRequest generates requests for LegacyCreateRepositoryProfile
+func NewLegacyCreateRepositoryProfileRequest(server string, params *LegacyCreateRepositoryProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -9058,7 +8305,7 @@ func NewCreateRepositoryProfileRequest(server string, params *CreateRepositoryPr
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateRepositoryProfile")
+	operationPath := fmt.Sprintf("/api/?action=CreateRepositoryProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -9070,18 +8317,6 @@ func NewCreateRepositoryProfileRequest(server string, params *CreateRepositoryPr
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -9150,8 +8385,8 @@ func NewCreateRepositoryProfileRequest(server string, params *CreateRepositoryPr
 	return req, nil
 }
 
-// NewCreateRoleRequest generates requests for CreateRole
-func NewCreateRoleRequest(server string, params *CreateRoleParams) (*http.Request, error) {
+// NewLegacyCreateRoleRequest generates requests for LegacyCreateRole
+func NewLegacyCreateRoleRequest(server string, params *LegacyCreateRoleParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -9159,7 +8394,7 @@ func NewCreateRoleRequest(server string, params *CreateRoleParams) (*http.Reques
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateRole")
+	operationPath := fmt.Sprintf("/api/?action=CreateRole&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -9171,18 +8406,6 @@ func NewCreateRoleRequest(server string, params *CreateRoleParams) (*http.Reques
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -9235,8 +8458,8 @@ func NewCreateRoleRequest(server string, params *CreateRoleParams) (*http.Reques
 	return req, nil
 }
 
-// NewCreateSavedSearchRequest generates requests for CreateSavedSearch
-func NewCreateSavedSearchRequest(server string, params *CreateSavedSearchParams) (*http.Request, error) {
+// NewLegacyCreateSavedSearchRequest generates requests for LegacyCreateSavedSearch
+func NewLegacyCreateSavedSearchRequest(server string, params *LegacyCreateSavedSearchParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -9244,7 +8467,7 @@ func NewCreateSavedSearchRequest(server string, params *CreateSavedSearchParams)
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateSavedSearch")
+	operationPath := fmt.Sprintf("/api/?action=CreateSavedSearch&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -9256,18 +8479,6 @@ func NewCreateSavedSearchRequest(server string, params *CreateSavedSearchParams)
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -9332,8 +8543,8 @@ func NewCreateSavedSearchRequest(server string, params *CreateSavedSearchParams)
 	return req, nil
 }
 
-// NewCreateScriptRequest generates requests for CreateScript
-func NewCreateScriptRequest(server string, params *CreateScriptParams) (*http.Request, error) {
+// NewLegacyCreateScriptRequest generates requests for LegacyCreateScript
+func NewLegacyCreateScriptRequest(server string, params *LegacyCreateScriptParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -9341,7 +8552,7 @@ func NewCreateScriptRequest(server string, params *CreateScriptParams) (*http.Re
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateScript")
+	operationPath := fmt.Sprintf("/api/?action=CreateScript&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -9353,18 +8564,6 @@ func NewCreateScriptRequest(server string, params *CreateScriptParams) (*http.Re
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -9477,8 +8676,8 @@ func NewCreateScriptRequest(server string, params *CreateScriptParams) (*http.Re
 	return req, nil
 }
 
-// NewCreateScriptAttachmentRequest generates requests for CreateScriptAttachment
-func NewCreateScriptAttachmentRequest(server string, params *CreateScriptAttachmentParams) (*http.Request, error) {
+// NewLegacyCreateScriptAttachmentRequest generates requests for LegacyCreateScriptAttachment
+func NewLegacyCreateScriptAttachmentRequest(server string, params *LegacyCreateScriptAttachmentParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -9486,7 +8685,7 @@ func NewCreateScriptAttachmentRequest(server string, params *CreateScriptAttachm
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateScriptAttachment")
+	operationPath := fmt.Sprintf("/api/?action=CreateScriptAttachment&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -9498,18 +8697,6 @@ func NewCreateScriptAttachmentRequest(server string, params *CreateScriptAttachm
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -9558,8 +8745,8 @@ func NewCreateScriptAttachmentRequest(server string, params *CreateScriptAttachm
 	return req, nil
 }
 
-// NewCreateSeriesRequest generates requests for CreateSeries
-func NewCreateSeriesRequest(server string, params *CreateSeriesParams) (*http.Request, error) {
+// NewLegacyCreateSeriesRequest generates requests for LegacyCreateSeries
+func NewLegacyCreateSeriesRequest(server string, params *LegacyCreateSeriesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -9567,7 +8754,7 @@ func NewCreateSeriesRequest(server string, params *CreateSeriesParams) (*http.Re
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateSeries")
+	operationPath := fmt.Sprintf("/api/?action=CreateSeries&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -9579,18 +8766,6 @@ func NewCreateSeriesRequest(server string, params *CreateSeriesParams) (*http.Re
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -9783,8 +8958,8 @@ func NewCreateSeriesRequest(server string, params *CreateSeriesParams) (*http.Re
 	return req, nil
 }
 
-// NewCreateUpgradeProfileRequest generates requests for CreateUpgradeProfile
-func NewCreateUpgradeProfileRequest(server string, params *CreateUpgradeProfileParams) (*http.Request, error) {
+// NewLegacyCreateUpgradeProfileRequest generates requests for LegacyCreateUpgradeProfile
+func NewLegacyCreateUpgradeProfileRequest(server string, params *LegacyCreateUpgradeProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -9792,7 +8967,7 @@ func NewCreateUpgradeProfileRequest(server string, params *CreateUpgradeProfileP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateUpgradeProfile")
+	operationPath := fmt.Sprintf("/api/?action=CreateUpgradeProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -9804,18 +8979,6 @@ func NewCreateUpgradeProfileRequest(server string, params *CreateUpgradeProfileP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -10036,8 +9199,8 @@ func NewCreateUpgradeProfileRequest(server string, params *CreateUpgradeProfileP
 	return req, nil
 }
 
-// NewCreateUserRequest generates requests for CreateUser
-func NewCreateUserRequest(server string, params *CreateUserParams) (*http.Request, error) {
+// NewLegacyCreateUserRequest generates requests for LegacyCreateUser
+func NewLegacyCreateUserRequest(server string, params *LegacyCreateUserParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -10045,7 +9208,7 @@ func NewCreateUserRequest(server string, params *CreateUserParams) (*http.Reques
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=CreateUser")
+	operationPath := fmt.Sprintf("/api/?action=CreateUser&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -10057,18 +9220,6 @@ func NewCreateUserRequest(server string, params *CreateUserParams) (*http.Reques
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -10221,8 +9372,8 @@ func NewCreateUserRequest(server string, params *CreateUserParams) (*http.Reques
 	return req, nil
 }
 
-// NewDeleteChildComputersRequest generates requests for DeleteChildComputers
-func NewDeleteChildComputersRequest(server string, params *DeleteChildComputersParams) (*http.Request, error) {
+// NewLegacyDeleteChildComputersRequest generates requests for LegacyDeleteChildComputers
+func NewLegacyDeleteChildComputersRequest(server string, params *LegacyDeleteChildComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -10230,7 +9381,7 @@ func NewDeleteChildComputersRequest(server string, params *DeleteChildComputersP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=DeleteChildComputers")
+	operationPath := fmt.Sprintf("/api/?action=DeleteChildComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -10242,18 +9393,6 @@ func NewDeleteChildComputersRequest(server string, params *DeleteChildComputersP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -10290,8 +9429,8 @@ func NewDeleteChildComputersRequest(server string, params *DeleteChildComputersP
 	return req, nil
 }
 
-// NewDeriveSeriesRequest generates requests for DeriveSeries
-func NewDeriveSeriesRequest(server string, params *DeriveSeriesParams) (*http.Request, error) {
+// NewLegacyDeriveSeriesRequest generates requests for LegacyDeriveSeries
+func NewLegacyDeriveSeriesRequest(server string, params *LegacyDeriveSeriesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -10299,7 +9438,7 @@ func NewDeriveSeriesRequest(server string, params *DeriveSeriesParams) (*http.Re
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=DeriveSeries")
+	operationPath := fmt.Sprintf("/api/?action=DeriveSeries&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -10311,18 +9450,6 @@ func NewDeriveSeriesRequest(server string, params *DeriveSeriesParams) (*http.Re
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -10383,8 +9510,8 @@ func NewDeriveSeriesRequest(server string, params *DeriveSeriesParams) (*http.Re
 	return req, nil
 }
 
-// NewDiffPullPocketRequest generates requests for DiffPullPocket
-func NewDiffPullPocketRequest(server string, params *DiffPullPocketParams) (*http.Request, error) {
+// NewLegacyDiffPullPocketRequest generates requests for LegacyDiffPullPocket
+func NewLegacyDiffPullPocketRequest(server string, params *LegacyDiffPullPocketParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -10392,7 +9519,7 @@ func NewDiffPullPocketRequest(server string, params *DiffPullPocketParams) (*htt
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=DiffPullPocket")
+	operationPath := fmt.Sprintf("/api/?action=DiffPullPocket&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -10404,18 +9531,6 @@ func NewDiffPullPocketRequest(server string, params *DiffPullPocketParams) (*htt
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -10476,8 +9591,8 @@ func NewDiffPullPocketRequest(server string, params *DiffPullPocketParams) (*htt
 	return req, nil
 }
 
-// NewDisableAdministratorRequest generates requests for DisableAdministrator
-func NewDisableAdministratorRequest(server string, params *DisableAdministratorParams) (*http.Request, error) {
+// NewLegacyDisableAdministratorRequest generates requests for LegacyDisableAdministrator
+func NewLegacyDisableAdministratorRequest(server string, params *LegacyDisableAdministratorParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -10485,7 +9600,7 @@ func NewDisableAdministratorRequest(server string, params *DisableAdministratorP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=DisableAdministrator")
+	operationPath := fmt.Sprintf("/api/?action=DisableAdministrator&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -10497,18 +9612,6 @@ func NewDisableAdministratorRequest(server string, params *DisableAdministratorP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -10545,8 +9648,8 @@ func NewDisableAdministratorRequest(server string, params *DisableAdministratorP
 	return req, nil
 }
 
-// NewDisassociateAlertRequest generates requests for DisassociateAlert
-func NewDisassociateAlertRequest(server string, params *DisassociateAlertParams) (*http.Request, error) {
+// NewLegacyDisassociateAlertRequest generates requests for LegacyDisassociateAlert
+func NewLegacyDisassociateAlertRequest(server string, params *LegacyDisassociateAlertParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -10554,7 +9657,7 @@ func NewDisassociateAlertRequest(server string, params *DisassociateAlertParams)
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=DisassociateAlert")
+	operationPath := fmt.Sprintf("/api/?action=DisassociateAlert&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -10566,18 +9669,6 @@ func NewDisassociateAlertRequest(server string, params *DisassociateAlertParams)
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -10646,8 +9737,8 @@ func NewDisassociateAlertRequest(server string, params *DisassociateAlertParams)
 	return req, nil
 }
 
-// NewDisassociatePackageProfileRequest generates requests for DisassociatePackageProfile
-func NewDisassociatePackageProfileRequest(server string, params *DisassociatePackageProfileParams) (*http.Request, error) {
+// NewLegacyDisassociatePackageProfileRequest generates requests for LegacyDisassociatePackageProfile
+func NewLegacyDisassociatePackageProfileRequest(server string, params *LegacyDisassociatePackageProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -10655,7 +9746,7 @@ func NewDisassociatePackageProfileRequest(server string, params *DisassociatePac
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=DisassociatePackageProfile")
+	operationPath := fmt.Sprintf("/api/?action=DisassociatePackageProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -10667,18 +9758,6 @@ func NewDisassociatePackageProfileRequest(server string, params *DisassociatePac
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -10747,8 +9826,8 @@ func NewDisassociatePackageProfileRequest(server string, params *DisassociatePac
 	return req, nil
 }
 
-// NewDisassociateRemovalProfileRequest generates requests for DisassociateRemovalProfile
-func NewDisassociateRemovalProfileRequest(server string, params *DisassociateRemovalProfileParams) (*http.Request, error) {
+// NewLegacyDisassociateRemovalProfileRequest generates requests for LegacyDisassociateRemovalProfile
+func NewLegacyDisassociateRemovalProfileRequest(server string, params *LegacyDisassociateRemovalProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -10756,7 +9835,7 @@ func NewDisassociateRemovalProfileRequest(server string, params *DisassociateRem
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=DisassociateRemovalProfile")
+	operationPath := fmt.Sprintf("/api/?action=DisassociateRemovalProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -10768,18 +9847,6 @@ func NewDisassociateRemovalProfileRequest(server string, params *DisassociateRem
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -10848,8 +9915,8 @@ func NewDisassociateRemovalProfileRequest(server string, params *DisassociateRem
 	return req, nil
 }
 
-// NewDisassociateRepositoryProfileRequest generates requests for DisassociateRepositoryProfile
-func NewDisassociateRepositoryProfileRequest(server string, params *DisassociateRepositoryProfileParams) (*http.Request, error) {
+// NewLegacyDisassociateRepositoryProfileRequest generates requests for LegacyDisassociateRepositoryProfile
+func NewLegacyDisassociateRepositoryProfileRequest(server string, params *LegacyDisassociateRepositoryProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -10857,7 +9924,7 @@ func NewDisassociateRepositoryProfileRequest(server string, params *Disassociate
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=DisassociateRepositoryProfile")
+	operationPath := fmt.Sprintf("/api/?action=DisassociateRepositoryProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -10869,18 +9936,6 @@ func NewDisassociateRepositoryProfileRequest(server string, params *Disassociate
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -10949,8 +10004,8 @@ func NewDisassociateRepositoryProfileRequest(server string, params *Disassociate
 	return req, nil
 }
 
-// NewDisassociateUpgradeProfileRequest generates requests for DisassociateUpgradeProfile
-func NewDisassociateUpgradeProfileRequest(server string, params *DisassociateUpgradeProfileParams) (*http.Request, error) {
+// NewLegacyDisassociateUpgradeProfileRequest generates requests for LegacyDisassociateUpgradeProfile
+func NewLegacyDisassociateUpgradeProfileRequest(server string, params *LegacyDisassociateUpgradeProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -10958,7 +10013,7 @@ func NewDisassociateUpgradeProfileRequest(server string, params *DisassociateUpg
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=DisassociateUpgradeProfile")
+	operationPath := fmt.Sprintf("/api/?action=DisassociateUpgradeProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -10970,18 +10025,6 @@ func NewDisassociateUpgradeProfileRequest(server string, params *DisassociateUpg
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -11050,8 +10093,8 @@ func NewDisassociateUpgradeProfileRequest(server string, params *DisassociateUpg
 	return req, nil
 }
 
-// NewEditPackageProfileRequest generates requests for EditPackageProfile
-func NewEditPackageProfileRequest(server string, params *EditPackageProfileParams) (*http.Request, error) {
+// NewLegacyEditPackageProfileRequest generates requests for LegacyEditPackageProfile
+func NewLegacyEditPackageProfileRequest(server string, params *LegacyEditPackageProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -11059,7 +10102,7 @@ func NewEditPackageProfileRequest(server string, params *EditPackageProfileParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=EditPackageProfile")
+	operationPath := fmt.Sprintf("/api/?action=EditPackageProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -11071,18 +10114,6 @@ func NewEditPackageProfileRequest(server string, params *EditPackageProfileParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -11167,8 +10198,8 @@ func NewEditPackageProfileRequest(server string, params *EditPackageProfileParam
 	return req, nil
 }
 
-// NewEditPocketRequest generates requests for EditPocket
-func NewEditPocketRequest(server string, params *EditPocketParams) (*http.Request, error) {
+// NewLegacyEditPocketRequest generates requests for LegacyEditPocket
+func NewLegacyEditPocketRequest(server string, params *LegacyEditPocketParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -11176,7 +10207,7 @@ func NewEditPocketRequest(server string, params *EditPocketParams) (*http.Reques
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=EditPocket")
+	operationPath := fmt.Sprintf("/api/?action=EditPocket&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -11188,18 +10219,6 @@ func NewEditPocketRequest(server string, params *EditPocketParams) (*http.Reques
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -11388,8 +10407,8 @@ func NewEditPocketRequest(server string, params *EditPocketParams) (*http.Reques
 	return req, nil
 }
 
-// NewEditRemovalProfileRequest generates requests for EditRemovalProfile
-func NewEditRemovalProfileRequest(server string, params *EditRemovalProfileParams) (*http.Request, error) {
+// NewLegacyEditRemovalProfileRequest generates requests for LegacyEditRemovalProfile
+func NewLegacyEditRemovalProfileRequest(server string, params *LegacyEditRemovalProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -11397,7 +10416,7 @@ func NewEditRemovalProfileRequest(server string, params *EditRemovalProfileParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=EditRemovalProfile")
+	operationPath := fmt.Sprintf("/api/?action=EditRemovalProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -11409,18 +10428,6 @@ func NewEditRemovalProfileRequest(server string, params *EditRemovalProfileParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -11521,8 +10528,8 @@ func NewEditRemovalProfileRequest(server string, params *EditRemovalProfileParam
 	return req, nil
 }
 
-// NewEditRepositoryProfileRequest generates requests for EditRepositoryProfile
-func NewEditRepositoryProfileRequest(server string, params *EditRepositoryProfileParams) (*http.Request, error) {
+// NewLegacyEditRepositoryProfileRequest generates requests for LegacyEditRepositoryProfile
+func NewLegacyEditRepositoryProfileRequest(server string, params *LegacyEditRepositoryProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -11530,7 +10537,7 @@ func NewEditRepositoryProfileRequest(server string, params *EditRepositoryProfil
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=EditRepositoryProfile")
+	operationPath := fmt.Sprintf("/api/?action=EditRepositoryProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -11542,18 +10549,6 @@ func NewEditRepositoryProfileRequest(server string, params *EditRepositoryProfil
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -11622,8 +10617,8 @@ func NewEditRepositoryProfileRequest(server string, params *EditRepositoryProfil
 	return req, nil
 }
 
-// NewEditSavedSearchRequest generates requests for EditSavedSearch
-func NewEditSavedSearchRequest(server string, params *EditSavedSearchParams) (*http.Request, error) {
+// NewLegacyEditSavedSearchRequest generates requests for LegacyEditSavedSearch
+func NewLegacyEditSavedSearchRequest(server string, params *LegacyEditSavedSearchParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -11631,7 +10626,7 @@ func NewEditSavedSearchRequest(server string, params *EditSavedSearchParams) (*h
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=EditSavedSearch")
+	operationPath := fmt.Sprintf("/api/?action=EditSavedSearch&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -11643,18 +10638,6 @@ func NewEditSavedSearchRequest(server string, params *EditSavedSearchParams) (*h
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -11723,8 +10706,8 @@ func NewEditSavedSearchRequest(server string, params *EditSavedSearchParams) (*h
 	return req, nil
 }
 
-// NewEditScriptRequest generates requests for EditScript
-func NewEditScriptRequest(server string, params *EditScriptParams) (*http.Request, error) {
+// NewLegacyEditScriptRequest generates requests for LegacyEditScript
+func NewLegacyEditScriptRequest(server string, params *LegacyEditScriptParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -11732,7 +10715,7 @@ func NewEditScriptRequest(server string, params *EditScriptParams) (*http.Reques
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=EditScript")
+	operationPath := fmt.Sprintf("/api/?action=EditScript&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -11744,18 +10727,6 @@ func NewEditScriptRequest(server string, params *EditScriptParams) (*http.Reques
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -11856,8 +10827,8 @@ func NewEditScriptRequest(server string, params *EditScriptParams) (*http.Reques
 	return req, nil
 }
 
-// NewEditUpgradeProfileRequest generates requests for EditUpgradeProfile
-func NewEditUpgradeProfileRequest(server string, params *EditUpgradeProfileParams) (*http.Request, error) {
+// NewLegacyEditUpgradeProfileRequest generates requests for LegacyEditUpgradeProfile
+func NewLegacyEditUpgradeProfileRequest(server string, params *LegacyEditUpgradeProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -11865,7 +10836,7 @@ func NewEditUpgradeProfileRequest(server string, params *EditUpgradeProfileParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=EditUpgradeProfile")
+	operationPath := fmt.Sprintf("/api/?action=EditUpgradeProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -11877,18 +10848,6 @@ func NewEditUpgradeProfileRequest(server string, params *EditUpgradeProfileParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -12117,8 +11076,8 @@ func NewEditUpgradeProfileRequest(server string, params *EditUpgradeProfileParam
 	return req, nil
 }
 
-// NewEditUserRequest generates requests for EditUser
-func NewEditUserRequest(server string, params *EditUserParams) (*http.Request, error) {
+// NewLegacyEditUserRequest generates requests for LegacyEditUser
+func NewLegacyEditUserRequest(server string, params *LegacyEditUserParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12126,7 +11085,7 @@ func NewEditUserRequest(server string, params *EditUserParams) (*http.Request, e
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=EditUser")
+	operationPath := fmt.Sprintf("/api/?action=EditUser&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12138,18 +11097,6 @@ func NewEditUserRequest(server string, params *EditUserParams) (*http.Request, e
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -12294,8 +11241,8 @@ func NewEditUserRequest(server string, params *EditUserParams) (*http.Request, e
 	return req, nil
 }
 
-// NewExecuteScriptRequest generates requests for ExecuteScript
-func NewExecuteScriptRequest(server string, params *ExecuteScriptParams) (*http.Request, error) {
+// NewLegacyExecuteScriptRequest generates requests for LegacyExecuteScript
+func NewLegacyExecuteScriptRequest(server string, params *LegacyExecuteScriptParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12303,7 +11250,7 @@ func NewExecuteScriptRequest(server string, params *ExecuteScriptParams) (*http.
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=ExecuteScript")
+	operationPath := fmt.Sprintf("/api/?action=ExecuteScript&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12315,18 +11262,6 @@ func NewExecuteScriptRequest(server string, params *ExecuteScriptParams) (*http.
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -12439,8 +11374,8 @@ func NewExecuteScriptRequest(server string, params *ExecuteScriptParams) (*http.
 	return req, nil
 }
 
-// NewGetAPTSourcesRequest generates requests for GetAPTSources
-func NewGetAPTSourcesRequest(server string, params *GetAPTSourcesParams) (*http.Request, error) {
+// NewLegacyGetAPTSourcesRequest generates requests for LegacyGetAPTSources
+func NewLegacyGetAPTSourcesRequest(server string, params *LegacyGetAPTSourcesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12448,7 +11383,7 @@ func NewGetAPTSourcesRequest(server string, params *GetAPTSourcesParams) (*http.
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetAPTSources")
+	operationPath := fmt.Sprintf("/api/?action=GetAPTSources&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12460,18 +11395,6 @@ func NewGetAPTSourcesRequest(server string, params *GetAPTSourcesParams) (*http.
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -12512,8 +11435,8 @@ func NewGetAPTSourcesRequest(server string, params *GetAPTSourcesParams) (*http.
 	return req, nil
 }
 
-// NewGetAccessGroupsRequest generates requests for GetAccessGroups
-func NewGetAccessGroupsRequest(server string, params *GetAccessGroupsParams) (*http.Request, error) {
+// NewLegacyGetAccessGroupsRequest generates requests for LegacyGetAccessGroups
+func NewLegacyGetAccessGroupsRequest(server string, params *LegacyGetAccessGroupsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12521,7 +11444,7 @@ func NewGetAccessGroupsRequest(server string, params *GetAccessGroupsParams) (*h
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetAccessGroups")
+	operationPath := fmt.Sprintf("/api/?action=GetAccessGroups&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12533,18 +11456,6 @@ func NewGetAccessGroupsRequest(server string, params *GetAccessGroupsParams) (*h
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -12585,8 +11496,8 @@ func NewGetAccessGroupsRequest(server string, params *GetAccessGroupsParams) (*h
 	return req, nil
 }
 
-// NewGetActivitiesRequest generates requests for GetActivities
-func NewGetActivitiesRequest(server string, params *GetActivitiesParams) (*http.Request, error) {
+// NewLegacyGetActivitiesRequest generates requests for LegacyGetActivities
+func NewLegacyGetActivitiesRequest(server string, params *LegacyGetActivitiesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12594,7 +11505,7 @@ func NewGetActivitiesRequest(server string, params *GetActivitiesParams) (*http.
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetActivities")
+	operationPath := fmt.Sprintf("/api/?action=GetActivities&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12606,18 +11517,6 @@ func NewGetActivitiesRequest(server string, params *GetActivitiesParams) (*http.
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -12690,8 +11589,8 @@ func NewGetActivitiesRequest(server string, params *GetActivitiesParams) (*http.
 	return req, nil
 }
 
-// NewGetActivityTypesRequest generates requests for GetActivityTypes
-func NewGetActivityTypesRequest(server string, params *GetActivityTypesParams) (*http.Request, error) {
+// NewLegacyGetActivityTypesRequest generates requests for LegacyGetActivityTypes
+func NewLegacyGetActivityTypesRequest(server string, params *LegacyGetActivityTypesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12699,7 +11598,7 @@ func NewGetActivityTypesRequest(server string, params *GetActivityTypesParams) (
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetActivityTypes")
+	operationPath := fmt.Sprintf("/api/?action=GetActivityTypes&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12711,18 +11610,6 @@ func NewGetActivityTypesRequest(server string, params *GetActivityTypesParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -12747,8 +11634,8 @@ func NewGetActivityTypesRequest(server string, params *GetActivityTypesParams) (
 	return req, nil
 }
 
-// NewGetAdministratorsRequest generates requests for GetAdministrators
-func NewGetAdministratorsRequest(server string, params *GetAdministratorsParams) (*http.Request, error) {
+// NewLegacyGetAdministratorsRequest generates requests for LegacyGetAdministrators
+func NewLegacyGetAdministratorsRequest(server string, params *LegacyGetAdministratorsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12756,7 +11643,7 @@ func NewGetAdministratorsRequest(server string, params *GetAdministratorsParams)
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetAdministrators")
+	operationPath := fmt.Sprintf("/api/?action=GetAdministrators&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12768,18 +11655,6 @@ func NewGetAdministratorsRequest(server string, params *GetAdministratorsParams)
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -12804,8 +11679,8 @@ func NewGetAdministratorsRequest(server string, params *GetAdministratorsParams)
 	return req, nil
 }
 
-// NewGetAlertSubscribersRequest generates requests for GetAlertSubscribers
-func NewGetAlertSubscribersRequest(server string, params *GetAlertSubscribersParams) (*http.Request, error) {
+// NewLegacyGetAlertSubscribersRequest generates requests for LegacyGetAlertSubscribers
+func NewLegacyGetAlertSubscribersRequest(server string, params *LegacyGetAlertSubscribersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12813,7 +11688,7 @@ func NewGetAlertSubscribersRequest(server string, params *GetAlertSubscribersPar
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetAlertSubscribers")
+	operationPath := fmt.Sprintf("/api/?action=GetAlertSubscribers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12825,18 +11700,6 @@ func NewGetAlertSubscribersRequest(server string, params *GetAlertSubscribersPar
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -12873,8 +11736,8 @@ func NewGetAlertSubscribersRequest(server string, params *GetAlertSubscribersPar
 	return req, nil
 }
 
-// NewGetAlertsRequest generates requests for GetAlerts
-func NewGetAlertsRequest(server string, params *GetAlertsParams) (*http.Request, error) {
+// NewLegacyGetAlertsRequest generates requests for LegacyGetAlerts
+func NewLegacyGetAlertsRequest(server string, params *LegacyGetAlertsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12882,7 +11745,7 @@ func NewGetAlertsRequest(server string, params *GetAlertsParams) (*http.Request,
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetAlerts")
+	operationPath := fmt.Sprintf("/api/?action=GetAlerts&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12894,18 +11757,6 @@ func NewGetAlertsRequest(server string, params *GetAlertsParams) (*http.Request,
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -12930,8 +11781,8 @@ func NewGetAlertsRequest(server string, params *GetAlertsParams) (*http.Request,
 	return req, nil
 }
 
-// NewGetCSVComplianceDataRequest generates requests for GetCSVComplianceData
-func NewGetCSVComplianceDataRequest(server string, params *GetCSVComplianceDataParams) (*http.Request, error) {
+// NewLegacyGetCSVComplianceDataRequest generates requests for LegacyGetCSVComplianceData
+func NewLegacyGetCSVComplianceDataRequest(server string, params *LegacyGetCSVComplianceDataParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12939,7 +11790,7 @@ func NewGetCSVComplianceDataRequest(server string, params *GetCSVComplianceDataP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetCSVComplianceData")
+	operationPath := fmt.Sprintf("/api/?action=GetCSVComplianceData&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -12951,18 +11802,6 @@ func NewGetCSVComplianceDataRequest(server string, params *GetCSVComplianceDataP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -13067,8 +11906,8 @@ func NewGetCSVComplianceDataRequest(server string, params *GetCSVComplianceDataP
 	return req, nil
 }
 
-// NewGetComputerProcessesRequest generates requests for GetComputerProcesses
-func NewGetComputerProcessesRequest(server string, params *GetComputerProcessesParams) (*http.Request, error) {
+// NewLegacyGetComputerProcessesRequest generates requests for LegacyGetComputerProcesses
+func NewLegacyGetComputerProcessesRequest(server string, params *LegacyGetComputerProcessesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -13076,7 +11915,7 @@ func NewGetComputerProcessesRequest(server string, params *GetComputerProcessesP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetComputerProcesses")
+	operationPath := fmt.Sprintf("/api/?action=GetComputerProcesses&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -13088,18 +11927,6 @@ func NewGetComputerProcessesRequest(server string, params *GetComputerProcessesP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -13168,8 +11995,8 @@ func NewGetComputerProcessesRequest(server string, params *GetComputerProcessesP
 	return req, nil
 }
 
-// NewGetComputersRequest generates requests for GetComputers
-func NewGetComputersRequest(server string, params *GetComputersParams) (*http.Request, error) {
+// NewLegacyGetComputersRequest generates requests for LegacyGetComputers
+func NewLegacyGetComputersRequest(server string, params *LegacyGetComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -13177,7 +12004,7 @@ func NewGetComputersRequest(server string, params *GetComputersParams) (*http.Re
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetComputers")
+	operationPath := fmt.Sprintf("/api/?action=GetComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -13189,18 +12016,6 @@ func NewGetComputersRequest(server string, params *GetComputersParams) (*http.Re
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -13353,8 +12168,8 @@ func NewGetComputersRequest(server string, params *GetComputersParams) (*http.Re
 	return req, nil
 }
 
-// NewGetComputersNotUpgradedRequest generates requests for GetComputersNotUpgraded
-func NewGetComputersNotUpgradedRequest(server string, params *GetComputersNotUpgradedParams) (*http.Request, error) {
+// NewLegacyGetComputersNotUpgradedRequest generates requests for LegacyGetComputersNotUpgraded
+func NewLegacyGetComputersNotUpgradedRequest(server string, params *LegacyGetComputersNotUpgradedParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -13362,7 +12177,7 @@ func NewGetComputersNotUpgradedRequest(server string, params *GetComputersNotUpg
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetComputersNotUpgraded")
+	operationPath := fmt.Sprintf("/api/?action=GetComputersNotUpgraded&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -13374,18 +12189,6 @@ func NewGetComputersNotUpgradedRequest(server string, params *GetComputersNotUpg
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -13458,8 +12261,8 @@ func NewGetComputersNotUpgradedRequest(server string, params *GetComputersNotUpg
 	return req, nil
 }
 
-// NewGetDistributionsRequest generates requests for GetDistributions
-func NewGetDistributionsRequest(server string, params *GetDistributionsParams) (*http.Request, error) {
+// NewLegacyGetDistributionsRequest generates requests for LegacyGetDistributions
+func NewLegacyGetDistributionsRequest(server string, params *LegacyGetDistributionsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -13467,7 +12270,7 @@ func NewGetDistributionsRequest(server string, params *GetDistributionsParams) (
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetDistributions")
+	operationPath := fmt.Sprintf("/api/?action=GetDistributions&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -13479,18 +12282,6 @@ func NewGetDistributionsRequest(server string, params *GetDistributionsParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -13547,8 +12338,8 @@ func NewGetDistributionsRequest(server string, params *GetDistributionsParams) (
 	return req, nil
 }
 
-// NewGetEventLogRequest generates requests for GetEventLog
-func NewGetEventLogRequest(server string, params *GetEventLogParams) (*http.Request, error) {
+// NewLegacyGetEventLogRequest generates requests for LegacyGetEventLog
+func NewLegacyGetEventLogRequest(server string, params *LegacyGetEventLogParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -13556,7 +12347,7 @@ func NewGetEventLogRequest(server string, params *GetEventLogParams) (*http.Requ
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetEventLog")
+	operationPath := fmt.Sprintf("/api/?action=GetEventLog&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -13568,18 +12359,6 @@ func NewGetEventLogRequest(server string, params *GetEventLogParams) (*http.Requ
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -13652,8 +12431,8 @@ func NewGetEventLogRequest(server string, params *GetEventLogParams) (*http.Requ
 	return req, nil
 }
 
-// NewGetGPGKeysRequest generates requests for GetGPGKeys
-func NewGetGPGKeysRequest(server string, params *GetGPGKeysParams) (*http.Request, error) {
+// NewLegacyGetGPGKeysRequest generates requests for LegacyGetGPGKeys
+func NewLegacyGetGPGKeysRequest(server string, params *LegacyGetGPGKeysParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -13661,7 +12440,7 @@ func NewGetGPGKeysRequest(server string, params *GetGPGKeysParams) (*http.Reques
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetGPGKeys")
+	operationPath := fmt.Sprintf("/api/?action=GetGPGKeys&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -13673,18 +12452,6 @@ func NewGetGPGKeysRequest(server string, params *GetGPGKeysParams) (*http.Reques
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -13725,8 +12492,8 @@ func NewGetGPGKeysRequest(server string, params *GetGPGKeysParams) (*http.Reques
 	return req, nil
 }
 
-// NewGetNotPingingComputersRequest generates requests for GetNotPingingComputers
-func NewGetNotPingingComputersRequest(server string, params *GetNotPingingComputersParams) (*http.Request, error) {
+// NewLegacyGetNotPingingComputersRequest generates requests for LegacyGetNotPingingComputers
+func NewLegacyGetNotPingingComputersRequest(server string, params *LegacyGetNotPingingComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -13734,7 +12501,7 @@ func NewGetNotPingingComputersRequest(server string, params *GetNotPingingComput
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetNotPingingComputers")
+	operationPath := fmt.Sprintf("/api/?action=GetNotPingingComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -13746,18 +12513,6 @@ func NewGetNotPingingComputersRequest(server string, params *GetNotPingingComput
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -13842,8 +12597,8 @@ func NewGetNotPingingComputersRequest(server string, params *GetNotPingingComput
 	return req, nil
 }
 
-// NewGetPackageProfilesRequest generates requests for GetPackageProfiles
-func NewGetPackageProfilesRequest(server string, params *GetPackageProfilesParams) (*http.Request, error) {
+// NewLegacyGetPackageProfilesRequest generates requests for LegacyGetPackageProfiles
+func NewLegacyGetPackageProfilesRequest(server string, params *LegacyGetPackageProfilesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -13851,7 +12606,7 @@ func NewGetPackageProfilesRequest(server string, params *GetPackageProfilesParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetPackageProfiles")
+	operationPath := fmt.Sprintf("/api/?action=GetPackageProfiles&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -13863,18 +12618,6 @@ func NewGetPackageProfilesRequest(server string, params *GetPackageProfilesParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -13915,8 +12658,8 @@ func NewGetPackageProfilesRequest(server string, params *GetPackageProfilesParam
 	return req, nil
 }
 
-// NewGetPackagesRequest generates requests for GetPackages
-func NewGetPackagesRequest(server string, params *GetPackagesParams) (*http.Request, error) {
+// NewLegacyGetPackagesRequest generates requests for LegacyGetPackages
+func NewLegacyGetPackagesRequest(server string, params *LegacyGetPackagesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -13924,7 +12667,7 @@ func NewGetPackagesRequest(server string, params *GetPackagesParams) (*http.Requ
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetPackages")
+	operationPath := fmt.Sprintf("/api/?action=GetPackages&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -13936,18 +12679,6 @@ func NewGetPackagesRequest(server string, params *GetPackagesParams) (*http.Requ
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -14112,8 +12843,8 @@ func NewGetPackagesRequest(server string, params *GetPackagesParams) (*http.Requ
 	return req, nil
 }
 
-// NewGetPendingComputersRequest generates requests for GetPendingComputers
-func NewGetPendingComputersRequest(server string, params *GetPendingComputersParams) (*http.Request, error) {
+// NewLegacyGetPendingComputersRequest generates requests for LegacyGetPendingComputers
+func NewLegacyGetPendingComputersRequest(server string, params *LegacyGetPendingComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -14121,7 +12852,7 @@ func NewGetPendingComputersRequest(server string, params *GetPendingComputersPar
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetPendingComputers")
+	operationPath := fmt.Sprintf("/api/?action=GetPendingComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14133,18 +12864,6 @@ func NewGetPendingComputersRequest(server string, params *GetPendingComputersPar
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -14169,8 +12888,8 @@ func NewGetPendingComputersRequest(server string, params *GetPendingComputersPar
 	return req, nil
 }
 
-// NewGetPermissionsRequest generates requests for GetPermissions
-func NewGetPermissionsRequest(server string, params *GetPermissionsParams) (*http.Request, error) {
+// NewLegacyGetPermissionsRequest generates requests for LegacyGetPermissions
+func NewLegacyGetPermissionsRequest(server string, params *LegacyGetPermissionsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -14178,7 +12897,7 @@ func NewGetPermissionsRequest(server string, params *GetPermissionsParams) (*htt
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetPermissions")
+	operationPath := fmt.Sprintf("/api/?action=GetPermissions&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14190,18 +12909,6 @@ func NewGetPermissionsRequest(server string, params *GetPermissionsParams) (*htt
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -14226,8 +12933,8 @@ func NewGetPermissionsRequest(server string, params *GetPermissionsParams) (*htt
 	return req, nil
 }
 
-// NewGetRemovalProfilesRequest generates requests for GetRemovalProfiles
-func NewGetRemovalProfilesRequest(server string, params *GetRemovalProfilesParams) (*http.Request, error) {
+// NewLegacyGetRemovalProfilesRequest generates requests for LegacyGetRemovalProfiles
+func NewLegacyGetRemovalProfilesRequest(server string, params *LegacyGetRemovalProfilesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -14235,7 +12942,7 @@ func NewGetRemovalProfilesRequest(server string, params *GetRemovalProfilesParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetRemovalProfiles")
+	operationPath := fmt.Sprintf("/api/?action=GetRemovalProfiles&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14247,18 +12954,6 @@ func NewGetRemovalProfilesRequest(server string, params *GetRemovalProfilesParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -14283,8 +12978,8 @@ func NewGetRemovalProfilesRequest(server string, params *GetRemovalProfilesParam
 	return req, nil
 }
 
-// NewGetRepoInfoRequest generates requests for GetRepoInfo
-func NewGetRepoInfoRequest(server string, params *GetRepoInfoParams) (*http.Request, error) {
+// NewLegacyGetRepoInfoRequest generates requests for LegacyGetRepoInfo
+func NewLegacyGetRepoInfoRequest(server string, params *LegacyGetRepoInfoParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -14292,7 +12987,7 @@ func NewGetRepoInfoRequest(server string, params *GetRepoInfoParams) (*http.Requ
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetRepoInfo")
+	operationPath := fmt.Sprintf("/api/?action=GetRepoInfo&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14304,18 +12999,6 @@ func NewGetRepoInfoRequest(server string, params *GetRepoInfoParams) (*http.Requ
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -14352,8 +13035,8 @@ func NewGetRepoInfoRequest(server string, params *GetRepoInfoParams) (*http.Requ
 	return req, nil
 }
 
-// NewGetRepositoryProfilesRequest generates requests for GetRepositoryProfiles
-func NewGetRepositoryProfilesRequest(server string, params *GetRepositoryProfilesParams) (*http.Request, error) {
+// NewLegacyGetRepositoryProfilesRequest generates requests for LegacyGetRepositoryProfiles
+func NewLegacyGetRepositoryProfilesRequest(server string, params *LegacyGetRepositoryProfilesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -14361,7 +13044,7 @@ func NewGetRepositoryProfilesRequest(server string, params *GetRepositoryProfile
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetRepositoryProfiles")
+	operationPath := fmt.Sprintf("/api/?action=GetRepositoryProfiles&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14373,18 +13056,6 @@ func NewGetRepositoryProfilesRequest(server string, params *GetRepositoryProfile
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -14425,8 +13096,8 @@ func NewGetRepositoryProfilesRequest(server string, params *GetRepositoryProfile
 	return req, nil
 }
 
-// NewGetRolesRequest generates requests for GetRoles
-func NewGetRolesRequest(server string, params *GetRolesParams) (*http.Request, error) {
+// NewLegacyGetRolesRequest generates requests for LegacyGetRoles
+func NewLegacyGetRolesRequest(server string, params *LegacyGetRolesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -14434,7 +13105,7 @@ func NewGetRolesRequest(server string, params *GetRolesParams) (*http.Request, e
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetRoles")
+	operationPath := fmt.Sprintf("/api/?action=GetRoles&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14446,18 +13117,6 @@ func NewGetRolesRequest(server string, params *GetRolesParams) (*http.Request, e
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -14498,8 +13157,8 @@ func NewGetRolesRequest(server string, params *GetRolesParams) (*http.Request, e
 	return req, nil
 }
 
-// NewGetSavedSearchesRequest generates requests for GetSavedSearches
-func NewGetSavedSearchesRequest(server string, params *GetSavedSearchesParams) (*http.Request, error) {
+// NewLegacyGetSavedSearchesRequest generates requests for LegacyGetSavedSearches
+func NewLegacyGetSavedSearchesRequest(server string, params *LegacyGetSavedSearchesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -14507,7 +13166,7 @@ func NewGetSavedSearchesRequest(server string, params *GetSavedSearchesParams) (
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetSavedSearches")
+	operationPath := fmt.Sprintf("/api/?action=GetSavedSearches&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14519,18 +13178,6 @@ func NewGetSavedSearchesRequest(server string, params *GetSavedSearchesParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -14587,8 +13234,8 @@ func NewGetSavedSearchesRequest(server string, params *GetSavedSearchesParams) (
 	return req, nil
 }
 
-// NewGetScriptCodeRequest generates requests for GetScriptCode
-func NewGetScriptCodeRequest(server string, params *GetScriptCodeParams) (*http.Request, error) {
+// NewLegacyGetScriptCodeRequest generates requests for LegacyGetScriptCode
+func NewLegacyGetScriptCodeRequest(server string, params *LegacyGetScriptCodeParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -14596,7 +13243,7 @@ func NewGetScriptCodeRequest(server string, params *GetScriptCodeParams) (*http.
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetScriptCode")
+	operationPath := fmt.Sprintf("/api/?action=GetScriptCode&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14608,18 +13255,6 @@ func NewGetScriptCodeRequest(server string, params *GetScriptCodeParams) (*http.
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -14656,8 +13291,8 @@ func NewGetScriptCodeRequest(server string, params *GetScriptCodeParams) (*http.
 	return req, nil
 }
 
-// NewGetScriptsRequest generates requests for GetScripts
-func NewGetScriptsRequest(server string, params *GetScriptsParams) (*http.Request, error) {
+// NewLegacyGetScriptsRequest generates requests for LegacyGetScripts
+func NewLegacyGetScriptsRequest(server string, params *LegacyGetScriptsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -14665,7 +13300,7 @@ func NewGetScriptsRequest(server string, params *GetScriptsParams) (*http.Reques
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetScripts")
+	operationPath := fmt.Sprintf("/api/?action=GetScripts&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14677,18 +13312,6 @@ func NewGetScriptsRequest(server string, params *GetScriptsParams) (*http.Reques
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -14761,8 +13384,8 @@ func NewGetScriptsRequest(server string, params *GetScriptsParams) (*http.Reques
 	return req, nil
 }
 
-// NewGetSettingsRequest generates requests for GetSettings
-func NewGetSettingsRequest(server string, params *GetSettingsParams) (*http.Request, error) {
+// NewLegacyGetSettingsRequest generates requests for LegacyGetSettings
+func NewLegacyGetSettingsRequest(server string, params *LegacyGetSettingsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -14770,7 +13393,7 @@ func NewGetSettingsRequest(server string, params *GetSettingsParams) (*http.Requ
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetSettings")
+	operationPath := fmt.Sprintf("/api/?action=GetSettings&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14782,18 +13405,6 @@ func NewGetSettingsRequest(server string, params *GetSettingsParams) (*http.Requ
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -14818,8 +13429,8 @@ func NewGetSettingsRequest(server string, params *GetSettingsParams) (*http.Requ
 	return req, nil
 }
 
-// NewGetUSNTimeToFixRequest generates requests for GetUSNTimeToFix
-func NewGetUSNTimeToFixRequest(server string, params *GetUSNTimeToFixParams) (*http.Request, error) {
+// NewLegacyGetUSNTimeToFixRequest generates requests for LegacyGetUSNTimeToFix
+func NewLegacyGetUSNTimeToFixRequest(server string, params *LegacyGetUSNTimeToFixParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -14827,7 +13438,7 @@ func NewGetUSNTimeToFixRequest(server string, params *GetUSNTimeToFixParams) (*h
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetUSNTimeToFix")
+	operationPath := fmt.Sprintf("/api/?action=GetUSNTimeToFix&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14839,18 +13450,6 @@ func NewGetUSNTimeToFixRequest(server string, params *GetUSNTimeToFixParams) (*h
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -14971,8 +13570,8 @@ func NewGetUSNTimeToFixRequest(server string, params *GetUSNTimeToFixParams) (*h
 	return req, nil
 }
 
-// NewGetUpgradeProfilesRequest generates requests for GetUpgradeProfiles
-func NewGetUpgradeProfilesRequest(server string, params *GetUpgradeProfilesParams) (*http.Request, error) {
+// NewLegacyGetUpgradeProfilesRequest generates requests for LegacyGetUpgradeProfiles
+func NewLegacyGetUpgradeProfilesRequest(server string, params *LegacyGetUpgradeProfilesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -14980,7 +13579,7 @@ func NewGetUpgradeProfilesRequest(server string, params *GetUpgradeProfilesParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetUpgradeProfiles")
+	operationPath := fmt.Sprintf("/api/?action=GetUpgradeProfiles&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14992,18 +13591,6 @@ func NewGetUpgradeProfilesRequest(server string, params *GetUpgradeProfilesParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -15044,8 +13631,8 @@ func NewGetUpgradeProfilesRequest(server string, params *GetUpgradeProfilesParam
 	return req, nil
 }
 
-// NewGetUpgradedComputersByFrequencyRequest generates requests for GetUpgradedComputersByFrequency
-func NewGetUpgradedComputersByFrequencyRequest(server string, params *GetUpgradedComputersByFrequencyParams) (*http.Request, error) {
+// NewLegacyGetUpgradedComputersByFrequencyRequest generates requests for LegacyGetUpgradedComputersByFrequency
+func NewLegacyGetUpgradedComputersByFrequencyRequest(server string, params *LegacyGetUpgradedComputersByFrequencyParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -15053,7 +13640,7 @@ func NewGetUpgradedComputersByFrequencyRequest(server string, params *GetUpgrade
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetUpgradedComputersByFrequency")
+	operationPath := fmt.Sprintf("/api/?action=GetUpgradedComputersByFrequency&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -15065,18 +13652,6 @@ func NewGetUpgradedComputersByFrequencyRequest(server string, params *GetUpgrade
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -15149,8 +13724,8 @@ func NewGetUpgradedComputersByFrequencyRequest(server string, params *GetUpgrade
 	return req, nil
 }
 
-// NewGetUsersRequest generates requests for GetUsers
-func NewGetUsersRequest(server string, params *GetUsersParams) (*http.Request, error) {
+// NewLegacyGetUsersRequest generates requests for LegacyGetUsers
+func NewLegacyGetUsersRequest(server string, params *LegacyGetUsersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -15158,7 +13733,7 @@ func NewGetUsersRequest(server string, params *GetUsersParams) (*http.Request, e
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetUsers")
+	operationPath := fmt.Sprintf("/api/?action=GetUsers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -15170,18 +13745,6 @@ func NewGetUsersRequest(server string, params *GetUsersParams) (*http.Request, e
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -15218,8 +13781,8 @@ func NewGetUsersRequest(server string, params *GetUsersParams) (*http.Request, e
 	return req, nil
 }
 
-// NewGetWSLHostsRequest generates requests for GetWSLHosts
-func NewGetWSLHostsRequest(server string, params *GetWSLHostsParams) (*http.Request, error) {
+// NewLegacyGetWSLHostsRequest generates requests for LegacyGetWSLHosts
+func NewLegacyGetWSLHostsRequest(server string, params *LegacyGetWSLHostsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -15227,7 +13790,7 @@ func NewGetWSLHostsRequest(server string, params *GetWSLHostsParams) (*http.Requ
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=GetWSLHosts")
+	operationPath := fmt.Sprintf("/api/?action=GetWSLHosts&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -15239,18 +13802,6 @@ func NewGetWSLHostsRequest(server string, params *GetWSLHostsParams) (*http.Requ
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -15323,8 +13874,8 @@ func NewGetWSLHostsRequest(server string, params *GetWSLHostsParams) (*http.Requ
 	return req, nil
 }
 
-// NewImportGPGKeyRequest generates requests for ImportGPGKey
-func NewImportGPGKeyRequest(server string, params *ImportGPGKeyParams) (*http.Request, error) {
+// NewLegacyImportGPGKeyRequest generates requests for LegacyImportGPGKey
+func NewLegacyImportGPGKeyRequest(server string, params *LegacyImportGPGKeyParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -15332,7 +13883,7 @@ func NewImportGPGKeyRequest(server string, params *ImportGPGKeyParams) (*http.Re
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=ImportGPGKey")
+	operationPath := fmt.Sprintf("/api/?action=ImportGPGKey&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -15344,18 +13895,6 @@ func NewImportGPGKeyRequest(server string, params *ImportGPGKeyParams) (*http.Re
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -15404,8 +13943,8 @@ func NewImportGPGKeyRequest(server string, params *ImportGPGKeyParams) (*http.Re
 	return req, nil
 }
 
-// NewInstallPackagesRequest generates requests for InstallPackages
-func NewInstallPackagesRequest(server string, params *InstallPackagesParams) (*http.Request, error) {
+// NewLegacyInstallPackagesRequest generates requests for LegacyInstallPackages
+func NewLegacyInstallPackagesRequest(server string, params *LegacyInstallPackagesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -15413,7 +13952,7 @@ func NewInstallPackagesRequest(server string, params *InstallPackagesParams) (*h
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=InstallPackages")
+	operationPath := fmt.Sprintf("/api/?action=InstallPackages&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -15425,18 +13964,6 @@ func NewInstallPackagesRequest(server string, params *InstallPackagesParams) (*h
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -15517,8 +14044,8 @@ func NewInstallPackagesRequest(server string, params *InstallPackagesParams) (*h
 	return req, nil
 }
 
-// NewInviteAdministratorRequest generates requests for InviteAdministrator
-func NewInviteAdministratorRequest(server string, params *InviteAdministratorParams) (*http.Request, error) {
+// NewLegacyInviteAdministratorRequest generates requests for LegacyInviteAdministrator
+func NewLegacyInviteAdministratorRequest(server string, params *LegacyInviteAdministratorParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -15526,7 +14053,7 @@ func NewInviteAdministratorRequest(server string, params *InviteAdministratorPar
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=InviteAdministrator")
+	operationPath := fmt.Sprintf("/api/?action=InviteAdministrator&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -15538,18 +14065,6 @@ func NewInviteAdministratorRequest(server string, params *InviteAdministratorPar
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -15614,8 +14129,8 @@ func NewInviteAdministratorRequest(server string, params *InviteAdministratorPar
 	return req, nil
 }
 
-// NewKillComputerProcessesRequest generates requests for KillComputerProcesses
-func NewKillComputerProcessesRequest(server string, params *KillComputerProcessesParams) (*http.Request, error) {
+// NewLegacyKillComputerProcessesRequest generates requests for LegacyKillComputerProcesses
+func NewLegacyKillComputerProcessesRequest(server string, params *LegacyKillComputerProcessesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -15623,7 +14138,7 @@ func NewKillComputerProcessesRequest(server string, params *KillComputerProcesse
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=KillComputerProcesses")
+	operationPath := fmt.Sprintf("/api/?action=KillComputerProcesses&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -15635,18 +14150,6 @@ func NewKillComputerProcessesRequest(server string, params *KillComputerProcesse
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -15695,8 +14198,8 @@ func NewKillComputerProcessesRequest(server string, params *KillComputerProcesse
 	return req, nil
 }
 
-// NewListPocketRequest generates requests for ListPocket
-func NewListPocketRequest(server string, params *ListPocketParams) (*http.Request, error) {
+// NewLegacyListPocketRequest generates requests for LegacyListPocket
+func NewLegacyListPocketRequest(server string, params *LegacyListPocketParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -15704,7 +14207,7 @@ func NewListPocketRequest(server string, params *ListPocketParams) (*http.Reques
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=ListPocket")
+	operationPath := fmt.Sprintf("/api/?action=ListPocket&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -15716,18 +14219,6 @@ func NewListPocketRequest(server string, params *ListPocketParams) (*http.Reques
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -15836,8 +14327,8 @@ func NewListPocketRequest(server string, params *ListPocketParams) (*http.Reques
 	return req, nil
 }
 
-// NewModifyPackageProfileRequest generates requests for ModifyPackageProfile
-func NewModifyPackageProfileRequest(server string, params *ModifyPackageProfileParams) (*http.Request, error) {
+// NewLegacyModifyPackageProfileRequest generates requests for LegacyModifyPackageProfile
+func NewLegacyModifyPackageProfileRequest(server string, params *LegacyModifyPackageProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -15845,7 +14336,7 @@ func NewModifyPackageProfileRequest(server string, params *ModifyPackageProfileP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=ModifyPackageProfile")
+	operationPath := fmt.Sprintf("/api/?action=ModifyPackageProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -15857,18 +14348,6 @@ func NewModifyPackageProfileRequest(server string, params *ModifyPackageProfileP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -15953,8 +14432,8 @@ func NewModifyPackageProfileRequest(server string, params *ModifyPackageProfileP
 	return req, nil
 }
 
-// NewPullPackagesToPocketRequest generates requests for PullPackagesToPocket
-func NewPullPackagesToPocketRequest(server string, params *PullPackagesToPocketParams) (*http.Request, error) {
+// NewLegacyPullPackagesToPocketRequest generates requests for LegacyPullPackagesToPocket
+func NewLegacyPullPackagesToPocketRequest(server string, params *LegacyPullPackagesToPocketParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -15962,7 +14441,7 @@ func NewPullPackagesToPocketRequest(server string, params *PullPackagesToPocketP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=PullPackagesToPocket")
+	operationPath := fmt.Sprintf("/api/?action=PullPackagesToPocket&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -15974,18 +14453,6 @@ func NewPullPackagesToPocketRequest(server string, params *PullPackagesToPocketP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16046,8 +14513,8 @@ func NewPullPackagesToPocketRequest(server string, params *PullPackagesToPocketP
 	return req, nil
 }
 
-// NewRebootComputersRequest generates requests for RebootComputers
-func NewRebootComputersRequest(server string, params *RebootComputersParams) (*http.Request, error) {
+// NewLegacyRebootComputersRequest generates requests for LegacyRebootComputers
+func NewLegacyRebootComputersRequest(server string, params *LegacyRebootComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16055,7 +14522,7 @@ func NewRebootComputersRequest(server string, params *RebootComputersParams) (*h
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RebootComputers")
+	operationPath := fmt.Sprintf("/api/?action=RebootComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16067,18 +14534,6 @@ func NewRebootComputersRequest(server string, params *RebootComputersParams) (*h
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16131,8 +14586,8 @@ func NewRebootComputersRequest(server string, params *RebootComputersParams) (*h
 	return req, nil
 }
 
-// NewRejectPendingComputersRequest generates requests for RejectPendingComputers
-func NewRejectPendingComputersRequest(server string, params *RejectPendingComputersParams) (*http.Request, error) {
+// NewLegacyRejectPendingComputersRequest generates requests for LegacyRejectPendingComputers
+func NewLegacyRejectPendingComputersRequest(server string, params *LegacyRejectPendingComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16140,7 +14595,7 @@ func NewRejectPendingComputersRequest(server string, params *RejectPendingComput
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RejectPendingComputers")
+	operationPath := fmt.Sprintf("/api/?action=RejectPendingComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16152,18 +14607,6 @@ func NewRejectPendingComputersRequest(server string, params *RejectPendingComput
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16200,8 +14643,8 @@ func NewRejectPendingComputersRequest(server string, params *RejectPendingComput
 	return req, nil
 }
 
-// NewRemoveAPTSourceRequest generates requests for RemoveAPTSource
-func NewRemoveAPTSourceRequest(server string, params *RemoveAPTSourceParams) (*http.Request, error) {
+// NewLegacyRemoveAPTSourceRequest generates requests for LegacyRemoveAPTSource
+func NewLegacyRemoveAPTSourceRequest(server string, params *LegacyRemoveAPTSourceParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16209,7 +14652,7 @@ func NewRemoveAPTSourceRequest(server string, params *RemoveAPTSourceParams) (*h
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveAPTSource")
+	operationPath := fmt.Sprintf("/api/?action=RemoveAPTSource&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16221,18 +14664,6 @@ func NewRemoveAPTSourceRequest(server string, params *RemoveAPTSourceParams) (*h
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16269,8 +14700,8 @@ func NewRemoveAPTSourceRequest(server string, params *RemoveAPTSourceParams) (*h
 	return req, nil
 }
 
-// NewRemoveAPTSourceFromRepositoryProfileRequest generates requests for RemoveAPTSourceFromRepositoryProfile
-func NewRemoveAPTSourceFromRepositoryProfileRequest(server string, params *RemoveAPTSourceFromRepositoryProfileParams) (*http.Request, error) {
+// NewLegacyRemoveAPTSourceFromRepositoryProfileRequest generates requests for LegacyRemoveAPTSourceFromRepositoryProfile
+func NewLegacyRemoveAPTSourceFromRepositoryProfileRequest(server string, params *LegacyRemoveAPTSourceFromRepositoryProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16278,7 +14709,7 @@ func NewRemoveAPTSourceFromRepositoryProfileRequest(server string, params *Remov
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveAPTSourceFromRepositoryProfile")
+	operationPath := fmt.Sprintf("/api/?action=RemoveAPTSourceFromRepositoryProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16290,18 +14721,6 @@ func NewRemoveAPTSourceFromRepositoryProfileRequest(server string, params *Remov
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16350,8 +14769,8 @@ func NewRemoveAPTSourceFromRepositoryProfileRequest(server string, params *Remov
 	return req, nil
 }
 
-// NewRemoveAPTSourcesRequest generates requests for RemoveAPTSources
-func NewRemoveAPTSourcesRequest(server string, params *RemoveAPTSourcesParams) (*http.Request, error) {
+// NewLegacyRemoveAPTSourcesRequest generates requests for LegacyRemoveAPTSources
+func NewLegacyRemoveAPTSourcesRequest(server string, params *LegacyRemoveAPTSourcesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16359,7 +14778,7 @@ func NewRemoveAPTSourcesRequest(server string, params *RemoveAPTSourcesParams) (
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveAPTSources")
+	operationPath := fmt.Sprintf("/api/?action=RemoveAPTSources&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16371,18 +14790,6 @@ func NewRemoveAPTSourcesRequest(server string, params *RemoveAPTSourcesParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16419,8 +14826,8 @@ func NewRemoveAPTSourcesRequest(server string, params *RemoveAPTSourcesParams) (
 	return req, nil
 }
 
-// NewRemoveAPTSourcesFromRepositoryProfileRequest generates requests for RemoveAPTSourcesFromRepositoryProfile
-func NewRemoveAPTSourcesFromRepositoryProfileRequest(server string, params *RemoveAPTSourcesFromRepositoryProfileParams) (*http.Request, error) {
+// NewLegacyRemoveAPTSourcesFromRepositoryProfileRequest generates requests for LegacyRemoveAPTSourcesFromRepositoryProfile
+func NewLegacyRemoveAPTSourcesFromRepositoryProfileRequest(server string, params *LegacyRemoveAPTSourcesFromRepositoryProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16428,7 +14835,7 @@ func NewRemoveAPTSourcesFromRepositoryProfileRequest(server string, params *Remo
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveAPTSourcesFromRepositoryProfile")
+	operationPath := fmt.Sprintf("/api/?action=RemoveAPTSourcesFromRepositoryProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16440,18 +14847,6 @@ func NewRemoveAPTSourcesFromRepositoryProfileRequest(server string, params *Remo
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16500,8 +14895,8 @@ func NewRemoveAPTSourcesFromRepositoryProfileRequest(server string, params *Remo
 	return req, nil
 }
 
-// NewRemoveAccessGroupRequest generates requests for RemoveAccessGroup
-func NewRemoveAccessGroupRequest(server string, params *RemoveAccessGroupParams) (*http.Request, error) {
+// NewLegacyRemoveAccessGroupRequest generates requests for LegacyRemoveAccessGroup
+func NewLegacyRemoveAccessGroupRequest(server string, params *LegacyRemoveAccessGroupParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16509,7 +14904,7 @@ func NewRemoveAccessGroupRequest(server string, params *RemoveAccessGroupParams)
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveAccessGroup")
+	operationPath := fmt.Sprintf("/api/?action=RemoveAccessGroup&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16521,18 +14916,6 @@ func NewRemoveAccessGroupRequest(server string, params *RemoveAccessGroupParams)
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16569,8 +14952,8 @@ func NewRemoveAccessGroupRequest(server string, params *RemoveAccessGroupParams)
 	return req, nil
 }
 
-// NewRemoveAccessGroupsFromRoleRequest generates requests for RemoveAccessGroupsFromRole
-func NewRemoveAccessGroupsFromRoleRequest(server string, params *RemoveAccessGroupsFromRoleParams) (*http.Request, error) {
+// NewLegacyRemoveAccessGroupsFromRoleRequest generates requests for LegacyRemoveAccessGroupsFromRole
+func NewLegacyRemoveAccessGroupsFromRoleRequest(server string, params *LegacyRemoveAccessGroupsFromRoleParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16578,7 +14961,7 @@ func NewRemoveAccessGroupsFromRoleRequest(server string, params *RemoveAccessGro
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveAccessGroupsFromRole")
+	operationPath := fmt.Sprintf("/api/?action=RemoveAccessGroupsFromRole&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16590,18 +14973,6 @@ func NewRemoveAccessGroupsFromRoleRequest(server string, params *RemoveAccessGro
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16650,8 +15021,8 @@ func NewRemoveAccessGroupsFromRoleRequest(server string, params *RemoveAccessGro
 	return req, nil
 }
 
-// NewRemoveAnnotationFromComputersRequest generates requests for RemoveAnnotationFromComputers
-func NewRemoveAnnotationFromComputersRequest(server string, params *RemoveAnnotationFromComputersParams) (*http.Request, error) {
+// NewLegacyRemoveAnnotationFromComputersRequest generates requests for LegacyRemoveAnnotationFromComputers
+func NewLegacyRemoveAnnotationFromComputersRequest(server string, params *LegacyRemoveAnnotationFromComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16659,7 +15030,7 @@ func NewRemoveAnnotationFromComputersRequest(server string, params *RemoveAnnota
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveAnnotationFromComputers")
+	operationPath := fmt.Sprintf("/api/?action=RemoveAnnotationFromComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16671,18 +15042,6 @@ func NewRemoveAnnotationFromComputersRequest(server string, params *RemoveAnnota
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16731,8 +15090,8 @@ func NewRemoveAnnotationFromComputersRequest(server string, params *RemoveAnnota
 	return req, nil
 }
 
-// NewRemoveComputersRequest generates requests for RemoveComputers
-func NewRemoveComputersRequest(server string, params *RemoveComputersParams) (*http.Request, error) {
+// NewLegacyRemoveComputersRequest generates requests for LegacyRemoveComputers
+func NewLegacyRemoveComputersRequest(server string, params *LegacyRemoveComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16740,7 +15099,7 @@ func NewRemoveComputersRequest(server string, params *RemoveComputersParams) (*h
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveComputers")
+	operationPath := fmt.Sprintf("/api/?action=RemoveComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16752,18 +15111,6 @@ func NewRemoveComputersRequest(server string, params *RemoveComputersParams) (*h
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16800,8 +15147,8 @@ func NewRemoveComputersRequest(server string, params *RemoveComputersParams) (*h
 	return req, nil
 }
 
-// NewRemoveDistributionRequest generates requests for RemoveDistribution
-func NewRemoveDistributionRequest(server string, params *RemoveDistributionParams) (*http.Request, error) {
+// NewLegacyRemoveDistributionRequest generates requests for LegacyRemoveDistribution
+func NewLegacyRemoveDistributionRequest(server string, params *LegacyRemoveDistributionParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16809,7 +15156,7 @@ func NewRemoveDistributionRequest(server string, params *RemoveDistributionParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveDistribution")
+	operationPath := fmt.Sprintf("/api/?action=RemoveDistribution&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16821,18 +15168,6 @@ func NewRemoveDistributionRequest(server string, params *RemoveDistributionParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16869,8 +15204,8 @@ func NewRemoveDistributionRequest(server string, params *RemoveDistributionParam
 	return req, nil
 }
 
-// NewRemoveGPGKeyRequest generates requests for RemoveGPGKey
-func NewRemoveGPGKeyRequest(server string, params *RemoveGPGKeyParams) (*http.Request, error) {
+// NewLegacyRemoveGPGKeyRequest generates requests for LegacyRemoveGPGKey
+func NewLegacyRemoveGPGKeyRequest(server string, params *LegacyRemoveGPGKeyParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16878,7 +15213,7 @@ func NewRemoveGPGKeyRequest(server string, params *RemoveGPGKeyParams) (*http.Re
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveGPGKey")
+	operationPath := fmt.Sprintf("/api/?action=RemoveGPGKey&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16890,18 +15225,6 @@ func NewRemoveGPGKeyRequest(server string, params *RemoveGPGKeyParams) (*http.Re
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -16938,8 +15261,8 @@ func NewRemoveGPGKeyRequest(server string, params *RemoveGPGKeyParams) (*http.Re
 	return req, nil
 }
 
-// NewRemovePackageFiltersFromPocketRequest generates requests for RemovePackageFiltersFromPocket
-func NewRemovePackageFiltersFromPocketRequest(server string, params *RemovePackageFiltersFromPocketParams) (*http.Request, error) {
+// NewLegacyRemovePackageFiltersFromPocketRequest generates requests for LegacyRemovePackageFiltersFromPocket
+func NewLegacyRemovePackageFiltersFromPocketRequest(server string, params *LegacyRemovePackageFiltersFromPocketParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -16947,7 +15270,7 @@ func NewRemovePackageFiltersFromPocketRequest(server string, params *RemovePacka
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemovePackageFiltersFromPocket")
+	operationPath := fmt.Sprintf("/api/?action=RemovePackageFiltersFromPocket&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -16959,18 +15282,6 @@ func NewRemovePackageFiltersFromPocketRequest(server string, params *RemovePacka
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -17043,8 +15354,8 @@ func NewRemovePackageFiltersFromPocketRequest(server string, params *RemovePacka
 	return req, nil
 }
 
-// NewRemovePackageProfileRequest generates requests for RemovePackageProfile
-func NewRemovePackageProfileRequest(server string, params *RemovePackageProfileParams) (*http.Request, error) {
+// NewLegacyRemovePackageProfileRequest generates requests for LegacyRemovePackageProfile
+func NewLegacyRemovePackageProfileRequest(server string, params *LegacyRemovePackageProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -17052,7 +15363,7 @@ func NewRemovePackageProfileRequest(server string, params *RemovePackageProfileP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemovePackageProfile")
+	operationPath := fmt.Sprintf("/api/?action=RemovePackageProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17064,18 +15375,6 @@ func NewRemovePackageProfileRequest(server string, params *RemovePackageProfileP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -17112,8 +15411,8 @@ func NewRemovePackageProfileRequest(server string, params *RemovePackageProfileP
 	return req, nil
 }
 
-// NewRemovePackagesRequest generates requests for RemovePackages
-func NewRemovePackagesRequest(server string, params *RemovePackagesParams) (*http.Request, error) {
+// NewLegacyRemovePackagesRequest generates requests for LegacyRemovePackages
+func NewLegacyRemovePackagesRequest(server string, params *LegacyRemovePackagesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -17121,7 +15420,7 @@ func NewRemovePackagesRequest(server string, params *RemovePackagesParams) (*htt
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemovePackages")
+	operationPath := fmt.Sprintf("/api/?action=RemovePackages&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17133,18 +15432,6 @@ func NewRemovePackagesRequest(server string, params *RemovePackagesParams) (*htt
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -17225,8 +15512,8 @@ func NewRemovePackagesRequest(server string, params *RemovePackagesParams) (*htt
 	return req, nil
 }
 
-// NewRemovePackagesFromPocketRequest generates requests for RemovePackagesFromPocket
-func NewRemovePackagesFromPocketRequest(server string, params *RemovePackagesFromPocketParams) (*http.Request, error) {
+// NewLegacyRemovePackagesFromPocketRequest generates requests for LegacyRemovePackagesFromPocket
+func NewLegacyRemovePackagesFromPocketRequest(server string, params *LegacyRemovePackagesFromPocketParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -17234,7 +15521,7 @@ func NewRemovePackagesFromPocketRequest(server string, params *RemovePackagesFro
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemovePackagesFromPocket")
+	operationPath := fmt.Sprintf("/api/?action=RemovePackagesFromPocket&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17246,18 +15533,6 @@ func NewRemovePackagesFromPocketRequest(server string, params *RemovePackagesFro
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -17330,8 +15605,8 @@ func NewRemovePackagesFromPocketRequest(server string, params *RemovePackagesFro
 	return req, nil
 }
 
-// NewRemovePermissionsFromRoleRequest generates requests for RemovePermissionsFromRole
-func NewRemovePermissionsFromRoleRequest(server string, params *RemovePermissionsFromRoleParams) (*http.Request, error) {
+// NewLegacyRemovePermissionsFromRoleRequest generates requests for LegacyRemovePermissionsFromRole
+func NewLegacyRemovePermissionsFromRoleRequest(server string, params *LegacyRemovePermissionsFromRoleParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -17339,7 +15614,7 @@ func NewRemovePermissionsFromRoleRequest(server string, params *RemovePermission
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemovePermissionsFromRole")
+	operationPath := fmt.Sprintf("/api/?action=RemovePermissionsFromRole&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17351,18 +15626,6 @@ func NewRemovePermissionsFromRoleRequest(server string, params *RemovePermission
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -17411,8 +15674,8 @@ func NewRemovePermissionsFromRoleRequest(server string, params *RemovePermission
 	return req, nil
 }
 
-// NewRemovePersonsFromRoleRequest generates requests for RemovePersonsFromRole
-func NewRemovePersonsFromRoleRequest(server string, params *RemovePersonsFromRoleParams) (*http.Request, error) {
+// NewLegacyRemovePersonsFromRoleRequest generates requests for LegacyRemovePersonsFromRole
+func NewLegacyRemovePersonsFromRoleRequest(server string, params *LegacyRemovePersonsFromRoleParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -17420,7 +15683,7 @@ func NewRemovePersonsFromRoleRequest(server string, params *RemovePersonsFromRol
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemovePersonsFromRole")
+	operationPath := fmt.Sprintf("/api/?action=RemovePersonsFromRole&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17432,18 +15695,6 @@ func NewRemovePersonsFromRoleRequest(server string, params *RemovePersonsFromRol
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -17492,8 +15743,8 @@ func NewRemovePersonsFromRoleRequest(server string, params *RemovePersonsFromRol
 	return req, nil
 }
 
-// NewRemovePocketRequest generates requests for RemovePocket
-func NewRemovePocketRequest(server string, params *RemovePocketParams) (*http.Request, error) {
+// NewLegacyRemovePocketRequest generates requests for LegacyRemovePocket
+func NewLegacyRemovePocketRequest(server string, params *LegacyRemovePocketParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -17501,7 +15752,7 @@ func NewRemovePocketRequest(server string, params *RemovePocketParams) (*http.Re
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemovePocket")
+	operationPath := fmt.Sprintf("/api/?action=RemovePocket&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17513,18 +15764,6 @@ func NewRemovePocketRequest(server string, params *RemovePocketParams) (*http.Re
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -17585,8 +15824,8 @@ func NewRemovePocketRequest(server string, params *RemovePocketParams) (*http.Re
 	return req, nil
 }
 
-// NewRemovePocketsFromRepositoryProfileRequest generates requests for RemovePocketsFromRepositoryProfile
-func NewRemovePocketsFromRepositoryProfileRequest(server string, params *RemovePocketsFromRepositoryProfileParams) (*http.Request, error) {
+// NewLegacyRemovePocketsFromRepositoryProfileRequest generates requests for LegacyRemovePocketsFromRepositoryProfile
+func NewLegacyRemovePocketsFromRepositoryProfileRequest(server string, params *LegacyRemovePocketsFromRepositoryProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -17594,7 +15833,7 @@ func NewRemovePocketsFromRepositoryProfileRequest(server string, params *RemoveP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemovePocketsFromRepositoryProfile")
+	operationPath := fmt.Sprintf("/api/?action=RemovePocketsFromRepositoryProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17606,18 +15845,6 @@ func NewRemovePocketsFromRepositoryProfileRequest(server string, params *RemoveP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -17690,8 +15917,8 @@ func NewRemovePocketsFromRepositoryProfileRequest(server string, params *RemoveP
 	return req, nil
 }
 
-// NewRemoveRemovalProfileRequest generates requests for RemoveRemovalProfile
-func NewRemoveRemovalProfileRequest(server string, params *RemoveRemovalProfileParams) (*http.Request, error) {
+// NewLegacyRemoveRemovalProfileRequest generates requests for LegacyRemoveRemovalProfile
+func NewLegacyRemoveRemovalProfileRequest(server string, params *LegacyRemoveRemovalProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -17699,7 +15926,7 @@ func NewRemoveRemovalProfileRequest(server string, params *RemoveRemovalProfileP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveRemovalProfile")
+	operationPath := fmt.Sprintf("/api/?action=RemoveRemovalProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17711,18 +15938,6 @@ func NewRemoveRemovalProfileRequest(server string, params *RemoveRemovalProfileP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -17759,8 +15974,8 @@ func NewRemoveRemovalProfileRequest(server string, params *RemoveRemovalProfileP
 	return req, nil
 }
 
-// NewRemoveRepositoryProfileRequest generates requests for RemoveRepositoryProfile
-func NewRemoveRepositoryProfileRequest(server string, params *RemoveRepositoryProfileParams) (*http.Request, error) {
+// NewLegacyRemoveRepositoryProfileRequest generates requests for LegacyRemoveRepositoryProfile
+func NewLegacyRemoveRepositoryProfileRequest(server string, params *LegacyRemoveRepositoryProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -17768,7 +15983,7 @@ func NewRemoveRepositoryProfileRequest(server string, params *RemoveRepositoryPr
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveRepositoryProfile")
+	operationPath := fmt.Sprintf("/api/?action=RemoveRepositoryProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17780,18 +15995,6 @@ func NewRemoveRepositoryProfileRequest(server string, params *RemoveRepositoryPr
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -17828,8 +16031,8 @@ func NewRemoveRepositoryProfileRequest(server string, params *RemoveRepositoryPr
 	return req, nil
 }
 
-// NewRemoveRepositoryProfilesRequest generates requests for RemoveRepositoryProfiles
-func NewRemoveRepositoryProfilesRequest(server string, params *RemoveRepositoryProfilesParams) (*http.Request, error) {
+// NewLegacyRemoveRepositoryProfilesRequest generates requests for LegacyRemoveRepositoryProfiles
+func NewLegacyRemoveRepositoryProfilesRequest(server string, params *LegacyRemoveRepositoryProfilesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -17837,7 +16040,7 @@ func NewRemoveRepositoryProfilesRequest(server string, params *RemoveRepositoryP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveRepositoryProfiles")
+	operationPath := fmt.Sprintf("/api/?action=RemoveRepositoryProfiles&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17849,18 +16052,6 @@ func NewRemoveRepositoryProfilesRequest(server string, params *RemoveRepositoryP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -17897,8 +16088,8 @@ func NewRemoveRepositoryProfilesRequest(server string, params *RemoveRepositoryP
 	return req, nil
 }
 
-// NewRemoveRoleRequest generates requests for RemoveRole
-func NewRemoveRoleRequest(server string, params *RemoveRoleParams) (*http.Request, error) {
+// NewLegacyRemoveRoleRequest generates requests for LegacyRemoveRole
+func NewLegacyRemoveRoleRequest(server string, params *LegacyRemoveRoleParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -17906,7 +16097,7 @@ func NewRemoveRoleRequest(server string, params *RemoveRoleParams) (*http.Reques
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveRole")
+	operationPath := fmt.Sprintf("/api/?action=RemoveRole&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17918,18 +16109,6 @@ func NewRemoveRoleRequest(server string, params *RemoveRoleParams) (*http.Reques
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -17966,8 +16145,8 @@ func NewRemoveRoleRequest(server string, params *RemoveRoleParams) (*http.Reques
 	return req, nil
 }
 
-// NewRemoveSavedSearchRequest generates requests for RemoveSavedSearch
-func NewRemoveSavedSearchRequest(server string, params *RemoveSavedSearchParams) (*http.Request, error) {
+// NewLegacyRemoveSavedSearchRequest generates requests for LegacyRemoveSavedSearch
+func NewLegacyRemoveSavedSearchRequest(server string, params *LegacyRemoveSavedSearchParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -17975,7 +16154,7 @@ func NewRemoveSavedSearchRequest(server string, params *RemoveSavedSearchParams)
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveSavedSearch")
+	operationPath := fmt.Sprintf("/api/?action=RemoveSavedSearch&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17987,18 +16166,6 @@ func NewRemoveSavedSearchRequest(server string, params *RemoveSavedSearchParams)
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18035,8 +16202,8 @@ func NewRemoveSavedSearchRequest(server string, params *RemoveSavedSearchParams)
 	return req, nil
 }
 
-// NewRemoveScriptRequest generates requests for RemoveScript
-func NewRemoveScriptRequest(server string, params *RemoveScriptParams) (*http.Request, error) {
+// NewLegacyRemoveScriptRequest generates requests for LegacyRemoveScript
+func NewLegacyRemoveScriptRequest(server string, params *LegacyRemoveScriptParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18044,7 +16211,7 @@ func NewRemoveScriptRequest(server string, params *RemoveScriptParams) (*http.Re
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveScript")
+	operationPath := fmt.Sprintf("/api/?action=RemoveScript&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18056,18 +16223,6 @@ func NewRemoveScriptRequest(server string, params *RemoveScriptParams) (*http.Re
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18104,8 +16259,8 @@ func NewRemoveScriptRequest(server string, params *RemoveScriptParams) (*http.Re
 	return req, nil
 }
 
-// NewRemoveScriptAttachmentRequest generates requests for RemoveScriptAttachment
-func NewRemoveScriptAttachmentRequest(server string, params *RemoveScriptAttachmentParams) (*http.Request, error) {
+// NewLegacyRemoveScriptAttachmentRequest generates requests for LegacyRemoveScriptAttachment
+func NewLegacyRemoveScriptAttachmentRequest(server string, params *LegacyRemoveScriptAttachmentParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18113,7 +16268,7 @@ func NewRemoveScriptAttachmentRequest(server string, params *RemoveScriptAttachm
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveScriptAttachment")
+	operationPath := fmt.Sprintf("/api/?action=RemoveScriptAttachment&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18125,18 +16280,6 @@ func NewRemoveScriptAttachmentRequest(server string, params *RemoveScriptAttachm
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18185,8 +16328,8 @@ func NewRemoveScriptAttachmentRequest(server string, params *RemoveScriptAttachm
 	return req, nil
 }
 
-// NewRemoveSeriesRequest generates requests for RemoveSeries
-func NewRemoveSeriesRequest(server string, params *RemoveSeriesParams) (*http.Request, error) {
+// NewLegacyRemoveSeriesRequest generates requests for LegacyRemoveSeries
+func NewLegacyRemoveSeriesRequest(server string, params *LegacyRemoveSeriesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18194,7 +16337,7 @@ func NewRemoveSeriesRequest(server string, params *RemoveSeriesParams) (*http.Re
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveSeries")
+	operationPath := fmt.Sprintf("/api/?action=RemoveSeries&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18206,18 +16349,6 @@ func NewRemoveSeriesRequest(server string, params *RemoveSeriesParams) (*http.Re
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18266,8 +16397,8 @@ func NewRemoveSeriesRequest(server string, params *RemoveSeriesParams) (*http.Re
 	return req, nil
 }
 
-// NewRemoveTagsFromComputersRequest generates requests for RemoveTagsFromComputers
-func NewRemoveTagsFromComputersRequest(server string, params *RemoveTagsFromComputersParams) (*http.Request, error) {
+// NewLegacyRemoveTagsFromComputersRequest generates requests for LegacyRemoveTagsFromComputers
+func NewLegacyRemoveTagsFromComputersRequest(server string, params *LegacyRemoveTagsFromComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18275,7 +16406,7 @@ func NewRemoveTagsFromComputersRequest(server string, params *RemoveTagsFromComp
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveTagsFromComputers")
+	operationPath := fmt.Sprintf("/api/?action=RemoveTagsFromComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18287,18 +16418,6 @@ func NewRemoveTagsFromComputersRequest(server string, params *RemoveTagsFromComp
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18347,8 +16466,8 @@ func NewRemoveTagsFromComputersRequest(server string, params *RemoveTagsFromComp
 	return req, nil
 }
 
-// NewRemoveUpgradeProfileRequest generates requests for RemoveUpgradeProfile
-func NewRemoveUpgradeProfileRequest(server string, params *RemoveUpgradeProfileParams) (*http.Request, error) {
+// NewLegacyRemoveUpgradeProfileRequest generates requests for LegacyRemoveUpgradeProfile
+func NewLegacyRemoveUpgradeProfileRequest(server string, params *LegacyRemoveUpgradeProfileParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18356,7 +16475,7 @@ func NewRemoveUpgradeProfileRequest(server string, params *RemoveUpgradeProfileP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveUpgradeProfile")
+	operationPath := fmt.Sprintf("/api/?action=RemoveUpgradeProfile&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18368,18 +16487,6 @@ func NewRemoveUpgradeProfileRequest(server string, params *RemoveUpgradeProfileP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18416,8 +16523,8 @@ func NewRemoveUpgradeProfileRequest(server string, params *RemoveUpgradeProfileP
 	return req, nil
 }
 
-// NewRemoveUploaderGPGKeysFromPocketRequest generates requests for RemoveUploaderGPGKeysFromPocket
-func NewRemoveUploaderGPGKeysFromPocketRequest(server string, params *RemoveUploaderGPGKeysFromPocketParams) (*http.Request, error) {
+// NewLegacyRemoveUploaderGPGKeysFromPocketRequest generates requests for LegacyRemoveUploaderGPGKeysFromPocket
+func NewLegacyRemoveUploaderGPGKeysFromPocketRequest(server string, params *LegacyRemoveUploaderGPGKeysFromPocketParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18425,7 +16532,7 @@ func NewRemoveUploaderGPGKeysFromPocketRequest(server string, params *RemoveUplo
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveUploaderGPGKeysFromPocket")
+	operationPath := fmt.Sprintf("/api/?action=RemoveUploaderGPGKeysFromPocket&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18437,18 +16544,6 @@ func NewRemoveUploaderGPGKeysFromPocketRequest(server string, params *RemoveUplo
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18521,8 +16616,8 @@ func NewRemoveUploaderGPGKeysFromPocketRequest(server string, params *RemoveUplo
 	return req, nil
 }
 
-// NewRemoveWSLHostsRequest generates requests for RemoveWSLHosts
-func NewRemoveWSLHostsRequest(server string, params *RemoveWSLHostsParams) (*http.Request, error) {
+// NewLegacyRemoveWSLHostsRequest generates requests for LegacyRemoveWSLHosts
+func NewLegacyRemoveWSLHostsRequest(server string, params *LegacyRemoveWSLHostsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18530,7 +16625,7 @@ func NewRemoveWSLHostsRequest(server string, params *RemoveWSLHostsParams) (*htt
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RemoveWSLHosts")
+	operationPath := fmt.Sprintf("/api/?action=RemoveWSLHosts&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18542,18 +16637,6 @@ func NewRemoveWSLHostsRequest(server string, params *RemoveWSLHostsParams) (*htt
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18606,8 +16689,8 @@ func NewRemoveWSLHostsRequest(server string, params *RemoveWSLHostsParams) (*htt
 	return req, nil
 }
 
-// NewRenameComputersRequest generates requests for RenameComputers
-func NewRenameComputersRequest(server string, params *RenameComputersParams) (*http.Request, error) {
+// NewLegacyRenameComputersRequest generates requests for LegacyRenameComputers
+func NewLegacyRenameComputersRequest(server string, params *LegacyRenameComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18615,7 +16698,7 @@ func NewRenameComputersRequest(server string, params *RenameComputersParams) (*h
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=RenameComputers")
+	operationPath := fmt.Sprintf("/api/?action=RenameComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18627,18 +16710,6 @@ func NewRenameComputersRequest(server string, params *RenameComputersParams) (*h
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18675,8 +16746,8 @@ func NewRenameComputersRequest(server string, params *RenameComputersParams) (*h
 	return req, nil
 }
 
-// NewSetDefaultChildComputerRequest generates requests for SetDefaultChildComputer
-func NewSetDefaultChildComputerRequest(server string, params *SetDefaultChildComputerParams) (*http.Request, error) {
+// NewLegacySetDefaultChildComputerRequest generates requests for LegacySetDefaultChildComputer
+func NewLegacySetDefaultChildComputerRequest(server string, params *LegacySetDefaultChildComputerParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18684,7 +16755,7 @@ func NewSetDefaultChildComputerRequest(server string, params *SetDefaultChildCom
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=SetDefaultChildComputer")
+	operationPath := fmt.Sprintf("/api/?action=SetDefaultChildComputer&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18696,18 +16767,6 @@ func NewSetDefaultChildComputerRequest(server string, params *SetDefaultChildCom
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18756,8 +16815,8 @@ func NewSetDefaultChildComputerRequest(server string, params *SetDefaultChildCom
 	return req, nil
 }
 
-// NewSetSettingsRequest generates requests for SetSettings
-func NewSetSettingsRequest(server string, params *SetSettingsParams) (*http.Request, error) {
+// NewLegacySetSettingsRequest generates requests for LegacySetSettings
+func NewLegacySetSettingsRequest(server string, params *LegacySetSettingsParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18765,7 +16824,7 @@ func NewSetSettingsRequest(server string, params *SetSettingsParams) (*http.Requ
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=SetSettings")
+	operationPath := fmt.Sprintf("/api/?action=SetSettings&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18777,18 +16836,6 @@ func NewSetSettingsRequest(server string, params *SetSettingsParams) (*http.Requ
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18825,8 +16872,8 @@ func NewSetSettingsRequest(server string, params *SetSettingsParams) (*http.Requ
 	return req, nil
 }
 
-// NewShutdownComputersRequest generates requests for ShutdownComputers
-func NewShutdownComputersRequest(server string, params *ShutdownComputersParams) (*http.Request, error) {
+// NewLegacyShutdownComputersRequest generates requests for LegacyShutdownComputers
+func NewLegacyShutdownComputersRequest(server string, params *LegacyShutdownComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18834,7 +16881,7 @@ func NewShutdownComputersRequest(server string, params *ShutdownComputersParams)
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=ShutdownComputers")
+	operationPath := fmt.Sprintf("/api/?action=ShutdownComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18846,18 +16893,6 @@ func NewShutdownComputersRequest(server string, params *ShutdownComputersParams)
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18910,8 +16945,8 @@ func NewShutdownComputersRequest(server string, params *ShutdownComputersParams)
 	return req, nil
 }
 
-// NewShutdownHostComputerRequest generates requests for ShutdownHostComputer
-func NewShutdownHostComputerRequest(server string, params *ShutdownHostComputerParams) (*http.Request, error) {
+// NewLegacyShutdownHostComputerRequest generates requests for LegacyShutdownHostComputer
+func NewLegacyShutdownHostComputerRequest(server string, params *LegacyShutdownHostComputerParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18919,7 +16954,7 @@ func NewShutdownHostComputerRequest(server string, params *ShutdownHostComputerP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=ShutdownHostComputer")
+	operationPath := fmt.Sprintf("/api/?action=ShutdownHostComputer&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18931,18 +16966,6 @@ func NewShutdownHostComputerRequest(server string, params *ShutdownHostComputerP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -18979,8 +17002,8 @@ func NewShutdownHostComputerRequest(server string, params *ShutdownHostComputerP
 	return req, nil
 }
 
-// NewStartChildComputersRequest generates requests for StartChildComputers
-func NewStartChildComputersRequest(server string, params *StartChildComputersParams) (*http.Request, error) {
+// NewLegacyStartChildComputersRequest generates requests for LegacyStartChildComputers
+func NewLegacyStartChildComputersRequest(server string, params *LegacyStartChildComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -18988,7 +17011,7 @@ func NewStartChildComputersRequest(server string, params *StartChildComputersPar
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=StartChildComputers")
+	operationPath := fmt.Sprintf("/api/?action=StartChildComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -19000,18 +17023,6 @@ func NewStartChildComputersRequest(server string, params *StartChildComputersPar
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -19048,8 +17059,8 @@ func NewStartChildComputersRequest(server string, params *StartChildComputersPar
 	return req, nil
 }
 
-// NewStopChildComputersRequest generates requests for StopChildComputers
-func NewStopChildComputersRequest(server string, params *StopChildComputersParams) (*http.Request, error) {
+// NewLegacyStopChildComputersRequest generates requests for LegacyStopChildComputers
+func NewLegacyStopChildComputersRequest(server string, params *LegacyStopChildComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -19057,7 +17068,7 @@ func NewStopChildComputersRequest(server string, params *StopChildComputersParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=StopChildComputers")
+	operationPath := fmt.Sprintf("/api/?action=StopChildComputers&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -19069,18 +17080,6 @@ func NewStopChildComputersRequest(server string, params *StopChildComputersParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -19117,8 +17116,8 @@ func NewStopChildComputersRequest(server string, params *StopChildComputersParam
 	return req, nil
 }
 
-// NewSubscribeToAlertRequest generates requests for SubscribeToAlert
-func NewSubscribeToAlertRequest(server string, params *SubscribeToAlertParams) (*http.Request, error) {
+// NewLegacySubscribeToAlertRequest generates requests for LegacySubscribeToAlert
+func NewLegacySubscribeToAlertRequest(server string, params *LegacySubscribeToAlertParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -19126,7 +17125,7 @@ func NewSubscribeToAlertRequest(server string, params *SubscribeToAlertParams) (
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=SubscribeToAlert")
+	operationPath := fmt.Sprintf("/api/?action=SubscribeToAlert&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -19138,30 +17137,6 @@ func NewSubscribeToAlertRequest(server string, params *SubscribeToAlertParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "alert_type", runtime.ParamLocationQuery, params.AlertType); err != nil {
 			return nil, err
@@ -19186,8 +17161,8 @@ func NewSubscribeToAlertRequest(server string, params *SubscribeToAlertParams) (
 	return req, nil
 }
 
-// NewSyncMirrorPocketRequest generates requests for SyncMirrorPocket
-func NewSyncMirrorPocketRequest(server string, params *SyncMirrorPocketParams) (*http.Request, error) {
+// NewLegacySyncMirrorPocketRequest generates requests for LegacySyncMirrorPocket
+func NewLegacySyncMirrorPocketRequest(server string, params *LegacySyncMirrorPocketParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -19195,7 +17170,7 @@ func NewSyncMirrorPocketRequest(server string, params *SyncMirrorPocketParams) (
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=SyncMirrorPocket")
+	operationPath := fmt.Sprintf("/api/?action=SyncMirrorPocket&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -19207,18 +17182,6 @@ func NewSyncMirrorPocketRequest(server string, params *SyncMirrorPocketParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -19279,8 +17242,8 @@ func NewSyncMirrorPocketRequest(server string, params *SyncMirrorPocketParams) (
 	return req, nil
 }
 
-// NewTerminateComputerProcessesRequest generates requests for TerminateComputerProcesses
-func NewTerminateComputerProcessesRequest(server string, params *TerminateComputerProcessesParams) (*http.Request, error) {
+// NewLegacyTerminateComputerProcessesRequest generates requests for LegacyTerminateComputerProcesses
+func NewLegacyTerminateComputerProcessesRequest(server string, params *LegacyTerminateComputerProcessesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -19288,7 +17251,7 @@ func NewTerminateComputerProcessesRequest(server string, params *TerminateComput
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=TerminateComputerProcesses")
+	operationPath := fmt.Sprintf("/api/?action=TerminateComputerProcesses&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -19300,18 +17263,6 @@ func NewTerminateComputerProcessesRequest(server string, params *TerminateComput
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -19360,8 +17311,8 @@ func NewTerminateComputerProcessesRequest(server string, params *TerminateComput
 	return req, nil
 }
 
-// NewUnsubscribeFromAlertRequest generates requests for UnsubscribeFromAlert
-func NewUnsubscribeFromAlertRequest(server string, params *UnsubscribeFromAlertParams) (*http.Request, error) {
+// NewLegacyUnsubscribeFromAlertRequest generates requests for LegacyUnsubscribeFromAlert
+func NewLegacyUnsubscribeFromAlertRequest(server string, params *LegacyUnsubscribeFromAlertParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -19369,7 +17320,7 @@ func NewUnsubscribeFromAlertRequest(server string, params *UnsubscribeFromAlertP
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=UnsubscribeFromAlert")
+	operationPath := fmt.Sprintf("/api/?action=UnsubscribeFromAlert&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -19381,18 +17332,6 @@ func NewUnsubscribeFromAlertRequest(server string, params *UnsubscribeFromAlertP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -19429,8 +17368,8 @@ func NewUnsubscribeFromAlertRequest(server string, params *UnsubscribeFromAlertP
 	return req, nil
 }
 
-// NewUpgradePackagesRequest generates requests for UpgradePackages
-func NewUpgradePackagesRequest(server string, params *UpgradePackagesParams) (*http.Request, error) {
+// NewLegacyUpgradePackagesRequest generates requests for LegacyUpgradePackages
+func NewLegacyUpgradePackagesRequest(server string, params *LegacyUpgradePackagesParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -19438,7 +17377,7 @@ func NewUpgradePackagesRequest(server string, params *UpgradePackagesParams) (*h
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api/?action=UpgradePackages")
+	operationPath := fmt.Sprintf("/api/?action=UpgradePackages&version=2011-08-01")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -19450,18 +17389,6 @@ func NewUpgradePackagesRequest(server string, params *UpgradePackagesParams) (*h
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
 			return nil, err
@@ -20177,416 +18104,416 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
-	// AcceptPendingComputersWithResponse request
-	AcceptPendingComputersWithResponse(ctx context.Context, params *AcceptPendingComputersParams, reqEditors ...RequestEditorFn) (*AcceptPendingComputersResponse, error)
+	// LegacyAcceptPendingComputersWithResponse request
+	LegacyAcceptPendingComputersWithResponse(ctx context.Context, params *LegacyAcceptPendingComputersParams, reqEditors ...RequestEditorFn) (*LegacyAcceptPendingComputersResponse, error)
 
-	// AddAPTSourcesToRepositoryProfileWithResponse request
-	AddAPTSourcesToRepositoryProfileWithResponse(ctx context.Context, params *AddAPTSourcesToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*AddAPTSourcesToRepositoryProfileResponse, error)
+	// LegacyAddAPTSourcesToRepositoryProfileWithResponse request
+	LegacyAddAPTSourcesToRepositoryProfileWithResponse(ctx context.Context, params *LegacyAddAPTSourcesToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyAddAPTSourcesToRepositoryProfileResponse, error)
 
-	// AddAccessGroupsToRoleWithResponse request
-	AddAccessGroupsToRoleWithResponse(ctx context.Context, params *AddAccessGroupsToRoleParams, reqEditors ...RequestEditorFn) (*AddAccessGroupsToRoleResponse, error)
+	// LegacyAddAccessGroupsToRoleWithResponse request
+	LegacyAddAccessGroupsToRoleWithResponse(ctx context.Context, params *LegacyAddAccessGroupsToRoleParams, reqEditors ...RequestEditorFn) (*LegacyAddAccessGroupsToRoleResponse, error)
 
-	// AddAnnotationToComputersWithResponse request
-	AddAnnotationToComputersWithResponse(ctx context.Context, params *AddAnnotationToComputersParams, reqEditors ...RequestEditorFn) (*AddAnnotationToComputersResponse, error)
+	// LegacyAddAnnotationToComputersWithResponse request
+	LegacyAddAnnotationToComputersWithResponse(ctx context.Context, params *LegacyAddAnnotationToComputersParams, reqEditors ...RequestEditorFn) (*LegacyAddAnnotationToComputersResponse, error)
 
-	// AddPackageFiltersToPocketWithResponse request
-	AddPackageFiltersToPocketWithResponse(ctx context.Context, params *AddPackageFiltersToPocketParams, reqEditors ...RequestEditorFn) (*AddPackageFiltersToPocketResponse, error)
+	// LegacyAddPackageFiltersToPocketWithResponse request
+	LegacyAddPackageFiltersToPocketWithResponse(ctx context.Context, params *LegacyAddPackageFiltersToPocketParams, reqEditors ...RequestEditorFn) (*LegacyAddPackageFiltersToPocketResponse, error)
 
-	// AddPermissionsToRoleWithResponse request
-	AddPermissionsToRoleWithResponse(ctx context.Context, params *AddPermissionsToRoleParams, reqEditors ...RequestEditorFn) (*AddPermissionsToRoleResponse, error)
+	// LegacyAddPermissionsToRoleWithResponse request
+	LegacyAddPermissionsToRoleWithResponse(ctx context.Context, params *LegacyAddPermissionsToRoleParams, reqEditors ...RequestEditorFn) (*LegacyAddPermissionsToRoleResponse, error)
 
-	// AddPersonsToRoleWithResponse request
-	AddPersonsToRoleWithResponse(ctx context.Context, params *AddPersonsToRoleParams, reqEditors ...RequestEditorFn) (*AddPersonsToRoleResponse, error)
+	// LegacyAddPersonsToRoleWithResponse request
+	LegacyAddPersonsToRoleWithResponse(ctx context.Context, params *LegacyAddPersonsToRoleParams, reqEditors ...RequestEditorFn) (*LegacyAddPersonsToRoleResponse, error)
 
-	// AddPocketsToRepositoryProfileWithResponse request
-	AddPocketsToRepositoryProfileWithResponse(ctx context.Context, params *AddPocketsToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*AddPocketsToRepositoryProfileResponse, error)
+	// LegacyAddPocketsToRepositoryProfileWithResponse request
+	LegacyAddPocketsToRepositoryProfileWithResponse(ctx context.Context, params *LegacyAddPocketsToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyAddPocketsToRepositoryProfileResponse, error)
 
-	// AddTagsToComputersWithResponse request
-	AddTagsToComputersWithResponse(ctx context.Context, params *AddTagsToComputersParams, reqEditors ...RequestEditorFn) (*AddTagsToComputersResponse, error)
+	// LegacyAddTagsToComputersWithResponse request
+	LegacyAddTagsToComputersWithResponse(ctx context.Context, params *LegacyAddTagsToComputersParams, reqEditors ...RequestEditorFn) (*LegacyAddTagsToComputersResponse, error)
 
-	// AddUploaderGPGKeysToPocketWithResponse request
-	AddUploaderGPGKeysToPocketWithResponse(ctx context.Context, params *AddUploaderGPGKeysToPocketParams, reqEditors ...RequestEditorFn) (*AddUploaderGPGKeysToPocketResponse, error)
+	// LegacyAddUploaderGPGKeysToPocketWithResponse request
+	LegacyAddUploaderGPGKeysToPocketWithResponse(ctx context.Context, params *LegacyAddUploaderGPGKeysToPocketParams, reqEditors ...RequestEditorFn) (*LegacyAddUploaderGPGKeysToPocketResponse, error)
 
-	// ApproveActivitiesWithResponse request
-	ApproveActivitiesWithResponse(ctx context.Context, params *ApproveActivitiesParams, reqEditors ...RequestEditorFn) (*ApproveActivitiesResponse, error)
+	// LegacyApproveActivitiesWithResponse request
+	LegacyApproveActivitiesWithResponse(ctx context.Context, params *LegacyApproveActivitiesParams, reqEditors ...RequestEditorFn) (*LegacyApproveActivitiesResponse, error)
 
-	// AssociateAlertWithResponse request
-	AssociateAlertWithResponse(ctx context.Context, params *AssociateAlertParams, reqEditors ...RequestEditorFn) (*AssociateAlertResponse, error)
+	// LegacyAssociateAlertWithResponse request
+	LegacyAssociateAlertWithResponse(ctx context.Context, params *LegacyAssociateAlertParams, reqEditors ...RequestEditorFn) (*LegacyAssociateAlertResponse, error)
 
-	// AssociatePackageProfileWithResponse request
-	AssociatePackageProfileWithResponse(ctx context.Context, params *AssociatePackageProfileParams, reqEditors ...RequestEditorFn) (*AssociatePackageProfileResponse, error)
+	// LegacyAssociatePackageProfileWithResponse request
+	LegacyAssociatePackageProfileWithResponse(ctx context.Context, params *LegacyAssociatePackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyAssociatePackageProfileResponse, error)
 
-	// AssociateRemovalProfileWithResponse request
-	AssociateRemovalProfileWithResponse(ctx context.Context, params *AssociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*AssociateRemovalProfileResponse, error)
+	// LegacyAssociateRemovalProfileWithResponse request
+	LegacyAssociateRemovalProfileWithResponse(ctx context.Context, params *LegacyAssociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*LegacyAssociateRemovalProfileResponse, error)
 
-	// AssociateRepositoryProfileWithResponse request
-	AssociateRepositoryProfileWithResponse(ctx context.Context, params *AssociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*AssociateRepositoryProfileResponse, error)
+	// LegacyAssociateRepositoryProfileWithResponse request
+	LegacyAssociateRepositoryProfileWithResponse(ctx context.Context, params *LegacyAssociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyAssociateRepositoryProfileResponse, error)
 
-	// AssociateUpgradeProfileWithResponse request
-	AssociateUpgradeProfileWithResponse(ctx context.Context, params *AssociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*AssociateUpgradeProfileResponse, error)
+	// LegacyAssociateUpgradeProfileWithResponse request
+	LegacyAssociateUpgradeProfileWithResponse(ctx context.Context, params *LegacyAssociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*LegacyAssociateUpgradeProfileResponse, error)
 
-	// CancelActivitiesWithResponse request
-	CancelActivitiesWithResponse(ctx context.Context, params *CancelActivitiesParams, reqEditors ...RequestEditorFn) (*CancelActivitiesResponse, error)
+	// LegacyCancelActivitiesWithResponse request
+	LegacyCancelActivitiesWithResponse(ctx context.Context, params *LegacyCancelActivitiesParams, reqEditors ...RequestEditorFn) (*LegacyCancelActivitiesResponse, error)
 
-	// ChangeComputersAccessGroupWithResponse request
-	ChangeComputersAccessGroupWithResponse(ctx context.Context, params *ChangeComputersAccessGroupParams, reqEditors ...RequestEditorFn) (*ChangeComputersAccessGroupResponse, error)
+	// LegacyChangeComputersAccessGroupWithResponse request
+	LegacyChangeComputersAccessGroupWithResponse(ctx context.Context, params *LegacyChangeComputersAccessGroupParams, reqEditors ...RequestEditorFn) (*LegacyChangeComputersAccessGroupResponse, error)
 
-	// CopyPackageProfileWithResponse request
-	CopyPackageProfileWithResponse(ctx context.Context, params *CopyPackageProfileParams, reqEditors ...RequestEditorFn) (*CopyPackageProfileResponse, error)
+	// LegacyCopyPackageProfileWithResponse request
+	LegacyCopyPackageProfileWithResponse(ctx context.Context, params *LegacyCopyPackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyCopyPackageProfileResponse, error)
 
-	// CopyRoleWithResponse request
-	CopyRoleWithResponse(ctx context.Context, params *CopyRoleParams, reqEditors ...RequestEditorFn) (*CopyRoleResponse, error)
+	// LegacyCopyRoleWithResponse request
+	LegacyCopyRoleWithResponse(ctx context.Context, params *LegacyCopyRoleParams, reqEditors ...RequestEditorFn) (*LegacyCopyRoleResponse, error)
 
-	// CopyScriptWithResponse request
-	CopyScriptWithResponse(ctx context.Context, params *CopyScriptParams, reqEditors ...RequestEditorFn) (*CopyScriptResponse, error)
+	// LegacyCopyScriptWithResponse request
+	LegacyCopyScriptWithResponse(ctx context.Context, params *LegacyCopyScriptParams, reqEditors ...RequestEditorFn) (*LegacyCopyScriptResponse, error)
 
-	// CreateAPTSourceWithResponse request
-	CreateAPTSourceWithResponse(ctx context.Context, params *CreateAPTSourceParams, reqEditors ...RequestEditorFn) (*CreateAPTSourceResponse, error)
+	// LegacyCreateAPTSourceWithResponse request
+	LegacyCreateAPTSourceWithResponse(ctx context.Context, params *LegacyCreateAPTSourceParams, reqEditors ...RequestEditorFn) (*LegacyCreateAPTSourceResponse, error)
 
-	// CreateAccessGroupWithResponse request
-	CreateAccessGroupWithResponse(ctx context.Context, params *CreateAccessGroupParams, reqEditors ...RequestEditorFn) (*CreateAccessGroupResponse, error)
+	// LegacyCreateAccessGroupWithResponse request
+	LegacyCreateAccessGroupWithResponse(ctx context.Context, params *LegacyCreateAccessGroupParams, reqEditors ...RequestEditorFn) (*LegacyCreateAccessGroupResponse, error)
 
-	// CreateChildComputerWithResponse request
-	CreateChildComputerWithResponse(ctx context.Context, params *CreateChildComputerParams, reqEditors ...RequestEditorFn) (*CreateChildComputerResponse, error)
+	// LegacyCreateChildComputerWithResponse request
+	LegacyCreateChildComputerWithResponse(ctx context.Context, params *LegacyCreateChildComputerParams, reqEditors ...RequestEditorFn) (*LegacyCreateChildComputerResponse, error)
 
-	// CreateDistributionWithResponse request
-	CreateDistributionWithResponse(ctx context.Context, params *CreateDistributionParams, reqEditors ...RequestEditorFn) (*CreateDistributionResponse, error)
+	// LegacyCreateDistributionWithResponse request
+	LegacyCreateDistributionWithResponse(ctx context.Context, params *LegacyCreateDistributionParams, reqEditors ...RequestEditorFn) (*LegacyCreateDistributionResponse, error)
 
-	// CreatePackageProfileWithResponse request
-	CreatePackageProfileWithResponse(ctx context.Context, params *CreatePackageProfileParams, reqEditors ...RequestEditorFn) (*CreatePackageProfileResponse, error)
+	// LegacyCreatePackageProfileWithResponse request
+	LegacyCreatePackageProfileWithResponse(ctx context.Context, params *LegacyCreatePackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyCreatePackageProfileResponse, error)
 
-	// CreatePocketWithResponse request
-	CreatePocketWithResponse(ctx context.Context, params *CreatePocketParams, reqEditors ...RequestEditorFn) (*CreatePocketResponse, error)
+	// LegacyCreatePocketWithResponse request
+	LegacyCreatePocketWithResponse(ctx context.Context, params *LegacyCreatePocketParams, reqEditors ...RequestEditorFn) (*LegacyCreatePocketResponse, error)
 
-	// CreateRemovalProfileWithResponse request
-	CreateRemovalProfileWithResponse(ctx context.Context, params *CreateRemovalProfileParams, reqEditors ...RequestEditorFn) (*CreateRemovalProfileResponse, error)
+	// LegacyCreateRemovalProfileWithResponse request
+	LegacyCreateRemovalProfileWithResponse(ctx context.Context, params *LegacyCreateRemovalProfileParams, reqEditors ...RequestEditorFn) (*LegacyCreateRemovalProfileResponse, error)
 
-	// CreateRepositoryProfileWithResponse request
-	CreateRepositoryProfileWithResponse(ctx context.Context, params *CreateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*CreateRepositoryProfileResponse, error)
+	// LegacyCreateRepositoryProfileWithResponse request
+	LegacyCreateRepositoryProfileWithResponse(ctx context.Context, params *LegacyCreateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyCreateRepositoryProfileResponse, error)
 
-	// CreateRoleWithResponse request
-	CreateRoleWithResponse(ctx context.Context, params *CreateRoleParams, reqEditors ...RequestEditorFn) (*CreateRoleResponse, error)
+	// LegacyCreateRoleWithResponse request
+	LegacyCreateRoleWithResponse(ctx context.Context, params *LegacyCreateRoleParams, reqEditors ...RequestEditorFn) (*LegacyCreateRoleResponse, error)
 
-	// CreateSavedSearchWithResponse request
-	CreateSavedSearchWithResponse(ctx context.Context, params *CreateSavedSearchParams, reqEditors ...RequestEditorFn) (*CreateSavedSearchResponse, error)
+	// LegacyCreateSavedSearchWithResponse request
+	LegacyCreateSavedSearchWithResponse(ctx context.Context, params *LegacyCreateSavedSearchParams, reqEditors ...RequestEditorFn) (*LegacyCreateSavedSearchResponse, error)
 
-	// CreateScriptWithResponse request
-	CreateScriptWithResponse(ctx context.Context, params *CreateScriptParams, reqEditors ...RequestEditorFn) (*CreateScriptResponse, error)
+	// LegacyCreateScriptWithResponse request
+	LegacyCreateScriptWithResponse(ctx context.Context, params *LegacyCreateScriptParams, reqEditors ...RequestEditorFn) (*LegacyCreateScriptResponse, error)
 
-	// CreateScriptAttachmentWithResponse request
-	CreateScriptAttachmentWithResponse(ctx context.Context, params *CreateScriptAttachmentParams, reqEditors ...RequestEditorFn) (*CreateScriptAttachmentResponse, error)
+	// LegacyCreateScriptAttachmentWithResponse request
+	LegacyCreateScriptAttachmentWithResponse(ctx context.Context, params *LegacyCreateScriptAttachmentParams, reqEditors ...RequestEditorFn) (*LegacyCreateScriptAttachmentResponse, error)
 
-	// CreateSeriesWithResponse request
-	CreateSeriesWithResponse(ctx context.Context, params *CreateSeriesParams, reqEditors ...RequestEditorFn) (*CreateSeriesResponse, error)
+	// LegacyCreateSeriesWithResponse request
+	LegacyCreateSeriesWithResponse(ctx context.Context, params *LegacyCreateSeriesParams, reqEditors ...RequestEditorFn) (*LegacyCreateSeriesResponse, error)
 
-	// CreateUpgradeProfileWithResponse request
-	CreateUpgradeProfileWithResponse(ctx context.Context, params *CreateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*CreateUpgradeProfileResponse, error)
+	// LegacyCreateUpgradeProfileWithResponse request
+	LegacyCreateUpgradeProfileWithResponse(ctx context.Context, params *LegacyCreateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*LegacyCreateUpgradeProfileResponse, error)
 
-	// CreateUserWithResponse request
-	CreateUserWithResponse(ctx context.Context, params *CreateUserParams, reqEditors ...RequestEditorFn) (*CreateUserResponse, error)
+	// LegacyCreateUserWithResponse request
+	LegacyCreateUserWithResponse(ctx context.Context, params *LegacyCreateUserParams, reqEditors ...RequestEditorFn) (*LegacyCreateUserResponse, error)
 
-	// DeleteChildComputersWithResponse request
-	DeleteChildComputersWithResponse(ctx context.Context, params *DeleteChildComputersParams, reqEditors ...RequestEditorFn) (*DeleteChildComputersResponse, error)
+	// LegacyDeleteChildComputersWithResponse request
+	LegacyDeleteChildComputersWithResponse(ctx context.Context, params *LegacyDeleteChildComputersParams, reqEditors ...RequestEditorFn) (*LegacyDeleteChildComputersResponse, error)
 
-	// DeriveSeriesWithResponse request
-	DeriveSeriesWithResponse(ctx context.Context, params *DeriveSeriesParams, reqEditors ...RequestEditorFn) (*DeriveSeriesResponse, error)
+	// LegacyDeriveSeriesWithResponse request
+	LegacyDeriveSeriesWithResponse(ctx context.Context, params *LegacyDeriveSeriesParams, reqEditors ...RequestEditorFn) (*LegacyDeriveSeriesResponse, error)
 
-	// DiffPullPocketWithResponse request
-	DiffPullPocketWithResponse(ctx context.Context, params *DiffPullPocketParams, reqEditors ...RequestEditorFn) (*DiffPullPocketResponse, error)
+	// LegacyDiffPullPocketWithResponse request
+	LegacyDiffPullPocketWithResponse(ctx context.Context, params *LegacyDiffPullPocketParams, reqEditors ...RequestEditorFn) (*LegacyDiffPullPocketResponse, error)
 
-	// DisableAdministratorWithResponse request
-	DisableAdministratorWithResponse(ctx context.Context, params *DisableAdministratorParams, reqEditors ...RequestEditorFn) (*DisableAdministratorResponse, error)
+	// LegacyDisableAdministratorWithResponse request
+	LegacyDisableAdministratorWithResponse(ctx context.Context, params *LegacyDisableAdministratorParams, reqEditors ...RequestEditorFn) (*LegacyDisableAdministratorResponse, error)
 
-	// DisassociateAlertWithResponse request
-	DisassociateAlertWithResponse(ctx context.Context, params *DisassociateAlertParams, reqEditors ...RequestEditorFn) (*DisassociateAlertResponse, error)
+	// LegacyDisassociateAlertWithResponse request
+	LegacyDisassociateAlertWithResponse(ctx context.Context, params *LegacyDisassociateAlertParams, reqEditors ...RequestEditorFn) (*LegacyDisassociateAlertResponse, error)
 
-	// DisassociatePackageProfileWithResponse request
-	DisassociatePackageProfileWithResponse(ctx context.Context, params *DisassociatePackageProfileParams, reqEditors ...RequestEditorFn) (*DisassociatePackageProfileResponse, error)
+	// LegacyDisassociatePackageProfileWithResponse request
+	LegacyDisassociatePackageProfileWithResponse(ctx context.Context, params *LegacyDisassociatePackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyDisassociatePackageProfileResponse, error)
 
-	// DisassociateRemovalProfileWithResponse request
-	DisassociateRemovalProfileWithResponse(ctx context.Context, params *DisassociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*DisassociateRemovalProfileResponse, error)
+	// LegacyDisassociateRemovalProfileWithResponse request
+	LegacyDisassociateRemovalProfileWithResponse(ctx context.Context, params *LegacyDisassociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*LegacyDisassociateRemovalProfileResponse, error)
 
-	// DisassociateRepositoryProfileWithResponse request
-	DisassociateRepositoryProfileWithResponse(ctx context.Context, params *DisassociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*DisassociateRepositoryProfileResponse, error)
+	// LegacyDisassociateRepositoryProfileWithResponse request
+	LegacyDisassociateRepositoryProfileWithResponse(ctx context.Context, params *LegacyDisassociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyDisassociateRepositoryProfileResponse, error)
 
-	// DisassociateUpgradeProfileWithResponse request
-	DisassociateUpgradeProfileWithResponse(ctx context.Context, params *DisassociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*DisassociateUpgradeProfileResponse, error)
+	// LegacyDisassociateUpgradeProfileWithResponse request
+	LegacyDisassociateUpgradeProfileWithResponse(ctx context.Context, params *LegacyDisassociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*LegacyDisassociateUpgradeProfileResponse, error)
 
-	// EditPackageProfileWithResponse request
-	EditPackageProfileWithResponse(ctx context.Context, params *EditPackageProfileParams, reqEditors ...RequestEditorFn) (*EditPackageProfileResponse, error)
+	// LegacyEditPackageProfileWithResponse request
+	LegacyEditPackageProfileWithResponse(ctx context.Context, params *LegacyEditPackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyEditPackageProfileResponse, error)
 
-	// EditPocketWithResponse request
-	EditPocketWithResponse(ctx context.Context, params *EditPocketParams, reqEditors ...RequestEditorFn) (*EditPocketResponse, error)
+	// LegacyEditPocketWithResponse request
+	LegacyEditPocketWithResponse(ctx context.Context, params *LegacyEditPocketParams, reqEditors ...RequestEditorFn) (*LegacyEditPocketResponse, error)
 
-	// EditRemovalProfileWithResponse request
-	EditRemovalProfileWithResponse(ctx context.Context, params *EditRemovalProfileParams, reqEditors ...RequestEditorFn) (*EditRemovalProfileResponse, error)
+	// LegacyEditRemovalProfileWithResponse request
+	LegacyEditRemovalProfileWithResponse(ctx context.Context, params *LegacyEditRemovalProfileParams, reqEditors ...RequestEditorFn) (*LegacyEditRemovalProfileResponse, error)
 
-	// EditRepositoryProfileWithResponse request
-	EditRepositoryProfileWithResponse(ctx context.Context, params *EditRepositoryProfileParams, reqEditors ...RequestEditorFn) (*EditRepositoryProfileResponse, error)
+	// LegacyEditRepositoryProfileWithResponse request
+	LegacyEditRepositoryProfileWithResponse(ctx context.Context, params *LegacyEditRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyEditRepositoryProfileResponse, error)
 
-	// EditSavedSearchWithResponse request
-	EditSavedSearchWithResponse(ctx context.Context, params *EditSavedSearchParams, reqEditors ...RequestEditorFn) (*EditSavedSearchResponse, error)
+	// LegacyEditSavedSearchWithResponse request
+	LegacyEditSavedSearchWithResponse(ctx context.Context, params *LegacyEditSavedSearchParams, reqEditors ...RequestEditorFn) (*LegacyEditSavedSearchResponse, error)
 
-	// EditScriptWithResponse request
-	EditScriptWithResponse(ctx context.Context, params *EditScriptParams, reqEditors ...RequestEditorFn) (*EditScriptResponse, error)
+	// LegacyEditScriptWithResponse request
+	LegacyEditScriptWithResponse(ctx context.Context, params *LegacyEditScriptParams, reqEditors ...RequestEditorFn) (*LegacyEditScriptResponse, error)
 
-	// EditUpgradeProfileWithResponse request
-	EditUpgradeProfileWithResponse(ctx context.Context, params *EditUpgradeProfileParams, reqEditors ...RequestEditorFn) (*EditUpgradeProfileResponse, error)
+	// LegacyEditUpgradeProfileWithResponse request
+	LegacyEditUpgradeProfileWithResponse(ctx context.Context, params *LegacyEditUpgradeProfileParams, reqEditors ...RequestEditorFn) (*LegacyEditUpgradeProfileResponse, error)
 
-	// EditUserWithResponse request
-	EditUserWithResponse(ctx context.Context, params *EditUserParams, reqEditors ...RequestEditorFn) (*EditUserResponse, error)
+	// LegacyEditUserWithResponse request
+	LegacyEditUserWithResponse(ctx context.Context, params *LegacyEditUserParams, reqEditors ...RequestEditorFn) (*LegacyEditUserResponse, error)
 
-	// ExecuteScriptWithResponse request
-	ExecuteScriptWithResponse(ctx context.Context, params *ExecuteScriptParams, reqEditors ...RequestEditorFn) (*ExecuteScriptResponse, error)
+	// LegacyExecuteScriptWithResponse request
+	LegacyExecuteScriptWithResponse(ctx context.Context, params *LegacyExecuteScriptParams, reqEditors ...RequestEditorFn) (*LegacyExecuteScriptResponse, error)
 
-	// GetAPTSourcesWithResponse request
-	GetAPTSourcesWithResponse(ctx context.Context, params *GetAPTSourcesParams, reqEditors ...RequestEditorFn) (*GetAPTSourcesResponse, error)
+	// LegacyGetAPTSourcesWithResponse request
+	LegacyGetAPTSourcesWithResponse(ctx context.Context, params *LegacyGetAPTSourcesParams, reqEditors ...RequestEditorFn) (*LegacyGetAPTSourcesResponse, error)
 
-	// GetAccessGroupsWithResponse request
-	GetAccessGroupsWithResponse(ctx context.Context, params *GetAccessGroupsParams, reqEditors ...RequestEditorFn) (*GetAccessGroupsResponse, error)
+	// LegacyGetAccessGroupsWithResponse request
+	LegacyGetAccessGroupsWithResponse(ctx context.Context, params *LegacyGetAccessGroupsParams, reqEditors ...RequestEditorFn) (*LegacyGetAccessGroupsResponse, error)
 
-	// GetActivitiesWithResponse request
-	GetActivitiesWithResponse(ctx context.Context, params *GetActivitiesParams, reqEditors ...RequestEditorFn) (*GetActivitiesResponse, error)
+	// LegacyGetActivitiesWithResponse request
+	LegacyGetActivitiesWithResponse(ctx context.Context, params *LegacyGetActivitiesParams, reqEditors ...RequestEditorFn) (*LegacyGetActivitiesResponse, error)
 
-	// GetActivityTypesWithResponse request
-	GetActivityTypesWithResponse(ctx context.Context, params *GetActivityTypesParams, reqEditors ...RequestEditorFn) (*GetActivityTypesResponse, error)
+	// LegacyGetActivityTypesWithResponse request
+	LegacyGetActivityTypesWithResponse(ctx context.Context, params *LegacyGetActivityTypesParams, reqEditors ...RequestEditorFn) (*LegacyGetActivityTypesResponse, error)
 
-	// GetAdministratorsWithResponse request
-	GetAdministratorsWithResponse(ctx context.Context, params *GetAdministratorsParams, reqEditors ...RequestEditorFn) (*GetAdministratorsResponse, error)
+	// LegacyGetAdministratorsWithResponse request
+	LegacyGetAdministratorsWithResponse(ctx context.Context, params *LegacyGetAdministratorsParams, reqEditors ...RequestEditorFn) (*LegacyGetAdministratorsResponse, error)
 
-	// GetAlertSubscribersWithResponse request
-	GetAlertSubscribersWithResponse(ctx context.Context, params *GetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*GetAlertSubscribersResponse, error)
+	// LegacyGetAlertSubscribersWithResponse request
+	LegacyGetAlertSubscribersWithResponse(ctx context.Context, params *LegacyGetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*LegacyGetAlertSubscribersResponse, error)
 
-	// GetAlertsWithResponse request
-	GetAlertsWithResponse(ctx context.Context, params *GetAlertsParams, reqEditors ...RequestEditorFn) (*GetAlertsResponse, error)
+	// LegacyGetAlertsWithResponse request
+	LegacyGetAlertsWithResponse(ctx context.Context, params *LegacyGetAlertsParams, reqEditors ...RequestEditorFn) (*LegacyGetAlertsResponse, error)
 
-	// GetCSVComplianceDataWithResponse request
-	GetCSVComplianceDataWithResponse(ctx context.Context, params *GetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*GetCSVComplianceDataResponse, error)
+	// LegacyGetCSVComplianceDataWithResponse request
+	LegacyGetCSVComplianceDataWithResponse(ctx context.Context, params *LegacyGetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*LegacyGetCSVComplianceDataResponse, error)
 
-	// GetComputerProcessesWithResponse request
-	GetComputerProcessesWithResponse(ctx context.Context, params *GetComputerProcessesParams, reqEditors ...RequestEditorFn) (*GetComputerProcessesResponse, error)
+	// LegacyGetComputerProcessesWithResponse request
+	LegacyGetComputerProcessesWithResponse(ctx context.Context, params *LegacyGetComputerProcessesParams, reqEditors ...RequestEditorFn) (*LegacyGetComputerProcessesResponse, error)
 
-	// GetComputersWithResponse request
-	GetComputersWithResponse(ctx context.Context, params *GetComputersParams, reqEditors ...RequestEditorFn) (*GetComputersResponse, error)
+	// LegacyGetComputersWithResponse request
+	LegacyGetComputersWithResponse(ctx context.Context, params *LegacyGetComputersParams, reqEditors ...RequestEditorFn) (*LegacyGetComputersResponse, error)
 
-	// GetComputersNotUpgradedWithResponse request
-	GetComputersNotUpgradedWithResponse(ctx context.Context, params *GetComputersNotUpgradedParams, reqEditors ...RequestEditorFn) (*GetComputersNotUpgradedResponse, error)
+	// LegacyGetComputersNotUpgradedWithResponse request
+	LegacyGetComputersNotUpgradedWithResponse(ctx context.Context, params *LegacyGetComputersNotUpgradedParams, reqEditors ...RequestEditorFn) (*LegacyGetComputersNotUpgradedResponse, error)
 
-	// GetDistributionsWithResponse request
-	GetDistributionsWithResponse(ctx context.Context, params *GetDistributionsParams, reqEditors ...RequestEditorFn) (*GetDistributionsResponse, error)
+	// LegacyGetDistributionsWithResponse request
+	LegacyGetDistributionsWithResponse(ctx context.Context, params *LegacyGetDistributionsParams, reqEditors ...RequestEditorFn) (*LegacyGetDistributionsResponse, error)
 
-	// GetEventLogWithResponse request
-	GetEventLogWithResponse(ctx context.Context, params *GetEventLogParams, reqEditors ...RequestEditorFn) (*GetEventLogResponse, error)
+	// LegacyGetEventLogWithResponse request
+	LegacyGetEventLogWithResponse(ctx context.Context, params *LegacyGetEventLogParams, reqEditors ...RequestEditorFn) (*LegacyGetEventLogResponse, error)
 
-	// GetGPGKeysWithResponse request
-	GetGPGKeysWithResponse(ctx context.Context, params *GetGPGKeysParams, reqEditors ...RequestEditorFn) (*GetGPGKeysResponse, error)
+	// LegacyGetGPGKeysWithResponse request
+	LegacyGetGPGKeysWithResponse(ctx context.Context, params *LegacyGetGPGKeysParams, reqEditors ...RequestEditorFn) (*LegacyGetGPGKeysResponse, error)
 
-	// GetNotPingingComputersWithResponse request
-	GetNotPingingComputersWithResponse(ctx context.Context, params *GetNotPingingComputersParams, reqEditors ...RequestEditorFn) (*GetNotPingingComputersResponse, error)
+	// LegacyGetNotPingingComputersWithResponse request
+	LegacyGetNotPingingComputersWithResponse(ctx context.Context, params *LegacyGetNotPingingComputersParams, reqEditors ...RequestEditorFn) (*LegacyGetNotPingingComputersResponse, error)
 
-	// GetPackageProfilesWithResponse request
-	GetPackageProfilesWithResponse(ctx context.Context, params *GetPackageProfilesParams, reqEditors ...RequestEditorFn) (*GetPackageProfilesResponse, error)
+	// LegacyGetPackageProfilesWithResponse request
+	LegacyGetPackageProfilesWithResponse(ctx context.Context, params *LegacyGetPackageProfilesParams, reqEditors ...RequestEditorFn) (*LegacyGetPackageProfilesResponse, error)
 
-	// GetPackagesWithResponse request
-	GetPackagesWithResponse(ctx context.Context, params *GetPackagesParams, reqEditors ...RequestEditorFn) (*GetPackagesResponse, error)
+	// LegacyGetPackagesWithResponse request
+	LegacyGetPackagesWithResponse(ctx context.Context, params *LegacyGetPackagesParams, reqEditors ...RequestEditorFn) (*LegacyGetPackagesResponse, error)
 
-	// GetPendingComputersWithResponse request
-	GetPendingComputersWithResponse(ctx context.Context, params *GetPendingComputersParams, reqEditors ...RequestEditorFn) (*GetPendingComputersResponse, error)
+	// LegacyGetPendingComputersWithResponse request
+	LegacyGetPendingComputersWithResponse(ctx context.Context, params *LegacyGetPendingComputersParams, reqEditors ...RequestEditorFn) (*LegacyGetPendingComputersResponse, error)
 
-	// GetPermissionsWithResponse request
-	GetPermissionsWithResponse(ctx context.Context, params *GetPermissionsParams, reqEditors ...RequestEditorFn) (*GetPermissionsResponse, error)
+	// LegacyGetPermissionsWithResponse request
+	LegacyGetPermissionsWithResponse(ctx context.Context, params *LegacyGetPermissionsParams, reqEditors ...RequestEditorFn) (*LegacyGetPermissionsResponse, error)
 
-	// GetRemovalProfilesWithResponse request
-	GetRemovalProfilesWithResponse(ctx context.Context, params *GetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*GetRemovalProfilesResponse, error)
+	// LegacyGetRemovalProfilesWithResponse request
+	LegacyGetRemovalProfilesWithResponse(ctx context.Context, params *LegacyGetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*LegacyGetRemovalProfilesResponse, error)
 
-	// GetRepoInfoWithResponse request
-	GetRepoInfoWithResponse(ctx context.Context, params *GetRepoInfoParams, reqEditors ...RequestEditorFn) (*GetRepoInfoResponse, error)
+	// LegacyGetRepoInfoWithResponse request
+	LegacyGetRepoInfoWithResponse(ctx context.Context, params *LegacyGetRepoInfoParams, reqEditors ...RequestEditorFn) (*LegacyGetRepoInfoResponse, error)
 
-	// GetRepositoryProfilesWithResponse request
-	GetRepositoryProfilesWithResponse(ctx context.Context, params *GetRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*GetRepositoryProfilesResponse, error)
+	// LegacyGetRepositoryProfilesWithResponse request
+	LegacyGetRepositoryProfilesWithResponse(ctx context.Context, params *LegacyGetRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*LegacyGetRepositoryProfilesResponse, error)
 
-	// GetRolesWithResponse request
-	GetRolesWithResponse(ctx context.Context, params *GetRolesParams, reqEditors ...RequestEditorFn) (*GetRolesResponse, error)
+	// LegacyGetRolesWithResponse request
+	LegacyGetRolesWithResponse(ctx context.Context, params *LegacyGetRolesParams, reqEditors ...RequestEditorFn) (*LegacyGetRolesResponse, error)
 
-	// GetSavedSearchesWithResponse request
-	GetSavedSearchesWithResponse(ctx context.Context, params *GetSavedSearchesParams, reqEditors ...RequestEditorFn) (*GetSavedSearchesResponse, error)
+	// LegacyGetSavedSearchesWithResponse request
+	LegacyGetSavedSearchesWithResponse(ctx context.Context, params *LegacyGetSavedSearchesParams, reqEditors ...RequestEditorFn) (*LegacyGetSavedSearchesResponse, error)
 
-	// GetScriptCodeWithResponse request
-	GetScriptCodeWithResponse(ctx context.Context, params *GetScriptCodeParams, reqEditors ...RequestEditorFn) (*GetScriptCodeResponse, error)
+	// LegacyGetScriptCodeWithResponse request
+	LegacyGetScriptCodeWithResponse(ctx context.Context, params *LegacyGetScriptCodeParams, reqEditors ...RequestEditorFn) (*LegacyGetScriptCodeResponse, error)
 
-	// GetScriptsWithResponse request
-	GetScriptsWithResponse(ctx context.Context, params *GetScriptsParams, reqEditors ...RequestEditorFn) (*GetScriptsResponse, error)
+	// LegacyGetScriptsWithResponse request
+	LegacyGetScriptsWithResponse(ctx context.Context, params *LegacyGetScriptsParams, reqEditors ...RequestEditorFn) (*LegacyGetScriptsResponse, error)
 
-	// GetSettingsWithResponse request
-	GetSettingsWithResponse(ctx context.Context, params *GetSettingsParams, reqEditors ...RequestEditorFn) (*GetSettingsResponse, error)
+	// LegacyGetSettingsWithResponse request
+	LegacyGetSettingsWithResponse(ctx context.Context, params *LegacyGetSettingsParams, reqEditors ...RequestEditorFn) (*LegacyGetSettingsResponse, error)
 
-	// GetUSNTimeToFixWithResponse request
-	GetUSNTimeToFixWithResponse(ctx context.Context, params *GetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*GetUSNTimeToFixResponse, error)
+	// LegacyGetUSNTimeToFixWithResponse request
+	LegacyGetUSNTimeToFixWithResponse(ctx context.Context, params *LegacyGetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*LegacyGetUSNTimeToFixResponse, error)
 
-	// GetUpgradeProfilesWithResponse request
-	GetUpgradeProfilesWithResponse(ctx context.Context, params *GetUpgradeProfilesParams, reqEditors ...RequestEditorFn) (*GetUpgradeProfilesResponse, error)
+	// LegacyGetUpgradeProfilesWithResponse request
+	LegacyGetUpgradeProfilesWithResponse(ctx context.Context, params *LegacyGetUpgradeProfilesParams, reqEditors ...RequestEditorFn) (*LegacyGetUpgradeProfilesResponse, error)
 
-	// GetUpgradedComputersByFrequencyWithResponse request
-	GetUpgradedComputersByFrequencyWithResponse(ctx context.Context, params *GetUpgradedComputersByFrequencyParams, reqEditors ...RequestEditorFn) (*GetUpgradedComputersByFrequencyResponse, error)
+	// LegacyGetUpgradedComputersByFrequencyWithResponse request
+	LegacyGetUpgradedComputersByFrequencyWithResponse(ctx context.Context, params *LegacyGetUpgradedComputersByFrequencyParams, reqEditors ...RequestEditorFn) (*LegacyGetUpgradedComputersByFrequencyResponse, error)
 
-	// GetUsersWithResponse request
-	GetUsersWithResponse(ctx context.Context, params *GetUsersParams, reqEditors ...RequestEditorFn) (*GetUsersResponse, error)
+	// LegacyGetUsersWithResponse request
+	LegacyGetUsersWithResponse(ctx context.Context, params *LegacyGetUsersParams, reqEditors ...RequestEditorFn) (*LegacyGetUsersResponse, error)
 
-	// GetWSLHostsWithResponse request
-	GetWSLHostsWithResponse(ctx context.Context, params *GetWSLHostsParams, reqEditors ...RequestEditorFn) (*GetWSLHostsResponse, error)
+	// LegacyGetWSLHostsWithResponse request
+	LegacyGetWSLHostsWithResponse(ctx context.Context, params *LegacyGetWSLHostsParams, reqEditors ...RequestEditorFn) (*LegacyGetWSLHostsResponse, error)
 
-	// ImportGPGKeyWithResponse request
-	ImportGPGKeyWithResponse(ctx context.Context, params *ImportGPGKeyParams, reqEditors ...RequestEditorFn) (*ImportGPGKeyResponse, error)
+	// LegacyImportGPGKeyWithResponse request
+	LegacyImportGPGKeyWithResponse(ctx context.Context, params *LegacyImportGPGKeyParams, reqEditors ...RequestEditorFn) (*LegacyImportGPGKeyResponse, error)
 
-	// InstallPackagesWithResponse request
-	InstallPackagesWithResponse(ctx context.Context, params *InstallPackagesParams, reqEditors ...RequestEditorFn) (*InstallPackagesResponse, error)
+	// LegacyInstallPackagesWithResponse request
+	LegacyInstallPackagesWithResponse(ctx context.Context, params *LegacyInstallPackagesParams, reqEditors ...RequestEditorFn) (*LegacyInstallPackagesResponse, error)
 
-	// InviteAdministratorWithResponse request
-	InviteAdministratorWithResponse(ctx context.Context, params *InviteAdministratorParams, reqEditors ...RequestEditorFn) (*InviteAdministratorResponse, error)
+	// LegacyInviteAdministratorWithResponse request
+	LegacyInviteAdministratorWithResponse(ctx context.Context, params *LegacyInviteAdministratorParams, reqEditors ...RequestEditorFn) (*LegacyInviteAdministratorResponse, error)
 
-	// KillComputerProcessesWithResponse request
-	KillComputerProcessesWithResponse(ctx context.Context, params *KillComputerProcessesParams, reqEditors ...RequestEditorFn) (*KillComputerProcessesResponse, error)
+	// LegacyKillComputerProcessesWithResponse request
+	LegacyKillComputerProcessesWithResponse(ctx context.Context, params *LegacyKillComputerProcessesParams, reqEditors ...RequestEditorFn) (*LegacyKillComputerProcessesResponse, error)
 
-	// ListPocketWithResponse request
-	ListPocketWithResponse(ctx context.Context, params *ListPocketParams, reqEditors ...RequestEditorFn) (*ListPocketResponse, error)
+	// LegacyListPocketWithResponse request
+	LegacyListPocketWithResponse(ctx context.Context, params *LegacyListPocketParams, reqEditors ...RequestEditorFn) (*LegacyListPocketResponse, error)
 
-	// ModifyPackageProfileWithResponse request
-	ModifyPackageProfileWithResponse(ctx context.Context, params *ModifyPackageProfileParams, reqEditors ...RequestEditorFn) (*ModifyPackageProfileResponse, error)
+	// LegacyModifyPackageProfileWithResponse request
+	LegacyModifyPackageProfileWithResponse(ctx context.Context, params *LegacyModifyPackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyModifyPackageProfileResponse, error)
 
-	// PullPackagesToPocketWithResponse request
-	PullPackagesToPocketWithResponse(ctx context.Context, params *PullPackagesToPocketParams, reqEditors ...RequestEditorFn) (*PullPackagesToPocketResponse, error)
+	// LegacyPullPackagesToPocketWithResponse request
+	LegacyPullPackagesToPocketWithResponse(ctx context.Context, params *LegacyPullPackagesToPocketParams, reqEditors ...RequestEditorFn) (*LegacyPullPackagesToPocketResponse, error)
 
-	// RebootComputersWithResponse request
-	RebootComputersWithResponse(ctx context.Context, params *RebootComputersParams, reqEditors ...RequestEditorFn) (*RebootComputersResponse, error)
+	// LegacyRebootComputersWithResponse request
+	LegacyRebootComputersWithResponse(ctx context.Context, params *LegacyRebootComputersParams, reqEditors ...RequestEditorFn) (*LegacyRebootComputersResponse, error)
 
-	// RejectPendingComputersWithResponse request
-	RejectPendingComputersWithResponse(ctx context.Context, params *RejectPendingComputersParams, reqEditors ...RequestEditorFn) (*RejectPendingComputersResponse, error)
+	// LegacyRejectPendingComputersWithResponse request
+	LegacyRejectPendingComputersWithResponse(ctx context.Context, params *LegacyRejectPendingComputersParams, reqEditors ...RequestEditorFn) (*LegacyRejectPendingComputersResponse, error)
 
-	// RemoveAPTSourceWithResponse request
-	RemoveAPTSourceWithResponse(ctx context.Context, params *RemoveAPTSourceParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourceResponse, error)
+	// LegacyRemoveAPTSourceWithResponse request
+	LegacyRemoveAPTSourceWithResponse(ctx context.Context, params *LegacyRemoveAPTSourceParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAPTSourceResponse, error)
 
-	// RemoveAPTSourceFromRepositoryProfileWithResponse request
-	RemoveAPTSourceFromRepositoryProfileWithResponse(ctx context.Context, params *RemoveAPTSourceFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourceFromRepositoryProfileResponse, error)
+	// LegacyRemoveAPTSourceFromRepositoryProfileWithResponse request
+	LegacyRemoveAPTSourceFromRepositoryProfileWithResponse(ctx context.Context, params *LegacyRemoveAPTSourceFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAPTSourceFromRepositoryProfileResponse, error)
 
-	// RemoveAPTSourcesWithResponse request
-	RemoveAPTSourcesWithResponse(ctx context.Context, params *RemoveAPTSourcesParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourcesResponse, error)
+	// LegacyRemoveAPTSourcesWithResponse request
+	LegacyRemoveAPTSourcesWithResponse(ctx context.Context, params *LegacyRemoveAPTSourcesParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAPTSourcesResponse, error)
 
-	// RemoveAPTSourcesFromRepositoryProfileWithResponse request
-	RemoveAPTSourcesFromRepositoryProfileWithResponse(ctx context.Context, params *RemoveAPTSourcesFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourcesFromRepositoryProfileResponse, error)
+	// LegacyRemoveAPTSourcesFromRepositoryProfileWithResponse request
+	LegacyRemoveAPTSourcesFromRepositoryProfileWithResponse(ctx context.Context, params *LegacyRemoveAPTSourcesFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAPTSourcesFromRepositoryProfileResponse, error)
 
-	// RemoveAccessGroupWithResponse request
-	RemoveAccessGroupWithResponse(ctx context.Context, params *RemoveAccessGroupParams, reqEditors ...RequestEditorFn) (*RemoveAccessGroupResponse, error)
+	// LegacyRemoveAccessGroupWithResponse request
+	LegacyRemoveAccessGroupWithResponse(ctx context.Context, params *LegacyRemoveAccessGroupParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAccessGroupResponse, error)
 
-	// RemoveAccessGroupsFromRoleWithResponse request
-	RemoveAccessGroupsFromRoleWithResponse(ctx context.Context, params *RemoveAccessGroupsFromRoleParams, reqEditors ...RequestEditorFn) (*RemoveAccessGroupsFromRoleResponse, error)
+	// LegacyRemoveAccessGroupsFromRoleWithResponse request
+	LegacyRemoveAccessGroupsFromRoleWithResponse(ctx context.Context, params *LegacyRemoveAccessGroupsFromRoleParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAccessGroupsFromRoleResponse, error)
 
-	// RemoveAnnotationFromComputersWithResponse request
-	RemoveAnnotationFromComputersWithResponse(ctx context.Context, params *RemoveAnnotationFromComputersParams, reqEditors ...RequestEditorFn) (*RemoveAnnotationFromComputersResponse, error)
+	// LegacyRemoveAnnotationFromComputersWithResponse request
+	LegacyRemoveAnnotationFromComputersWithResponse(ctx context.Context, params *LegacyRemoveAnnotationFromComputersParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAnnotationFromComputersResponse, error)
 
-	// RemoveComputersWithResponse request
-	RemoveComputersWithResponse(ctx context.Context, params *RemoveComputersParams, reqEditors ...RequestEditorFn) (*RemoveComputersResponse, error)
+	// LegacyRemoveComputersWithResponse request
+	LegacyRemoveComputersWithResponse(ctx context.Context, params *LegacyRemoveComputersParams, reqEditors ...RequestEditorFn) (*LegacyRemoveComputersResponse, error)
 
-	// RemoveDistributionWithResponse request
-	RemoveDistributionWithResponse(ctx context.Context, params *RemoveDistributionParams, reqEditors ...RequestEditorFn) (*RemoveDistributionResponse, error)
+	// LegacyRemoveDistributionWithResponse request
+	LegacyRemoveDistributionWithResponse(ctx context.Context, params *LegacyRemoveDistributionParams, reqEditors ...RequestEditorFn) (*LegacyRemoveDistributionResponse, error)
 
-	// RemoveGPGKeyWithResponse request
-	RemoveGPGKeyWithResponse(ctx context.Context, params *RemoveGPGKeyParams, reqEditors ...RequestEditorFn) (*RemoveGPGKeyResponse, error)
+	// LegacyRemoveGPGKeyWithResponse request
+	LegacyRemoveGPGKeyWithResponse(ctx context.Context, params *LegacyRemoveGPGKeyParams, reqEditors ...RequestEditorFn) (*LegacyRemoveGPGKeyResponse, error)
 
-	// RemovePackageFiltersFromPocketWithResponse request
-	RemovePackageFiltersFromPocketWithResponse(ctx context.Context, params *RemovePackageFiltersFromPocketParams, reqEditors ...RequestEditorFn) (*RemovePackageFiltersFromPocketResponse, error)
+	// LegacyRemovePackageFiltersFromPocketWithResponse request
+	LegacyRemovePackageFiltersFromPocketWithResponse(ctx context.Context, params *LegacyRemovePackageFiltersFromPocketParams, reqEditors ...RequestEditorFn) (*LegacyRemovePackageFiltersFromPocketResponse, error)
 
-	// RemovePackageProfileWithResponse request
-	RemovePackageProfileWithResponse(ctx context.Context, params *RemovePackageProfileParams, reqEditors ...RequestEditorFn) (*RemovePackageProfileResponse, error)
+	// LegacyRemovePackageProfileWithResponse request
+	LegacyRemovePackageProfileWithResponse(ctx context.Context, params *LegacyRemovePackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemovePackageProfileResponse, error)
 
-	// RemovePackagesWithResponse request
-	RemovePackagesWithResponse(ctx context.Context, params *RemovePackagesParams, reqEditors ...RequestEditorFn) (*RemovePackagesResponse, error)
+	// LegacyRemovePackagesWithResponse request
+	LegacyRemovePackagesWithResponse(ctx context.Context, params *LegacyRemovePackagesParams, reqEditors ...RequestEditorFn) (*LegacyRemovePackagesResponse, error)
 
-	// RemovePackagesFromPocketWithResponse request
-	RemovePackagesFromPocketWithResponse(ctx context.Context, params *RemovePackagesFromPocketParams, reqEditors ...RequestEditorFn) (*RemovePackagesFromPocketResponse, error)
+	// LegacyRemovePackagesFromPocketWithResponse request
+	LegacyRemovePackagesFromPocketWithResponse(ctx context.Context, params *LegacyRemovePackagesFromPocketParams, reqEditors ...RequestEditorFn) (*LegacyRemovePackagesFromPocketResponse, error)
 
-	// RemovePermissionsFromRoleWithResponse request
-	RemovePermissionsFromRoleWithResponse(ctx context.Context, params *RemovePermissionsFromRoleParams, reqEditors ...RequestEditorFn) (*RemovePermissionsFromRoleResponse, error)
+	// LegacyRemovePermissionsFromRoleWithResponse request
+	LegacyRemovePermissionsFromRoleWithResponse(ctx context.Context, params *LegacyRemovePermissionsFromRoleParams, reqEditors ...RequestEditorFn) (*LegacyRemovePermissionsFromRoleResponse, error)
 
-	// RemovePersonsFromRoleWithResponse request
-	RemovePersonsFromRoleWithResponse(ctx context.Context, params *RemovePersonsFromRoleParams, reqEditors ...RequestEditorFn) (*RemovePersonsFromRoleResponse, error)
+	// LegacyRemovePersonsFromRoleWithResponse request
+	LegacyRemovePersonsFromRoleWithResponse(ctx context.Context, params *LegacyRemovePersonsFromRoleParams, reqEditors ...RequestEditorFn) (*LegacyRemovePersonsFromRoleResponse, error)
 
-	// RemovePocketWithResponse request
-	RemovePocketWithResponse(ctx context.Context, params *RemovePocketParams, reqEditors ...RequestEditorFn) (*RemovePocketResponse, error)
+	// LegacyRemovePocketWithResponse request
+	LegacyRemovePocketWithResponse(ctx context.Context, params *LegacyRemovePocketParams, reqEditors ...RequestEditorFn) (*LegacyRemovePocketResponse, error)
 
-	// RemovePocketsFromRepositoryProfileWithResponse request
-	RemovePocketsFromRepositoryProfileWithResponse(ctx context.Context, params *RemovePocketsFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemovePocketsFromRepositoryProfileResponse, error)
+	// LegacyRemovePocketsFromRepositoryProfileWithResponse request
+	LegacyRemovePocketsFromRepositoryProfileWithResponse(ctx context.Context, params *LegacyRemovePocketsFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemovePocketsFromRepositoryProfileResponse, error)
 
-	// RemoveRemovalProfileWithResponse request
-	RemoveRemovalProfileWithResponse(ctx context.Context, params *RemoveRemovalProfileParams, reqEditors ...RequestEditorFn) (*RemoveRemovalProfileResponse, error)
+	// LegacyRemoveRemovalProfileWithResponse request
+	LegacyRemoveRemovalProfileWithResponse(ctx context.Context, params *LegacyRemoveRemovalProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemoveRemovalProfileResponse, error)
 
-	// RemoveRepositoryProfileWithResponse request
-	RemoveRepositoryProfileWithResponse(ctx context.Context, params *RemoveRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemoveRepositoryProfileResponse, error)
+	// LegacyRemoveRepositoryProfileWithResponse request
+	LegacyRemoveRepositoryProfileWithResponse(ctx context.Context, params *LegacyRemoveRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemoveRepositoryProfileResponse, error)
 
-	// RemoveRepositoryProfilesWithResponse request
-	RemoveRepositoryProfilesWithResponse(ctx context.Context, params *RemoveRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*RemoveRepositoryProfilesResponse, error)
+	// LegacyRemoveRepositoryProfilesWithResponse request
+	LegacyRemoveRepositoryProfilesWithResponse(ctx context.Context, params *LegacyRemoveRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*LegacyRemoveRepositoryProfilesResponse, error)
 
-	// RemoveRoleWithResponse request
-	RemoveRoleWithResponse(ctx context.Context, params *RemoveRoleParams, reqEditors ...RequestEditorFn) (*RemoveRoleResponse, error)
+	// LegacyRemoveRoleWithResponse request
+	LegacyRemoveRoleWithResponse(ctx context.Context, params *LegacyRemoveRoleParams, reqEditors ...RequestEditorFn) (*LegacyRemoveRoleResponse, error)
 
-	// RemoveSavedSearchWithResponse request
-	RemoveSavedSearchWithResponse(ctx context.Context, params *RemoveSavedSearchParams, reqEditors ...RequestEditorFn) (*RemoveSavedSearchResponse, error)
+	// LegacyRemoveSavedSearchWithResponse request
+	LegacyRemoveSavedSearchWithResponse(ctx context.Context, params *LegacyRemoveSavedSearchParams, reqEditors ...RequestEditorFn) (*LegacyRemoveSavedSearchResponse, error)
 
-	// RemoveScriptWithResponse request
-	RemoveScriptWithResponse(ctx context.Context, params *RemoveScriptParams, reqEditors ...RequestEditorFn) (*RemoveScriptResponse, error)
+	// LegacyRemoveScriptWithResponse request
+	LegacyRemoveScriptWithResponse(ctx context.Context, params *LegacyRemoveScriptParams, reqEditors ...RequestEditorFn) (*LegacyRemoveScriptResponse, error)
 
-	// RemoveScriptAttachmentWithResponse request
-	RemoveScriptAttachmentWithResponse(ctx context.Context, params *RemoveScriptAttachmentParams, reqEditors ...RequestEditorFn) (*RemoveScriptAttachmentResponse, error)
+	// LegacyRemoveScriptAttachmentWithResponse request
+	LegacyRemoveScriptAttachmentWithResponse(ctx context.Context, params *LegacyRemoveScriptAttachmentParams, reqEditors ...RequestEditorFn) (*LegacyRemoveScriptAttachmentResponse, error)
 
-	// RemoveSeriesWithResponse request
-	RemoveSeriesWithResponse(ctx context.Context, params *RemoveSeriesParams, reqEditors ...RequestEditorFn) (*RemoveSeriesResponse, error)
+	// LegacyRemoveSeriesWithResponse request
+	LegacyRemoveSeriesWithResponse(ctx context.Context, params *LegacyRemoveSeriesParams, reqEditors ...RequestEditorFn) (*LegacyRemoveSeriesResponse, error)
 
-	// RemoveTagsFromComputersWithResponse request
-	RemoveTagsFromComputersWithResponse(ctx context.Context, params *RemoveTagsFromComputersParams, reqEditors ...RequestEditorFn) (*RemoveTagsFromComputersResponse, error)
+	// LegacyRemoveTagsFromComputersWithResponse request
+	LegacyRemoveTagsFromComputersWithResponse(ctx context.Context, params *LegacyRemoveTagsFromComputersParams, reqEditors ...RequestEditorFn) (*LegacyRemoveTagsFromComputersResponse, error)
 
-	// RemoveUpgradeProfileWithResponse request
-	RemoveUpgradeProfileWithResponse(ctx context.Context, params *RemoveUpgradeProfileParams, reqEditors ...RequestEditorFn) (*RemoveUpgradeProfileResponse, error)
+	// LegacyRemoveUpgradeProfileWithResponse request
+	LegacyRemoveUpgradeProfileWithResponse(ctx context.Context, params *LegacyRemoveUpgradeProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemoveUpgradeProfileResponse, error)
 
-	// RemoveUploaderGPGKeysFromPocketWithResponse request
-	RemoveUploaderGPGKeysFromPocketWithResponse(ctx context.Context, params *RemoveUploaderGPGKeysFromPocketParams, reqEditors ...RequestEditorFn) (*RemoveUploaderGPGKeysFromPocketResponse, error)
+	// LegacyRemoveUploaderGPGKeysFromPocketWithResponse request
+	LegacyRemoveUploaderGPGKeysFromPocketWithResponse(ctx context.Context, params *LegacyRemoveUploaderGPGKeysFromPocketParams, reqEditors ...RequestEditorFn) (*LegacyRemoveUploaderGPGKeysFromPocketResponse, error)
 
-	// RemoveWSLHostsWithResponse request
-	RemoveWSLHostsWithResponse(ctx context.Context, params *RemoveWSLHostsParams, reqEditors ...RequestEditorFn) (*RemoveWSLHostsResponse, error)
+	// LegacyRemoveWSLHostsWithResponse request
+	LegacyRemoveWSLHostsWithResponse(ctx context.Context, params *LegacyRemoveWSLHostsParams, reqEditors ...RequestEditorFn) (*LegacyRemoveWSLHostsResponse, error)
 
-	// RenameComputersWithResponse request
-	RenameComputersWithResponse(ctx context.Context, params *RenameComputersParams, reqEditors ...RequestEditorFn) (*RenameComputersResponse, error)
+	// LegacyRenameComputersWithResponse request
+	LegacyRenameComputersWithResponse(ctx context.Context, params *LegacyRenameComputersParams, reqEditors ...RequestEditorFn) (*LegacyRenameComputersResponse, error)
 
-	// SetDefaultChildComputerWithResponse request
-	SetDefaultChildComputerWithResponse(ctx context.Context, params *SetDefaultChildComputerParams, reqEditors ...RequestEditorFn) (*SetDefaultChildComputerResponse, error)
+	// LegacySetDefaultChildComputerWithResponse request
+	LegacySetDefaultChildComputerWithResponse(ctx context.Context, params *LegacySetDefaultChildComputerParams, reqEditors ...RequestEditorFn) (*LegacySetDefaultChildComputerResponse, error)
 
-	// SetSettingsWithResponse request
-	SetSettingsWithResponse(ctx context.Context, params *SetSettingsParams, reqEditors ...RequestEditorFn) (*SetSettingsResponse, error)
+	// LegacySetSettingsWithResponse request
+	LegacySetSettingsWithResponse(ctx context.Context, params *LegacySetSettingsParams, reqEditors ...RequestEditorFn) (*LegacySetSettingsResponse, error)
 
-	// ShutdownComputersWithResponse request
-	ShutdownComputersWithResponse(ctx context.Context, params *ShutdownComputersParams, reqEditors ...RequestEditorFn) (*ShutdownComputersResponse, error)
+	// LegacyShutdownComputersWithResponse request
+	LegacyShutdownComputersWithResponse(ctx context.Context, params *LegacyShutdownComputersParams, reqEditors ...RequestEditorFn) (*LegacyShutdownComputersResponse, error)
 
-	// ShutdownHostComputerWithResponse request
-	ShutdownHostComputerWithResponse(ctx context.Context, params *ShutdownHostComputerParams, reqEditors ...RequestEditorFn) (*ShutdownHostComputerResponse, error)
+	// LegacyShutdownHostComputerWithResponse request
+	LegacyShutdownHostComputerWithResponse(ctx context.Context, params *LegacyShutdownHostComputerParams, reqEditors ...RequestEditorFn) (*LegacyShutdownHostComputerResponse, error)
 
-	// StartChildComputersWithResponse request
-	StartChildComputersWithResponse(ctx context.Context, params *StartChildComputersParams, reqEditors ...RequestEditorFn) (*StartChildComputersResponse, error)
+	// LegacyStartChildComputersWithResponse request
+	LegacyStartChildComputersWithResponse(ctx context.Context, params *LegacyStartChildComputersParams, reqEditors ...RequestEditorFn) (*LegacyStartChildComputersResponse, error)
 
-	// StopChildComputersWithResponse request
-	StopChildComputersWithResponse(ctx context.Context, params *StopChildComputersParams, reqEditors ...RequestEditorFn) (*StopChildComputersResponse, error)
+	// LegacyStopChildComputersWithResponse request
+	LegacyStopChildComputersWithResponse(ctx context.Context, params *LegacyStopChildComputersParams, reqEditors ...RequestEditorFn) (*LegacyStopChildComputersResponse, error)
 
-	// SubscribeToAlertWithResponse request
-	SubscribeToAlertWithResponse(ctx context.Context, params *SubscribeToAlertParams, reqEditors ...RequestEditorFn) (*SubscribeToAlertResponse, error)
+	// LegacySubscribeToAlertWithResponse request
+	LegacySubscribeToAlertWithResponse(ctx context.Context, params *LegacySubscribeToAlertParams, reqEditors ...RequestEditorFn) (*LegacySubscribeToAlertResponse, error)
 
-	// SyncMirrorPocketWithResponse request
-	SyncMirrorPocketWithResponse(ctx context.Context, params *SyncMirrorPocketParams, reqEditors ...RequestEditorFn) (*SyncMirrorPocketResponse, error)
+	// LegacySyncMirrorPocketWithResponse request
+	LegacySyncMirrorPocketWithResponse(ctx context.Context, params *LegacySyncMirrorPocketParams, reqEditors ...RequestEditorFn) (*LegacySyncMirrorPocketResponse, error)
 
-	// TerminateComputerProcessesWithResponse request
-	TerminateComputerProcessesWithResponse(ctx context.Context, params *TerminateComputerProcessesParams, reqEditors ...RequestEditorFn) (*TerminateComputerProcessesResponse, error)
+	// LegacyTerminateComputerProcessesWithResponse request
+	LegacyTerminateComputerProcessesWithResponse(ctx context.Context, params *LegacyTerminateComputerProcessesParams, reqEditors ...RequestEditorFn) (*LegacyTerminateComputerProcessesResponse, error)
 
-	// UnsubscribeFromAlertWithResponse request
-	UnsubscribeFromAlertWithResponse(ctx context.Context, params *UnsubscribeFromAlertParams, reqEditors ...RequestEditorFn) (*UnsubscribeFromAlertResponse, error)
+	// LegacyUnsubscribeFromAlertWithResponse request
+	LegacyUnsubscribeFromAlertWithResponse(ctx context.Context, params *LegacyUnsubscribeFromAlertParams, reqEditors ...RequestEditorFn) (*LegacyUnsubscribeFromAlertResponse, error)
 
-	// UpgradePackagesWithResponse request
-	UpgradePackagesWithResponse(ctx context.Context, params *UpgradePackagesParams, reqEditors ...RequestEditorFn) (*UpgradePackagesResponse, error)
+	// LegacyUpgradePackagesWithResponse request
+	LegacyUpgradePackagesWithResponse(ctx context.Context, params *LegacyUpgradePackagesParams, reqEditors ...RequestEditorFn) (*LegacyUpgradePackagesResponse, error)
 
 	// LoginWithPasswordWithBodyWithResponse request with any body
 	LoginWithPasswordWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LoginWithPasswordResponse, error)
@@ -20642,7 +18569,7 @@ type ClientWithResponsesInterface interface {
 	RedactScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*RedactScriptResponse, error)
 }
 
-type AcceptPendingComputersResponse struct {
+type LegacyAcceptPendingComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20652,7 +18579,7 @@ type AcceptPendingComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AcceptPendingComputersResponse) Status() string {
+func (r LegacyAcceptPendingComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20660,14 +18587,14 @@ func (r AcceptPendingComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AcceptPendingComputersResponse) StatusCode() int {
+func (r LegacyAcceptPendingComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AddAPTSourcesToRepositoryProfileResponse struct {
+type LegacyAddAPTSourcesToRepositoryProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20677,7 +18604,7 @@ type AddAPTSourcesToRepositoryProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AddAPTSourcesToRepositoryProfileResponse) Status() string {
+func (r LegacyAddAPTSourcesToRepositoryProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20685,14 +18612,14 @@ func (r AddAPTSourcesToRepositoryProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AddAPTSourcesToRepositoryProfileResponse) StatusCode() int {
+func (r LegacyAddAPTSourcesToRepositoryProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AddAccessGroupsToRoleResponse struct {
+type LegacyAddAccessGroupsToRoleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20702,7 +18629,7 @@ type AddAccessGroupsToRoleResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AddAccessGroupsToRoleResponse) Status() string {
+func (r LegacyAddAccessGroupsToRoleResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20710,14 +18637,14 @@ func (r AddAccessGroupsToRoleResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AddAccessGroupsToRoleResponse) StatusCode() int {
+func (r LegacyAddAccessGroupsToRoleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AddAnnotationToComputersResponse struct {
+type LegacyAddAnnotationToComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20727,7 +18654,7 @@ type AddAnnotationToComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AddAnnotationToComputersResponse) Status() string {
+func (r LegacyAddAnnotationToComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20735,14 +18662,14 @@ func (r AddAnnotationToComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AddAnnotationToComputersResponse) StatusCode() int {
+func (r LegacyAddAnnotationToComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AddPackageFiltersToPocketResponse struct {
+type LegacyAddPackageFiltersToPocketResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20752,7 +18679,7 @@ type AddPackageFiltersToPocketResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AddPackageFiltersToPocketResponse) Status() string {
+func (r LegacyAddPackageFiltersToPocketResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20760,14 +18687,14 @@ func (r AddPackageFiltersToPocketResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AddPackageFiltersToPocketResponse) StatusCode() int {
+func (r LegacyAddPackageFiltersToPocketResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AddPermissionsToRoleResponse struct {
+type LegacyAddPermissionsToRoleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20777,7 +18704,7 @@ type AddPermissionsToRoleResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AddPermissionsToRoleResponse) Status() string {
+func (r LegacyAddPermissionsToRoleResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20785,14 +18712,14 @@ func (r AddPermissionsToRoleResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AddPermissionsToRoleResponse) StatusCode() int {
+func (r LegacyAddPermissionsToRoleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AddPersonsToRoleResponse struct {
+type LegacyAddPersonsToRoleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20802,7 +18729,7 @@ type AddPersonsToRoleResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AddPersonsToRoleResponse) Status() string {
+func (r LegacyAddPersonsToRoleResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20810,14 +18737,14 @@ func (r AddPersonsToRoleResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AddPersonsToRoleResponse) StatusCode() int {
+func (r LegacyAddPersonsToRoleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AddPocketsToRepositoryProfileResponse struct {
+type LegacyAddPocketsToRepositoryProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20827,7 +18754,7 @@ type AddPocketsToRepositoryProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AddPocketsToRepositoryProfileResponse) Status() string {
+func (r LegacyAddPocketsToRepositoryProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20835,14 +18762,14 @@ func (r AddPocketsToRepositoryProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AddPocketsToRepositoryProfileResponse) StatusCode() int {
+func (r LegacyAddPocketsToRepositoryProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AddTagsToComputersResponse struct {
+type LegacyAddTagsToComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20852,7 +18779,7 @@ type AddTagsToComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AddTagsToComputersResponse) Status() string {
+func (r LegacyAddTagsToComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20860,14 +18787,14 @@ func (r AddTagsToComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AddTagsToComputersResponse) StatusCode() int {
+func (r LegacyAddTagsToComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AddUploaderGPGKeysToPocketResponse struct {
+type LegacyAddUploaderGPGKeysToPocketResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20877,7 +18804,7 @@ type AddUploaderGPGKeysToPocketResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AddUploaderGPGKeysToPocketResponse) Status() string {
+func (r LegacyAddUploaderGPGKeysToPocketResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20885,14 +18812,14 @@ func (r AddUploaderGPGKeysToPocketResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AddUploaderGPGKeysToPocketResponse) StatusCode() int {
+func (r LegacyAddUploaderGPGKeysToPocketResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type ApproveActivitiesResponse struct {
+type LegacyApproveActivitiesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20902,7 +18829,7 @@ type ApproveActivitiesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r ApproveActivitiesResponse) Status() string {
+func (r LegacyApproveActivitiesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20910,14 +18837,14 @@ func (r ApproveActivitiesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ApproveActivitiesResponse) StatusCode() int {
+func (r LegacyApproveActivitiesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AssociateAlertResponse struct {
+type LegacyAssociateAlertResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20927,7 +18854,7 @@ type AssociateAlertResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AssociateAlertResponse) Status() string {
+func (r LegacyAssociateAlertResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20935,14 +18862,14 @@ func (r AssociateAlertResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AssociateAlertResponse) StatusCode() int {
+func (r LegacyAssociateAlertResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AssociatePackageProfileResponse struct {
+type LegacyAssociatePackageProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20952,7 +18879,7 @@ type AssociatePackageProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AssociatePackageProfileResponse) Status() string {
+func (r LegacyAssociatePackageProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20960,14 +18887,14 @@ func (r AssociatePackageProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AssociatePackageProfileResponse) StatusCode() int {
+func (r LegacyAssociatePackageProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AssociateRemovalProfileResponse struct {
+type LegacyAssociateRemovalProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -20977,7 +18904,7 @@ type AssociateRemovalProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AssociateRemovalProfileResponse) Status() string {
+func (r LegacyAssociateRemovalProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -20985,14 +18912,14 @@ func (r AssociateRemovalProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AssociateRemovalProfileResponse) StatusCode() int {
+func (r LegacyAssociateRemovalProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AssociateRepositoryProfileResponse struct {
+type LegacyAssociateRepositoryProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21002,7 +18929,7 @@ type AssociateRepositoryProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AssociateRepositoryProfileResponse) Status() string {
+func (r LegacyAssociateRepositoryProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21010,14 +18937,14 @@ func (r AssociateRepositoryProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AssociateRepositoryProfileResponse) StatusCode() int {
+func (r LegacyAssociateRepositoryProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type AssociateUpgradeProfileResponse struct {
+type LegacyAssociateUpgradeProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21027,7 +18954,7 @@ type AssociateUpgradeProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r AssociateUpgradeProfileResponse) Status() string {
+func (r LegacyAssociateUpgradeProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21035,14 +18962,14 @@ func (r AssociateUpgradeProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r AssociateUpgradeProfileResponse) StatusCode() int {
+func (r LegacyAssociateUpgradeProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CancelActivitiesResponse struct {
+type LegacyCancelActivitiesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21052,7 +18979,7 @@ type CancelActivitiesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CancelActivitiesResponse) Status() string {
+func (r LegacyCancelActivitiesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21060,14 +18987,14 @@ func (r CancelActivitiesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CancelActivitiesResponse) StatusCode() int {
+func (r LegacyCancelActivitiesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type ChangeComputersAccessGroupResponse struct {
+type LegacyChangeComputersAccessGroupResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21077,7 +19004,7 @@ type ChangeComputersAccessGroupResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r ChangeComputersAccessGroupResponse) Status() string {
+func (r LegacyChangeComputersAccessGroupResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21085,14 +19012,14 @@ func (r ChangeComputersAccessGroupResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ChangeComputersAccessGroupResponse) StatusCode() int {
+func (r LegacyChangeComputersAccessGroupResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CopyPackageProfileResponse struct {
+type LegacyCopyPackageProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21102,7 +19029,7 @@ type CopyPackageProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CopyPackageProfileResponse) Status() string {
+func (r LegacyCopyPackageProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21110,14 +19037,14 @@ func (r CopyPackageProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CopyPackageProfileResponse) StatusCode() int {
+func (r LegacyCopyPackageProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CopyRoleResponse struct {
+type LegacyCopyRoleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21127,7 +19054,7 @@ type CopyRoleResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CopyRoleResponse) Status() string {
+func (r LegacyCopyRoleResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21135,14 +19062,14 @@ func (r CopyRoleResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CopyRoleResponse) StatusCode() int {
+func (r LegacyCopyRoleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CopyScriptResponse struct {
+type LegacyCopyScriptResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21152,7 +19079,7 @@ type CopyScriptResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CopyScriptResponse) Status() string {
+func (r LegacyCopyScriptResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21160,14 +19087,14 @@ func (r CopyScriptResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CopyScriptResponse) StatusCode() int {
+func (r LegacyCopyScriptResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateAPTSourceResponse struct {
+type LegacyCreateAPTSourceResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21177,7 +19104,7 @@ type CreateAPTSourceResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateAPTSourceResponse) Status() string {
+func (r LegacyCreateAPTSourceResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21185,14 +19112,14 @@ func (r CreateAPTSourceResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateAPTSourceResponse) StatusCode() int {
+func (r LegacyCreateAPTSourceResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateAccessGroupResponse struct {
+type LegacyCreateAccessGroupResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21202,7 +19129,7 @@ type CreateAccessGroupResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateAccessGroupResponse) Status() string {
+func (r LegacyCreateAccessGroupResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21210,14 +19137,14 @@ func (r CreateAccessGroupResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateAccessGroupResponse) StatusCode() int {
+func (r LegacyCreateAccessGroupResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateChildComputerResponse struct {
+type LegacyCreateChildComputerResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21227,7 +19154,7 @@ type CreateChildComputerResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateChildComputerResponse) Status() string {
+func (r LegacyCreateChildComputerResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21235,14 +19162,14 @@ func (r CreateChildComputerResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateChildComputerResponse) StatusCode() int {
+func (r LegacyCreateChildComputerResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateDistributionResponse struct {
+type LegacyCreateDistributionResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21252,7 +19179,7 @@ type CreateDistributionResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateDistributionResponse) Status() string {
+func (r LegacyCreateDistributionResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21260,14 +19187,14 @@ func (r CreateDistributionResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateDistributionResponse) StatusCode() int {
+func (r LegacyCreateDistributionResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreatePackageProfileResponse struct {
+type LegacyCreatePackageProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21277,7 +19204,7 @@ type CreatePackageProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreatePackageProfileResponse) Status() string {
+func (r LegacyCreatePackageProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21285,14 +19212,14 @@ func (r CreatePackageProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreatePackageProfileResponse) StatusCode() int {
+func (r LegacyCreatePackageProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreatePocketResponse struct {
+type LegacyCreatePocketResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21302,7 +19229,7 @@ type CreatePocketResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreatePocketResponse) Status() string {
+func (r LegacyCreatePocketResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21310,14 +19237,14 @@ func (r CreatePocketResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreatePocketResponse) StatusCode() int {
+func (r LegacyCreatePocketResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateRemovalProfileResponse struct {
+type LegacyCreateRemovalProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21327,7 +19254,7 @@ type CreateRemovalProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateRemovalProfileResponse) Status() string {
+func (r LegacyCreateRemovalProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21335,14 +19262,14 @@ func (r CreateRemovalProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateRemovalProfileResponse) StatusCode() int {
+func (r LegacyCreateRemovalProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateRepositoryProfileResponse struct {
+type LegacyCreateRepositoryProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21352,7 +19279,7 @@ type CreateRepositoryProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateRepositoryProfileResponse) Status() string {
+func (r LegacyCreateRepositoryProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21360,14 +19287,14 @@ func (r CreateRepositoryProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateRepositoryProfileResponse) StatusCode() int {
+func (r LegacyCreateRepositoryProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateRoleResponse struct {
+type LegacyCreateRoleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21377,7 +19304,7 @@ type CreateRoleResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateRoleResponse) Status() string {
+func (r LegacyCreateRoleResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21385,14 +19312,14 @@ func (r CreateRoleResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateRoleResponse) StatusCode() int {
+func (r LegacyCreateRoleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateSavedSearchResponse struct {
+type LegacyCreateSavedSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21402,7 +19329,7 @@ type CreateSavedSearchResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateSavedSearchResponse) Status() string {
+func (r LegacyCreateSavedSearchResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21410,14 +19337,14 @@ func (r CreateSavedSearchResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateSavedSearchResponse) StatusCode() int {
+func (r LegacyCreateSavedSearchResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateScriptResponse struct {
+type LegacyCreateScriptResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21427,7 +19354,7 @@ type CreateScriptResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateScriptResponse) Status() string {
+func (r LegacyCreateScriptResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21435,14 +19362,14 @@ func (r CreateScriptResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateScriptResponse) StatusCode() int {
+func (r LegacyCreateScriptResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateScriptAttachmentResponse struct {
+type LegacyCreateScriptAttachmentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21452,7 +19379,7 @@ type CreateScriptAttachmentResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateScriptAttachmentResponse) Status() string {
+func (r LegacyCreateScriptAttachmentResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21460,14 +19387,14 @@ func (r CreateScriptAttachmentResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateScriptAttachmentResponse) StatusCode() int {
+func (r LegacyCreateScriptAttachmentResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateSeriesResponse struct {
+type LegacyCreateSeriesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21477,7 +19404,7 @@ type CreateSeriesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateSeriesResponse) Status() string {
+func (r LegacyCreateSeriesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21485,14 +19412,14 @@ func (r CreateSeriesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateSeriesResponse) StatusCode() int {
+func (r LegacyCreateSeriesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateUpgradeProfileResponse struct {
+type LegacyCreateUpgradeProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21502,7 +19429,7 @@ type CreateUpgradeProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateUpgradeProfileResponse) Status() string {
+func (r LegacyCreateUpgradeProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21510,14 +19437,14 @@ func (r CreateUpgradeProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateUpgradeProfileResponse) StatusCode() int {
+func (r LegacyCreateUpgradeProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type CreateUserResponse struct {
+type LegacyCreateUserResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21527,7 +19454,7 @@ type CreateUserResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r CreateUserResponse) Status() string {
+func (r LegacyCreateUserResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21535,14 +19462,14 @@ func (r CreateUserResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r CreateUserResponse) StatusCode() int {
+func (r LegacyCreateUserResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DeleteChildComputersResponse struct {
+type LegacyDeleteChildComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21552,7 +19479,7 @@ type DeleteChildComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DeleteChildComputersResponse) Status() string {
+func (r LegacyDeleteChildComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21560,14 +19487,14 @@ func (r DeleteChildComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DeleteChildComputersResponse) StatusCode() int {
+func (r LegacyDeleteChildComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DeriveSeriesResponse struct {
+type LegacyDeriveSeriesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21577,7 +19504,7 @@ type DeriveSeriesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DeriveSeriesResponse) Status() string {
+func (r LegacyDeriveSeriesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21585,14 +19512,14 @@ func (r DeriveSeriesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DeriveSeriesResponse) StatusCode() int {
+func (r LegacyDeriveSeriesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DiffPullPocketResponse struct {
+type LegacyDiffPullPocketResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21602,7 +19529,7 @@ type DiffPullPocketResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DiffPullPocketResponse) Status() string {
+func (r LegacyDiffPullPocketResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21610,14 +19537,14 @@ func (r DiffPullPocketResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DiffPullPocketResponse) StatusCode() int {
+func (r LegacyDiffPullPocketResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DisableAdministratorResponse struct {
+type LegacyDisableAdministratorResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21627,7 +19554,7 @@ type DisableAdministratorResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DisableAdministratorResponse) Status() string {
+func (r LegacyDisableAdministratorResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21635,14 +19562,14 @@ func (r DisableAdministratorResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DisableAdministratorResponse) StatusCode() int {
+func (r LegacyDisableAdministratorResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DisassociateAlertResponse struct {
+type LegacyDisassociateAlertResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21652,7 +19579,7 @@ type DisassociateAlertResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DisassociateAlertResponse) Status() string {
+func (r LegacyDisassociateAlertResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21660,14 +19587,14 @@ func (r DisassociateAlertResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DisassociateAlertResponse) StatusCode() int {
+func (r LegacyDisassociateAlertResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DisassociatePackageProfileResponse struct {
+type LegacyDisassociatePackageProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21677,7 +19604,7 @@ type DisassociatePackageProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DisassociatePackageProfileResponse) Status() string {
+func (r LegacyDisassociatePackageProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21685,14 +19612,14 @@ func (r DisassociatePackageProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DisassociatePackageProfileResponse) StatusCode() int {
+func (r LegacyDisassociatePackageProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DisassociateRemovalProfileResponse struct {
+type LegacyDisassociateRemovalProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21702,7 +19629,7 @@ type DisassociateRemovalProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DisassociateRemovalProfileResponse) Status() string {
+func (r LegacyDisassociateRemovalProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21710,14 +19637,14 @@ func (r DisassociateRemovalProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DisassociateRemovalProfileResponse) StatusCode() int {
+func (r LegacyDisassociateRemovalProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DisassociateRepositoryProfileResponse struct {
+type LegacyDisassociateRepositoryProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21727,7 +19654,7 @@ type DisassociateRepositoryProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DisassociateRepositoryProfileResponse) Status() string {
+func (r LegacyDisassociateRepositoryProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21735,14 +19662,14 @@ func (r DisassociateRepositoryProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DisassociateRepositoryProfileResponse) StatusCode() int {
+func (r LegacyDisassociateRepositoryProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type DisassociateUpgradeProfileResponse struct {
+type LegacyDisassociateUpgradeProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21752,7 +19679,7 @@ type DisassociateUpgradeProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r DisassociateUpgradeProfileResponse) Status() string {
+func (r LegacyDisassociateUpgradeProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21760,14 +19687,14 @@ func (r DisassociateUpgradeProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r DisassociateUpgradeProfileResponse) StatusCode() int {
+func (r LegacyDisassociateUpgradeProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type EditPackageProfileResponse struct {
+type LegacyEditPackageProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21777,7 +19704,7 @@ type EditPackageProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r EditPackageProfileResponse) Status() string {
+func (r LegacyEditPackageProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21785,14 +19712,14 @@ func (r EditPackageProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r EditPackageProfileResponse) StatusCode() int {
+func (r LegacyEditPackageProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type EditPocketResponse struct {
+type LegacyEditPocketResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21802,7 +19729,7 @@ type EditPocketResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r EditPocketResponse) Status() string {
+func (r LegacyEditPocketResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21810,14 +19737,14 @@ func (r EditPocketResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r EditPocketResponse) StatusCode() int {
+func (r LegacyEditPocketResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type EditRemovalProfileResponse struct {
+type LegacyEditRemovalProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21827,7 +19754,7 @@ type EditRemovalProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r EditRemovalProfileResponse) Status() string {
+func (r LegacyEditRemovalProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21835,14 +19762,14 @@ func (r EditRemovalProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r EditRemovalProfileResponse) StatusCode() int {
+func (r LegacyEditRemovalProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type EditRepositoryProfileResponse struct {
+type LegacyEditRepositoryProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21852,7 +19779,7 @@ type EditRepositoryProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r EditRepositoryProfileResponse) Status() string {
+func (r LegacyEditRepositoryProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21860,14 +19787,14 @@ func (r EditRepositoryProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r EditRepositoryProfileResponse) StatusCode() int {
+func (r LegacyEditRepositoryProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type EditSavedSearchResponse struct {
+type LegacyEditSavedSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21877,7 +19804,7 @@ type EditSavedSearchResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r EditSavedSearchResponse) Status() string {
+func (r LegacyEditSavedSearchResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21885,14 +19812,14 @@ func (r EditSavedSearchResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r EditSavedSearchResponse) StatusCode() int {
+func (r LegacyEditSavedSearchResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type EditScriptResponse struct {
+type LegacyEditScriptResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21902,7 +19829,7 @@ type EditScriptResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r EditScriptResponse) Status() string {
+func (r LegacyEditScriptResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21910,14 +19837,14 @@ func (r EditScriptResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r EditScriptResponse) StatusCode() int {
+func (r LegacyEditScriptResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type EditUpgradeProfileResponse struct {
+type LegacyEditUpgradeProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21927,7 +19854,7 @@ type EditUpgradeProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r EditUpgradeProfileResponse) Status() string {
+func (r LegacyEditUpgradeProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21935,14 +19862,14 @@ func (r EditUpgradeProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r EditUpgradeProfileResponse) StatusCode() int {
+func (r LegacyEditUpgradeProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type EditUserResponse struct {
+type LegacyEditUserResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21952,7 +19879,7 @@ type EditUserResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r EditUserResponse) Status() string {
+func (r LegacyEditUserResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21960,14 +19887,14 @@ func (r EditUserResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r EditUserResponse) StatusCode() int {
+func (r LegacyEditUserResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type ExecuteScriptResponse struct {
+type LegacyExecuteScriptResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -21977,7 +19904,7 @@ type ExecuteScriptResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r ExecuteScriptResponse) Status() string {
+func (r LegacyExecuteScriptResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -21985,14 +19912,14 @@ func (r ExecuteScriptResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ExecuteScriptResponse) StatusCode() int {
+func (r LegacyExecuteScriptResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetAPTSourcesResponse struct {
+type LegacyGetAPTSourcesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22002,7 +19929,7 @@ type GetAPTSourcesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetAPTSourcesResponse) Status() string {
+func (r LegacyGetAPTSourcesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22010,14 +19937,14 @@ func (r GetAPTSourcesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetAPTSourcesResponse) StatusCode() int {
+func (r LegacyGetAPTSourcesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetAccessGroupsResponse struct {
+type LegacyGetAccessGroupsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22027,7 +19954,7 @@ type GetAccessGroupsResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetAccessGroupsResponse) Status() string {
+func (r LegacyGetAccessGroupsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22035,14 +19962,14 @@ func (r GetAccessGroupsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetAccessGroupsResponse) StatusCode() int {
+func (r LegacyGetAccessGroupsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetActivitiesResponse struct {
+type LegacyGetActivitiesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22052,7 +19979,7 @@ type GetActivitiesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetActivitiesResponse) Status() string {
+func (r LegacyGetActivitiesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22060,14 +19987,14 @@ func (r GetActivitiesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetActivitiesResponse) StatusCode() int {
+func (r LegacyGetActivitiesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetActivityTypesResponse struct {
+type LegacyGetActivityTypesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22076,7 +20003,7 @@ type GetActivityTypesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetActivityTypesResponse) Status() string {
+func (r LegacyGetActivityTypesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22084,14 +20011,14 @@ func (r GetActivityTypesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetActivityTypesResponse) StatusCode() int {
+func (r LegacyGetActivityTypesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetAdministratorsResponse struct {
+type LegacyGetAdministratorsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22100,7 +20027,7 @@ type GetAdministratorsResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetAdministratorsResponse) Status() string {
+func (r LegacyGetAdministratorsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22108,14 +20035,14 @@ func (r GetAdministratorsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetAdministratorsResponse) StatusCode() int {
+func (r LegacyGetAdministratorsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetAlertSubscribersResponse struct {
+type LegacyGetAlertSubscribersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22125,7 +20052,7 @@ type GetAlertSubscribersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetAlertSubscribersResponse) Status() string {
+func (r LegacyGetAlertSubscribersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22133,14 +20060,14 @@ func (r GetAlertSubscribersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetAlertSubscribersResponse) StatusCode() int {
+func (r LegacyGetAlertSubscribersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetAlertsResponse struct {
+type LegacyGetAlertsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22149,7 +20076,7 @@ type GetAlertsResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetAlertsResponse) Status() string {
+func (r LegacyGetAlertsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22157,14 +20084,14 @@ func (r GetAlertsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetAlertsResponse) StatusCode() int {
+func (r LegacyGetAlertsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetCSVComplianceDataResponse struct {
+type LegacyGetCSVComplianceDataResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22174,7 +20101,7 @@ type GetCSVComplianceDataResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetCSVComplianceDataResponse) Status() string {
+func (r LegacyGetCSVComplianceDataResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22182,14 +20109,14 @@ func (r GetCSVComplianceDataResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetCSVComplianceDataResponse) StatusCode() int {
+func (r LegacyGetCSVComplianceDataResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetComputerProcessesResponse struct {
+type LegacyGetComputerProcessesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22199,7 +20126,7 @@ type GetComputerProcessesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetComputerProcessesResponse) Status() string {
+func (r LegacyGetComputerProcessesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22207,14 +20134,14 @@ func (r GetComputerProcessesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetComputerProcessesResponse) StatusCode() int {
+func (r LegacyGetComputerProcessesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetComputersResponse struct {
+type LegacyGetComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22224,7 +20151,7 @@ type GetComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetComputersResponse) Status() string {
+func (r LegacyGetComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22232,14 +20159,14 @@ func (r GetComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetComputersResponse) StatusCode() int {
+func (r LegacyGetComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetComputersNotUpgradedResponse struct {
+type LegacyGetComputersNotUpgradedResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22249,7 +20176,7 @@ type GetComputersNotUpgradedResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetComputersNotUpgradedResponse) Status() string {
+func (r LegacyGetComputersNotUpgradedResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22257,14 +20184,14 @@ func (r GetComputersNotUpgradedResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetComputersNotUpgradedResponse) StatusCode() int {
+func (r LegacyGetComputersNotUpgradedResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetDistributionsResponse struct {
+type LegacyGetDistributionsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22273,7 +20200,7 @@ type GetDistributionsResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetDistributionsResponse) Status() string {
+func (r LegacyGetDistributionsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22281,14 +20208,14 @@ func (r GetDistributionsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetDistributionsResponse) StatusCode() int {
+func (r LegacyGetDistributionsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetEventLogResponse struct {
+type LegacyGetEventLogResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22298,7 +20225,7 @@ type GetEventLogResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetEventLogResponse) Status() string {
+func (r LegacyGetEventLogResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22306,14 +20233,14 @@ func (r GetEventLogResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetEventLogResponse) StatusCode() int {
+func (r LegacyGetEventLogResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetGPGKeysResponse struct {
+type LegacyGetGPGKeysResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22322,7 +20249,7 @@ type GetGPGKeysResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetGPGKeysResponse) Status() string {
+func (r LegacyGetGPGKeysResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22330,14 +20257,14 @@ func (r GetGPGKeysResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetGPGKeysResponse) StatusCode() int {
+func (r LegacyGetGPGKeysResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetNotPingingComputersResponse struct {
+type LegacyGetNotPingingComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22347,7 +20274,7 @@ type GetNotPingingComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetNotPingingComputersResponse) Status() string {
+func (r LegacyGetNotPingingComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22355,14 +20282,14 @@ func (r GetNotPingingComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetNotPingingComputersResponse) StatusCode() int {
+func (r LegacyGetNotPingingComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetPackageProfilesResponse struct {
+type LegacyGetPackageProfilesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22371,7 +20298,7 @@ type GetPackageProfilesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetPackageProfilesResponse) Status() string {
+func (r LegacyGetPackageProfilesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22379,14 +20306,14 @@ func (r GetPackageProfilesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetPackageProfilesResponse) StatusCode() int {
+func (r LegacyGetPackageProfilesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetPackagesResponse struct {
+type LegacyGetPackagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22396,7 +20323,7 @@ type GetPackagesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetPackagesResponse) Status() string {
+func (r LegacyGetPackagesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22404,14 +20331,14 @@ func (r GetPackagesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetPackagesResponse) StatusCode() int {
+func (r LegacyGetPackagesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetPendingComputersResponse struct {
+type LegacyGetPendingComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22420,7 +20347,7 @@ type GetPendingComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetPendingComputersResponse) Status() string {
+func (r LegacyGetPendingComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22428,14 +20355,14 @@ func (r GetPendingComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetPendingComputersResponse) StatusCode() int {
+func (r LegacyGetPendingComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetPermissionsResponse struct {
+type LegacyGetPermissionsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22444,7 +20371,7 @@ type GetPermissionsResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetPermissionsResponse) Status() string {
+func (r LegacyGetPermissionsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22452,14 +20379,14 @@ func (r GetPermissionsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetPermissionsResponse) StatusCode() int {
+func (r LegacyGetPermissionsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetRemovalProfilesResponse struct {
+type LegacyGetRemovalProfilesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22468,7 +20395,7 @@ type GetRemovalProfilesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetRemovalProfilesResponse) Status() string {
+func (r LegacyGetRemovalProfilesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22476,14 +20403,14 @@ func (r GetRemovalProfilesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetRemovalProfilesResponse) StatusCode() int {
+func (r LegacyGetRemovalProfilesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetRepoInfoResponse struct {
+type LegacyGetRepoInfoResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22493,7 +20420,7 @@ type GetRepoInfoResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetRepoInfoResponse) Status() string {
+func (r LegacyGetRepoInfoResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22501,14 +20428,14 @@ func (r GetRepoInfoResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetRepoInfoResponse) StatusCode() int {
+func (r LegacyGetRepoInfoResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetRepositoryProfilesResponse struct {
+type LegacyGetRepositoryProfilesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22517,7 +20444,7 @@ type GetRepositoryProfilesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetRepositoryProfilesResponse) Status() string {
+func (r LegacyGetRepositoryProfilesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22525,14 +20452,14 @@ func (r GetRepositoryProfilesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetRepositoryProfilesResponse) StatusCode() int {
+func (r LegacyGetRepositoryProfilesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetRolesResponse struct {
+type LegacyGetRolesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22541,7 +20468,7 @@ type GetRolesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetRolesResponse) Status() string {
+func (r LegacyGetRolesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22549,14 +20476,14 @@ func (r GetRolesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetRolesResponse) StatusCode() int {
+func (r LegacyGetRolesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetSavedSearchesResponse struct {
+type LegacyGetSavedSearchesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22565,7 +20492,7 @@ type GetSavedSearchesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetSavedSearchesResponse) Status() string {
+func (r LegacyGetSavedSearchesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22573,14 +20500,14 @@ func (r GetSavedSearchesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetSavedSearchesResponse) StatusCode() int {
+func (r LegacyGetSavedSearchesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetScriptCodeResponse struct {
+type LegacyGetScriptCodeResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22590,7 +20517,7 @@ type GetScriptCodeResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetScriptCodeResponse) Status() string {
+func (r LegacyGetScriptCodeResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22598,14 +20525,14 @@ func (r GetScriptCodeResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetScriptCodeResponse) StatusCode() int {
+func (r LegacyGetScriptCodeResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetScriptsResponse struct {
+type LegacyGetScriptsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22615,7 +20542,7 @@ type GetScriptsResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetScriptsResponse) Status() string {
+func (r LegacyGetScriptsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22623,14 +20550,14 @@ func (r GetScriptsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetScriptsResponse) StatusCode() int {
+func (r LegacyGetScriptsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetSettingsResponse struct {
+type LegacyGetSettingsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22639,7 +20566,7 @@ type GetSettingsResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetSettingsResponse) Status() string {
+func (r LegacyGetSettingsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22647,14 +20574,14 @@ func (r GetSettingsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetSettingsResponse) StatusCode() int {
+func (r LegacyGetSettingsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetUSNTimeToFixResponse struct {
+type LegacyGetUSNTimeToFixResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22664,7 +20591,7 @@ type GetUSNTimeToFixResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetUSNTimeToFixResponse) Status() string {
+func (r LegacyGetUSNTimeToFixResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22672,14 +20599,14 @@ func (r GetUSNTimeToFixResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetUSNTimeToFixResponse) StatusCode() int {
+func (r LegacyGetUSNTimeToFixResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetUpgradeProfilesResponse struct {
+type LegacyGetUpgradeProfilesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22688,7 +20615,7 @@ type GetUpgradeProfilesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetUpgradeProfilesResponse) Status() string {
+func (r LegacyGetUpgradeProfilesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22696,14 +20623,14 @@ func (r GetUpgradeProfilesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetUpgradeProfilesResponse) StatusCode() int {
+func (r LegacyGetUpgradeProfilesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetUpgradedComputersByFrequencyResponse struct {
+type LegacyGetUpgradedComputersByFrequencyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22713,7 +20640,7 @@ type GetUpgradedComputersByFrequencyResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetUpgradedComputersByFrequencyResponse) Status() string {
+func (r LegacyGetUpgradedComputersByFrequencyResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22721,14 +20648,14 @@ func (r GetUpgradedComputersByFrequencyResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetUpgradedComputersByFrequencyResponse) StatusCode() int {
+func (r LegacyGetUpgradedComputersByFrequencyResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetUsersResponse struct {
+type LegacyGetUsersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22738,7 +20665,7 @@ type GetUsersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetUsersResponse) Status() string {
+func (r LegacyGetUsersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22746,14 +20673,14 @@ func (r GetUsersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetUsersResponse) StatusCode() int {
+func (r LegacyGetUsersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type GetWSLHostsResponse struct {
+type LegacyGetWSLHostsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22763,7 +20690,7 @@ type GetWSLHostsResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r GetWSLHostsResponse) Status() string {
+func (r LegacyGetWSLHostsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22771,14 +20698,14 @@ func (r GetWSLHostsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GetWSLHostsResponse) StatusCode() int {
+func (r LegacyGetWSLHostsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type ImportGPGKeyResponse struct {
+type LegacyImportGPGKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22788,7 +20715,7 @@ type ImportGPGKeyResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r ImportGPGKeyResponse) Status() string {
+func (r LegacyImportGPGKeyResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22796,14 +20723,14 @@ func (r ImportGPGKeyResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ImportGPGKeyResponse) StatusCode() int {
+func (r LegacyImportGPGKeyResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type InstallPackagesResponse struct {
+type LegacyInstallPackagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22813,7 +20740,7 @@ type InstallPackagesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r InstallPackagesResponse) Status() string {
+func (r LegacyInstallPackagesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22821,14 +20748,14 @@ func (r InstallPackagesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r InstallPackagesResponse) StatusCode() int {
+func (r LegacyInstallPackagesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type InviteAdministratorResponse struct {
+type LegacyInviteAdministratorResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22838,7 +20765,7 @@ type InviteAdministratorResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r InviteAdministratorResponse) Status() string {
+func (r LegacyInviteAdministratorResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22846,14 +20773,14 @@ func (r InviteAdministratorResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r InviteAdministratorResponse) StatusCode() int {
+func (r LegacyInviteAdministratorResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type KillComputerProcessesResponse struct {
+type LegacyKillComputerProcessesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22863,7 +20790,7 @@ type KillComputerProcessesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r KillComputerProcessesResponse) Status() string {
+func (r LegacyKillComputerProcessesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22871,14 +20798,14 @@ func (r KillComputerProcessesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r KillComputerProcessesResponse) StatusCode() int {
+func (r LegacyKillComputerProcessesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type ListPocketResponse struct {
+type LegacyListPocketResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22888,7 +20815,7 @@ type ListPocketResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r ListPocketResponse) Status() string {
+func (r LegacyListPocketResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22896,14 +20823,14 @@ func (r ListPocketResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ListPocketResponse) StatusCode() int {
+func (r LegacyListPocketResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type ModifyPackageProfileResponse struct {
+type LegacyModifyPackageProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22913,7 +20840,7 @@ type ModifyPackageProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r ModifyPackageProfileResponse) Status() string {
+func (r LegacyModifyPackageProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22921,14 +20848,14 @@ func (r ModifyPackageProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ModifyPackageProfileResponse) StatusCode() int {
+func (r LegacyModifyPackageProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type PullPackagesToPocketResponse struct {
+type LegacyPullPackagesToPocketResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22938,7 +20865,7 @@ type PullPackagesToPocketResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r PullPackagesToPocketResponse) Status() string {
+func (r LegacyPullPackagesToPocketResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22946,14 +20873,14 @@ func (r PullPackagesToPocketResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r PullPackagesToPocketResponse) StatusCode() int {
+func (r LegacyPullPackagesToPocketResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RebootComputersResponse struct {
+type LegacyRebootComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22963,7 +20890,7 @@ type RebootComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RebootComputersResponse) Status() string {
+func (r LegacyRebootComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22971,14 +20898,14 @@ func (r RebootComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RebootComputersResponse) StatusCode() int {
+func (r LegacyRebootComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RejectPendingComputersResponse struct {
+type LegacyRejectPendingComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -22988,7 +20915,7 @@ type RejectPendingComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RejectPendingComputersResponse) Status() string {
+func (r LegacyRejectPendingComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -22996,14 +20923,14 @@ func (r RejectPendingComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RejectPendingComputersResponse) StatusCode() int {
+func (r LegacyRejectPendingComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveAPTSourceResponse struct {
+type LegacyRemoveAPTSourceResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23013,7 +20940,7 @@ type RemoveAPTSourceResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveAPTSourceResponse) Status() string {
+func (r LegacyRemoveAPTSourceResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23021,14 +20948,14 @@ func (r RemoveAPTSourceResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveAPTSourceResponse) StatusCode() int {
+func (r LegacyRemoveAPTSourceResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveAPTSourceFromRepositoryProfileResponse struct {
+type LegacyRemoveAPTSourceFromRepositoryProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23038,7 +20965,7 @@ type RemoveAPTSourceFromRepositoryProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveAPTSourceFromRepositoryProfileResponse) Status() string {
+func (r LegacyRemoveAPTSourceFromRepositoryProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23046,14 +20973,14 @@ func (r RemoveAPTSourceFromRepositoryProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveAPTSourceFromRepositoryProfileResponse) StatusCode() int {
+func (r LegacyRemoveAPTSourceFromRepositoryProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveAPTSourcesResponse struct {
+type LegacyRemoveAPTSourcesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23063,7 +20990,7 @@ type RemoveAPTSourcesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveAPTSourcesResponse) Status() string {
+func (r LegacyRemoveAPTSourcesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23071,14 +20998,14 @@ func (r RemoveAPTSourcesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveAPTSourcesResponse) StatusCode() int {
+func (r LegacyRemoveAPTSourcesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveAPTSourcesFromRepositoryProfileResponse struct {
+type LegacyRemoveAPTSourcesFromRepositoryProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23088,7 +21015,7 @@ type RemoveAPTSourcesFromRepositoryProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveAPTSourcesFromRepositoryProfileResponse) Status() string {
+func (r LegacyRemoveAPTSourcesFromRepositoryProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23096,14 +21023,14 @@ func (r RemoveAPTSourcesFromRepositoryProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveAPTSourcesFromRepositoryProfileResponse) StatusCode() int {
+func (r LegacyRemoveAPTSourcesFromRepositoryProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveAccessGroupResponse struct {
+type LegacyRemoveAccessGroupResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23113,7 +21040,7 @@ type RemoveAccessGroupResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveAccessGroupResponse) Status() string {
+func (r LegacyRemoveAccessGroupResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23121,14 +21048,14 @@ func (r RemoveAccessGroupResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveAccessGroupResponse) StatusCode() int {
+func (r LegacyRemoveAccessGroupResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveAccessGroupsFromRoleResponse struct {
+type LegacyRemoveAccessGroupsFromRoleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23138,7 +21065,7 @@ type RemoveAccessGroupsFromRoleResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveAccessGroupsFromRoleResponse) Status() string {
+func (r LegacyRemoveAccessGroupsFromRoleResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23146,14 +21073,14 @@ func (r RemoveAccessGroupsFromRoleResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveAccessGroupsFromRoleResponse) StatusCode() int {
+func (r LegacyRemoveAccessGroupsFromRoleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveAnnotationFromComputersResponse struct {
+type LegacyRemoveAnnotationFromComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23163,7 +21090,7 @@ type RemoveAnnotationFromComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveAnnotationFromComputersResponse) Status() string {
+func (r LegacyRemoveAnnotationFromComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23171,14 +21098,14 @@ func (r RemoveAnnotationFromComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveAnnotationFromComputersResponse) StatusCode() int {
+func (r LegacyRemoveAnnotationFromComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveComputersResponse struct {
+type LegacyRemoveComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23188,7 +21115,7 @@ type RemoveComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveComputersResponse) Status() string {
+func (r LegacyRemoveComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23196,14 +21123,14 @@ func (r RemoveComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveComputersResponse) StatusCode() int {
+func (r LegacyRemoveComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveDistributionResponse struct {
+type LegacyRemoveDistributionResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23213,7 +21140,7 @@ type RemoveDistributionResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveDistributionResponse) Status() string {
+func (r LegacyRemoveDistributionResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23221,14 +21148,14 @@ func (r RemoveDistributionResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveDistributionResponse) StatusCode() int {
+func (r LegacyRemoveDistributionResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveGPGKeyResponse struct {
+type LegacyRemoveGPGKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23238,7 +21165,7 @@ type RemoveGPGKeyResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveGPGKeyResponse) Status() string {
+func (r LegacyRemoveGPGKeyResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23246,14 +21173,14 @@ func (r RemoveGPGKeyResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveGPGKeyResponse) StatusCode() int {
+func (r LegacyRemoveGPGKeyResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemovePackageFiltersFromPocketResponse struct {
+type LegacyRemovePackageFiltersFromPocketResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23263,7 +21190,7 @@ type RemovePackageFiltersFromPocketResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemovePackageFiltersFromPocketResponse) Status() string {
+func (r LegacyRemovePackageFiltersFromPocketResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23271,14 +21198,14 @@ func (r RemovePackageFiltersFromPocketResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemovePackageFiltersFromPocketResponse) StatusCode() int {
+func (r LegacyRemovePackageFiltersFromPocketResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemovePackageProfileResponse struct {
+type LegacyRemovePackageProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23288,7 +21215,7 @@ type RemovePackageProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemovePackageProfileResponse) Status() string {
+func (r LegacyRemovePackageProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23296,14 +21223,14 @@ func (r RemovePackageProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemovePackageProfileResponse) StatusCode() int {
+func (r LegacyRemovePackageProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemovePackagesResponse struct {
+type LegacyRemovePackagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23313,7 +21240,7 @@ type RemovePackagesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemovePackagesResponse) Status() string {
+func (r LegacyRemovePackagesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23321,14 +21248,14 @@ func (r RemovePackagesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemovePackagesResponse) StatusCode() int {
+func (r LegacyRemovePackagesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemovePackagesFromPocketResponse struct {
+type LegacyRemovePackagesFromPocketResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23338,7 +21265,7 @@ type RemovePackagesFromPocketResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemovePackagesFromPocketResponse) Status() string {
+func (r LegacyRemovePackagesFromPocketResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23346,14 +21273,14 @@ func (r RemovePackagesFromPocketResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemovePackagesFromPocketResponse) StatusCode() int {
+func (r LegacyRemovePackagesFromPocketResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemovePermissionsFromRoleResponse struct {
+type LegacyRemovePermissionsFromRoleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23363,7 +21290,7 @@ type RemovePermissionsFromRoleResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemovePermissionsFromRoleResponse) Status() string {
+func (r LegacyRemovePermissionsFromRoleResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23371,14 +21298,14 @@ func (r RemovePermissionsFromRoleResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemovePermissionsFromRoleResponse) StatusCode() int {
+func (r LegacyRemovePermissionsFromRoleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemovePersonsFromRoleResponse struct {
+type LegacyRemovePersonsFromRoleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23388,7 +21315,7 @@ type RemovePersonsFromRoleResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemovePersonsFromRoleResponse) Status() string {
+func (r LegacyRemovePersonsFromRoleResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23396,14 +21323,14 @@ func (r RemovePersonsFromRoleResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemovePersonsFromRoleResponse) StatusCode() int {
+func (r LegacyRemovePersonsFromRoleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemovePocketResponse struct {
+type LegacyRemovePocketResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23413,7 +21340,7 @@ type RemovePocketResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemovePocketResponse) Status() string {
+func (r LegacyRemovePocketResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23421,14 +21348,14 @@ func (r RemovePocketResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemovePocketResponse) StatusCode() int {
+func (r LegacyRemovePocketResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemovePocketsFromRepositoryProfileResponse struct {
+type LegacyRemovePocketsFromRepositoryProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23438,7 +21365,7 @@ type RemovePocketsFromRepositoryProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemovePocketsFromRepositoryProfileResponse) Status() string {
+func (r LegacyRemovePocketsFromRepositoryProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23446,14 +21373,14 @@ func (r RemovePocketsFromRepositoryProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemovePocketsFromRepositoryProfileResponse) StatusCode() int {
+func (r LegacyRemovePocketsFromRepositoryProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveRemovalProfileResponse struct {
+type LegacyRemoveRemovalProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23463,7 +21390,7 @@ type RemoveRemovalProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveRemovalProfileResponse) Status() string {
+func (r LegacyRemoveRemovalProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23471,14 +21398,14 @@ func (r RemoveRemovalProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveRemovalProfileResponse) StatusCode() int {
+func (r LegacyRemoveRemovalProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveRepositoryProfileResponse struct {
+type LegacyRemoveRepositoryProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23488,7 +21415,7 @@ type RemoveRepositoryProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveRepositoryProfileResponse) Status() string {
+func (r LegacyRemoveRepositoryProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23496,14 +21423,14 @@ func (r RemoveRepositoryProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveRepositoryProfileResponse) StatusCode() int {
+func (r LegacyRemoveRepositoryProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveRepositoryProfilesResponse struct {
+type LegacyRemoveRepositoryProfilesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23513,7 +21440,7 @@ type RemoveRepositoryProfilesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveRepositoryProfilesResponse) Status() string {
+func (r LegacyRemoveRepositoryProfilesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23521,14 +21448,14 @@ func (r RemoveRepositoryProfilesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveRepositoryProfilesResponse) StatusCode() int {
+func (r LegacyRemoveRepositoryProfilesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveRoleResponse struct {
+type LegacyRemoveRoleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23538,7 +21465,7 @@ type RemoveRoleResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveRoleResponse) Status() string {
+func (r LegacyRemoveRoleResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23546,14 +21473,14 @@ func (r RemoveRoleResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveRoleResponse) StatusCode() int {
+func (r LegacyRemoveRoleResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveSavedSearchResponse struct {
+type LegacyRemoveSavedSearchResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23563,7 +21490,7 @@ type RemoveSavedSearchResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveSavedSearchResponse) Status() string {
+func (r LegacyRemoveSavedSearchResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23571,14 +21498,14 @@ func (r RemoveSavedSearchResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveSavedSearchResponse) StatusCode() int {
+func (r LegacyRemoveSavedSearchResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveScriptResponse struct {
+type LegacyRemoveScriptResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23588,7 +21515,7 @@ type RemoveScriptResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveScriptResponse) Status() string {
+func (r LegacyRemoveScriptResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23596,14 +21523,14 @@ func (r RemoveScriptResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveScriptResponse) StatusCode() int {
+func (r LegacyRemoveScriptResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveScriptAttachmentResponse struct {
+type LegacyRemoveScriptAttachmentResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23613,7 +21540,7 @@ type RemoveScriptAttachmentResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveScriptAttachmentResponse) Status() string {
+func (r LegacyRemoveScriptAttachmentResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23621,14 +21548,14 @@ func (r RemoveScriptAttachmentResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveScriptAttachmentResponse) StatusCode() int {
+func (r LegacyRemoveScriptAttachmentResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveSeriesResponse struct {
+type LegacyRemoveSeriesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23638,7 +21565,7 @@ type RemoveSeriesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveSeriesResponse) Status() string {
+func (r LegacyRemoveSeriesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23646,14 +21573,14 @@ func (r RemoveSeriesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveSeriesResponse) StatusCode() int {
+func (r LegacyRemoveSeriesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveTagsFromComputersResponse struct {
+type LegacyRemoveTagsFromComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23663,7 +21590,7 @@ type RemoveTagsFromComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveTagsFromComputersResponse) Status() string {
+func (r LegacyRemoveTagsFromComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23671,14 +21598,14 @@ func (r RemoveTagsFromComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveTagsFromComputersResponse) StatusCode() int {
+func (r LegacyRemoveTagsFromComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveUpgradeProfileResponse struct {
+type LegacyRemoveUpgradeProfileResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23688,7 +21615,7 @@ type RemoveUpgradeProfileResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveUpgradeProfileResponse) Status() string {
+func (r LegacyRemoveUpgradeProfileResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23696,14 +21623,14 @@ func (r RemoveUpgradeProfileResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveUpgradeProfileResponse) StatusCode() int {
+func (r LegacyRemoveUpgradeProfileResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveUploaderGPGKeysFromPocketResponse struct {
+type LegacyRemoveUploaderGPGKeysFromPocketResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23713,7 +21640,7 @@ type RemoveUploaderGPGKeysFromPocketResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveUploaderGPGKeysFromPocketResponse) Status() string {
+func (r LegacyRemoveUploaderGPGKeysFromPocketResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23721,14 +21648,14 @@ func (r RemoveUploaderGPGKeysFromPocketResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveUploaderGPGKeysFromPocketResponse) StatusCode() int {
+func (r LegacyRemoveUploaderGPGKeysFromPocketResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RemoveWSLHostsResponse struct {
+type LegacyRemoveWSLHostsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23738,7 +21665,7 @@ type RemoveWSLHostsResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RemoveWSLHostsResponse) Status() string {
+func (r LegacyRemoveWSLHostsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23746,14 +21673,14 @@ func (r RemoveWSLHostsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RemoveWSLHostsResponse) StatusCode() int {
+func (r LegacyRemoveWSLHostsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type RenameComputersResponse struct {
+type LegacyRenameComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23763,7 +21690,7 @@ type RenameComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r RenameComputersResponse) Status() string {
+func (r LegacyRenameComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23771,14 +21698,14 @@ func (r RenameComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r RenameComputersResponse) StatusCode() int {
+func (r LegacyRenameComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type SetDefaultChildComputerResponse struct {
+type LegacySetDefaultChildComputerResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23788,7 +21715,7 @@ type SetDefaultChildComputerResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r SetDefaultChildComputerResponse) Status() string {
+func (r LegacySetDefaultChildComputerResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23796,14 +21723,14 @@ func (r SetDefaultChildComputerResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r SetDefaultChildComputerResponse) StatusCode() int {
+func (r LegacySetDefaultChildComputerResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type SetSettingsResponse struct {
+type LegacySetSettingsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23813,7 +21740,7 @@ type SetSettingsResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r SetSettingsResponse) Status() string {
+func (r LegacySetSettingsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23821,14 +21748,14 @@ func (r SetSettingsResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r SetSettingsResponse) StatusCode() int {
+func (r LegacySetSettingsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type ShutdownComputersResponse struct {
+type LegacyShutdownComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23838,7 +21765,7 @@ type ShutdownComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r ShutdownComputersResponse) Status() string {
+func (r LegacyShutdownComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23846,14 +21773,14 @@ func (r ShutdownComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ShutdownComputersResponse) StatusCode() int {
+func (r LegacyShutdownComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type ShutdownHostComputerResponse struct {
+type LegacyShutdownHostComputerResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23863,7 +21790,7 @@ type ShutdownHostComputerResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r ShutdownHostComputerResponse) Status() string {
+func (r LegacyShutdownHostComputerResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23871,14 +21798,14 @@ func (r ShutdownHostComputerResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r ShutdownHostComputerResponse) StatusCode() int {
+func (r LegacyShutdownHostComputerResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type StartChildComputersResponse struct {
+type LegacyStartChildComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23888,7 +21815,7 @@ type StartChildComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r StartChildComputersResponse) Status() string {
+func (r LegacyStartChildComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23896,14 +21823,14 @@ func (r StartChildComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r StartChildComputersResponse) StatusCode() int {
+func (r LegacyStartChildComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type StopChildComputersResponse struct {
+type LegacyStopChildComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23913,7 +21840,7 @@ type StopChildComputersResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r StopChildComputersResponse) Status() string {
+func (r LegacyStopChildComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23921,14 +21848,14 @@ func (r StopChildComputersResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r StopChildComputersResponse) StatusCode() int {
+func (r LegacyStopChildComputersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type SubscribeToAlertResponse struct {
+type LegacySubscribeToAlertResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23938,7 +21865,7 @@ type SubscribeToAlertResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r SubscribeToAlertResponse) Status() string {
+func (r LegacySubscribeToAlertResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23946,14 +21873,14 @@ func (r SubscribeToAlertResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r SubscribeToAlertResponse) StatusCode() int {
+func (r LegacySubscribeToAlertResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type SyncMirrorPocketResponse struct {
+type LegacySyncMirrorPocketResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23963,7 +21890,7 @@ type SyncMirrorPocketResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r SyncMirrorPocketResponse) Status() string {
+func (r LegacySyncMirrorPocketResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23971,14 +21898,14 @@ func (r SyncMirrorPocketResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r SyncMirrorPocketResponse) StatusCode() int {
+func (r LegacySyncMirrorPocketResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type TerminateComputerProcessesResponse struct {
+type LegacyTerminateComputerProcessesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -23988,7 +21915,7 @@ type TerminateComputerProcessesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r TerminateComputerProcessesResponse) Status() string {
+func (r LegacyTerminateComputerProcessesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -23996,14 +21923,14 @@ func (r TerminateComputerProcessesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r TerminateComputerProcessesResponse) StatusCode() int {
+func (r LegacyTerminateComputerProcessesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type UnsubscribeFromAlertResponse struct {
+type LegacyUnsubscribeFromAlertResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -24013,7 +21940,7 @@ type UnsubscribeFromAlertResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r UnsubscribeFromAlertResponse) Status() string {
+func (r LegacyUnsubscribeFromAlertResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -24021,14 +21948,14 @@ func (r UnsubscribeFromAlertResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r UnsubscribeFromAlertResponse) StatusCode() int {
+func (r LegacyUnsubscribeFromAlertResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
 }
 
-type UpgradePackagesResponse struct {
+type LegacyUpgradePackagesResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
@@ -24038,7 +21965,7 @@ type UpgradePackagesResponse struct {
 }
 
 // Status returns HTTPResponse.Status
-func (r UpgradePackagesResponse) Status() string {
+func (r LegacyUpgradePackagesResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -24046,7 +21973,7 @@ func (r UpgradePackagesResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r UpgradePackagesResponse) StatusCode() int {
+func (r LegacyUpgradePackagesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -24417,1237 +22344,1237 @@ func (r RedactScriptResponse) StatusCode() int {
 	return 0
 }
 
-// AcceptPendingComputersWithResponse request returning *AcceptPendingComputersResponse
-func (c *ClientWithResponses) AcceptPendingComputersWithResponse(ctx context.Context, params *AcceptPendingComputersParams, reqEditors ...RequestEditorFn) (*AcceptPendingComputersResponse, error) {
-	rsp, err := c.AcceptPendingComputers(ctx, params, reqEditors...)
+// LegacyAcceptPendingComputersWithResponse request returning *LegacyAcceptPendingComputersResponse
+func (c *ClientWithResponses) LegacyAcceptPendingComputersWithResponse(ctx context.Context, params *LegacyAcceptPendingComputersParams, reqEditors ...RequestEditorFn) (*LegacyAcceptPendingComputersResponse, error) {
+	rsp, err := c.LegacyAcceptPendingComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAcceptPendingComputersResponse(rsp)
+	return ParseLegacyAcceptPendingComputersResponse(rsp)
 }
 
-// AddAPTSourcesToRepositoryProfileWithResponse request returning *AddAPTSourcesToRepositoryProfileResponse
-func (c *ClientWithResponses) AddAPTSourcesToRepositoryProfileWithResponse(ctx context.Context, params *AddAPTSourcesToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*AddAPTSourcesToRepositoryProfileResponse, error) {
-	rsp, err := c.AddAPTSourcesToRepositoryProfile(ctx, params, reqEditors...)
+// LegacyAddAPTSourcesToRepositoryProfileWithResponse request returning *LegacyAddAPTSourcesToRepositoryProfileResponse
+func (c *ClientWithResponses) LegacyAddAPTSourcesToRepositoryProfileWithResponse(ctx context.Context, params *LegacyAddAPTSourcesToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyAddAPTSourcesToRepositoryProfileResponse, error) {
+	rsp, err := c.LegacyAddAPTSourcesToRepositoryProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAddAPTSourcesToRepositoryProfileResponse(rsp)
+	return ParseLegacyAddAPTSourcesToRepositoryProfileResponse(rsp)
 }
 
-// AddAccessGroupsToRoleWithResponse request returning *AddAccessGroupsToRoleResponse
-func (c *ClientWithResponses) AddAccessGroupsToRoleWithResponse(ctx context.Context, params *AddAccessGroupsToRoleParams, reqEditors ...RequestEditorFn) (*AddAccessGroupsToRoleResponse, error) {
-	rsp, err := c.AddAccessGroupsToRole(ctx, params, reqEditors...)
+// LegacyAddAccessGroupsToRoleWithResponse request returning *LegacyAddAccessGroupsToRoleResponse
+func (c *ClientWithResponses) LegacyAddAccessGroupsToRoleWithResponse(ctx context.Context, params *LegacyAddAccessGroupsToRoleParams, reqEditors ...RequestEditorFn) (*LegacyAddAccessGroupsToRoleResponse, error) {
+	rsp, err := c.LegacyAddAccessGroupsToRole(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAddAccessGroupsToRoleResponse(rsp)
+	return ParseLegacyAddAccessGroupsToRoleResponse(rsp)
 }
 
-// AddAnnotationToComputersWithResponse request returning *AddAnnotationToComputersResponse
-func (c *ClientWithResponses) AddAnnotationToComputersWithResponse(ctx context.Context, params *AddAnnotationToComputersParams, reqEditors ...RequestEditorFn) (*AddAnnotationToComputersResponse, error) {
-	rsp, err := c.AddAnnotationToComputers(ctx, params, reqEditors...)
+// LegacyAddAnnotationToComputersWithResponse request returning *LegacyAddAnnotationToComputersResponse
+func (c *ClientWithResponses) LegacyAddAnnotationToComputersWithResponse(ctx context.Context, params *LegacyAddAnnotationToComputersParams, reqEditors ...RequestEditorFn) (*LegacyAddAnnotationToComputersResponse, error) {
+	rsp, err := c.LegacyAddAnnotationToComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAddAnnotationToComputersResponse(rsp)
+	return ParseLegacyAddAnnotationToComputersResponse(rsp)
 }
 
-// AddPackageFiltersToPocketWithResponse request returning *AddPackageFiltersToPocketResponse
-func (c *ClientWithResponses) AddPackageFiltersToPocketWithResponse(ctx context.Context, params *AddPackageFiltersToPocketParams, reqEditors ...RequestEditorFn) (*AddPackageFiltersToPocketResponse, error) {
-	rsp, err := c.AddPackageFiltersToPocket(ctx, params, reqEditors...)
+// LegacyAddPackageFiltersToPocketWithResponse request returning *LegacyAddPackageFiltersToPocketResponse
+func (c *ClientWithResponses) LegacyAddPackageFiltersToPocketWithResponse(ctx context.Context, params *LegacyAddPackageFiltersToPocketParams, reqEditors ...RequestEditorFn) (*LegacyAddPackageFiltersToPocketResponse, error) {
+	rsp, err := c.LegacyAddPackageFiltersToPocket(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAddPackageFiltersToPocketResponse(rsp)
+	return ParseLegacyAddPackageFiltersToPocketResponse(rsp)
 }
 
-// AddPermissionsToRoleWithResponse request returning *AddPermissionsToRoleResponse
-func (c *ClientWithResponses) AddPermissionsToRoleWithResponse(ctx context.Context, params *AddPermissionsToRoleParams, reqEditors ...RequestEditorFn) (*AddPermissionsToRoleResponse, error) {
-	rsp, err := c.AddPermissionsToRole(ctx, params, reqEditors...)
+// LegacyAddPermissionsToRoleWithResponse request returning *LegacyAddPermissionsToRoleResponse
+func (c *ClientWithResponses) LegacyAddPermissionsToRoleWithResponse(ctx context.Context, params *LegacyAddPermissionsToRoleParams, reqEditors ...RequestEditorFn) (*LegacyAddPermissionsToRoleResponse, error) {
+	rsp, err := c.LegacyAddPermissionsToRole(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAddPermissionsToRoleResponse(rsp)
+	return ParseLegacyAddPermissionsToRoleResponse(rsp)
 }
 
-// AddPersonsToRoleWithResponse request returning *AddPersonsToRoleResponse
-func (c *ClientWithResponses) AddPersonsToRoleWithResponse(ctx context.Context, params *AddPersonsToRoleParams, reqEditors ...RequestEditorFn) (*AddPersonsToRoleResponse, error) {
-	rsp, err := c.AddPersonsToRole(ctx, params, reqEditors...)
+// LegacyAddPersonsToRoleWithResponse request returning *LegacyAddPersonsToRoleResponse
+func (c *ClientWithResponses) LegacyAddPersonsToRoleWithResponse(ctx context.Context, params *LegacyAddPersonsToRoleParams, reqEditors ...RequestEditorFn) (*LegacyAddPersonsToRoleResponse, error) {
+	rsp, err := c.LegacyAddPersonsToRole(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAddPersonsToRoleResponse(rsp)
+	return ParseLegacyAddPersonsToRoleResponse(rsp)
 }
 
-// AddPocketsToRepositoryProfileWithResponse request returning *AddPocketsToRepositoryProfileResponse
-func (c *ClientWithResponses) AddPocketsToRepositoryProfileWithResponse(ctx context.Context, params *AddPocketsToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*AddPocketsToRepositoryProfileResponse, error) {
-	rsp, err := c.AddPocketsToRepositoryProfile(ctx, params, reqEditors...)
+// LegacyAddPocketsToRepositoryProfileWithResponse request returning *LegacyAddPocketsToRepositoryProfileResponse
+func (c *ClientWithResponses) LegacyAddPocketsToRepositoryProfileWithResponse(ctx context.Context, params *LegacyAddPocketsToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyAddPocketsToRepositoryProfileResponse, error) {
+	rsp, err := c.LegacyAddPocketsToRepositoryProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAddPocketsToRepositoryProfileResponse(rsp)
+	return ParseLegacyAddPocketsToRepositoryProfileResponse(rsp)
 }
 
-// AddTagsToComputersWithResponse request returning *AddTagsToComputersResponse
-func (c *ClientWithResponses) AddTagsToComputersWithResponse(ctx context.Context, params *AddTagsToComputersParams, reqEditors ...RequestEditorFn) (*AddTagsToComputersResponse, error) {
-	rsp, err := c.AddTagsToComputers(ctx, params, reqEditors...)
+// LegacyAddTagsToComputersWithResponse request returning *LegacyAddTagsToComputersResponse
+func (c *ClientWithResponses) LegacyAddTagsToComputersWithResponse(ctx context.Context, params *LegacyAddTagsToComputersParams, reqEditors ...RequestEditorFn) (*LegacyAddTagsToComputersResponse, error) {
+	rsp, err := c.LegacyAddTagsToComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAddTagsToComputersResponse(rsp)
+	return ParseLegacyAddTagsToComputersResponse(rsp)
 }
 
-// AddUploaderGPGKeysToPocketWithResponse request returning *AddUploaderGPGKeysToPocketResponse
-func (c *ClientWithResponses) AddUploaderGPGKeysToPocketWithResponse(ctx context.Context, params *AddUploaderGPGKeysToPocketParams, reqEditors ...RequestEditorFn) (*AddUploaderGPGKeysToPocketResponse, error) {
-	rsp, err := c.AddUploaderGPGKeysToPocket(ctx, params, reqEditors...)
+// LegacyAddUploaderGPGKeysToPocketWithResponse request returning *LegacyAddUploaderGPGKeysToPocketResponse
+func (c *ClientWithResponses) LegacyAddUploaderGPGKeysToPocketWithResponse(ctx context.Context, params *LegacyAddUploaderGPGKeysToPocketParams, reqEditors ...RequestEditorFn) (*LegacyAddUploaderGPGKeysToPocketResponse, error) {
+	rsp, err := c.LegacyAddUploaderGPGKeysToPocket(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAddUploaderGPGKeysToPocketResponse(rsp)
+	return ParseLegacyAddUploaderGPGKeysToPocketResponse(rsp)
 }
 
-// ApproveActivitiesWithResponse request returning *ApproveActivitiesResponse
-func (c *ClientWithResponses) ApproveActivitiesWithResponse(ctx context.Context, params *ApproveActivitiesParams, reqEditors ...RequestEditorFn) (*ApproveActivitiesResponse, error) {
-	rsp, err := c.ApproveActivities(ctx, params, reqEditors...)
+// LegacyApproveActivitiesWithResponse request returning *LegacyApproveActivitiesResponse
+func (c *ClientWithResponses) LegacyApproveActivitiesWithResponse(ctx context.Context, params *LegacyApproveActivitiesParams, reqEditors ...RequestEditorFn) (*LegacyApproveActivitiesResponse, error) {
+	rsp, err := c.LegacyApproveActivities(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseApproveActivitiesResponse(rsp)
+	return ParseLegacyApproveActivitiesResponse(rsp)
 }
 
-// AssociateAlertWithResponse request returning *AssociateAlertResponse
-func (c *ClientWithResponses) AssociateAlertWithResponse(ctx context.Context, params *AssociateAlertParams, reqEditors ...RequestEditorFn) (*AssociateAlertResponse, error) {
-	rsp, err := c.AssociateAlert(ctx, params, reqEditors...)
+// LegacyAssociateAlertWithResponse request returning *LegacyAssociateAlertResponse
+func (c *ClientWithResponses) LegacyAssociateAlertWithResponse(ctx context.Context, params *LegacyAssociateAlertParams, reqEditors ...RequestEditorFn) (*LegacyAssociateAlertResponse, error) {
+	rsp, err := c.LegacyAssociateAlert(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAssociateAlertResponse(rsp)
+	return ParseLegacyAssociateAlertResponse(rsp)
 }
 
-// AssociatePackageProfileWithResponse request returning *AssociatePackageProfileResponse
-func (c *ClientWithResponses) AssociatePackageProfileWithResponse(ctx context.Context, params *AssociatePackageProfileParams, reqEditors ...RequestEditorFn) (*AssociatePackageProfileResponse, error) {
-	rsp, err := c.AssociatePackageProfile(ctx, params, reqEditors...)
+// LegacyAssociatePackageProfileWithResponse request returning *LegacyAssociatePackageProfileResponse
+func (c *ClientWithResponses) LegacyAssociatePackageProfileWithResponse(ctx context.Context, params *LegacyAssociatePackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyAssociatePackageProfileResponse, error) {
+	rsp, err := c.LegacyAssociatePackageProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAssociatePackageProfileResponse(rsp)
+	return ParseLegacyAssociatePackageProfileResponse(rsp)
 }
 
-// AssociateRemovalProfileWithResponse request returning *AssociateRemovalProfileResponse
-func (c *ClientWithResponses) AssociateRemovalProfileWithResponse(ctx context.Context, params *AssociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*AssociateRemovalProfileResponse, error) {
-	rsp, err := c.AssociateRemovalProfile(ctx, params, reqEditors...)
+// LegacyAssociateRemovalProfileWithResponse request returning *LegacyAssociateRemovalProfileResponse
+func (c *ClientWithResponses) LegacyAssociateRemovalProfileWithResponse(ctx context.Context, params *LegacyAssociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*LegacyAssociateRemovalProfileResponse, error) {
+	rsp, err := c.LegacyAssociateRemovalProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAssociateRemovalProfileResponse(rsp)
+	return ParseLegacyAssociateRemovalProfileResponse(rsp)
 }
 
-// AssociateRepositoryProfileWithResponse request returning *AssociateRepositoryProfileResponse
-func (c *ClientWithResponses) AssociateRepositoryProfileWithResponse(ctx context.Context, params *AssociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*AssociateRepositoryProfileResponse, error) {
-	rsp, err := c.AssociateRepositoryProfile(ctx, params, reqEditors...)
+// LegacyAssociateRepositoryProfileWithResponse request returning *LegacyAssociateRepositoryProfileResponse
+func (c *ClientWithResponses) LegacyAssociateRepositoryProfileWithResponse(ctx context.Context, params *LegacyAssociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyAssociateRepositoryProfileResponse, error) {
+	rsp, err := c.LegacyAssociateRepositoryProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAssociateRepositoryProfileResponse(rsp)
+	return ParseLegacyAssociateRepositoryProfileResponse(rsp)
 }
 
-// AssociateUpgradeProfileWithResponse request returning *AssociateUpgradeProfileResponse
-func (c *ClientWithResponses) AssociateUpgradeProfileWithResponse(ctx context.Context, params *AssociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*AssociateUpgradeProfileResponse, error) {
-	rsp, err := c.AssociateUpgradeProfile(ctx, params, reqEditors...)
+// LegacyAssociateUpgradeProfileWithResponse request returning *LegacyAssociateUpgradeProfileResponse
+func (c *ClientWithResponses) LegacyAssociateUpgradeProfileWithResponse(ctx context.Context, params *LegacyAssociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*LegacyAssociateUpgradeProfileResponse, error) {
+	rsp, err := c.LegacyAssociateUpgradeProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseAssociateUpgradeProfileResponse(rsp)
+	return ParseLegacyAssociateUpgradeProfileResponse(rsp)
 }
 
-// CancelActivitiesWithResponse request returning *CancelActivitiesResponse
-func (c *ClientWithResponses) CancelActivitiesWithResponse(ctx context.Context, params *CancelActivitiesParams, reqEditors ...RequestEditorFn) (*CancelActivitiesResponse, error) {
-	rsp, err := c.CancelActivities(ctx, params, reqEditors...)
+// LegacyCancelActivitiesWithResponse request returning *LegacyCancelActivitiesResponse
+func (c *ClientWithResponses) LegacyCancelActivitiesWithResponse(ctx context.Context, params *LegacyCancelActivitiesParams, reqEditors ...RequestEditorFn) (*LegacyCancelActivitiesResponse, error) {
+	rsp, err := c.LegacyCancelActivities(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCancelActivitiesResponse(rsp)
+	return ParseLegacyCancelActivitiesResponse(rsp)
 }
 
-// ChangeComputersAccessGroupWithResponse request returning *ChangeComputersAccessGroupResponse
-func (c *ClientWithResponses) ChangeComputersAccessGroupWithResponse(ctx context.Context, params *ChangeComputersAccessGroupParams, reqEditors ...RequestEditorFn) (*ChangeComputersAccessGroupResponse, error) {
-	rsp, err := c.ChangeComputersAccessGroup(ctx, params, reqEditors...)
+// LegacyChangeComputersAccessGroupWithResponse request returning *LegacyChangeComputersAccessGroupResponse
+func (c *ClientWithResponses) LegacyChangeComputersAccessGroupWithResponse(ctx context.Context, params *LegacyChangeComputersAccessGroupParams, reqEditors ...RequestEditorFn) (*LegacyChangeComputersAccessGroupResponse, error) {
+	rsp, err := c.LegacyChangeComputersAccessGroup(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseChangeComputersAccessGroupResponse(rsp)
+	return ParseLegacyChangeComputersAccessGroupResponse(rsp)
 }
 
-// CopyPackageProfileWithResponse request returning *CopyPackageProfileResponse
-func (c *ClientWithResponses) CopyPackageProfileWithResponse(ctx context.Context, params *CopyPackageProfileParams, reqEditors ...RequestEditorFn) (*CopyPackageProfileResponse, error) {
-	rsp, err := c.CopyPackageProfile(ctx, params, reqEditors...)
+// LegacyCopyPackageProfileWithResponse request returning *LegacyCopyPackageProfileResponse
+func (c *ClientWithResponses) LegacyCopyPackageProfileWithResponse(ctx context.Context, params *LegacyCopyPackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyCopyPackageProfileResponse, error) {
+	rsp, err := c.LegacyCopyPackageProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCopyPackageProfileResponse(rsp)
+	return ParseLegacyCopyPackageProfileResponse(rsp)
 }
 
-// CopyRoleWithResponse request returning *CopyRoleResponse
-func (c *ClientWithResponses) CopyRoleWithResponse(ctx context.Context, params *CopyRoleParams, reqEditors ...RequestEditorFn) (*CopyRoleResponse, error) {
-	rsp, err := c.CopyRole(ctx, params, reqEditors...)
+// LegacyCopyRoleWithResponse request returning *LegacyCopyRoleResponse
+func (c *ClientWithResponses) LegacyCopyRoleWithResponse(ctx context.Context, params *LegacyCopyRoleParams, reqEditors ...RequestEditorFn) (*LegacyCopyRoleResponse, error) {
+	rsp, err := c.LegacyCopyRole(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCopyRoleResponse(rsp)
+	return ParseLegacyCopyRoleResponse(rsp)
 }
 
-// CopyScriptWithResponse request returning *CopyScriptResponse
-func (c *ClientWithResponses) CopyScriptWithResponse(ctx context.Context, params *CopyScriptParams, reqEditors ...RequestEditorFn) (*CopyScriptResponse, error) {
-	rsp, err := c.CopyScript(ctx, params, reqEditors...)
+// LegacyCopyScriptWithResponse request returning *LegacyCopyScriptResponse
+func (c *ClientWithResponses) LegacyCopyScriptWithResponse(ctx context.Context, params *LegacyCopyScriptParams, reqEditors ...RequestEditorFn) (*LegacyCopyScriptResponse, error) {
+	rsp, err := c.LegacyCopyScript(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCopyScriptResponse(rsp)
+	return ParseLegacyCopyScriptResponse(rsp)
 }
 
-// CreateAPTSourceWithResponse request returning *CreateAPTSourceResponse
-func (c *ClientWithResponses) CreateAPTSourceWithResponse(ctx context.Context, params *CreateAPTSourceParams, reqEditors ...RequestEditorFn) (*CreateAPTSourceResponse, error) {
-	rsp, err := c.CreateAPTSource(ctx, params, reqEditors...)
+// LegacyCreateAPTSourceWithResponse request returning *LegacyCreateAPTSourceResponse
+func (c *ClientWithResponses) LegacyCreateAPTSourceWithResponse(ctx context.Context, params *LegacyCreateAPTSourceParams, reqEditors ...RequestEditorFn) (*LegacyCreateAPTSourceResponse, error) {
+	rsp, err := c.LegacyCreateAPTSource(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateAPTSourceResponse(rsp)
+	return ParseLegacyCreateAPTSourceResponse(rsp)
 }
 
-// CreateAccessGroupWithResponse request returning *CreateAccessGroupResponse
-func (c *ClientWithResponses) CreateAccessGroupWithResponse(ctx context.Context, params *CreateAccessGroupParams, reqEditors ...RequestEditorFn) (*CreateAccessGroupResponse, error) {
-	rsp, err := c.CreateAccessGroup(ctx, params, reqEditors...)
+// LegacyCreateAccessGroupWithResponse request returning *LegacyCreateAccessGroupResponse
+func (c *ClientWithResponses) LegacyCreateAccessGroupWithResponse(ctx context.Context, params *LegacyCreateAccessGroupParams, reqEditors ...RequestEditorFn) (*LegacyCreateAccessGroupResponse, error) {
+	rsp, err := c.LegacyCreateAccessGroup(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateAccessGroupResponse(rsp)
+	return ParseLegacyCreateAccessGroupResponse(rsp)
 }
 
-// CreateChildComputerWithResponse request returning *CreateChildComputerResponse
-func (c *ClientWithResponses) CreateChildComputerWithResponse(ctx context.Context, params *CreateChildComputerParams, reqEditors ...RequestEditorFn) (*CreateChildComputerResponse, error) {
-	rsp, err := c.CreateChildComputer(ctx, params, reqEditors...)
+// LegacyCreateChildComputerWithResponse request returning *LegacyCreateChildComputerResponse
+func (c *ClientWithResponses) LegacyCreateChildComputerWithResponse(ctx context.Context, params *LegacyCreateChildComputerParams, reqEditors ...RequestEditorFn) (*LegacyCreateChildComputerResponse, error) {
+	rsp, err := c.LegacyCreateChildComputer(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateChildComputerResponse(rsp)
+	return ParseLegacyCreateChildComputerResponse(rsp)
 }
 
-// CreateDistributionWithResponse request returning *CreateDistributionResponse
-func (c *ClientWithResponses) CreateDistributionWithResponse(ctx context.Context, params *CreateDistributionParams, reqEditors ...RequestEditorFn) (*CreateDistributionResponse, error) {
-	rsp, err := c.CreateDistribution(ctx, params, reqEditors...)
+// LegacyCreateDistributionWithResponse request returning *LegacyCreateDistributionResponse
+func (c *ClientWithResponses) LegacyCreateDistributionWithResponse(ctx context.Context, params *LegacyCreateDistributionParams, reqEditors ...RequestEditorFn) (*LegacyCreateDistributionResponse, error) {
+	rsp, err := c.LegacyCreateDistribution(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateDistributionResponse(rsp)
+	return ParseLegacyCreateDistributionResponse(rsp)
 }
 
-// CreatePackageProfileWithResponse request returning *CreatePackageProfileResponse
-func (c *ClientWithResponses) CreatePackageProfileWithResponse(ctx context.Context, params *CreatePackageProfileParams, reqEditors ...RequestEditorFn) (*CreatePackageProfileResponse, error) {
-	rsp, err := c.CreatePackageProfile(ctx, params, reqEditors...)
+// LegacyCreatePackageProfileWithResponse request returning *LegacyCreatePackageProfileResponse
+func (c *ClientWithResponses) LegacyCreatePackageProfileWithResponse(ctx context.Context, params *LegacyCreatePackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyCreatePackageProfileResponse, error) {
+	rsp, err := c.LegacyCreatePackageProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreatePackageProfileResponse(rsp)
+	return ParseLegacyCreatePackageProfileResponse(rsp)
 }
 
-// CreatePocketWithResponse request returning *CreatePocketResponse
-func (c *ClientWithResponses) CreatePocketWithResponse(ctx context.Context, params *CreatePocketParams, reqEditors ...RequestEditorFn) (*CreatePocketResponse, error) {
-	rsp, err := c.CreatePocket(ctx, params, reqEditors...)
+// LegacyCreatePocketWithResponse request returning *LegacyCreatePocketResponse
+func (c *ClientWithResponses) LegacyCreatePocketWithResponse(ctx context.Context, params *LegacyCreatePocketParams, reqEditors ...RequestEditorFn) (*LegacyCreatePocketResponse, error) {
+	rsp, err := c.LegacyCreatePocket(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreatePocketResponse(rsp)
+	return ParseLegacyCreatePocketResponse(rsp)
 }
 
-// CreateRemovalProfileWithResponse request returning *CreateRemovalProfileResponse
-func (c *ClientWithResponses) CreateRemovalProfileWithResponse(ctx context.Context, params *CreateRemovalProfileParams, reqEditors ...RequestEditorFn) (*CreateRemovalProfileResponse, error) {
-	rsp, err := c.CreateRemovalProfile(ctx, params, reqEditors...)
+// LegacyCreateRemovalProfileWithResponse request returning *LegacyCreateRemovalProfileResponse
+func (c *ClientWithResponses) LegacyCreateRemovalProfileWithResponse(ctx context.Context, params *LegacyCreateRemovalProfileParams, reqEditors ...RequestEditorFn) (*LegacyCreateRemovalProfileResponse, error) {
+	rsp, err := c.LegacyCreateRemovalProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateRemovalProfileResponse(rsp)
+	return ParseLegacyCreateRemovalProfileResponse(rsp)
 }
 
-// CreateRepositoryProfileWithResponse request returning *CreateRepositoryProfileResponse
-func (c *ClientWithResponses) CreateRepositoryProfileWithResponse(ctx context.Context, params *CreateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*CreateRepositoryProfileResponse, error) {
-	rsp, err := c.CreateRepositoryProfile(ctx, params, reqEditors...)
+// LegacyCreateRepositoryProfileWithResponse request returning *LegacyCreateRepositoryProfileResponse
+func (c *ClientWithResponses) LegacyCreateRepositoryProfileWithResponse(ctx context.Context, params *LegacyCreateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyCreateRepositoryProfileResponse, error) {
+	rsp, err := c.LegacyCreateRepositoryProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateRepositoryProfileResponse(rsp)
+	return ParseLegacyCreateRepositoryProfileResponse(rsp)
 }
 
-// CreateRoleWithResponse request returning *CreateRoleResponse
-func (c *ClientWithResponses) CreateRoleWithResponse(ctx context.Context, params *CreateRoleParams, reqEditors ...RequestEditorFn) (*CreateRoleResponse, error) {
-	rsp, err := c.CreateRole(ctx, params, reqEditors...)
+// LegacyCreateRoleWithResponse request returning *LegacyCreateRoleResponse
+func (c *ClientWithResponses) LegacyCreateRoleWithResponse(ctx context.Context, params *LegacyCreateRoleParams, reqEditors ...RequestEditorFn) (*LegacyCreateRoleResponse, error) {
+	rsp, err := c.LegacyCreateRole(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateRoleResponse(rsp)
+	return ParseLegacyCreateRoleResponse(rsp)
 }
 
-// CreateSavedSearchWithResponse request returning *CreateSavedSearchResponse
-func (c *ClientWithResponses) CreateSavedSearchWithResponse(ctx context.Context, params *CreateSavedSearchParams, reqEditors ...RequestEditorFn) (*CreateSavedSearchResponse, error) {
-	rsp, err := c.CreateSavedSearch(ctx, params, reqEditors...)
+// LegacyCreateSavedSearchWithResponse request returning *LegacyCreateSavedSearchResponse
+func (c *ClientWithResponses) LegacyCreateSavedSearchWithResponse(ctx context.Context, params *LegacyCreateSavedSearchParams, reqEditors ...RequestEditorFn) (*LegacyCreateSavedSearchResponse, error) {
+	rsp, err := c.LegacyCreateSavedSearch(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateSavedSearchResponse(rsp)
+	return ParseLegacyCreateSavedSearchResponse(rsp)
 }
 
-// CreateScriptWithResponse request returning *CreateScriptResponse
-func (c *ClientWithResponses) CreateScriptWithResponse(ctx context.Context, params *CreateScriptParams, reqEditors ...RequestEditorFn) (*CreateScriptResponse, error) {
-	rsp, err := c.CreateScript(ctx, params, reqEditors...)
+// LegacyCreateScriptWithResponse request returning *LegacyCreateScriptResponse
+func (c *ClientWithResponses) LegacyCreateScriptWithResponse(ctx context.Context, params *LegacyCreateScriptParams, reqEditors ...RequestEditorFn) (*LegacyCreateScriptResponse, error) {
+	rsp, err := c.LegacyCreateScript(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateScriptResponse(rsp)
+	return ParseLegacyCreateScriptResponse(rsp)
 }
 
-// CreateScriptAttachmentWithResponse request returning *CreateScriptAttachmentResponse
-func (c *ClientWithResponses) CreateScriptAttachmentWithResponse(ctx context.Context, params *CreateScriptAttachmentParams, reqEditors ...RequestEditorFn) (*CreateScriptAttachmentResponse, error) {
-	rsp, err := c.CreateScriptAttachment(ctx, params, reqEditors...)
+// LegacyCreateScriptAttachmentWithResponse request returning *LegacyCreateScriptAttachmentResponse
+func (c *ClientWithResponses) LegacyCreateScriptAttachmentWithResponse(ctx context.Context, params *LegacyCreateScriptAttachmentParams, reqEditors ...RequestEditorFn) (*LegacyCreateScriptAttachmentResponse, error) {
+	rsp, err := c.LegacyCreateScriptAttachment(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateScriptAttachmentResponse(rsp)
+	return ParseLegacyCreateScriptAttachmentResponse(rsp)
 }
 
-// CreateSeriesWithResponse request returning *CreateSeriesResponse
-func (c *ClientWithResponses) CreateSeriesWithResponse(ctx context.Context, params *CreateSeriesParams, reqEditors ...RequestEditorFn) (*CreateSeriesResponse, error) {
-	rsp, err := c.CreateSeries(ctx, params, reqEditors...)
+// LegacyCreateSeriesWithResponse request returning *LegacyCreateSeriesResponse
+func (c *ClientWithResponses) LegacyCreateSeriesWithResponse(ctx context.Context, params *LegacyCreateSeriesParams, reqEditors ...RequestEditorFn) (*LegacyCreateSeriesResponse, error) {
+	rsp, err := c.LegacyCreateSeries(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateSeriesResponse(rsp)
+	return ParseLegacyCreateSeriesResponse(rsp)
 }
 
-// CreateUpgradeProfileWithResponse request returning *CreateUpgradeProfileResponse
-func (c *ClientWithResponses) CreateUpgradeProfileWithResponse(ctx context.Context, params *CreateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*CreateUpgradeProfileResponse, error) {
-	rsp, err := c.CreateUpgradeProfile(ctx, params, reqEditors...)
+// LegacyCreateUpgradeProfileWithResponse request returning *LegacyCreateUpgradeProfileResponse
+func (c *ClientWithResponses) LegacyCreateUpgradeProfileWithResponse(ctx context.Context, params *LegacyCreateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*LegacyCreateUpgradeProfileResponse, error) {
+	rsp, err := c.LegacyCreateUpgradeProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateUpgradeProfileResponse(rsp)
+	return ParseLegacyCreateUpgradeProfileResponse(rsp)
 }
 
-// CreateUserWithResponse request returning *CreateUserResponse
-func (c *ClientWithResponses) CreateUserWithResponse(ctx context.Context, params *CreateUserParams, reqEditors ...RequestEditorFn) (*CreateUserResponse, error) {
-	rsp, err := c.CreateUser(ctx, params, reqEditors...)
+// LegacyCreateUserWithResponse request returning *LegacyCreateUserResponse
+func (c *ClientWithResponses) LegacyCreateUserWithResponse(ctx context.Context, params *LegacyCreateUserParams, reqEditors ...RequestEditorFn) (*LegacyCreateUserResponse, error) {
+	rsp, err := c.LegacyCreateUser(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseCreateUserResponse(rsp)
+	return ParseLegacyCreateUserResponse(rsp)
 }
 
-// DeleteChildComputersWithResponse request returning *DeleteChildComputersResponse
-func (c *ClientWithResponses) DeleteChildComputersWithResponse(ctx context.Context, params *DeleteChildComputersParams, reqEditors ...RequestEditorFn) (*DeleteChildComputersResponse, error) {
-	rsp, err := c.DeleteChildComputers(ctx, params, reqEditors...)
+// LegacyDeleteChildComputersWithResponse request returning *LegacyDeleteChildComputersResponse
+func (c *ClientWithResponses) LegacyDeleteChildComputersWithResponse(ctx context.Context, params *LegacyDeleteChildComputersParams, reqEditors ...RequestEditorFn) (*LegacyDeleteChildComputersResponse, error) {
+	rsp, err := c.LegacyDeleteChildComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDeleteChildComputersResponse(rsp)
+	return ParseLegacyDeleteChildComputersResponse(rsp)
 }
 
-// DeriveSeriesWithResponse request returning *DeriveSeriesResponse
-func (c *ClientWithResponses) DeriveSeriesWithResponse(ctx context.Context, params *DeriveSeriesParams, reqEditors ...RequestEditorFn) (*DeriveSeriesResponse, error) {
-	rsp, err := c.DeriveSeries(ctx, params, reqEditors...)
+// LegacyDeriveSeriesWithResponse request returning *LegacyDeriveSeriesResponse
+func (c *ClientWithResponses) LegacyDeriveSeriesWithResponse(ctx context.Context, params *LegacyDeriveSeriesParams, reqEditors ...RequestEditorFn) (*LegacyDeriveSeriesResponse, error) {
+	rsp, err := c.LegacyDeriveSeries(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDeriveSeriesResponse(rsp)
+	return ParseLegacyDeriveSeriesResponse(rsp)
 }
 
-// DiffPullPocketWithResponse request returning *DiffPullPocketResponse
-func (c *ClientWithResponses) DiffPullPocketWithResponse(ctx context.Context, params *DiffPullPocketParams, reqEditors ...RequestEditorFn) (*DiffPullPocketResponse, error) {
-	rsp, err := c.DiffPullPocket(ctx, params, reqEditors...)
+// LegacyDiffPullPocketWithResponse request returning *LegacyDiffPullPocketResponse
+func (c *ClientWithResponses) LegacyDiffPullPocketWithResponse(ctx context.Context, params *LegacyDiffPullPocketParams, reqEditors ...RequestEditorFn) (*LegacyDiffPullPocketResponse, error) {
+	rsp, err := c.LegacyDiffPullPocket(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDiffPullPocketResponse(rsp)
+	return ParseLegacyDiffPullPocketResponse(rsp)
 }
 
-// DisableAdministratorWithResponse request returning *DisableAdministratorResponse
-func (c *ClientWithResponses) DisableAdministratorWithResponse(ctx context.Context, params *DisableAdministratorParams, reqEditors ...RequestEditorFn) (*DisableAdministratorResponse, error) {
-	rsp, err := c.DisableAdministrator(ctx, params, reqEditors...)
+// LegacyDisableAdministratorWithResponse request returning *LegacyDisableAdministratorResponse
+func (c *ClientWithResponses) LegacyDisableAdministratorWithResponse(ctx context.Context, params *LegacyDisableAdministratorParams, reqEditors ...RequestEditorFn) (*LegacyDisableAdministratorResponse, error) {
+	rsp, err := c.LegacyDisableAdministrator(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDisableAdministratorResponse(rsp)
+	return ParseLegacyDisableAdministratorResponse(rsp)
 }
 
-// DisassociateAlertWithResponse request returning *DisassociateAlertResponse
-func (c *ClientWithResponses) DisassociateAlertWithResponse(ctx context.Context, params *DisassociateAlertParams, reqEditors ...RequestEditorFn) (*DisassociateAlertResponse, error) {
-	rsp, err := c.DisassociateAlert(ctx, params, reqEditors...)
+// LegacyDisassociateAlertWithResponse request returning *LegacyDisassociateAlertResponse
+func (c *ClientWithResponses) LegacyDisassociateAlertWithResponse(ctx context.Context, params *LegacyDisassociateAlertParams, reqEditors ...RequestEditorFn) (*LegacyDisassociateAlertResponse, error) {
+	rsp, err := c.LegacyDisassociateAlert(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDisassociateAlertResponse(rsp)
+	return ParseLegacyDisassociateAlertResponse(rsp)
 }
 
-// DisassociatePackageProfileWithResponse request returning *DisassociatePackageProfileResponse
-func (c *ClientWithResponses) DisassociatePackageProfileWithResponse(ctx context.Context, params *DisassociatePackageProfileParams, reqEditors ...RequestEditorFn) (*DisassociatePackageProfileResponse, error) {
-	rsp, err := c.DisassociatePackageProfile(ctx, params, reqEditors...)
+// LegacyDisassociatePackageProfileWithResponse request returning *LegacyDisassociatePackageProfileResponse
+func (c *ClientWithResponses) LegacyDisassociatePackageProfileWithResponse(ctx context.Context, params *LegacyDisassociatePackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyDisassociatePackageProfileResponse, error) {
+	rsp, err := c.LegacyDisassociatePackageProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDisassociatePackageProfileResponse(rsp)
+	return ParseLegacyDisassociatePackageProfileResponse(rsp)
 }
 
-// DisassociateRemovalProfileWithResponse request returning *DisassociateRemovalProfileResponse
-func (c *ClientWithResponses) DisassociateRemovalProfileWithResponse(ctx context.Context, params *DisassociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*DisassociateRemovalProfileResponse, error) {
-	rsp, err := c.DisassociateRemovalProfile(ctx, params, reqEditors...)
+// LegacyDisassociateRemovalProfileWithResponse request returning *LegacyDisassociateRemovalProfileResponse
+func (c *ClientWithResponses) LegacyDisassociateRemovalProfileWithResponse(ctx context.Context, params *LegacyDisassociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*LegacyDisassociateRemovalProfileResponse, error) {
+	rsp, err := c.LegacyDisassociateRemovalProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDisassociateRemovalProfileResponse(rsp)
+	return ParseLegacyDisassociateRemovalProfileResponse(rsp)
 }
 
-// DisassociateRepositoryProfileWithResponse request returning *DisassociateRepositoryProfileResponse
-func (c *ClientWithResponses) DisassociateRepositoryProfileWithResponse(ctx context.Context, params *DisassociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*DisassociateRepositoryProfileResponse, error) {
-	rsp, err := c.DisassociateRepositoryProfile(ctx, params, reqEditors...)
+// LegacyDisassociateRepositoryProfileWithResponse request returning *LegacyDisassociateRepositoryProfileResponse
+func (c *ClientWithResponses) LegacyDisassociateRepositoryProfileWithResponse(ctx context.Context, params *LegacyDisassociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyDisassociateRepositoryProfileResponse, error) {
+	rsp, err := c.LegacyDisassociateRepositoryProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDisassociateRepositoryProfileResponse(rsp)
+	return ParseLegacyDisassociateRepositoryProfileResponse(rsp)
 }
 
-// DisassociateUpgradeProfileWithResponse request returning *DisassociateUpgradeProfileResponse
-func (c *ClientWithResponses) DisassociateUpgradeProfileWithResponse(ctx context.Context, params *DisassociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*DisassociateUpgradeProfileResponse, error) {
-	rsp, err := c.DisassociateUpgradeProfile(ctx, params, reqEditors...)
+// LegacyDisassociateUpgradeProfileWithResponse request returning *LegacyDisassociateUpgradeProfileResponse
+func (c *ClientWithResponses) LegacyDisassociateUpgradeProfileWithResponse(ctx context.Context, params *LegacyDisassociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*LegacyDisassociateUpgradeProfileResponse, error) {
+	rsp, err := c.LegacyDisassociateUpgradeProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseDisassociateUpgradeProfileResponse(rsp)
+	return ParseLegacyDisassociateUpgradeProfileResponse(rsp)
 }
 
-// EditPackageProfileWithResponse request returning *EditPackageProfileResponse
-func (c *ClientWithResponses) EditPackageProfileWithResponse(ctx context.Context, params *EditPackageProfileParams, reqEditors ...RequestEditorFn) (*EditPackageProfileResponse, error) {
-	rsp, err := c.EditPackageProfile(ctx, params, reqEditors...)
+// LegacyEditPackageProfileWithResponse request returning *LegacyEditPackageProfileResponse
+func (c *ClientWithResponses) LegacyEditPackageProfileWithResponse(ctx context.Context, params *LegacyEditPackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyEditPackageProfileResponse, error) {
+	rsp, err := c.LegacyEditPackageProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEditPackageProfileResponse(rsp)
+	return ParseLegacyEditPackageProfileResponse(rsp)
 }
 
-// EditPocketWithResponse request returning *EditPocketResponse
-func (c *ClientWithResponses) EditPocketWithResponse(ctx context.Context, params *EditPocketParams, reqEditors ...RequestEditorFn) (*EditPocketResponse, error) {
-	rsp, err := c.EditPocket(ctx, params, reqEditors...)
+// LegacyEditPocketWithResponse request returning *LegacyEditPocketResponse
+func (c *ClientWithResponses) LegacyEditPocketWithResponse(ctx context.Context, params *LegacyEditPocketParams, reqEditors ...RequestEditorFn) (*LegacyEditPocketResponse, error) {
+	rsp, err := c.LegacyEditPocket(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEditPocketResponse(rsp)
+	return ParseLegacyEditPocketResponse(rsp)
 }
 
-// EditRemovalProfileWithResponse request returning *EditRemovalProfileResponse
-func (c *ClientWithResponses) EditRemovalProfileWithResponse(ctx context.Context, params *EditRemovalProfileParams, reqEditors ...RequestEditorFn) (*EditRemovalProfileResponse, error) {
-	rsp, err := c.EditRemovalProfile(ctx, params, reqEditors...)
+// LegacyEditRemovalProfileWithResponse request returning *LegacyEditRemovalProfileResponse
+func (c *ClientWithResponses) LegacyEditRemovalProfileWithResponse(ctx context.Context, params *LegacyEditRemovalProfileParams, reqEditors ...RequestEditorFn) (*LegacyEditRemovalProfileResponse, error) {
+	rsp, err := c.LegacyEditRemovalProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEditRemovalProfileResponse(rsp)
+	return ParseLegacyEditRemovalProfileResponse(rsp)
 }
 
-// EditRepositoryProfileWithResponse request returning *EditRepositoryProfileResponse
-func (c *ClientWithResponses) EditRepositoryProfileWithResponse(ctx context.Context, params *EditRepositoryProfileParams, reqEditors ...RequestEditorFn) (*EditRepositoryProfileResponse, error) {
-	rsp, err := c.EditRepositoryProfile(ctx, params, reqEditors...)
+// LegacyEditRepositoryProfileWithResponse request returning *LegacyEditRepositoryProfileResponse
+func (c *ClientWithResponses) LegacyEditRepositoryProfileWithResponse(ctx context.Context, params *LegacyEditRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyEditRepositoryProfileResponse, error) {
+	rsp, err := c.LegacyEditRepositoryProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEditRepositoryProfileResponse(rsp)
+	return ParseLegacyEditRepositoryProfileResponse(rsp)
 }
 
-// EditSavedSearchWithResponse request returning *EditSavedSearchResponse
-func (c *ClientWithResponses) EditSavedSearchWithResponse(ctx context.Context, params *EditSavedSearchParams, reqEditors ...RequestEditorFn) (*EditSavedSearchResponse, error) {
-	rsp, err := c.EditSavedSearch(ctx, params, reqEditors...)
+// LegacyEditSavedSearchWithResponse request returning *LegacyEditSavedSearchResponse
+func (c *ClientWithResponses) LegacyEditSavedSearchWithResponse(ctx context.Context, params *LegacyEditSavedSearchParams, reqEditors ...RequestEditorFn) (*LegacyEditSavedSearchResponse, error) {
+	rsp, err := c.LegacyEditSavedSearch(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEditSavedSearchResponse(rsp)
+	return ParseLegacyEditSavedSearchResponse(rsp)
 }
 
-// EditScriptWithResponse request returning *EditScriptResponse
-func (c *ClientWithResponses) EditScriptWithResponse(ctx context.Context, params *EditScriptParams, reqEditors ...RequestEditorFn) (*EditScriptResponse, error) {
-	rsp, err := c.EditScript(ctx, params, reqEditors...)
+// LegacyEditScriptWithResponse request returning *LegacyEditScriptResponse
+func (c *ClientWithResponses) LegacyEditScriptWithResponse(ctx context.Context, params *LegacyEditScriptParams, reqEditors ...RequestEditorFn) (*LegacyEditScriptResponse, error) {
+	rsp, err := c.LegacyEditScript(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEditScriptResponse(rsp)
+	return ParseLegacyEditScriptResponse(rsp)
 }
 
-// EditUpgradeProfileWithResponse request returning *EditUpgradeProfileResponse
-func (c *ClientWithResponses) EditUpgradeProfileWithResponse(ctx context.Context, params *EditUpgradeProfileParams, reqEditors ...RequestEditorFn) (*EditUpgradeProfileResponse, error) {
-	rsp, err := c.EditUpgradeProfile(ctx, params, reqEditors...)
+// LegacyEditUpgradeProfileWithResponse request returning *LegacyEditUpgradeProfileResponse
+func (c *ClientWithResponses) LegacyEditUpgradeProfileWithResponse(ctx context.Context, params *LegacyEditUpgradeProfileParams, reqEditors ...RequestEditorFn) (*LegacyEditUpgradeProfileResponse, error) {
+	rsp, err := c.LegacyEditUpgradeProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEditUpgradeProfileResponse(rsp)
+	return ParseLegacyEditUpgradeProfileResponse(rsp)
 }
 
-// EditUserWithResponse request returning *EditUserResponse
-func (c *ClientWithResponses) EditUserWithResponse(ctx context.Context, params *EditUserParams, reqEditors ...RequestEditorFn) (*EditUserResponse, error) {
-	rsp, err := c.EditUser(ctx, params, reqEditors...)
+// LegacyEditUserWithResponse request returning *LegacyEditUserResponse
+func (c *ClientWithResponses) LegacyEditUserWithResponse(ctx context.Context, params *LegacyEditUserParams, reqEditors ...RequestEditorFn) (*LegacyEditUserResponse, error) {
+	rsp, err := c.LegacyEditUser(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseEditUserResponse(rsp)
+	return ParseLegacyEditUserResponse(rsp)
 }
 
-// ExecuteScriptWithResponse request returning *ExecuteScriptResponse
-func (c *ClientWithResponses) ExecuteScriptWithResponse(ctx context.Context, params *ExecuteScriptParams, reqEditors ...RequestEditorFn) (*ExecuteScriptResponse, error) {
-	rsp, err := c.ExecuteScript(ctx, params, reqEditors...)
+// LegacyExecuteScriptWithResponse request returning *LegacyExecuteScriptResponse
+func (c *ClientWithResponses) LegacyExecuteScriptWithResponse(ctx context.Context, params *LegacyExecuteScriptParams, reqEditors ...RequestEditorFn) (*LegacyExecuteScriptResponse, error) {
+	rsp, err := c.LegacyExecuteScript(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseExecuteScriptResponse(rsp)
+	return ParseLegacyExecuteScriptResponse(rsp)
 }
 
-// GetAPTSourcesWithResponse request returning *GetAPTSourcesResponse
-func (c *ClientWithResponses) GetAPTSourcesWithResponse(ctx context.Context, params *GetAPTSourcesParams, reqEditors ...RequestEditorFn) (*GetAPTSourcesResponse, error) {
-	rsp, err := c.GetAPTSources(ctx, params, reqEditors...)
+// LegacyGetAPTSourcesWithResponse request returning *LegacyGetAPTSourcesResponse
+func (c *ClientWithResponses) LegacyGetAPTSourcesWithResponse(ctx context.Context, params *LegacyGetAPTSourcesParams, reqEditors ...RequestEditorFn) (*LegacyGetAPTSourcesResponse, error) {
+	rsp, err := c.LegacyGetAPTSources(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetAPTSourcesResponse(rsp)
+	return ParseLegacyGetAPTSourcesResponse(rsp)
 }
 
-// GetAccessGroupsWithResponse request returning *GetAccessGroupsResponse
-func (c *ClientWithResponses) GetAccessGroupsWithResponse(ctx context.Context, params *GetAccessGroupsParams, reqEditors ...RequestEditorFn) (*GetAccessGroupsResponse, error) {
-	rsp, err := c.GetAccessGroups(ctx, params, reqEditors...)
+// LegacyGetAccessGroupsWithResponse request returning *LegacyGetAccessGroupsResponse
+func (c *ClientWithResponses) LegacyGetAccessGroupsWithResponse(ctx context.Context, params *LegacyGetAccessGroupsParams, reqEditors ...RequestEditorFn) (*LegacyGetAccessGroupsResponse, error) {
+	rsp, err := c.LegacyGetAccessGroups(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetAccessGroupsResponse(rsp)
+	return ParseLegacyGetAccessGroupsResponse(rsp)
 }
 
-// GetActivitiesWithResponse request returning *GetActivitiesResponse
-func (c *ClientWithResponses) GetActivitiesWithResponse(ctx context.Context, params *GetActivitiesParams, reqEditors ...RequestEditorFn) (*GetActivitiesResponse, error) {
-	rsp, err := c.GetActivities(ctx, params, reqEditors...)
+// LegacyGetActivitiesWithResponse request returning *LegacyGetActivitiesResponse
+func (c *ClientWithResponses) LegacyGetActivitiesWithResponse(ctx context.Context, params *LegacyGetActivitiesParams, reqEditors ...RequestEditorFn) (*LegacyGetActivitiesResponse, error) {
+	rsp, err := c.LegacyGetActivities(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetActivitiesResponse(rsp)
+	return ParseLegacyGetActivitiesResponse(rsp)
 }
 
-// GetActivityTypesWithResponse request returning *GetActivityTypesResponse
-func (c *ClientWithResponses) GetActivityTypesWithResponse(ctx context.Context, params *GetActivityTypesParams, reqEditors ...RequestEditorFn) (*GetActivityTypesResponse, error) {
-	rsp, err := c.GetActivityTypes(ctx, params, reqEditors...)
+// LegacyGetActivityTypesWithResponse request returning *LegacyGetActivityTypesResponse
+func (c *ClientWithResponses) LegacyGetActivityTypesWithResponse(ctx context.Context, params *LegacyGetActivityTypesParams, reqEditors ...RequestEditorFn) (*LegacyGetActivityTypesResponse, error) {
+	rsp, err := c.LegacyGetActivityTypes(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetActivityTypesResponse(rsp)
+	return ParseLegacyGetActivityTypesResponse(rsp)
 }
 
-// GetAdministratorsWithResponse request returning *GetAdministratorsResponse
-func (c *ClientWithResponses) GetAdministratorsWithResponse(ctx context.Context, params *GetAdministratorsParams, reqEditors ...RequestEditorFn) (*GetAdministratorsResponse, error) {
-	rsp, err := c.GetAdministrators(ctx, params, reqEditors...)
+// LegacyGetAdministratorsWithResponse request returning *LegacyGetAdministratorsResponse
+func (c *ClientWithResponses) LegacyGetAdministratorsWithResponse(ctx context.Context, params *LegacyGetAdministratorsParams, reqEditors ...RequestEditorFn) (*LegacyGetAdministratorsResponse, error) {
+	rsp, err := c.LegacyGetAdministrators(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetAdministratorsResponse(rsp)
+	return ParseLegacyGetAdministratorsResponse(rsp)
 }
 
-// GetAlertSubscribersWithResponse request returning *GetAlertSubscribersResponse
-func (c *ClientWithResponses) GetAlertSubscribersWithResponse(ctx context.Context, params *GetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*GetAlertSubscribersResponse, error) {
-	rsp, err := c.GetAlertSubscribers(ctx, params, reqEditors...)
+// LegacyGetAlertSubscribersWithResponse request returning *LegacyGetAlertSubscribersResponse
+func (c *ClientWithResponses) LegacyGetAlertSubscribersWithResponse(ctx context.Context, params *LegacyGetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*LegacyGetAlertSubscribersResponse, error) {
+	rsp, err := c.LegacyGetAlertSubscribers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetAlertSubscribersResponse(rsp)
+	return ParseLegacyGetAlertSubscribersResponse(rsp)
 }
 
-// GetAlertsWithResponse request returning *GetAlertsResponse
-func (c *ClientWithResponses) GetAlertsWithResponse(ctx context.Context, params *GetAlertsParams, reqEditors ...RequestEditorFn) (*GetAlertsResponse, error) {
-	rsp, err := c.GetAlerts(ctx, params, reqEditors...)
+// LegacyGetAlertsWithResponse request returning *LegacyGetAlertsResponse
+func (c *ClientWithResponses) LegacyGetAlertsWithResponse(ctx context.Context, params *LegacyGetAlertsParams, reqEditors ...RequestEditorFn) (*LegacyGetAlertsResponse, error) {
+	rsp, err := c.LegacyGetAlerts(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetAlertsResponse(rsp)
+	return ParseLegacyGetAlertsResponse(rsp)
 }
 
-// GetCSVComplianceDataWithResponse request returning *GetCSVComplianceDataResponse
-func (c *ClientWithResponses) GetCSVComplianceDataWithResponse(ctx context.Context, params *GetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*GetCSVComplianceDataResponse, error) {
-	rsp, err := c.GetCSVComplianceData(ctx, params, reqEditors...)
+// LegacyGetCSVComplianceDataWithResponse request returning *LegacyGetCSVComplianceDataResponse
+func (c *ClientWithResponses) LegacyGetCSVComplianceDataWithResponse(ctx context.Context, params *LegacyGetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*LegacyGetCSVComplianceDataResponse, error) {
+	rsp, err := c.LegacyGetCSVComplianceData(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetCSVComplianceDataResponse(rsp)
+	return ParseLegacyGetCSVComplianceDataResponse(rsp)
 }
 
-// GetComputerProcessesWithResponse request returning *GetComputerProcessesResponse
-func (c *ClientWithResponses) GetComputerProcessesWithResponse(ctx context.Context, params *GetComputerProcessesParams, reqEditors ...RequestEditorFn) (*GetComputerProcessesResponse, error) {
-	rsp, err := c.GetComputerProcesses(ctx, params, reqEditors...)
+// LegacyGetComputerProcessesWithResponse request returning *LegacyGetComputerProcessesResponse
+func (c *ClientWithResponses) LegacyGetComputerProcessesWithResponse(ctx context.Context, params *LegacyGetComputerProcessesParams, reqEditors ...RequestEditorFn) (*LegacyGetComputerProcessesResponse, error) {
+	rsp, err := c.LegacyGetComputerProcesses(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetComputerProcessesResponse(rsp)
+	return ParseLegacyGetComputerProcessesResponse(rsp)
 }
 
-// GetComputersWithResponse request returning *GetComputersResponse
-func (c *ClientWithResponses) GetComputersWithResponse(ctx context.Context, params *GetComputersParams, reqEditors ...RequestEditorFn) (*GetComputersResponse, error) {
-	rsp, err := c.GetComputers(ctx, params, reqEditors...)
+// LegacyGetComputersWithResponse request returning *LegacyGetComputersResponse
+func (c *ClientWithResponses) LegacyGetComputersWithResponse(ctx context.Context, params *LegacyGetComputersParams, reqEditors ...RequestEditorFn) (*LegacyGetComputersResponse, error) {
+	rsp, err := c.LegacyGetComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetComputersResponse(rsp)
+	return ParseLegacyGetComputersResponse(rsp)
 }
 
-// GetComputersNotUpgradedWithResponse request returning *GetComputersNotUpgradedResponse
-func (c *ClientWithResponses) GetComputersNotUpgradedWithResponse(ctx context.Context, params *GetComputersNotUpgradedParams, reqEditors ...RequestEditorFn) (*GetComputersNotUpgradedResponse, error) {
-	rsp, err := c.GetComputersNotUpgraded(ctx, params, reqEditors...)
+// LegacyGetComputersNotUpgradedWithResponse request returning *LegacyGetComputersNotUpgradedResponse
+func (c *ClientWithResponses) LegacyGetComputersNotUpgradedWithResponse(ctx context.Context, params *LegacyGetComputersNotUpgradedParams, reqEditors ...RequestEditorFn) (*LegacyGetComputersNotUpgradedResponse, error) {
+	rsp, err := c.LegacyGetComputersNotUpgraded(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetComputersNotUpgradedResponse(rsp)
+	return ParseLegacyGetComputersNotUpgradedResponse(rsp)
 }
 
-// GetDistributionsWithResponse request returning *GetDistributionsResponse
-func (c *ClientWithResponses) GetDistributionsWithResponse(ctx context.Context, params *GetDistributionsParams, reqEditors ...RequestEditorFn) (*GetDistributionsResponse, error) {
-	rsp, err := c.GetDistributions(ctx, params, reqEditors...)
+// LegacyGetDistributionsWithResponse request returning *LegacyGetDistributionsResponse
+func (c *ClientWithResponses) LegacyGetDistributionsWithResponse(ctx context.Context, params *LegacyGetDistributionsParams, reqEditors ...RequestEditorFn) (*LegacyGetDistributionsResponse, error) {
+	rsp, err := c.LegacyGetDistributions(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetDistributionsResponse(rsp)
+	return ParseLegacyGetDistributionsResponse(rsp)
 }
 
-// GetEventLogWithResponse request returning *GetEventLogResponse
-func (c *ClientWithResponses) GetEventLogWithResponse(ctx context.Context, params *GetEventLogParams, reqEditors ...RequestEditorFn) (*GetEventLogResponse, error) {
-	rsp, err := c.GetEventLog(ctx, params, reqEditors...)
+// LegacyGetEventLogWithResponse request returning *LegacyGetEventLogResponse
+func (c *ClientWithResponses) LegacyGetEventLogWithResponse(ctx context.Context, params *LegacyGetEventLogParams, reqEditors ...RequestEditorFn) (*LegacyGetEventLogResponse, error) {
+	rsp, err := c.LegacyGetEventLog(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetEventLogResponse(rsp)
+	return ParseLegacyGetEventLogResponse(rsp)
 }
 
-// GetGPGKeysWithResponse request returning *GetGPGKeysResponse
-func (c *ClientWithResponses) GetGPGKeysWithResponse(ctx context.Context, params *GetGPGKeysParams, reqEditors ...RequestEditorFn) (*GetGPGKeysResponse, error) {
-	rsp, err := c.GetGPGKeys(ctx, params, reqEditors...)
+// LegacyGetGPGKeysWithResponse request returning *LegacyGetGPGKeysResponse
+func (c *ClientWithResponses) LegacyGetGPGKeysWithResponse(ctx context.Context, params *LegacyGetGPGKeysParams, reqEditors ...RequestEditorFn) (*LegacyGetGPGKeysResponse, error) {
+	rsp, err := c.LegacyGetGPGKeys(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetGPGKeysResponse(rsp)
+	return ParseLegacyGetGPGKeysResponse(rsp)
 }
 
-// GetNotPingingComputersWithResponse request returning *GetNotPingingComputersResponse
-func (c *ClientWithResponses) GetNotPingingComputersWithResponse(ctx context.Context, params *GetNotPingingComputersParams, reqEditors ...RequestEditorFn) (*GetNotPingingComputersResponse, error) {
-	rsp, err := c.GetNotPingingComputers(ctx, params, reqEditors...)
+// LegacyGetNotPingingComputersWithResponse request returning *LegacyGetNotPingingComputersResponse
+func (c *ClientWithResponses) LegacyGetNotPingingComputersWithResponse(ctx context.Context, params *LegacyGetNotPingingComputersParams, reqEditors ...RequestEditorFn) (*LegacyGetNotPingingComputersResponse, error) {
+	rsp, err := c.LegacyGetNotPingingComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetNotPingingComputersResponse(rsp)
+	return ParseLegacyGetNotPingingComputersResponse(rsp)
 }
 
-// GetPackageProfilesWithResponse request returning *GetPackageProfilesResponse
-func (c *ClientWithResponses) GetPackageProfilesWithResponse(ctx context.Context, params *GetPackageProfilesParams, reqEditors ...RequestEditorFn) (*GetPackageProfilesResponse, error) {
-	rsp, err := c.GetPackageProfiles(ctx, params, reqEditors...)
+// LegacyGetPackageProfilesWithResponse request returning *LegacyGetPackageProfilesResponse
+func (c *ClientWithResponses) LegacyGetPackageProfilesWithResponse(ctx context.Context, params *LegacyGetPackageProfilesParams, reqEditors ...RequestEditorFn) (*LegacyGetPackageProfilesResponse, error) {
+	rsp, err := c.LegacyGetPackageProfiles(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetPackageProfilesResponse(rsp)
+	return ParseLegacyGetPackageProfilesResponse(rsp)
 }
 
-// GetPackagesWithResponse request returning *GetPackagesResponse
-func (c *ClientWithResponses) GetPackagesWithResponse(ctx context.Context, params *GetPackagesParams, reqEditors ...RequestEditorFn) (*GetPackagesResponse, error) {
-	rsp, err := c.GetPackages(ctx, params, reqEditors...)
+// LegacyGetPackagesWithResponse request returning *LegacyGetPackagesResponse
+func (c *ClientWithResponses) LegacyGetPackagesWithResponse(ctx context.Context, params *LegacyGetPackagesParams, reqEditors ...RequestEditorFn) (*LegacyGetPackagesResponse, error) {
+	rsp, err := c.LegacyGetPackages(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetPackagesResponse(rsp)
+	return ParseLegacyGetPackagesResponse(rsp)
 }
 
-// GetPendingComputersWithResponse request returning *GetPendingComputersResponse
-func (c *ClientWithResponses) GetPendingComputersWithResponse(ctx context.Context, params *GetPendingComputersParams, reqEditors ...RequestEditorFn) (*GetPendingComputersResponse, error) {
-	rsp, err := c.GetPendingComputers(ctx, params, reqEditors...)
+// LegacyGetPendingComputersWithResponse request returning *LegacyGetPendingComputersResponse
+func (c *ClientWithResponses) LegacyGetPendingComputersWithResponse(ctx context.Context, params *LegacyGetPendingComputersParams, reqEditors ...RequestEditorFn) (*LegacyGetPendingComputersResponse, error) {
+	rsp, err := c.LegacyGetPendingComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetPendingComputersResponse(rsp)
+	return ParseLegacyGetPendingComputersResponse(rsp)
 }
 
-// GetPermissionsWithResponse request returning *GetPermissionsResponse
-func (c *ClientWithResponses) GetPermissionsWithResponse(ctx context.Context, params *GetPermissionsParams, reqEditors ...RequestEditorFn) (*GetPermissionsResponse, error) {
-	rsp, err := c.GetPermissions(ctx, params, reqEditors...)
+// LegacyGetPermissionsWithResponse request returning *LegacyGetPermissionsResponse
+func (c *ClientWithResponses) LegacyGetPermissionsWithResponse(ctx context.Context, params *LegacyGetPermissionsParams, reqEditors ...RequestEditorFn) (*LegacyGetPermissionsResponse, error) {
+	rsp, err := c.LegacyGetPermissions(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetPermissionsResponse(rsp)
+	return ParseLegacyGetPermissionsResponse(rsp)
 }
 
-// GetRemovalProfilesWithResponse request returning *GetRemovalProfilesResponse
-func (c *ClientWithResponses) GetRemovalProfilesWithResponse(ctx context.Context, params *GetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*GetRemovalProfilesResponse, error) {
-	rsp, err := c.GetRemovalProfiles(ctx, params, reqEditors...)
+// LegacyGetRemovalProfilesWithResponse request returning *LegacyGetRemovalProfilesResponse
+func (c *ClientWithResponses) LegacyGetRemovalProfilesWithResponse(ctx context.Context, params *LegacyGetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*LegacyGetRemovalProfilesResponse, error) {
+	rsp, err := c.LegacyGetRemovalProfiles(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetRemovalProfilesResponse(rsp)
+	return ParseLegacyGetRemovalProfilesResponse(rsp)
 }
 
-// GetRepoInfoWithResponse request returning *GetRepoInfoResponse
-func (c *ClientWithResponses) GetRepoInfoWithResponse(ctx context.Context, params *GetRepoInfoParams, reqEditors ...RequestEditorFn) (*GetRepoInfoResponse, error) {
-	rsp, err := c.GetRepoInfo(ctx, params, reqEditors...)
+// LegacyGetRepoInfoWithResponse request returning *LegacyGetRepoInfoResponse
+func (c *ClientWithResponses) LegacyGetRepoInfoWithResponse(ctx context.Context, params *LegacyGetRepoInfoParams, reqEditors ...RequestEditorFn) (*LegacyGetRepoInfoResponse, error) {
+	rsp, err := c.LegacyGetRepoInfo(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetRepoInfoResponse(rsp)
+	return ParseLegacyGetRepoInfoResponse(rsp)
 }
 
-// GetRepositoryProfilesWithResponse request returning *GetRepositoryProfilesResponse
-func (c *ClientWithResponses) GetRepositoryProfilesWithResponse(ctx context.Context, params *GetRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*GetRepositoryProfilesResponse, error) {
-	rsp, err := c.GetRepositoryProfiles(ctx, params, reqEditors...)
+// LegacyGetRepositoryProfilesWithResponse request returning *LegacyGetRepositoryProfilesResponse
+func (c *ClientWithResponses) LegacyGetRepositoryProfilesWithResponse(ctx context.Context, params *LegacyGetRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*LegacyGetRepositoryProfilesResponse, error) {
+	rsp, err := c.LegacyGetRepositoryProfiles(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetRepositoryProfilesResponse(rsp)
+	return ParseLegacyGetRepositoryProfilesResponse(rsp)
 }
 
-// GetRolesWithResponse request returning *GetRolesResponse
-func (c *ClientWithResponses) GetRolesWithResponse(ctx context.Context, params *GetRolesParams, reqEditors ...RequestEditorFn) (*GetRolesResponse, error) {
-	rsp, err := c.GetRoles(ctx, params, reqEditors...)
+// LegacyGetRolesWithResponse request returning *LegacyGetRolesResponse
+func (c *ClientWithResponses) LegacyGetRolesWithResponse(ctx context.Context, params *LegacyGetRolesParams, reqEditors ...RequestEditorFn) (*LegacyGetRolesResponse, error) {
+	rsp, err := c.LegacyGetRoles(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetRolesResponse(rsp)
+	return ParseLegacyGetRolesResponse(rsp)
 }
 
-// GetSavedSearchesWithResponse request returning *GetSavedSearchesResponse
-func (c *ClientWithResponses) GetSavedSearchesWithResponse(ctx context.Context, params *GetSavedSearchesParams, reqEditors ...RequestEditorFn) (*GetSavedSearchesResponse, error) {
-	rsp, err := c.GetSavedSearches(ctx, params, reqEditors...)
+// LegacyGetSavedSearchesWithResponse request returning *LegacyGetSavedSearchesResponse
+func (c *ClientWithResponses) LegacyGetSavedSearchesWithResponse(ctx context.Context, params *LegacyGetSavedSearchesParams, reqEditors ...RequestEditorFn) (*LegacyGetSavedSearchesResponse, error) {
+	rsp, err := c.LegacyGetSavedSearches(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetSavedSearchesResponse(rsp)
+	return ParseLegacyGetSavedSearchesResponse(rsp)
 }
 
-// GetScriptCodeWithResponse request returning *GetScriptCodeResponse
-func (c *ClientWithResponses) GetScriptCodeWithResponse(ctx context.Context, params *GetScriptCodeParams, reqEditors ...RequestEditorFn) (*GetScriptCodeResponse, error) {
-	rsp, err := c.GetScriptCode(ctx, params, reqEditors...)
+// LegacyGetScriptCodeWithResponse request returning *LegacyGetScriptCodeResponse
+func (c *ClientWithResponses) LegacyGetScriptCodeWithResponse(ctx context.Context, params *LegacyGetScriptCodeParams, reqEditors ...RequestEditorFn) (*LegacyGetScriptCodeResponse, error) {
+	rsp, err := c.LegacyGetScriptCode(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetScriptCodeResponse(rsp)
+	return ParseLegacyGetScriptCodeResponse(rsp)
 }
 
-// GetScriptsWithResponse request returning *GetScriptsResponse
-func (c *ClientWithResponses) GetScriptsWithResponse(ctx context.Context, params *GetScriptsParams, reqEditors ...RequestEditorFn) (*GetScriptsResponse, error) {
-	rsp, err := c.GetScripts(ctx, params, reqEditors...)
+// LegacyGetScriptsWithResponse request returning *LegacyGetScriptsResponse
+func (c *ClientWithResponses) LegacyGetScriptsWithResponse(ctx context.Context, params *LegacyGetScriptsParams, reqEditors ...RequestEditorFn) (*LegacyGetScriptsResponse, error) {
+	rsp, err := c.LegacyGetScripts(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetScriptsResponse(rsp)
+	return ParseLegacyGetScriptsResponse(rsp)
 }
 
-// GetSettingsWithResponse request returning *GetSettingsResponse
-func (c *ClientWithResponses) GetSettingsWithResponse(ctx context.Context, params *GetSettingsParams, reqEditors ...RequestEditorFn) (*GetSettingsResponse, error) {
-	rsp, err := c.GetSettings(ctx, params, reqEditors...)
+// LegacyGetSettingsWithResponse request returning *LegacyGetSettingsResponse
+func (c *ClientWithResponses) LegacyGetSettingsWithResponse(ctx context.Context, params *LegacyGetSettingsParams, reqEditors ...RequestEditorFn) (*LegacyGetSettingsResponse, error) {
+	rsp, err := c.LegacyGetSettings(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetSettingsResponse(rsp)
+	return ParseLegacyGetSettingsResponse(rsp)
 }
 
-// GetUSNTimeToFixWithResponse request returning *GetUSNTimeToFixResponse
-func (c *ClientWithResponses) GetUSNTimeToFixWithResponse(ctx context.Context, params *GetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*GetUSNTimeToFixResponse, error) {
-	rsp, err := c.GetUSNTimeToFix(ctx, params, reqEditors...)
+// LegacyGetUSNTimeToFixWithResponse request returning *LegacyGetUSNTimeToFixResponse
+func (c *ClientWithResponses) LegacyGetUSNTimeToFixWithResponse(ctx context.Context, params *LegacyGetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*LegacyGetUSNTimeToFixResponse, error) {
+	rsp, err := c.LegacyGetUSNTimeToFix(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetUSNTimeToFixResponse(rsp)
+	return ParseLegacyGetUSNTimeToFixResponse(rsp)
 }
 
-// GetUpgradeProfilesWithResponse request returning *GetUpgradeProfilesResponse
-func (c *ClientWithResponses) GetUpgradeProfilesWithResponse(ctx context.Context, params *GetUpgradeProfilesParams, reqEditors ...RequestEditorFn) (*GetUpgradeProfilesResponse, error) {
-	rsp, err := c.GetUpgradeProfiles(ctx, params, reqEditors...)
+// LegacyGetUpgradeProfilesWithResponse request returning *LegacyGetUpgradeProfilesResponse
+func (c *ClientWithResponses) LegacyGetUpgradeProfilesWithResponse(ctx context.Context, params *LegacyGetUpgradeProfilesParams, reqEditors ...RequestEditorFn) (*LegacyGetUpgradeProfilesResponse, error) {
+	rsp, err := c.LegacyGetUpgradeProfiles(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetUpgradeProfilesResponse(rsp)
+	return ParseLegacyGetUpgradeProfilesResponse(rsp)
 }
 
-// GetUpgradedComputersByFrequencyWithResponse request returning *GetUpgradedComputersByFrequencyResponse
-func (c *ClientWithResponses) GetUpgradedComputersByFrequencyWithResponse(ctx context.Context, params *GetUpgradedComputersByFrequencyParams, reqEditors ...RequestEditorFn) (*GetUpgradedComputersByFrequencyResponse, error) {
-	rsp, err := c.GetUpgradedComputersByFrequency(ctx, params, reqEditors...)
+// LegacyGetUpgradedComputersByFrequencyWithResponse request returning *LegacyGetUpgradedComputersByFrequencyResponse
+func (c *ClientWithResponses) LegacyGetUpgradedComputersByFrequencyWithResponse(ctx context.Context, params *LegacyGetUpgradedComputersByFrequencyParams, reqEditors ...RequestEditorFn) (*LegacyGetUpgradedComputersByFrequencyResponse, error) {
+	rsp, err := c.LegacyGetUpgradedComputersByFrequency(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetUpgradedComputersByFrequencyResponse(rsp)
+	return ParseLegacyGetUpgradedComputersByFrequencyResponse(rsp)
 }
 
-// GetUsersWithResponse request returning *GetUsersResponse
-func (c *ClientWithResponses) GetUsersWithResponse(ctx context.Context, params *GetUsersParams, reqEditors ...RequestEditorFn) (*GetUsersResponse, error) {
-	rsp, err := c.GetUsers(ctx, params, reqEditors...)
+// LegacyGetUsersWithResponse request returning *LegacyGetUsersResponse
+func (c *ClientWithResponses) LegacyGetUsersWithResponse(ctx context.Context, params *LegacyGetUsersParams, reqEditors ...RequestEditorFn) (*LegacyGetUsersResponse, error) {
+	rsp, err := c.LegacyGetUsers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetUsersResponse(rsp)
+	return ParseLegacyGetUsersResponse(rsp)
 }
 
-// GetWSLHostsWithResponse request returning *GetWSLHostsResponse
-func (c *ClientWithResponses) GetWSLHostsWithResponse(ctx context.Context, params *GetWSLHostsParams, reqEditors ...RequestEditorFn) (*GetWSLHostsResponse, error) {
-	rsp, err := c.GetWSLHosts(ctx, params, reqEditors...)
+// LegacyGetWSLHostsWithResponse request returning *LegacyGetWSLHostsResponse
+func (c *ClientWithResponses) LegacyGetWSLHostsWithResponse(ctx context.Context, params *LegacyGetWSLHostsParams, reqEditors ...RequestEditorFn) (*LegacyGetWSLHostsResponse, error) {
+	rsp, err := c.LegacyGetWSLHosts(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGetWSLHostsResponse(rsp)
+	return ParseLegacyGetWSLHostsResponse(rsp)
 }
 
-// ImportGPGKeyWithResponse request returning *ImportGPGKeyResponse
-func (c *ClientWithResponses) ImportGPGKeyWithResponse(ctx context.Context, params *ImportGPGKeyParams, reqEditors ...RequestEditorFn) (*ImportGPGKeyResponse, error) {
-	rsp, err := c.ImportGPGKey(ctx, params, reqEditors...)
+// LegacyImportGPGKeyWithResponse request returning *LegacyImportGPGKeyResponse
+func (c *ClientWithResponses) LegacyImportGPGKeyWithResponse(ctx context.Context, params *LegacyImportGPGKeyParams, reqEditors ...RequestEditorFn) (*LegacyImportGPGKeyResponse, error) {
+	rsp, err := c.LegacyImportGPGKey(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseImportGPGKeyResponse(rsp)
+	return ParseLegacyImportGPGKeyResponse(rsp)
 }
 
-// InstallPackagesWithResponse request returning *InstallPackagesResponse
-func (c *ClientWithResponses) InstallPackagesWithResponse(ctx context.Context, params *InstallPackagesParams, reqEditors ...RequestEditorFn) (*InstallPackagesResponse, error) {
-	rsp, err := c.InstallPackages(ctx, params, reqEditors...)
+// LegacyInstallPackagesWithResponse request returning *LegacyInstallPackagesResponse
+func (c *ClientWithResponses) LegacyInstallPackagesWithResponse(ctx context.Context, params *LegacyInstallPackagesParams, reqEditors ...RequestEditorFn) (*LegacyInstallPackagesResponse, error) {
+	rsp, err := c.LegacyInstallPackages(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseInstallPackagesResponse(rsp)
+	return ParseLegacyInstallPackagesResponse(rsp)
 }
 
-// InviteAdministratorWithResponse request returning *InviteAdministratorResponse
-func (c *ClientWithResponses) InviteAdministratorWithResponse(ctx context.Context, params *InviteAdministratorParams, reqEditors ...RequestEditorFn) (*InviteAdministratorResponse, error) {
-	rsp, err := c.InviteAdministrator(ctx, params, reqEditors...)
+// LegacyInviteAdministratorWithResponse request returning *LegacyInviteAdministratorResponse
+func (c *ClientWithResponses) LegacyInviteAdministratorWithResponse(ctx context.Context, params *LegacyInviteAdministratorParams, reqEditors ...RequestEditorFn) (*LegacyInviteAdministratorResponse, error) {
+	rsp, err := c.LegacyInviteAdministrator(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseInviteAdministratorResponse(rsp)
+	return ParseLegacyInviteAdministratorResponse(rsp)
 }
 
-// KillComputerProcessesWithResponse request returning *KillComputerProcessesResponse
-func (c *ClientWithResponses) KillComputerProcessesWithResponse(ctx context.Context, params *KillComputerProcessesParams, reqEditors ...RequestEditorFn) (*KillComputerProcessesResponse, error) {
-	rsp, err := c.KillComputerProcesses(ctx, params, reqEditors...)
+// LegacyKillComputerProcessesWithResponse request returning *LegacyKillComputerProcessesResponse
+func (c *ClientWithResponses) LegacyKillComputerProcessesWithResponse(ctx context.Context, params *LegacyKillComputerProcessesParams, reqEditors ...RequestEditorFn) (*LegacyKillComputerProcessesResponse, error) {
+	rsp, err := c.LegacyKillComputerProcesses(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseKillComputerProcessesResponse(rsp)
+	return ParseLegacyKillComputerProcessesResponse(rsp)
 }
 
-// ListPocketWithResponse request returning *ListPocketResponse
-func (c *ClientWithResponses) ListPocketWithResponse(ctx context.Context, params *ListPocketParams, reqEditors ...RequestEditorFn) (*ListPocketResponse, error) {
-	rsp, err := c.ListPocket(ctx, params, reqEditors...)
+// LegacyListPocketWithResponse request returning *LegacyListPocketResponse
+func (c *ClientWithResponses) LegacyListPocketWithResponse(ctx context.Context, params *LegacyListPocketParams, reqEditors ...RequestEditorFn) (*LegacyListPocketResponse, error) {
+	rsp, err := c.LegacyListPocket(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseListPocketResponse(rsp)
+	return ParseLegacyListPocketResponse(rsp)
 }
 
-// ModifyPackageProfileWithResponse request returning *ModifyPackageProfileResponse
-func (c *ClientWithResponses) ModifyPackageProfileWithResponse(ctx context.Context, params *ModifyPackageProfileParams, reqEditors ...RequestEditorFn) (*ModifyPackageProfileResponse, error) {
-	rsp, err := c.ModifyPackageProfile(ctx, params, reqEditors...)
+// LegacyModifyPackageProfileWithResponse request returning *LegacyModifyPackageProfileResponse
+func (c *ClientWithResponses) LegacyModifyPackageProfileWithResponse(ctx context.Context, params *LegacyModifyPackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyModifyPackageProfileResponse, error) {
+	rsp, err := c.LegacyModifyPackageProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseModifyPackageProfileResponse(rsp)
+	return ParseLegacyModifyPackageProfileResponse(rsp)
 }
 
-// PullPackagesToPocketWithResponse request returning *PullPackagesToPocketResponse
-func (c *ClientWithResponses) PullPackagesToPocketWithResponse(ctx context.Context, params *PullPackagesToPocketParams, reqEditors ...RequestEditorFn) (*PullPackagesToPocketResponse, error) {
-	rsp, err := c.PullPackagesToPocket(ctx, params, reqEditors...)
+// LegacyPullPackagesToPocketWithResponse request returning *LegacyPullPackagesToPocketResponse
+func (c *ClientWithResponses) LegacyPullPackagesToPocketWithResponse(ctx context.Context, params *LegacyPullPackagesToPocketParams, reqEditors ...RequestEditorFn) (*LegacyPullPackagesToPocketResponse, error) {
+	rsp, err := c.LegacyPullPackagesToPocket(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParsePullPackagesToPocketResponse(rsp)
+	return ParseLegacyPullPackagesToPocketResponse(rsp)
 }
 
-// RebootComputersWithResponse request returning *RebootComputersResponse
-func (c *ClientWithResponses) RebootComputersWithResponse(ctx context.Context, params *RebootComputersParams, reqEditors ...RequestEditorFn) (*RebootComputersResponse, error) {
-	rsp, err := c.RebootComputers(ctx, params, reqEditors...)
+// LegacyRebootComputersWithResponse request returning *LegacyRebootComputersResponse
+func (c *ClientWithResponses) LegacyRebootComputersWithResponse(ctx context.Context, params *LegacyRebootComputersParams, reqEditors ...RequestEditorFn) (*LegacyRebootComputersResponse, error) {
+	rsp, err := c.LegacyRebootComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRebootComputersResponse(rsp)
+	return ParseLegacyRebootComputersResponse(rsp)
 }
 
-// RejectPendingComputersWithResponse request returning *RejectPendingComputersResponse
-func (c *ClientWithResponses) RejectPendingComputersWithResponse(ctx context.Context, params *RejectPendingComputersParams, reqEditors ...RequestEditorFn) (*RejectPendingComputersResponse, error) {
-	rsp, err := c.RejectPendingComputers(ctx, params, reqEditors...)
+// LegacyRejectPendingComputersWithResponse request returning *LegacyRejectPendingComputersResponse
+func (c *ClientWithResponses) LegacyRejectPendingComputersWithResponse(ctx context.Context, params *LegacyRejectPendingComputersParams, reqEditors ...RequestEditorFn) (*LegacyRejectPendingComputersResponse, error) {
+	rsp, err := c.LegacyRejectPendingComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRejectPendingComputersResponse(rsp)
+	return ParseLegacyRejectPendingComputersResponse(rsp)
 }
 
-// RemoveAPTSourceWithResponse request returning *RemoveAPTSourceResponse
-func (c *ClientWithResponses) RemoveAPTSourceWithResponse(ctx context.Context, params *RemoveAPTSourceParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourceResponse, error) {
-	rsp, err := c.RemoveAPTSource(ctx, params, reqEditors...)
+// LegacyRemoveAPTSourceWithResponse request returning *LegacyRemoveAPTSourceResponse
+func (c *ClientWithResponses) LegacyRemoveAPTSourceWithResponse(ctx context.Context, params *LegacyRemoveAPTSourceParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAPTSourceResponse, error) {
+	rsp, err := c.LegacyRemoveAPTSource(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveAPTSourceResponse(rsp)
+	return ParseLegacyRemoveAPTSourceResponse(rsp)
 }
 
-// RemoveAPTSourceFromRepositoryProfileWithResponse request returning *RemoveAPTSourceFromRepositoryProfileResponse
-func (c *ClientWithResponses) RemoveAPTSourceFromRepositoryProfileWithResponse(ctx context.Context, params *RemoveAPTSourceFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourceFromRepositoryProfileResponse, error) {
-	rsp, err := c.RemoveAPTSourceFromRepositoryProfile(ctx, params, reqEditors...)
+// LegacyRemoveAPTSourceFromRepositoryProfileWithResponse request returning *LegacyRemoveAPTSourceFromRepositoryProfileResponse
+func (c *ClientWithResponses) LegacyRemoveAPTSourceFromRepositoryProfileWithResponse(ctx context.Context, params *LegacyRemoveAPTSourceFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAPTSourceFromRepositoryProfileResponse, error) {
+	rsp, err := c.LegacyRemoveAPTSourceFromRepositoryProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveAPTSourceFromRepositoryProfileResponse(rsp)
+	return ParseLegacyRemoveAPTSourceFromRepositoryProfileResponse(rsp)
 }
 
-// RemoveAPTSourcesWithResponse request returning *RemoveAPTSourcesResponse
-func (c *ClientWithResponses) RemoveAPTSourcesWithResponse(ctx context.Context, params *RemoveAPTSourcesParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourcesResponse, error) {
-	rsp, err := c.RemoveAPTSources(ctx, params, reqEditors...)
+// LegacyRemoveAPTSourcesWithResponse request returning *LegacyRemoveAPTSourcesResponse
+func (c *ClientWithResponses) LegacyRemoveAPTSourcesWithResponse(ctx context.Context, params *LegacyRemoveAPTSourcesParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAPTSourcesResponse, error) {
+	rsp, err := c.LegacyRemoveAPTSources(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveAPTSourcesResponse(rsp)
+	return ParseLegacyRemoveAPTSourcesResponse(rsp)
 }
 
-// RemoveAPTSourcesFromRepositoryProfileWithResponse request returning *RemoveAPTSourcesFromRepositoryProfileResponse
-func (c *ClientWithResponses) RemoveAPTSourcesFromRepositoryProfileWithResponse(ctx context.Context, params *RemoveAPTSourcesFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourcesFromRepositoryProfileResponse, error) {
-	rsp, err := c.RemoveAPTSourcesFromRepositoryProfile(ctx, params, reqEditors...)
+// LegacyRemoveAPTSourcesFromRepositoryProfileWithResponse request returning *LegacyRemoveAPTSourcesFromRepositoryProfileResponse
+func (c *ClientWithResponses) LegacyRemoveAPTSourcesFromRepositoryProfileWithResponse(ctx context.Context, params *LegacyRemoveAPTSourcesFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAPTSourcesFromRepositoryProfileResponse, error) {
+	rsp, err := c.LegacyRemoveAPTSourcesFromRepositoryProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveAPTSourcesFromRepositoryProfileResponse(rsp)
+	return ParseLegacyRemoveAPTSourcesFromRepositoryProfileResponse(rsp)
 }
 
-// RemoveAccessGroupWithResponse request returning *RemoveAccessGroupResponse
-func (c *ClientWithResponses) RemoveAccessGroupWithResponse(ctx context.Context, params *RemoveAccessGroupParams, reqEditors ...RequestEditorFn) (*RemoveAccessGroupResponse, error) {
-	rsp, err := c.RemoveAccessGroup(ctx, params, reqEditors...)
+// LegacyRemoveAccessGroupWithResponse request returning *LegacyRemoveAccessGroupResponse
+func (c *ClientWithResponses) LegacyRemoveAccessGroupWithResponse(ctx context.Context, params *LegacyRemoveAccessGroupParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAccessGroupResponse, error) {
+	rsp, err := c.LegacyRemoveAccessGroup(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveAccessGroupResponse(rsp)
+	return ParseLegacyRemoveAccessGroupResponse(rsp)
 }
 
-// RemoveAccessGroupsFromRoleWithResponse request returning *RemoveAccessGroupsFromRoleResponse
-func (c *ClientWithResponses) RemoveAccessGroupsFromRoleWithResponse(ctx context.Context, params *RemoveAccessGroupsFromRoleParams, reqEditors ...RequestEditorFn) (*RemoveAccessGroupsFromRoleResponse, error) {
-	rsp, err := c.RemoveAccessGroupsFromRole(ctx, params, reqEditors...)
+// LegacyRemoveAccessGroupsFromRoleWithResponse request returning *LegacyRemoveAccessGroupsFromRoleResponse
+func (c *ClientWithResponses) LegacyRemoveAccessGroupsFromRoleWithResponse(ctx context.Context, params *LegacyRemoveAccessGroupsFromRoleParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAccessGroupsFromRoleResponse, error) {
+	rsp, err := c.LegacyRemoveAccessGroupsFromRole(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveAccessGroupsFromRoleResponse(rsp)
+	return ParseLegacyRemoveAccessGroupsFromRoleResponse(rsp)
 }
 
-// RemoveAnnotationFromComputersWithResponse request returning *RemoveAnnotationFromComputersResponse
-func (c *ClientWithResponses) RemoveAnnotationFromComputersWithResponse(ctx context.Context, params *RemoveAnnotationFromComputersParams, reqEditors ...RequestEditorFn) (*RemoveAnnotationFromComputersResponse, error) {
-	rsp, err := c.RemoveAnnotationFromComputers(ctx, params, reqEditors...)
+// LegacyRemoveAnnotationFromComputersWithResponse request returning *LegacyRemoveAnnotationFromComputersResponse
+func (c *ClientWithResponses) LegacyRemoveAnnotationFromComputersWithResponse(ctx context.Context, params *LegacyRemoveAnnotationFromComputersParams, reqEditors ...RequestEditorFn) (*LegacyRemoveAnnotationFromComputersResponse, error) {
+	rsp, err := c.LegacyRemoveAnnotationFromComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveAnnotationFromComputersResponse(rsp)
+	return ParseLegacyRemoveAnnotationFromComputersResponse(rsp)
 }
 
-// RemoveComputersWithResponse request returning *RemoveComputersResponse
-func (c *ClientWithResponses) RemoveComputersWithResponse(ctx context.Context, params *RemoveComputersParams, reqEditors ...RequestEditorFn) (*RemoveComputersResponse, error) {
-	rsp, err := c.RemoveComputers(ctx, params, reqEditors...)
+// LegacyRemoveComputersWithResponse request returning *LegacyRemoveComputersResponse
+func (c *ClientWithResponses) LegacyRemoveComputersWithResponse(ctx context.Context, params *LegacyRemoveComputersParams, reqEditors ...RequestEditorFn) (*LegacyRemoveComputersResponse, error) {
+	rsp, err := c.LegacyRemoveComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveComputersResponse(rsp)
+	return ParseLegacyRemoveComputersResponse(rsp)
 }
 
-// RemoveDistributionWithResponse request returning *RemoveDistributionResponse
-func (c *ClientWithResponses) RemoveDistributionWithResponse(ctx context.Context, params *RemoveDistributionParams, reqEditors ...RequestEditorFn) (*RemoveDistributionResponse, error) {
-	rsp, err := c.RemoveDistribution(ctx, params, reqEditors...)
+// LegacyRemoveDistributionWithResponse request returning *LegacyRemoveDistributionResponse
+func (c *ClientWithResponses) LegacyRemoveDistributionWithResponse(ctx context.Context, params *LegacyRemoveDistributionParams, reqEditors ...RequestEditorFn) (*LegacyRemoveDistributionResponse, error) {
+	rsp, err := c.LegacyRemoveDistribution(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveDistributionResponse(rsp)
+	return ParseLegacyRemoveDistributionResponse(rsp)
 }
 
-// RemoveGPGKeyWithResponse request returning *RemoveGPGKeyResponse
-func (c *ClientWithResponses) RemoveGPGKeyWithResponse(ctx context.Context, params *RemoveGPGKeyParams, reqEditors ...RequestEditorFn) (*RemoveGPGKeyResponse, error) {
-	rsp, err := c.RemoveGPGKey(ctx, params, reqEditors...)
+// LegacyRemoveGPGKeyWithResponse request returning *LegacyRemoveGPGKeyResponse
+func (c *ClientWithResponses) LegacyRemoveGPGKeyWithResponse(ctx context.Context, params *LegacyRemoveGPGKeyParams, reqEditors ...RequestEditorFn) (*LegacyRemoveGPGKeyResponse, error) {
+	rsp, err := c.LegacyRemoveGPGKey(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveGPGKeyResponse(rsp)
+	return ParseLegacyRemoveGPGKeyResponse(rsp)
 }
 
-// RemovePackageFiltersFromPocketWithResponse request returning *RemovePackageFiltersFromPocketResponse
-func (c *ClientWithResponses) RemovePackageFiltersFromPocketWithResponse(ctx context.Context, params *RemovePackageFiltersFromPocketParams, reqEditors ...RequestEditorFn) (*RemovePackageFiltersFromPocketResponse, error) {
-	rsp, err := c.RemovePackageFiltersFromPocket(ctx, params, reqEditors...)
+// LegacyRemovePackageFiltersFromPocketWithResponse request returning *LegacyRemovePackageFiltersFromPocketResponse
+func (c *ClientWithResponses) LegacyRemovePackageFiltersFromPocketWithResponse(ctx context.Context, params *LegacyRemovePackageFiltersFromPocketParams, reqEditors ...RequestEditorFn) (*LegacyRemovePackageFiltersFromPocketResponse, error) {
+	rsp, err := c.LegacyRemovePackageFiltersFromPocket(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemovePackageFiltersFromPocketResponse(rsp)
+	return ParseLegacyRemovePackageFiltersFromPocketResponse(rsp)
 }
 
-// RemovePackageProfileWithResponse request returning *RemovePackageProfileResponse
-func (c *ClientWithResponses) RemovePackageProfileWithResponse(ctx context.Context, params *RemovePackageProfileParams, reqEditors ...RequestEditorFn) (*RemovePackageProfileResponse, error) {
-	rsp, err := c.RemovePackageProfile(ctx, params, reqEditors...)
+// LegacyRemovePackageProfileWithResponse request returning *LegacyRemovePackageProfileResponse
+func (c *ClientWithResponses) LegacyRemovePackageProfileWithResponse(ctx context.Context, params *LegacyRemovePackageProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemovePackageProfileResponse, error) {
+	rsp, err := c.LegacyRemovePackageProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemovePackageProfileResponse(rsp)
+	return ParseLegacyRemovePackageProfileResponse(rsp)
 }
 
-// RemovePackagesWithResponse request returning *RemovePackagesResponse
-func (c *ClientWithResponses) RemovePackagesWithResponse(ctx context.Context, params *RemovePackagesParams, reqEditors ...RequestEditorFn) (*RemovePackagesResponse, error) {
-	rsp, err := c.RemovePackages(ctx, params, reqEditors...)
+// LegacyRemovePackagesWithResponse request returning *LegacyRemovePackagesResponse
+func (c *ClientWithResponses) LegacyRemovePackagesWithResponse(ctx context.Context, params *LegacyRemovePackagesParams, reqEditors ...RequestEditorFn) (*LegacyRemovePackagesResponse, error) {
+	rsp, err := c.LegacyRemovePackages(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemovePackagesResponse(rsp)
+	return ParseLegacyRemovePackagesResponse(rsp)
 }
 
-// RemovePackagesFromPocketWithResponse request returning *RemovePackagesFromPocketResponse
-func (c *ClientWithResponses) RemovePackagesFromPocketWithResponse(ctx context.Context, params *RemovePackagesFromPocketParams, reqEditors ...RequestEditorFn) (*RemovePackagesFromPocketResponse, error) {
-	rsp, err := c.RemovePackagesFromPocket(ctx, params, reqEditors...)
+// LegacyRemovePackagesFromPocketWithResponse request returning *LegacyRemovePackagesFromPocketResponse
+func (c *ClientWithResponses) LegacyRemovePackagesFromPocketWithResponse(ctx context.Context, params *LegacyRemovePackagesFromPocketParams, reqEditors ...RequestEditorFn) (*LegacyRemovePackagesFromPocketResponse, error) {
+	rsp, err := c.LegacyRemovePackagesFromPocket(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemovePackagesFromPocketResponse(rsp)
+	return ParseLegacyRemovePackagesFromPocketResponse(rsp)
 }
 
-// RemovePermissionsFromRoleWithResponse request returning *RemovePermissionsFromRoleResponse
-func (c *ClientWithResponses) RemovePermissionsFromRoleWithResponse(ctx context.Context, params *RemovePermissionsFromRoleParams, reqEditors ...RequestEditorFn) (*RemovePermissionsFromRoleResponse, error) {
-	rsp, err := c.RemovePermissionsFromRole(ctx, params, reqEditors...)
+// LegacyRemovePermissionsFromRoleWithResponse request returning *LegacyRemovePermissionsFromRoleResponse
+func (c *ClientWithResponses) LegacyRemovePermissionsFromRoleWithResponse(ctx context.Context, params *LegacyRemovePermissionsFromRoleParams, reqEditors ...RequestEditorFn) (*LegacyRemovePermissionsFromRoleResponse, error) {
+	rsp, err := c.LegacyRemovePermissionsFromRole(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemovePermissionsFromRoleResponse(rsp)
+	return ParseLegacyRemovePermissionsFromRoleResponse(rsp)
 }
 
-// RemovePersonsFromRoleWithResponse request returning *RemovePersonsFromRoleResponse
-func (c *ClientWithResponses) RemovePersonsFromRoleWithResponse(ctx context.Context, params *RemovePersonsFromRoleParams, reqEditors ...RequestEditorFn) (*RemovePersonsFromRoleResponse, error) {
-	rsp, err := c.RemovePersonsFromRole(ctx, params, reqEditors...)
+// LegacyRemovePersonsFromRoleWithResponse request returning *LegacyRemovePersonsFromRoleResponse
+func (c *ClientWithResponses) LegacyRemovePersonsFromRoleWithResponse(ctx context.Context, params *LegacyRemovePersonsFromRoleParams, reqEditors ...RequestEditorFn) (*LegacyRemovePersonsFromRoleResponse, error) {
+	rsp, err := c.LegacyRemovePersonsFromRole(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemovePersonsFromRoleResponse(rsp)
+	return ParseLegacyRemovePersonsFromRoleResponse(rsp)
 }
 
-// RemovePocketWithResponse request returning *RemovePocketResponse
-func (c *ClientWithResponses) RemovePocketWithResponse(ctx context.Context, params *RemovePocketParams, reqEditors ...RequestEditorFn) (*RemovePocketResponse, error) {
-	rsp, err := c.RemovePocket(ctx, params, reqEditors...)
+// LegacyRemovePocketWithResponse request returning *LegacyRemovePocketResponse
+func (c *ClientWithResponses) LegacyRemovePocketWithResponse(ctx context.Context, params *LegacyRemovePocketParams, reqEditors ...RequestEditorFn) (*LegacyRemovePocketResponse, error) {
+	rsp, err := c.LegacyRemovePocket(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemovePocketResponse(rsp)
+	return ParseLegacyRemovePocketResponse(rsp)
 }
 
-// RemovePocketsFromRepositoryProfileWithResponse request returning *RemovePocketsFromRepositoryProfileResponse
-func (c *ClientWithResponses) RemovePocketsFromRepositoryProfileWithResponse(ctx context.Context, params *RemovePocketsFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemovePocketsFromRepositoryProfileResponse, error) {
-	rsp, err := c.RemovePocketsFromRepositoryProfile(ctx, params, reqEditors...)
+// LegacyRemovePocketsFromRepositoryProfileWithResponse request returning *LegacyRemovePocketsFromRepositoryProfileResponse
+func (c *ClientWithResponses) LegacyRemovePocketsFromRepositoryProfileWithResponse(ctx context.Context, params *LegacyRemovePocketsFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemovePocketsFromRepositoryProfileResponse, error) {
+	rsp, err := c.LegacyRemovePocketsFromRepositoryProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemovePocketsFromRepositoryProfileResponse(rsp)
+	return ParseLegacyRemovePocketsFromRepositoryProfileResponse(rsp)
 }
 
-// RemoveRemovalProfileWithResponse request returning *RemoveRemovalProfileResponse
-func (c *ClientWithResponses) RemoveRemovalProfileWithResponse(ctx context.Context, params *RemoveRemovalProfileParams, reqEditors ...RequestEditorFn) (*RemoveRemovalProfileResponse, error) {
-	rsp, err := c.RemoveRemovalProfile(ctx, params, reqEditors...)
+// LegacyRemoveRemovalProfileWithResponse request returning *LegacyRemoveRemovalProfileResponse
+func (c *ClientWithResponses) LegacyRemoveRemovalProfileWithResponse(ctx context.Context, params *LegacyRemoveRemovalProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemoveRemovalProfileResponse, error) {
+	rsp, err := c.LegacyRemoveRemovalProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveRemovalProfileResponse(rsp)
+	return ParseLegacyRemoveRemovalProfileResponse(rsp)
 }
 
-// RemoveRepositoryProfileWithResponse request returning *RemoveRepositoryProfileResponse
-func (c *ClientWithResponses) RemoveRepositoryProfileWithResponse(ctx context.Context, params *RemoveRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemoveRepositoryProfileResponse, error) {
-	rsp, err := c.RemoveRepositoryProfile(ctx, params, reqEditors...)
+// LegacyRemoveRepositoryProfileWithResponse request returning *LegacyRemoveRepositoryProfileResponse
+func (c *ClientWithResponses) LegacyRemoveRepositoryProfileWithResponse(ctx context.Context, params *LegacyRemoveRepositoryProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemoveRepositoryProfileResponse, error) {
+	rsp, err := c.LegacyRemoveRepositoryProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveRepositoryProfileResponse(rsp)
+	return ParseLegacyRemoveRepositoryProfileResponse(rsp)
 }
 
-// RemoveRepositoryProfilesWithResponse request returning *RemoveRepositoryProfilesResponse
-func (c *ClientWithResponses) RemoveRepositoryProfilesWithResponse(ctx context.Context, params *RemoveRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*RemoveRepositoryProfilesResponse, error) {
-	rsp, err := c.RemoveRepositoryProfiles(ctx, params, reqEditors...)
+// LegacyRemoveRepositoryProfilesWithResponse request returning *LegacyRemoveRepositoryProfilesResponse
+func (c *ClientWithResponses) LegacyRemoveRepositoryProfilesWithResponse(ctx context.Context, params *LegacyRemoveRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*LegacyRemoveRepositoryProfilesResponse, error) {
+	rsp, err := c.LegacyRemoveRepositoryProfiles(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveRepositoryProfilesResponse(rsp)
+	return ParseLegacyRemoveRepositoryProfilesResponse(rsp)
 }
 
-// RemoveRoleWithResponse request returning *RemoveRoleResponse
-func (c *ClientWithResponses) RemoveRoleWithResponse(ctx context.Context, params *RemoveRoleParams, reqEditors ...RequestEditorFn) (*RemoveRoleResponse, error) {
-	rsp, err := c.RemoveRole(ctx, params, reqEditors...)
+// LegacyRemoveRoleWithResponse request returning *LegacyRemoveRoleResponse
+func (c *ClientWithResponses) LegacyRemoveRoleWithResponse(ctx context.Context, params *LegacyRemoveRoleParams, reqEditors ...RequestEditorFn) (*LegacyRemoveRoleResponse, error) {
+	rsp, err := c.LegacyRemoveRole(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveRoleResponse(rsp)
+	return ParseLegacyRemoveRoleResponse(rsp)
 }
 
-// RemoveSavedSearchWithResponse request returning *RemoveSavedSearchResponse
-func (c *ClientWithResponses) RemoveSavedSearchWithResponse(ctx context.Context, params *RemoveSavedSearchParams, reqEditors ...RequestEditorFn) (*RemoveSavedSearchResponse, error) {
-	rsp, err := c.RemoveSavedSearch(ctx, params, reqEditors...)
+// LegacyRemoveSavedSearchWithResponse request returning *LegacyRemoveSavedSearchResponse
+func (c *ClientWithResponses) LegacyRemoveSavedSearchWithResponse(ctx context.Context, params *LegacyRemoveSavedSearchParams, reqEditors ...RequestEditorFn) (*LegacyRemoveSavedSearchResponse, error) {
+	rsp, err := c.LegacyRemoveSavedSearch(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveSavedSearchResponse(rsp)
+	return ParseLegacyRemoveSavedSearchResponse(rsp)
 }
 
-// RemoveScriptWithResponse request returning *RemoveScriptResponse
-func (c *ClientWithResponses) RemoveScriptWithResponse(ctx context.Context, params *RemoveScriptParams, reqEditors ...RequestEditorFn) (*RemoveScriptResponse, error) {
-	rsp, err := c.RemoveScript(ctx, params, reqEditors...)
+// LegacyRemoveScriptWithResponse request returning *LegacyRemoveScriptResponse
+func (c *ClientWithResponses) LegacyRemoveScriptWithResponse(ctx context.Context, params *LegacyRemoveScriptParams, reqEditors ...RequestEditorFn) (*LegacyRemoveScriptResponse, error) {
+	rsp, err := c.LegacyRemoveScript(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveScriptResponse(rsp)
+	return ParseLegacyRemoveScriptResponse(rsp)
 }
 
-// RemoveScriptAttachmentWithResponse request returning *RemoveScriptAttachmentResponse
-func (c *ClientWithResponses) RemoveScriptAttachmentWithResponse(ctx context.Context, params *RemoveScriptAttachmentParams, reqEditors ...RequestEditorFn) (*RemoveScriptAttachmentResponse, error) {
-	rsp, err := c.RemoveScriptAttachment(ctx, params, reqEditors...)
+// LegacyRemoveScriptAttachmentWithResponse request returning *LegacyRemoveScriptAttachmentResponse
+func (c *ClientWithResponses) LegacyRemoveScriptAttachmentWithResponse(ctx context.Context, params *LegacyRemoveScriptAttachmentParams, reqEditors ...RequestEditorFn) (*LegacyRemoveScriptAttachmentResponse, error) {
+	rsp, err := c.LegacyRemoveScriptAttachment(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveScriptAttachmentResponse(rsp)
+	return ParseLegacyRemoveScriptAttachmentResponse(rsp)
 }
 
-// RemoveSeriesWithResponse request returning *RemoveSeriesResponse
-func (c *ClientWithResponses) RemoveSeriesWithResponse(ctx context.Context, params *RemoveSeriesParams, reqEditors ...RequestEditorFn) (*RemoveSeriesResponse, error) {
-	rsp, err := c.RemoveSeries(ctx, params, reqEditors...)
+// LegacyRemoveSeriesWithResponse request returning *LegacyRemoveSeriesResponse
+func (c *ClientWithResponses) LegacyRemoveSeriesWithResponse(ctx context.Context, params *LegacyRemoveSeriesParams, reqEditors ...RequestEditorFn) (*LegacyRemoveSeriesResponse, error) {
+	rsp, err := c.LegacyRemoveSeries(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveSeriesResponse(rsp)
+	return ParseLegacyRemoveSeriesResponse(rsp)
 }
 
-// RemoveTagsFromComputersWithResponse request returning *RemoveTagsFromComputersResponse
-func (c *ClientWithResponses) RemoveTagsFromComputersWithResponse(ctx context.Context, params *RemoveTagsFromComputersParams, reqEditors ...RequestEditorFn) (*RemoveTagsFromComputersResponse, error) {
-	rsp, err := c.RemoveTagsFromComputers(ctx, params, reqEditors...)
+// LegacyRemoveTagsFromComputersWithResponse request returning *LegacyRemoveTagsFromComputersResponse
+func (c *ClientWithResponses) LegacyRemoveTagsFromComputersWithResponse(ctx context.Context, params *LegacyRemoveTagsFromComputersParams, reqEditors ...RequestEditorFn) (*LegacyRemoveTagsFromComputersResponse, error) {
+	rsp, err := c.LegacyRemoveTagsFromComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveTagsFromComputersResponse(rsp)
+	return ParseLegacyRemoveTagsFromComputersResponse(rsp)
 }
 
-// RemoveUpgradeProfileWithResponse request returning *RemoveUpgradeProfileResponse
-func (c *ClientWithResponses) RemoveUpgradeProfileWithResponse(ctx context.Context, params *RemoveUpgradeProfileParams, reqEditors ...RequestEditorFn) (*RemoveUpgradeProfileResponse, error) {
-	rsp, err := c.RemoveUpgradeProfile(ctx, params, reqEditors...)
+// LegacyRemoveUpgradeProfileWithResponse request returning *LegacyRemoveUpgradeProfileResponse
+func (c *ClientWithResponses) LegacyRemoveUpgradeProfileWithResponse(ctx context.Context, params *LegacyRemoveUpgradeProfileParams, reqEditors ...RequestEditorFn) (*LegacyRemoveUpgradeProfileResponse, error) {
+	rsp, err := c.LegacyRemoveUpgradeProfile(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveUpgradeProfileResponse(rsp)
+	return ParseLegacyRemoveUpgradeProfileResponse(rsp)
 }
 
-// RemoveUploaderGPGKeysFromPocketWithResponse request returning *RemoveUploaderGPGKeysFromPocketResponse
-func (c *ClientWithResponses) RemoveUploaderGPGKeysFromPocketWithResponse(ctx context.Context, params *RemoveUploaderGPGKeysFromPocketParams, reqEditors ...RequestEditorFn) (*RemoveUploaderGPGKeysFromPocketResponse, error) {
-	rsp, err := c.RemoveUploaderGPGKeysFromPocket(ctx, params, reqEditors...)
+// LegacyRemoveUploaderGPGKeysFromPocketWithResponse request returning *LegacyRemoveUploaderGPGKeysFromPocketResponse
+func (c *ClientWithResponses) LegacyRemoveUploaderGPGKeysFromPocketWithResponse(ctx context.Context, params *LegacyRemoveUploaderGPGKeysFromPocketParams, reqEditors ...RequestEditorFn) (*LegacyRemoveUploaderGPGKeysFromPocketResponse, error) {
+	rsp, err := c.LegacyRemoveUploaderGPGKeysFromPocket(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveUploaderGPGKeysFromPocketResponse(rsp)
+	return ParseLegacyRemoveUploaderGPGKeysFromPocketResponse(rsp)
 }
 
-// RemoveWSLHostsWithResponse request returning *RemoveWSLHostsResponse
-func (c *ClientWithResponses) RemoveWSLHostsWithResponse(ctx context.Context, params *RemoveWSLHostsParams, reqEditors ...RequestEditorFn) (*RemoveWSLHostsResponse, error) {
-	rsp, err := c.RemoveWSLHosts(ctx, params, reqEditors...)
+// LegacyRemoveWSLHostsWithResponse request returning *LegacyRemoveWSLHostsResponse
+func (c *ClientWithResponses) LegacyRemoveWSLHostsWithResponse(ctx context.Context, params *LegacyRemoveWSLHostsParams, reqEditors ...RequestEditorFn) (*LegacyRemoveWSLHostsResponse, error) {
+	rsp, err := c.LegacyRemoveWSLHosts(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRemoveWSLHostsResponse(rsp)
+	return ParseLegacyRemoveWSLHostsResponse(rsp)
 }
 
-// RenameComputersWithResponse request returning *RenameComputersResponse
-func (c *ClientWithResponses) RenameComputersWithResponse(ctx context.Context, params *RenameComputersParams, reqEditors ...RequestEditorFn) (*RenameComputersResponse, error) {
-	rsp, err := c.RenameComputers(ctx, params, reqEditors...)
+// LegacyRenameComputersWithResponse request returning *LegacyRenameComputersResponse
+func (c *ClientWithResponses) LegacyRenameComputersWithResponse(ctx context.Context, params *LegacyRenameComputersParams, reqEditors ...RequestEditorFn) (*LegacyRenameComputersResponse, error) {
+	rsp, err := c.LegacyRenameComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseRenameComputersResponse(rsp)
+	return ParseLegacyRenameComputersResponse(rsp)
 }
 
-// SetDefaultChildComputerWithResponse request returning *SetDefaultChildComputerResponse
-func (c *ClientWithResponses) SetDefaultChildComputerWithResponse(ctx context.Context, params *SetDefaultChildComputerParams, reqEditors ...RequestEditorFn) (*SetDefaultChildComputerResponse, error) {
-	rsp, err := c.SetDefaultChildComputer(ctx, params, reqEditors...)
+// LegacySetDefaultChildComputerWithResponse request returning *LegacySetDefaultChildComputerResponse
+func (c *ClientWithResponses) LegacySetDefaultChildComputerWithResponse(ctx context.Context, params *LegacySetDefaultChildComputerParams, reqEditors ...RequestEditorFn) (*LegacySetDefaultChildComputerResponse, error) {
+	rsp, err := c.LegacySetDefaultChildComputer(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseSetDefaultChildComputerResponse(rsp)
+	return ParseLegacySetDefaultChildComputerResponse(rsp)
 }
 
-// SetSettingsWithResponse request returning *SetSettingsResponse
-func (c *ClientWithResponses) SetSettingsWithResponse(ctx context.Context, params *SetSettingsParams, reqEditors ...RequestEditorFn) (*SetSettingsResponse, error) {
-	rsp, err := c.SetSettings(ctx, params, reqEditors...)
+// LegacySetSettingsWithResponse request returning *LegacySetSettingsResponse
+func (c *ClientWithResponses) LegacySetSettingsWithResponse(ctx context.Context, params *LegacySetSettingsParams, reqEditors ...RequestEditorFn) (*LegacySetSettingsResponse, error) {
+	rsp, err := c.LegacySetSettings(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseSetSettingsResponse(rsp)
+	return ParseLegacySetSettingsResponse(rsp)
 }
 
-// ShutdownComputersWithResponse request returning *ShutdownComputersResponse
-func (c *ClientWithResponses) ShutdownComputersWithResponse(ctx context.Context, params *ShutdownComputersParams, reqEditors ...RequestEditorFn) (*ShutdownComputersResponse, error) {
-	rsp, err := c.ShutdownComputers(ctx, params, reqEditors...)
+// LegacyShutdownComputersWithResponse request returning *LegacyShutdownComputersResponse
+func (c *ClientWithResponses) LegacyShutdownComputersWithResponse(ctx context.Context, params *LegacyShutdownComputersParams, reqEditors ...RequestEditorFn) (*LegacyShutdownComputersResponse, error) {
+	rsp, err := c.LegacyShutdownComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseShutdownComputersResponse(rsp)
+	return ParseLegacyShutdownComputersResponse(rsp)
 }
 
-// ShutdownHostComputerWithResponse request returning *ShutdownHostComputerResponse
-func (c *ClientWithResponses) ShutdownHostComputerWithResponse(ctx context.Context, params *ShutdownHostComputerParams, reqEditors ...RequestEditorFn) (*ShutdownHostComputerResponse, error) {
-	rsp, err := c.ShutdownHostComputer(ctx, params, reqEditors...)
+// LegacyShutdownHostComputerWithResponse request returning *LegacyShutdownHostComputerResponse
+func (c *ClientWithResponses) LegacyShutdownHostComputerWithResponse(ctx context.Context, params *LegacyShutdownHostComputerParams, reqEditors ...RequestEditorFn) (*LegacyShutdownHostComputerResponse, error) {
+	rsp, err := c.LegacyShutdownHostComputer(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseShutdownHostComputerResponse(rsp)
+	return ParseLegacyShutdownHostComputerResponse(rsp)
 }
 
-// StartChildComputersWithResponse request returning *StartChildComputersResponse
-func (c *ClientWithResponses) StartChildComputersWithResponse(ctx context.Context, params *StartChildComputersParams, reqEditors ...RequestEditorFn) (*StartChildComputersResponse, error) {
-	rsp, err := c.StartChildComputers(ctx, params, reqEditors...)
+// LegacyStartChildComputersWithResponse request returning *LegacyStartChildComputersResponse
+func (c *ClientWithResponses) LegacyStartChildComputersWithResponse(ctx context.Context, params *LegacyStartChildComputersParams, reqEditors ...RequestEditorFn) (*LegacyStartChildComputersResponse, error) {
+	rsp, err := c.LegacyStartChildComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseStartChildComputersResponse(rsp)
+	return ParseLegacyStartChildComputersResponse(rsp)
 }
 
-// StopChildComputersWithResponse request returning *StopChildComputersResponse
-func (c *ClientWithResponses) StopChildComputersWithResponse(ctx context.Context, params *StopChildComputersParams, reqEditors ...RequestEditorFn) (*StopChildComputersResponse, error) {
-	rsp, err := c.StopChildComputers(ctx, params, reqEditors...)
+// LegacyStopChildComputersWithResponse request returning *LegacyStopChildComputersResponse
+func (c *ClientWithResponses) LegacyStopChildComputersWithResponse(ctx context.Context, params *LegacyStopChildComputersParams, reqEditors ...RequestEditorFn) (*LegacyStopChildComputersResponse, error) {
+	rsp, err := c.LegacyStopChildComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseStopChildComputersResponse(rsp)
+	return ParseLegacyStopChildComputersResponse(rsp)
 }
 
-// SubscribeToAlertWithResponse request returning *SubscribeToAlertResponse
-func (c *ClientWithResponses) SubscribeToAlertWithResponse(ctx context.Context, params *SubscribeToAlertParams, reqEditors ...RequestEditorFn) (*SubscribeToAlertResponse, error) {
-	rsp, err := c.SubscribeToAlert(ctx, params, reqEditors...)
+// LegacySubscribeToAlertWithResponse request returning *LegacySubscribeToAlertResponse
+func (c *ClientWithResponses) LegacySubscribeToAlertWithResponse(ctx context.Context, params *LegacySubscribeToAlertParams, reqEditors ...RequestEditorFn) (*LegacySubscribeToAlertResponse, error) {
+	rsp, err := c.LegacySubscribeToAlert(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseSubscribeToAlertResponse(rsp)
+	return ParseLegacySubscribeToAlertResponse(rsp)
 }
 
-// SyncMirrorPocketWithResponse request returning *SyncMirrorPocketResponse
-func (c *ClientWithResponses) SyncMirrorPocketWithResponse(ctx context.Context, params *SyncMirrorPocketParams, reqEditors ...RequestEditorFn) (*SyncMirrorPocketResponse, error) {
-	rsp, err := c.SyncMirrorPocket(ctx, params, reqEditors...)
+// LegacySyncMirrorPocketWithResponse request returning *LegacySyncMirrorPocketResponse
+func (c *ClientWithResponses) LegacySyncMirrorPocketWithResponse(ctx context.Context, params *LegacySyncMirrorPocketParams, reqEditors ...RequestEditorFn) (*LegacySyncMirrorPocketResponse, error) {
+	rsp, err := c.LegacySyncMirrorPocket(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseSyncMirrorPocketResponse(rsp)
+	return ParseLegacySyncMirrorPocketResponse(rsp)
 }
 
-// TerminateComputerProcessesWithResponse request returning *TerminateComputerProcessesResponse
-func (c *ClientWithResponses) TerminateComputerProcessesWithResponse(ctx context.Context, params *TerminateComputerProcessesParams, reqEditors ...RequestEditorFn) (*TerminateComputerProcessesResponse, error) {
-	rsp, err := c.TerminateComputerProcesses(ctx, params, reqEditors...)
+// LegacyTerminateComputerProcessesWithResponse request returning *LegacyTerminateComputerProcessesResponse
+func (c *ClientWithResponses) LegacyTerminateComputerProcessesWithResponse(ctx context.Context, params *LegacyTerminateComputerProcessesParams, reqEditors ...RequestEditorFn) (*LegacyTerminateComputerProcessesResponse, error) {
+	rsp, err := c.LegacyTerminateComputerProcesses(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseTerminateComputerProcessesResponse(rsp)
+	return ParseLegacyTerminateComputerProcessesResponse(rsp)
 }
 
-// UnsubscribeFromAlertWithResponse request returning *UnsubscribeFromAlertResponse
-func (c *ClientWithResponses) UnsubscribeFromAlertWithResponse(ctx context.Context, params *UnsubscribeFromAlertParams, reqEditors ...RequestEditorFn) (*UnsubscribeFromAlertResponse, error) {
-	rsp, err := c.UnsubscribeFromAlert(ctx, params, reqEditors...)
+// LegacyUnsubscribeFromAlertWithResponse request returning *LegacyUnsubscribeFromAlertResponse
+func (c *ClientWithResponses) LegacyUnsubscribeFromAlertWithResponse(ctx context.Context, params *LegacyUnsubscribeFromAlertParams, reqEditors ...RequestEditorFn) (*LegacyUnsubscribeFromAlertResponse, error) {
+	rsp, err := c.LegacyUnsubscribeFromAlert(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseUnsubscribeFromAlertResponse(rsp)
+	return ParseLegacyUnsubscribeFromAlertResponse(rsp)
 }
 
-// UpgradePackagesWithResponse request returning *UpgradePackagesResponse
-func (c *ClientWithResponses) UpgradePackagesWithResponse(ctx context.Context, params *UpgradePackagesParams, reqEditors ...RequestEditorFn) (*UpgradePackagesResponse, error) {
-	rsp, err := c.UpgradePackages(ctx, params, reqEditors...)
+// LegacyUpgradePackagesWithResponse request returning *LegacyUpgradePackagesResponse
+func (c *ClientWithResponses) LegacyUpgradePackagesWithResponse(ctx context.Context, params *LegacyUpgradePackagesParams, reqEditors ...RequestEditorFn) (*LegacyUpgradePackagesResponse, error) {
+	rsp, err := c.LegacyUpgradePackages(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseUpgradePackagesResponse(rsp)
+	return ParseLegacyUpgradePackagesResponse(rsp)
 }
 
 // LoginWithPasswordWithBodyWithResponse request with arbitrary body returning *LoginWithPasswordResponse
@@ -25817,15 +23744,15 @@ func (c *ClientWithResponses) RedactScriptWithResponse(ctx context.Context, scri
 	return ParseRedactScriptResponse(rsp)
 }
 
-// ParseAcceptPendingComputersResponse parses an HTTP response from a AcceptPendingComputersWithResponse call
-func ParseAcceptPendingComputersResponse(rsp *http.Response) (*AcceptPendingComputersResponse, error) {
+// ParseLegacyAcceptPendingComputersResponse parses an HTTP response from a LegacyAcceptPendingComputersWithResponse call
+func ParseLegacyAcceptPendingComputersResponse(rsp *http.Response) (*LegacyAcceptPendingComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AcceptPendingComputersResponse{
+	response := &LegacyAcceptPendingComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -25864,15 +23791,15 @@ func ParseAcceptPendingComputersResponse(rsp *http.Response) (*AcceptPendingComp
 	return response, nil
 }
 
-// ParseAddAPTSourcesToRepositoryProfileResponse parses an HTTP response from a AddAPTSourcesToRepositoryProfileWithResponse call
-func ParseAddAPTSourcesToRepositoryProfileResponse(rsp *http.Response) (*AddAPTSourcesToRepositoryProfileResponse, error) {
+// ParseLegacyAddAPTSourcesToRepositoryProfileResponse parses an HTTP response from a LegacyAddAPTSourcesToRepositoryProfileWithResponse call
+func ParseLegacyAddAPTSourcesToRepositoryProfileResponse(rsp *http.Response) (*LegacyAddAPTSourcesToRepositoryProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AddAPTSourcesToRepositoryProfileResponse{
+	response := &LegacyAddAPTSourcesToRepositoryProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -25911,15 +23838,15 @@ func ParseAddAPTSourcesToRepositoryProfileResponse(rsp *http.Response) (*AddAPTS
 	return response, nil
 }
 
-// ParseAddAccessGroupsToRoleResponse parses an HTTP response from a AddAccessGroupsToRoleWithResponse call
-func ParseAddAccessGroupsToRoleResponse(rsp *http.Response) (*AddAccessGroupsToRoleResponse, error) {
+// ParseLegacyAddAccessGroupsToRoleResponse parses an HTTP response from a LegacyAddAccessGroupsToRoleWithResponse call
+func ParseLegacyAddAccessGroupsToRoleResponse(rsp *http.Response) (*LegacyAddAccessGroupsToRoleResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AddAccessGroupsToRoleResponse{
+	response := &LegacyAddAccessGroupsToRoleResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -25958,15 +23885,15 @@ func ParseAddAccessGroupsToRoleResponse(rsp *http.Response) (*AddAccessGroupsToR
 	return response, nil
 }
 
-// ParseAddAnnotationToComputersResponse parses an HTTP response from a AddAnnotationToComputersWithResponse call
-func ParseAddAnnotationToComputersResponse(rsp *http.Response) (*AddAnnotationToComputersResponse, error) {
+// ParseLegacyAddAnnotationToComputersResponse parses an HTTP response from a LegacyAddAnnotationToComputersWithResponse call
+func ParseLegacyAddAnnotationToComputersResponse(rsp *http.Response) (*LegacyAddAnnotationToComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AddAnnotationToComputersResponse{
+	response := &LegacyAddAnnotationToComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26005,15 +23932,15 @@ func ParseAddAnnotationToComputersResponse(rsp *http.Response) (*AddAnnotationTo
 	return response, nil
 }
 
-// ParseAddPackageFiltersToPocketResponse parses an HTTP response from a AddPackageFiltersToPocketWithResponse call
-func ParseAddPackageFiltersToPocketResponse(rsp *http.Response) (*AddPackageFiltersToPocketResponse, error) {
+// ParseLegacyAddPackageFiltersToPocketResponse parses an HTTP response from a LegacyAddPackageFiltersToPocketWithResponse call
+func ParseLegacyAddPackageFiltersToPocketResponse(rsp *http.Response) (*LegacyAddPackageFiltersToPocketResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AddPackageFiltersToPocketResponse{
+	response := &LegacyAddPackageFiltersToPocketResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26052,15 +23979,15 @@ func ParseAddPackageFiltersToPocketResponse(rsp *http.Response) (*AddPackageFilt
 	return response, nil
 }
 
-// ParseAddPermissionsToRoleResponse parses an HTTP response from a AddPermissionsToRoleWithResponse call
-func ParseAddPermissionsToRoleResponse(rsp *http.Response) (*AddPermissionsToRoleResponse, error) {
+// ParseLegacyAddPermissionsToRoleResponse parses an HTTP response from a LegacyAddPermissionsToRoleWithResponse call
+func ParseLegacyAddPermissionsToRoleResponse(rsp *http.Response) (*LegacyAddPermissionsToRoleResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AddPermissionsToRoleResponse{
+	response := &LegacyAddPermissionsToRoleResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26099,15 +24026,15 @@ func ParseAddPermissionsToRoleResponse(rsp *http.Response) (*AddPermissionsToRol
 	return response, nil
 }
 
-// ParseAddPersonsToRoleResponse parses an HTTP response from a AddPersonsToRoleWithResponse call
-func ParseAddPersonsToRoleResponse(rsp *http.Response) (*AddPersonsToRoleResponse, error) {
+// ParseLegacyAddPersonsToRoleResponse parses an HTTP response from a LegacyAddPersonsToRoleWithResponse call
+func ParseLegacyAddPersonsToRoleResponse(rsp *http.Response) (*LegacyAddPersonsToRoleResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AddPersonsToRoleResponse{
+	response := &LegacyAddPersonsToRoleResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26146,15 +24073,15 @@ func ParseAddPersonsToRoleResponse(rsp *http.Response) (*AddPersonsToRoleRespons
 	return response, nil
 }
 
-// ParseAddPocketsToRepositoryProfileResponse parses an HTTP response from a AddPocketsToRepositoryProfileWithResponse call
-func ParseAddPocketsToRepositoryProfileResponse(rsp *http.Response) (*AddPocketsToRepositoryProfileResponse, error) {
+// ParseLegacyAddPocketsToRepositoryProfileResponse parses an HTTP response from a LegacyAddPocketsToRepositoryProfileWithResponse call
+func ParseLegacyAddPocketsToRepositoryProfileResponse(rsp *http.Response) (*LegacyAddPocketsToRepositoryProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AddPocketsToRepositoryProfileResponse{
+	response := &LegacyAddPocketsToRepositoryProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26193,15 +24120,15 @@ func ParseAddPocketsToRepositoryProfileResponse(rsp *http.Response) (*AddPockets
 	return response, nil
 }
 
-// ParseAddTagsToComputersResponse parses an HTTP response from a AddTagsToComputersWithResponse call
-func ParseAddTagsToComputersResponse(rsp *http.Response) (*AddTagsToComputersResponse, error) {
+// ParseLegacyAddTagsToComputersResponse parses an HTTP response from a LegacyAddTagsToComputersWithResponse call
+func ParseLegacyAddTagsToComputersResponse(rsp *http.Response) (*LegacyAddTagsToComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AddTagsToComputersResponse{
+	response := &LegacyAddTagsToComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26240,15 +24167,15 @@ func ParseAddTagsToComputersResponse(rsp *http.Response) (*AddTagsToComputersRes
 	return response, nil
 }
 
-// ParseAddUploaderGPGKeysToPocketResponse parses an HTTP response from a AddUploaderGPGKeysToPocketWithResponse call
-func ParseAddUploaderGPGKeysToPocketResponse(rsp *http.Response) (*AddUploaderGPGKeysToPocketResponse, error) {
+// ParseLegacyAddUploaderGPGKeysToPocketResponse parses an HTTP response from a LegacyAddUploaderGPGKeysToPocketWithResponse call
+func ParseLegacyAddUploaderGPGKeysToPocketResponse(rsp *http.Response) (*LegacyAddUploaderGPGKeysToPocketResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AddUploaderGPGKeysToPocketResponse{
+	response := &LegacyAddUploaderGPGKeysToPocketResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26287,15 +24214,15 @@ func ParseAddUploaderGPGKeysToPocketResponse(rsp *http.Response) (*AddUploaderGP
 	return response, nil
 }
 
-// ParseApproveActivitiesResponse parses an HTTP response from a ApproveActivitiesWithResponse call
-func ParseApproveActivitiesResponse(rsp *http.Response) (*ApproveActivitiesResponse, error) {
+// ParseLegacyApproveActivitiesResponse parses an HTTP response from a LegacyApproveActivitiesWithResponse call
+func ParseLegacyApproveActivitiesResponse(rsp *http.Response) (*LegacyApproveActivitiesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ApproveActivitiesResponse{
+	response := &LegacyApproveActivitiesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26334,15 +24261,15 @@ func ParseApproveActivitiesResponse(rsp *http.Response) (*ApproveActivitiesRespo
 	return response, nil
 }
 
-// ParseAssociateAlertResponse parses an HTTP response from a AssociateAlertWithResponse call
-func ParseAssociateAlertResponse(rsp *http.Response) (*AssociateAlertResponse, error) {
+// ParseLegacyAssociateAlertResponse parses an HTTP response from a LegacyAssociateAlertWithResponse call
+func ParseLegacyAssociateAlertResponse(rsp *http.Response) (*LegacyAssociateAlertResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AssociateAlertResponse{
+	response := &LegacyAssociateAlertResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26381,15 +24308,15 @@ func ParseAssociateAlertResponse(rsp *http.Response) (*AssociateAlertResponse, e
 	return response, nil
 }
 
-// ParseAssociatePackageProfileResponse parses an HTTP response from a AssociatePackageProfileWithResponse call
-func ParseAssociatePackageProfileResponse(rsp *http.Response) (*AssociatePackageProfileResponse, error) {
+// ParseLegacyAssociatePackageProfileResponse parses an HTTP response from a LegacyAssociatePackageProfileWithResponse call
+func ParseLegacyAssociatePackageProfileResponse(rsp *http.Response) (*LegacyAssociatePackageProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AssociatePackageProfileResponse{
+	response := &LegacyAssociatePackageProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26428,15 +24355,15 @@ func ParseAssociatePackageProfileResponse(rsp *http.Response) (*AssociatePackage
 	return response, nil
 }
 
-// ParseAssociateRemovalProfileResponse parses an HTTP response from a AssociateRemovalProfileWithResponse call
-func ParseAssociateRemovalProfileResponse(rsp *http.Response) (*AssociateRemovalProfileResponse, error) {
+// ParseLegacyAssociateRemovalProfileResponse parses an HTTP response from a LegacyAssociateRemovalProfileWithResponse call
+func ParseLegacyAssociateRemovalProfileResponse(rsp *http.Response) (*LegacyAssociateRemovalProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AssociateRemovalProfileResponse{
+	response := &LegacyAssociateRemovalProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26475,15 +24402,15 @@ func ParseAssociateRemovalProfileResponse(rsp *http.Response) (*AssociateRemoval
 	return response, nil
 }
 
-// ParseAssociateRepositoryProfileResponse parses an HTTP response from a AssociateRepositoryProfileWithResponse call
-func ParseAssociateRepositoryProfileResponse(rsp *http.Response) (*AssociateRepositoryProfileResponse, error) {
+// ParseLegacyAssociateRepositoryProfileResponse parses an HTTP response from a LegacyAssociateRepositoryProfileWithResponse call
+func ParseLegacyAssociateRepositoryProfileResponse(rsp *http.Response) (*LegacyAssociateRepositoryProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AssociateRepositoryProfileResponse{
+	response := &LegacyAssociateRepositoryProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26522,15 +24449,15 @@ func ParseAssociateRepositoryProfileResponse(rsp *http.Response) (*AssociateRepo
 	return response, nil
 }
 
-// ParseAssociateUpgradeProfileResponse parses an HTTP response from a AssociateUpgradeProfileWithResponse call
-func ParseAssociateUpgradeProfileResponse(rsp *http.Response) (*AssociateUpgradeProfileResponse, error) {
+// ParseLegacyAssociateUpgradeProfileResponse parses an HTTP response from a LegacyAssociateUpgradeProfileWithResponse call
+func ParseLegacyAssociateUpgradeProfileResponse(rsp *http.Response) (*LegacyAssociateUpgradeProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &AssociateUpgradeProfileResponse{
+	response := &LegacyAssociateUpgradeProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26569,15 +24496,15 @@ func ParseAssociateUpgradeProfileResponse(rsp *http.Response) (*AssociateUpgrade
 	return response, nil
 }
 
-// ParseCancelActivitiesResponse parses an HTTP response from a CancelActivitiesWithResponse call
-func ParseCancelActivitiesResponse(rsp *http.Response) (*CancelActivitiesResponse, error) {
+// ParseLegacyCancelActivitiesResponse parses an HTTP response from a LegacyCancelActivitiesWithResponse call
+func ParseLegacyCancelActivitiesResponse(rsp *http.Response) (*LegacyCancelActivitiesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CancelActivitiesResponse{
+	response := &LegacyCancelActivitiesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26616,15 +24543,15 @@ func ParseCancelActivitiesResponse(rsp *http.Response) (*CancelActivitiesRespons
 	return response, nil
 }
 
-// ParseChangeComputersAccessGroupResponse parses an HTTP response from a ChangeComputersAccessGroupWithResponse call
-func ParseChangeComputersAccessGroupResponse(rsp *http.Response) (*ChangeComputersAccessGroupResponse, error) {
+// ParseLegacyChangeComputersAccessGroupResponse parses an HTTP response from a LegacyChangeComputersAccessGroupWithResponse call
+func ParseLegacyChangeComputersAccessGroupResponse(rsp *http.Response) (*LegacyChangeComputersAccessGroupResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ChangeComputersAccessGroupResponse{
+	response := &LegacyChangeComputersAccessGroupResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26663,15 +24590,15 @@ func ParseChangeComputersAccessGroupResponse(rsp *http.Response) (*ChangeCompute
 	return response, nil
 }
 
-// ParseCopyPackageProfileResponse parses an HTTP response from a CopyPackageProfileWithResponse call
-func ParseCopyPackageProfileResponse(rsp *http.Response) (*CopyPackageProfileResponse, error) {
+// ParseLegacyCopyPackageProfileResponse parses an HTTP response from a LegacyCopyPackageProfileWithResponse call
+func ParseLegacyCopyPackageProfileResponse(rsp *http.Response) (*LegacyCopyPackageProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CopyPackageProfileResponse{
+	response := &LegacyCopyPackageProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26710,15 +24637,15 @@ func ParseCopyPackageProfileResponse(rsp *http.Response) (*CopyPackageProfileRes
 	return response, nil
 }
 
-// ParseCopyRoleResponse parses an HTTP response from a CopyRoleWithResponse call
-func ParseCopyRoleResponse(rsp *http.Response) (*CopyRoleResponse, error) {
+// ParseLegacyCopyRoleResponse parses an HTTP response from a LegacyCopyRoleWithResponse call
+func ParseLegacyCopyRoleResponse(rsp *http.Response) (*LegacyCopyRoleResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CopyRoleResponse{
+	response := &LegacyCopyRoleResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26757,15 +24684,15 @@ func ParseCopyRoleResponse(rsp *http.Response) (*CopyRoleResponse, error) {
 	return response, nil
 }
 
-// ParseCopyScriptResponse parses an HTTP response from a CopyScriptWithResponse call
-func ParseCopyScriptResponse(rsp *http.Response) (*CopyScriptResponse, error) {
+// ParseLegacyCopyScriptResponse parses an HTTP response from a LegacyCopyScriptWithResponse call
+func ParseLegacyCopyScriptResponse(rsp *http.Response) (*LegacyCopyScriptResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CopyScriptResponse{
+	response := &LegacyCopyScriptResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26804,15 +24731,15 @@ func ParseCopyScriptResponse(rsp *http.Response) (*CopyScriptResponse, error) {
 	return response, nil
 }
 
-// ParseCreateAPTSourceResponse parses an HTTP response from a CreateAPTSourceWithResponse call
-func ParseCreateAPTSourceResponse(rsp *http.Response) (*CreateAPTSourceResponse, error) {
+// ParseLegacyCreateAPTSourceResponse parses an HTTP response from a LegacyCreateAPTSourceWithResponse call
+func ParseLegacyCreateAPTSourceResponse(rsp *http.Response) (*LegacyCreateAPTSourceResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateAPTSourceResponse{
+	response := &LegacyCreateAPTSourceResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26851,15 +24778,15 @@ func ParseCreateAPTSourceResponse(rsp *http.Response) (*CreateAPTSourceResponse,
 	return response, nil
 }
 
-// ParseCreateAccessGroupResponse parses an HTTP response from a CreateAccessGroupWithResponse call
-func ParseCreateAccessGroupResponse(rsp *http.Response) (*CreateAccessGroupResponse, error) {
+// ParseLegacyCreateAccessGroupResponse parses an HTTP response from a LegacyCreateAccessGroupWithResponse call
+func ParseLegacyCreateAccessGroupResponse(rsp *http.Response) (*LegacyCreateAccessGroupResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateAccessGroupResponse{
+	response := &LegacyCreateAccessGroupResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26898,15 +24825,15 @@ func ParseCreateAccessGroupResponse(rsp *http.Response) (*CreateAccessGroupRespo
 	return response, nil
 }
 
-// ParseCreateChildComputerResponse parses an HTTP response from a CreateChildComputerWithResponse call
-func ParseCreateChildComputerResponse(rsp *http.Response) (*CreateChildComputerResponse, error) {
+// ParseLegacyCreateChildComputerResponse parses an HTTP response from a LegacyCreateChildComputerWithResponse call
+func ParseLegacyCreateChildComputerResponse(rsp *http.Response) (*LegacyCreateChildComputerResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateChildComputerResponse{
+	response := &LegacyCreateChildComputerResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26945,15 +24872,15 @@ func ParseCreateChildComputerResponse(rsp *http.Response) (*CreateChildComputerR
 	return response, nil
 }
 
-// ParseCreateDistributionResponse parses an HTTP response from a CreateDistributionWithResponse call
-func ParseCreateDistributionResponse(rsp *http.Response) (*CreateDistributionResponse, error) {
+// ParseLegacyCreateDistributionResponse parses an HTTP response from a LegacyCreateDistributionWithResponse call
+func ParseLegacyCreateDistributionResponse(rsp *http.Response) (*LegacyCreateDistributionResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateDistributionResponse{
+	response := &LegacyCreateDistributionResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -26992,15 +24919,15 @@ func ParseCreateDistributionResponse(rsp *http.Response) (*CreateDistributionRes
 	return response, nil
 }
 
-// ParseCreatePackageProfileResponse parses an HTTP response from a CreatePackageProfileWithResponse call
-func ParseCreatePackageProfileResponse(rsp *http.Response) (*CreatePackageProfileResponse, error) {
+// ParseLegacyCreatePackageProfileResponse parses an HTTP response from a LegacyCreatePackageProfileWithResponse call
+func ParseLegacyCreatePackageProfileResponse(rsp *http.Response) (*LegacyCreatePackageProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreatePackageProfileResponse{
+	response := &LegacyCreatePackageProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27039,15 +24966,15 @@ func ParseCreatePackageProfileResponse(rsp *http.Response) (*CreatePackageProfil
 	return response, nil
 }
 
-// ParseCreatePocketResponse parses an HTTP response from a CreatePocketWithResponse call
-func ParseCreatePocketResponse(rsp *http.Response) (*CreatePocketResponse, error) {
+// ParseLegacyCreatePocketResponse parses an HTTP response from a LegacyCreatePocketWithResponse call
+func ParseLegacyCreatePocketResponse(rsp *http.Response) (*LegacyCreatePocketResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreatePocketResponse{
+	response := &LegacyCreatePocketResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27086,15 +25013,15 @@ func ParseCreatePocketResponse(rsp *http.Response) (*CreatePocketResponse, error
 	return response, nil
 }
 
-// ParseCreateRemovalProfileResponse parses an HTTP response from a CreateRemovalProfileWithResponse call
-func ParseCreateRemovalProfileResponse(rsp *http.Response) (*CreateRemovalProfileResponse, error) {
+// ParseLegacyCreateRemovalProfileResponse parses an HTTP response from a LegacyCreateRemovalProfileWithResponse call
+func ParseLegacyCreateRemovalProfileResponse(rsp *http.Response) (*LegacyCreateRemovalProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateRemovalProfileResponse{
+	response := &LegacyCreateRemovalProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27133,15 +25060,15 @@ func ParseCreateRemovalProfileResponse(rsp *http.Response) (*CreateRemovalProfil
 	return response, nil
 }
 
-// ParseCreateRepositoryProfileResponse parses an HTTP response from a CreateRepositoryProfileWithResponse call
-func ParseCreateRepositoryProfileResponse(rsp *http.Response) (*CreateRepositoryProfileResponse, error) {
+// ParseLegacyCreateRepositoryProfileResponse parses an HTTP response from a LegacyCreateRepositoryProfileWithResponse call
+func ParseLegacyCreateRepositoryProfileResponse(rsp *http.Response) (*LegacyCreateRepositoryProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateRepositoryProfileResponse{
+	response := &LegacyCreateRepositoryProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27180,15 +25107,15 @@ func ParseCreateRepositoryProfileResponse(rsp *http.Response) (*CreateRepository
 	return response, nil
 }
 
-// ParseCreateRoleResponse parses an HTTP response from a CreateRoleWithResponse call
-func ParseCreateRoleResponse(rsp *http.Response) (*CreateRoleResponse, error) {
+// ParseLegacyCreateRoleResponse parses an HTTP response from a LegacyCreateRoleWithResponse call
+func ParseLegacyCreateRoleResponse(rsp *http.Response) (*LegacyCreateRoleResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateRoleResponse{
+	response := &LegacyCreateRoleResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27227,15 +25154,15 @@ func ParseCreateRoleResponse(rsp *http.Response) (*CreateRoleResponse, error) {
 	return response, nil
 }
 
-// ParseCreateSavedSearchResponse parses an HTTP response from a CreateSavedSearchWithResponse call
-func ParseCreateSavedSearchResponse(rsp *http.Response) (*CreateSavedSearchResponse, error) {
+// ParseLegacyCreateSavedSearchResponse parses an HTTP response from a LegacyCreateSavedSearchWithResponse call
+func ParseLegacyCreateSavedSearchResponse(rsp *http.Response) (*LegacyCreateSavedSearchResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateSavedSearchResponse{
+	response := &LegacyCreateSavedSearchResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27274,15 +25201,15 @@ func ParseCreateSavedSearchResponse(rsp *http.Response) (*CreateSavedSearchRespo
 	return response, nil
 }
 
-// ParseCreateScriptResponse parses an HTTP response from a CreateScriptWithResponse call
-func ParseCreateScriptResponse(rsp *http.Response) (*CreateScriptResponse, error) {
+// ParseLegacyCreateScriptResponse parses an HTTP response from a LegacyCreateScriptWithResponse call
+func ParseLegacyCreateScriptResponse(rsp *http.Response) (*LegacyCreateScriptResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateScriptResponse{
+	response := &LegacyCreateScriptResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27321,15 +25248,15 @@ func ParseCreateScriptResponse(rsp *http.Response) (*CreateScriptResponse, error
 	return response, nil
 }
 
-// ParseCreateScriptAttachmentResponse parses an HTTP response from a CreateScriptAttachmentWithResponse call
-func ParseCreateScriptAttachmentResponse(rsp *http.Response) (*CreateScriptAttachmentResponse, error) {
+// ParseLegacyCreateScriptAttachmentResponse parses an HTTP response from a LegacyCreateScriptAttachmentWithResponse call
+func ParseLegacyCreateScriptAttachmentResponse(rsp *http.Response) (*LegacyCreateScriptAttachmentResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateScriptAttachmentResponse{
+	response := &LegacyCreateScriptAttachmentResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27368,15 +25295,15 @@ func ParseCreateScriptAttachmentResponse(rsp *http.Response) (*CreateScriptAttac
 	return response, nil
 }
 
-// ParseCreateSeriesResponse parses an HTTP response from a CreateSeriesWithResponse call
-func ParseCreateSeriesResponse(rsp *http.Response) (*CreateSeriesResponse, error) {
+// ParseLegacyCreateSeriesResponse parses an HTTP response from a LegacyCreateSeriesWithResponse call
+func ParseLegacyCreateSeriesResponse(rsp *http.Response) (*LegacyCreateSeriesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateSeriesResponse{
+	response := &LegacyCreateSeriesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27415,15 +25342,15 @@ func ParseCreateSeriesResponse(rsp *http.Response) (*CreateSeriesResponse, error
 	return response, nil
 }
 
-// ParseCreateUpgradeProfileResponse parses an HTTP response from a CreateUpgradeProfileWithResponse call
-func ParseCreateUpgradeProfileResponse(rsp *http.Response) (*CreateUpgradeProfileResponse, error) {
+// ParseLegacyCreateUpgradeProfileResponse parses an HTTP response from a LegacyCreateUpgradeProfileWithResponse call
+func ParseLegacyCreateUpgradeProfileResponse(rsp *http.Response) (*LegacyCreateUpgradeProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateUpgradeProfileResponse{
+	response := &LegacyCreateUpgradeProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27462,15 +25389,15 @@ func ParseCreateUpgradeProfileResponse(rsp *http.Response) (*CreateUpgradeProfil
 	return response, nil
 }
 
-// ParseCreateUserResponse parses an HTTP response from a CreateUserWithResponse call
-func ParseCreateUserResponse(rsp *http.Response) (*CreateUserResponse, error) {
+// ParseLegacyCreateUserResponse parses an HTTP response from a LegacyCreateUserWithResponse call
+func ParseLegacyCreateUserResponse(rsp *http.Response) (*LegacyCreateUserResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &CreateUserResponse{
+	response := &LegacyCreateUserResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27509,15 +25436,15 @@ func ParseCreateUserResponse(rsp *http.Response) (*CreateUserResponse, error) {
 	return response, nil
 }
 
-// ParseDeleteChildComputersResponse parses an HTTP response from a DeleteChildComputersWithResponse call
-func ParseDeleteChildComputersResponse(rsp *http.Response) (*DeleteChildComputersResponse, error) {
+// ParseLegacyDeleteChildComputersResponse parses an HTTP response from a LegacyDeleteChildComputersWithResponse call
+func ParseLegacyDeleteChildComputersResponse(rsp *http.Response) (*LegacyDeleteChildComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DeleteChildComputersResponse{
+	response := &LegacyDeleteChildComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27556,15 +25483,15 @@ func ParseDeleteChildComputersResponse(rsp *http.Response) (*DeleteChildComputer
 	return response, nil
 }
 
-// ParseDeriveSeriesResponse parses an HTTP response from a DeriveSeriesWithResponse call
-func ParseDeriveSeriesResponse(rsp *http.Response) (*DeriveSeriesResponse, error) {
+// ParseLegacyDeriveSeriesResponse parses an HTTP response from a LegacyDeriveSeriesWithResponse call
+func ParseLegacyDeriveSeriesResponse(rsp *http.Response) (*LegacyDeriveSeriesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DeriveSeriesResponse{
+	response := &LegacyDeriveSeriesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27603,15 +25530,15 @@ func ParseDeriveSeriesResponse(rsp *http.Response) (*DeriveSeriesResponse, error
 	return response, nil
 }
 
-// ParseDiffPullPocketResponse parses an HTTP response from a DiffPullPocketWithResponse call
-func ParseDiffPullPocketResponse(rsp *http.Response) (*DiffPullPocketResponse, error) {
+// ParseLegacyDiffPullPocketResponse parses an HTTP response from a LegacyDiffPullPocketWithResponse call
+func ParseLegacyDiffPullPocketResponse(rsp *http.Response) (*LegacyDiffPullPocketResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DiffPullPocketResponse{
+	response := &LegacyDiffPullPocketResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27650,15 +25577,15 @@ func ParseDiffPullPocketResponse(rsp *http.Response) (*DiffPullPocketResponse, e
 	return response, nil
 }
 
-// ParseDisableAdministratorResponse parses an HTTP response from a DisableAdministratorWithResponse call
-func ParseDisableAdministratorResponse(rsp *http.Response) (*DisableAdministratorResponse, error) {
+// ParseLegacyDisableAdministratorResponse parses an HTTP response from a LegacyDisableAdministratorWithResponse call
+func ParseLegacyDisableAdministratorResponse(rsp *http.Response) (*LegacyDisableAdministratorResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DisableAdministratorResponse{
+	response := &LegacyDisableAdministratorResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27697,15 +25624,15 @@ func ParseDisableAdministratorResponse(rsp *http.Response) (*DisableAdministrato
 	return response, nil
 }
 
-// ParseDisassociateAlertResponse parses an HTTP response from a DisassociateAlertWithResponse call
-func ParseDisassociateAlertResponse(rsp *http.Response) (*DisassociateAlertResponse, error) {
+// ParseLegacyDisassociateAlertResponse parses an HTTP response from a LegacyDisassociateAlertWithResponse call
+func ParseLegacyDisassociateAlertResponse(rsp *http.Response) (*LegacyDisassociateAlertResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DisassociateAlertResponse{
+	response := &LegacyDisassociateAlertResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27744,15 +25671,15 @@ func ParseDisassociateAlertResponse(rsp *http.Response) (*DisassociateAlertRespo
 	return response, nil
 }
 
-// ParseDisassociatePackageProfileResponse parses an HTTP response from a DisassociatePackageProfileWithResponse call
-func ParseDisassociatePackageProfileResponse(rsp *http.Response) (*DisassociatePackageProfileResponse, error) {
+// ParseLegacyDisassociatePackageProfileResponse parses an HTTP response from a LegacyDisassociatePackageProfileWithResponse call
+func ParseLegacyDisassociatePackageProfileResponse(rsp *http.Response) (*LegacyDisassociatePackageProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DisassociatePackageProfileResponse{
+	response := &LegacyDisassociatePackageProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27791,15 +25718,15 @@ func ParseDisassociatePackageProfileResponse(rsp *http.Response) (*DisassociateP
 	return response, nil
 }
 
-// ParseDisassociateRemovalProfileResponse parses an HTTP response from a DisassociateRemovalProfileWithResponse call
-func ParseDisassociateRemovalProfileResponse(rsp *http.Response) (*DisassociateRemovalProfileResponse, error) {
+// ParseLegacyDisassociateRemovalProfileResponse parses an HTTP response from a LegacyDisassociateRemovalProfileWithResponse call
+func ParseLegacyDisassociateRemovalProfileResponse(rsp *http.Response) (*LegacyDisassociateRemovalProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DisassociateRemovalProfileResponse{
+	response := &LegacyDisassociateRemovalProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27838,15 +25765,15 @@ func ParseDisassociateRemovalProfileResponse(rsp *http.Response) (*DisassociateR
 	return response, nil
 }
 
-// ParseDisassociateRepositoryProfileResponse parses an HTTP response from a DisassociateRepositoryProfileWithResponse call
-func ParseDisassociateRepositoryProfileResponse(rsp *http.Response) (*DisassociateRepositoryProfileResponse, error) {
+// ParseLegacyDisassociateRepositoryProfileResponse parses an HTTP response from a LegacyDisassociateRepositoryProfileWithResponse call
+func ParseLegacyDisassociateRepositoryProfileResponse(rsp *http.Response) (*LegacyDisassociateRepositoryProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DisassociateRepositoryProfileResponse{
+	response := &LegacyDisassociateRepositoryProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27885,15 +25812,15 @@ func ParseDisassociateRepositoryProfileResponse(rsp *http.Response) (*Disassocia
 	return response, nil
 }
 
-// ParseDisassociateUpgradeProfileResponse parses an HTTP response from a DisassociateUpgradeProfileWithResponse call
-func ParseDisassociateUpgradeProfileResponse(rsp *http.Response) (*DisassociateUpgradeProfileResponse, error) {
+// ParseLegacyDisassociateUpgradeProfileResponse parses an HTTP response from a LegacyDisassociateUpgradeProfileWithResponse call
+func ParseLegacyDisassociateUpgradeProfileResponse(rsp *http.Response) (*LegacyDisassociateUpgradeProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &DisassociateUpgradeProfileResponse{
+	response := &LegacyDisassociateUpgradeProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27932,15 +25859,15 @@ func ParseDisassociateUpgradeProfileResponse(rsp *http.Response) (*DisassociateU
 	return response, nil
 }
 
-// ParseEditPackageProfileResponse parses an HTTP response from a EditPackageProfileWithResponse call
-func ParseEditPackageProfileResponse(rsp *http.Response) (*EditPackageProfileResponse, error) {
+// ParseLegacyEditPackageProfileResponse parses an HTTP response from a LegacyEditPackageProfileWithResponse call
+func ParseLegacyEditPackageProfileResponse(rsp *http.Response) (*LegacyEditPackageProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &EditPackageProfileResponse{
+	response := &LegacyEditPackageProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -27979,15 +25906,15 @@ func ParseEditPackageProfileResponse(rsp *http.Response) (*EditPackageProfileRes
 	return response, nil
 }
 
-// ParseEditPocketResponse parses an HTTP response from a EditPocketWithResponse call
-func ParseEditPocketResponse(rsp *http.Response) (*EditPocketResponse, error) {
+// ParseLegacyEditPocketResponse parses an HTTP response from a LegacyEditPocketWithResponse call
+func ParseLegacyEditPocketResponse(rsp *http.Response) (*LegacyEditPocketResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &EditPocketResponse{
+	response := &LegacyEditPocketResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28026,15 +25953,15 @@ func ParseEditPocketResponse(rsp *http.Response) (*EditPocketResponse, error) {
 	return response, nil
 }
 
-// ParseEditRemovalProfileResponse parses an HTTP response from a EditRemovalProfileWithResponse call
-func ParseEditRemovalProfileResponse(rsp *http.Response) (*EditRemovalProfileResponse, error) {
+// ParseLegacyEditRemovalProfileResponse parses an HTTP response from a LegacyEditRemovalProfileWithResponse call
+func ParseLegacyEditRemovalProfileResponse(rsp *http.Response) (*LegacyEditRemovalProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &EditRemovalProfileResponse{
+	response := &LegacyEditRemovalProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28073,15 +26000,15 @@ func ParseEditRemovalProfileResponse(rsp *http.Response) (*EditRemovalProfileRes
 	return response, nil
 }
 
-// ParseEditRepositoryProfileResponse parses an HTTP response from a EditRepositoryProfileWithResponse call
-func ParseEditRepositoryProfileResponse(rsp *http.Response) (*EditRepositoryProfileResponse, error) {
+// ParseLegacyEditRepositoryProfileResponse parses an HTTP response from a LegacyEditRepositoryProfileWithResponse call
+func ParseLegacyEditRepositoryProfileResponse(rsp *http.Response) (*LegacyEditRepositoryProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &EditRepositoryProfileResponse{
+	response := &LegacyEditRepositoryProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28120,15 +26047,15 @@ func ParseEditRepositoryProfileResponse(rsp *http.Response) (*EditRepositoryProf
 	return response, nil
 }
 
-// ParseEditSavedSearchResponse parses an HTTP response from a EditSavedSearchWithResponse call
-func ParseEditSavedSearchResponse(rsp *http.Response) (*EditSavedSearchResponse, error) {
+// ParseLegacyEditSavedSearchResponse parses an HTTP response from a LegacyEditSavedSearchWithResponse call
+func ParseLegacyEditSavedSearchResponse(rsp *http.Response) (*LegacyEditSavedSearchResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &EditSavedSearchResponse{
+	response := &LegacyEditSavedSearchResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28167,15 +26094,15 @@ func ParseEditSavedSearchResponse(rsp *http.Response) (*EditSavedSearchResponse,
 	return response, nil
 }
 
-// ParseEditScriptResponse parses an HTTP response from a EditScriptWithResponse call
-func ParseEditScriptResponse(rsp *http.Response) (*EditScriptResponse, error) {
+// ParseLegacyEditScriptResponse parses an HTTP response from a LegacyEditScriptWithResponse call
+func ParseLegacyEditScriptResponse(rsp *http.Response) (*LegacyEditScriptResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &EditScriptResponse{
+	response := &LegacyEditScriptResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28214,15 +26141,15 @@ func ParseEditScriptResponse(rsp *http.Response) (*EditScriptResponse, error) {
 	return response, nil
 }
 
-// ParseEditUpgradeProfileResponse parses an HTTP response from a EditUpgradeProfileWithResponse call
-func ParseEditUpgradeProfileResponse(rsp *http.Response) (*EditUpgradeProfileResponse, error) {
+// ParseLegacyEditUpgradeProfileResponse parses an HTTP response from a LegacyEditUpgradeProfileWithResponse call
+func ParseLegacyEditUpgradeProfileResponse(rsp *http.Response) (*LegacyEditUpgradeProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &EditUpgradeProfileResponse{
+	response := &LegacyEditUpgradeProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28261,15 +26188,15 @@ func ParseEditUpgradeProfileResponse(rsp *http.Response) (*EditUpgradeProfileRes
 	return response, nil
 }
 
-// ParseEditUserResponse parses an HTTP response from a EditUserWithResponse call
-func ParseEditUserResponse(rsp *http.Response) (*EditUserResponse, error) {
+// ParseLegacyEditUserResponse parses an HTTP response from a LegacyEditUserWithResponse call
+func ParseLegacyEditUserResponse(rsp *http.Response) (*LegacyEditUserResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &EditUserResponse{
+	response := &LegacyEditUserResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28308,15 +26235,15 @@ func ParseEditUserResponse(rsp *http.Response) (*EditUserResponse, error) {
 	return response, nil
 }
 
-// ParseExecuteScriptResponse parses an HTTP response from a ExecuteScriptWithResponse call
-func ParseExecuteScriptResponse(rsp *http.Response) (*ExecuteScriptResponse, error) {
+// ParseLegacyExecuteScriptResponse parses an HTTP response from a LegacyExecuteScriptWithResponse call
+func ParseLegacyExecuteScriptResponse(rsp *http.Response) (*LegacyExecuteScriptResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ExecuteScriptResponse{
+	response := &LegacyExecuteScriptResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28355,15 +26282,15 @@ func ParseExecuteScriptResponse(rsp *http.Response) (*ExecuteScriptResponse, err
 	return response, nil
 }
 
-// ParseGetAPTSourcesResponse parses an HTTP response from a GetAPTSourcesWithResponse call
-func ParseGetAPTSourcesResponse(rsp *http.Response) (*GetAPTSourcesResponse, error) {
+// ParseLegacyGetAPTSourcesResponse parses an HTTP response from a LegacyGetAPTSourcesWithResponse call
+func ParseLegacyGetAPTSourcesResponse(rsp *http.Response) (*LegacyGetAPTSourcesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetAPTSourcesResponse{
+	response := &LegacyGetAPTSourcesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28402,15 +26329,15 @@ func ParseGetAPTSourcesResponse(rsp *http.Response) (*GetAPTSourcesResponse, err
 	return response, nil
 }
 
-// ParseGetAccessGroupsResponse parses an HTTP response from a GetAccessGroupsWithResponse call
-func ParseGetAccessGroupsResponse(rsp *http.Response) (*GetAccessGroupsResponse, error) {
+// ParseLegacyGetAccessGroupsResponse parses an HTTP response from a LegacyGetAccessGroupsWithResponse call
+func ParseLegacyGetAccessGroupsResponse(rsp *http.Response) (*LegacyGetAccessGroupsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetAccessGroupsResponse{
+	response := &LegacyGetAccessGroupsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28449,15 +26376,15 @@ func ParseGetAccessGroupsResponse(rsp *http.Response) (*GetAccessGroupsResponse,
 	return response, nil
 }
 
-// ParseGetActivitiesResponse parses an HTTP response from a GetActivitiesWithResponse call
-func ParseGetActivitiesResponse(rsp *http.Response) (*GetActivitiesResponse, error) {
+// ParseLegacyGetActivitiesResponse parses an HTTP response from a LegacyGetActivitiesWithResponse call
+func ParseLegacyGetActivitiesResponse(rsp *http.Response) (*LegacyGetActivitiesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetActivitiesResponse{
+	response := &LegacyGetActivitiesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28496,15 +26423,15 @@ func ParseGetActivitiesResponse(rsp *http.Response) (*GetActivitiesResponse, err
 	return response, nil
 }
 
-// ParseGetActivityTypesResponse parses an HTTP response from a GetActivityTypesWithResponse call
-func ParseGetActivityTypesResponse(rsp *http.Response) (*GetActivityTypesResponse, error) {
+// ParseLegacyGetActivityTypesResponse parses an HTTP response from a LegacyGetActivityTypesWithResponse call
+func ParseLegacyGetActivityTypesResponse(rsp *http.Response) (*LegacyGetActivityTypesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetActivityTypesResponse{
+	response := &LegacyGetActivityTypesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28536,15 +26463,15 @@ func ParseGetActivityTypesResponse(rsp *http.Response) (*GetActivityTypesRespons
 	return response, nil
 }
 
-// ParseGetAdministratorsResponse parses an HTTP response from a GetAdministratorsWithResponse call
-func ParseGetAdministratorsResponse(rsp *http.Response) (*GetAdministratorsResponse, error) {
+// ParseLegacyGetAdministratorsResponse parses an HTTP response from a LegacyGetAdministratorsWithResponse call
+func ParseLegacyGetAdministratorsResponse(rsp *http.Response) (*LegacyGetAdministratorsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetAdministratorsResponse{
+	response := &LegacyGetAdministratorsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28576,15 +26503,15 @@ func ParseGetAdministratorsResponse(rsp *http.Response) (*GetAdministratorsRespo
 	return response, nil
 }
 
-// ParseGetAlertSubscribersResponse parses an HTTP response from a GetAlertSubscribersWithResponse call
-func ParseGetAlertSubscribersResponse(rsp *http.Response) (*GetAlertSubscribersResponse, error) {
+// ParseLegacyGetAlertSubscribersResponse parses an HTTP response from a LegacyGetAlertSubscribersWithResponse call
+func ParseLegacyGetAlertSubscribersResponse(rsp *http.Response) (*LegacyGetAlertSubscribersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetAlertSubscribersResponse{
+	response := &LegacyGetAlertSubscribersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28623,15 +26550,15 @@ func ParseGetAlertSubscribersResponse(rsp *http.Response) (*GetAlertSubscribersR
 	return response, nil
 }
 
-// ParseGetAlertsResponse parses an HTTP response from a GetAlertsWithResponse call
-func ParseGetAlertsResponse(rsp *http.Response) (*GetAlertsResponse, error) {
+// ParseLegacyGetAlertsResponse parses an HTTP response from a LegacyGetAlertsWithResponse call
+func ParseLegacyGetAlertsResponse(rsp *http.Response) (*LegacyGetAlertsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetAlertsResponse{
+	response := &LegacyGetAlertsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28663,15 +26590,15 @@ func ParseGetAlertsResponse(rsp *http.Response) (*GetAlertsResponse, error) {
 	return response, nil
 }
 
-// ParseGetCSVComplianceDataResponse parses an HTTP response from a GetCSVComplianceDataWithResponse call
-func ParseGetCSVComplianceDataResponse(rsp *http.Response) (*GetCSVComplianceDataResponse, error) {
+// ParseLegacyGetCSVComplianceDataResponse parses an HTTP response from a LegacyGetCSVComplianceDataWithResponse call
+func ParseLegacyGetCSVComplianceDataResponse(rsp *http.Response) (*LegacyGetCSVComplianceDataResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetCSVComplianceDataResponse{
+	response := &LegacyGetCSVComplianceDataResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28710,15 +26637,15 @@ func ParseGetCSVComplianceDataResponse(rsp *http.Response) (*GetCSVComplianceDat
 	return response, nil
 }
 
-// ParseGetComputerProcessesResponse parses an HTTP response from a GetComputerProcessesWithResponse call
-func ParseGetComputerProcessesResponse(rsp *http.Response) (*GetComputerProcessesResponse, error) {
+// ParseLegacyGetComputerProcessesResponse parses an HTTP response from a LegacyGetComputerProcessesWithResponse call
+func ParseLegacyGetComputerProcessesResponse(rsp *http.Response) (*LegacyGetComputerProcessesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetComputerProcessesResponse{
+	response := &LegacyGetComputerProcessesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28757,15 +26684,15 @@ func ParseGetComputerProcessesResponse(rsp *http.Response) (*GetComputerProcesse
 	return response, nil
 }
 
-// ParseGetComputersResponse parses an HTTP response from a GetComputersWithResponse call
-func ParseGetComputersResponse(rsp *http.Response) (*GetComputersResponse, error) {
+// ParseLegacyGetComputersResponse parses an HTTP response from a LegacyGetComputersWithResponse call
+func ParseLegacyGetComputersResponse(rsp *http.Response) (*LegacyGetComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetComputersResponse{
+	response := &LegacyGetComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28804,15 +26731,15 @@ func ParseGetComputersResponse(rsp *http.Response) (*GetComputersResponse, error
 	return response, nil
 }
 
-// ParseGetComputersNotUpgradedResponse parses an HTTP response from a GetComputersNotUpgradedWithResponse call
-func ParseGetComputersNotUpgradedResponse(rsp *http.Response) (*GetComputersNotUpgradedResponse, error) {
+// ParseLegacyGetComputersNotUpgradedResponse parses an HTTP response from a LegacyGetComputersNotUpgradedWithResponse call
+func ParseLegacyGetComputersNotUpgradedResponse(rsp *http.Response) (*LegacyGetComputersNotUpgradedResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetComputersNotUpgradedResponse{
+	response := &LegacyGetComputersNotUpgradedResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28851,15 +26778,15 @@ func ParseGetComputersNotUpgradedResponse(rsp *http.Response) (*GetComputersNotU
 	return response, nil
 }
 
-// ParseGetDistributionsResponse parses an HTTP response from a GetDistributionsWithResponse call
-func ParseGetDistributionsResponse(rsp *http.Response) (*GetDistributionsResponse, error) {
+// ParseLegacyGetDistributionsResponse parses an HTTP response from a LegacyGetDistributionsWithResponse call
+func ParseLegacyGetDistributionsResponse(rsp *http.Response) (*LegacyGetDistributionsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetDistributionsResponse{
+	response := &LegacyGetDistributionsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28891,15 +26818,15 @@ func ParseGetDistributionsResponse(rsp *http.Response) (*GetDistributionsRespons
 	return response, nil
 }
 
-// ParseGetEventLogResponse parses an HTTP response from a GetEventLogWithResponse call
-func ParseGetEventLogResponse(rsp *http.Response) (*GetEventLogResponse, error) {
+// ParseLegacyGetEventLogResponse parses an HTTP response from a LegacyGetEventLogWithResponse call
+func ParseLegacyGetEventLogResponse(rsp *http.Response) (*LegacyGetEventLogResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetEventLogResponse{
+	response := &LegacyGetEventLogResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28938,15 +26865,15 @@ func ParseGetEventLogResponse(rsp *http.Response) (*GetEventLogResponse, error) 
 	return response, nil
 }
 
-// ParseGetGPGKeysResponse parses an HTTP response from a GetGPGKeysWithResponse call
-func ParseGetGPGKeysResponse(rsp *http.Response) (*GetGPGKeysResponse, error) {
+// ParseLegacyGetGPGKeysResponse parses an HTTP response from a LegacyGetGPGKeysWithResponse call
+func ParseLegacyGetGPGKeysResponse(rsp *http.Response) (*LegacyGetGPGKeysResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetGPGKeysResponse{
+	response := &LegacyGetGPGKeysResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -28978,15 +26905,15 @@ func ParseGetGPGKeysResponse(rsp *http.Response) (*GetGPGKeysResponse, error) {
 	return response, nil
 }
 
-// ParseGetNotPingingComputersResponse parses an HTTP response from a GetNotPingingComputersWithResponse call
-func ParseGetNotPingingComputersResponse(rsp *http.Response) (*GetNotPingingComputersResponse, error) {
+// ParseLegacyGetNotPingingComputersResponse parses an HTTP response from a LegacyGetNotPingingComputersWithResponse call
+func ParseLegacyGetNotPingingComputersResponse(rsp *http.Response) (*LegacyGetNotPingingComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetNotPingingComputersResponse{
+	response := &LegacyGetNotPingingComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29025,15 +26952,15 @@ func ParseGetNotPingingComputersResponse(rsp *http.Response) (*GetNotPingingComp
 	return response, nil
 }
 
-// ParseGetPackageProfilesResponse parses an HTTP response from a GetPackageProfilesWithResponse call
-func ParseGetPackageProfilesResponse(rsp *http.Response) (*GetPackageProfilesResponse, error) {
+// ParseLegacyGetPackageProfilesResponse parses an HTTP response from a LegacyGetPackageProfilesWithResponse call
+func ParseLegacyGetPackageProfilesResponse(rsp *http.Response) (*LegacyGetPackageProfilesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetPackageProfilesResponse{
+	response := &LegacyGetPackageProfilesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29065,15 +26992,15 @@ func ParseGetPackageProfilesResponse(rsp *http.Response) (*GetPackageProfilesRes
 	return response, nil
 }
 
-// ParseGetPackagesResponse parses an HTTP response from a GetPackagesWithResponse call
-func ParseGetPackagesResponse(rsp *http.Response) (*GetPackagesResponse, error) {
+// ParseLegacyGetPackagesResponse parses an HTTP response from a LegacyGetPackagesWithResponse call
+func ParseLegacyGetPackagesResponse(rsp *http.Response) (*LegacyGetPackagesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetPackagesResponse{
+	response := &LegacyGetPackagesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29112,15 +27039,15 @@ func ParseGetPackagesResponse(rsp *http.Response) (*GetPackagesResponse, error) 
 	return response, nil
 }
 
-// ParseGetPendingComputersResponse parses an HTTP response from a GetPendingComputersWithResponse call
-func ParseGetPendingComputersResponse(rsp *http.Response) (*GetPendingComputersResponse, error) {
+// ParseLegacyGetPendingComputersResponse parses an HTTP response from a LegacyGetPendingComputersWithResponse call
+func ParseLegacyGetPendingComputersResponse(rsp *http.Response) (*LegacyGetPendingComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetPendingComputersResponse{
+	response := &LegacyGetPendingComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29152,15 +27079,15 @@ func ParseGetPendingComputersResponse(rsp *http.Response) (*GetPendingComputersR
 	return response, nil
 }
 
-// ParseGetPermissionsResponse parses an HTTP response from a GetPermissionsWithResponse call
-func ParseGetPermissionsResponse(rsp *http.Response) (*GetPermissionsResponse, error) {
+// ParseLegacyGetPermissionsResponse parses an HTTP response from a LegacyGetPermissionsWithResponse call
+func ParseLegacyGetPermissionsResponse(rsp *http.Response) (*LegacyGetPermissionsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetPermissionsResponse{
+	response := &LegacyGetPermissionsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29192,15 +27119,15 @@ func ParseGetPermissionsResponse(rsp *http.Response) (*GetPermissionsResponse, e
 	return response, nil
 }
 
-// ParseGetRemovalProfilesResponse parses an HTTP response from a GetRemovalProfilesWithResponse call
-func ParseGetRemovalProfilesResponse(rsp *http.Response) (*GetRemovalProfilesResponse, error) {
+// ParseLegacyGetRemovalProfilesResponse parses an HTTP response from a LegacyGetRemovalProfilesWithResponse call
+func ParseLegacyGetRemovalProfilesResponse(rsp *http.Response) (*LegacyGetRemovalProfilesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetRemovalProfilesResponse{
+	response := &LegacyGetRemovalProfilesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29232,15 +27159,15 @@ func ParseGetRemovalProfilesResponse(rsp *http.Response) (*GetRemovalProfilesRes
 	return response, nil
 }
 
-// ParseGetRepoInfoResponse parses an HTTP response from a GetRepoInfoWithResponse call
-func ParseGetRepoInfoResponse(rsp *http.Response) (*GetRepoInfoResponse, error) {
+// ParseLegacyGetRepoInfoResponse parses an HTTP response from a LegacyGetRepoInfoWithResponse call
+func ParseLegacyGetRepoInfoResponse(rsp *http.Response) (*LegacyGetRepoInfoResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetRepoInfoResponse{
+	response := &LegacyGetRepoInfoResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29279,15 +27206,15 @@ func ParseGetRepoInfoResponse(rsp *http.Response) (*GetRepoInfoResponse, error) 
 	return response, nil
 }
 
-// ParseGetRepositoryProfilesResponse parses an HTTP response from a GetRepositoryProfilesWithResponse call
-func ParseGetRepositoryProfilesResponse(rsp *http.Response) (*GetRepositoryProfilesResponse, error) {
+// ParseLegacyGetRepositoryProfilesResponse parses an HTTP response from a LegacyGetRepositoryProfilesWithResponse call
+func ParseLegacyGetRepositoryProfilesResponse(rsp *http.Response) (*LegacyGetRepositoryProfilesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetRepositoryProfilesResponse{
+	response := &LegacyGetRepositoryProfilesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29319,15 +27246,15 @@ func ParseGetRepositoryProfilesResponse(rsp *http.Response) (*GetRepositoryProfi
 	return response, nil
 }
 
-// ParseGetRolesResponse parses an HTTP response from a GetRolesWithResponse call
-func ParseGetRolesResponse(rsp *http.Response) (*GetRolesResponse, error) {
+// ParseLegacyGetRolesResponse parses an HTTP response from a LegacyGetRolesWithResponse call
+func ParseLegacyGetRolesResponse(rsp *http.Response) (*LegacyGetRolesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetRolesResponse{
+	response := &LegacyGetRolesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29359,15 +27286,15 @@ func ParseGetRolesResponse(rsp *http.Response) (*GetRolesResponse, error) {
 	return response, nil
 }
 
-// ParseGetSavedSearchesResponse parses an HTTP response from a GetSavedSearchesWithResponse call
-func ParseGetSavedSearchesResponse(rsp *http.Response) (*GetSavedSearchesResponse, error) {
+// ParseLegacyGetSavedSearchesResponse parses an HTTP response from a LegacyGetSavedSearchesWithResponse call
+func ParseLegacyGetSavedSearchesResponse(rsp *http.Response) (*LegacyGetSavedSearchesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetSavedSearchesResponse{
+	response := &LegacyGetSavedSearchesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29399,15 +27326,15 @@ func ParseGetSavedSearchesResponse(rsp *http.Response) (*GetSavedSearchesRespons
 	return response, nil
 }
 
-// ParseGetScriptCodeResponse parses an HTTP response from a GetScriptCodeWithResponse call
-func ParseGetScriptCodeResponse(rsp *http.Response) (*GetScriptCodeResponse, error) {
+// ParseLegacyGetScriptCodeResponse parses an HTTP response from a LegacyGetScriptCodeWithResponse call
+func ParseLegacyGetScriptCodeResponse(rsp *http.Response) (*LegacyGetScriptCodeResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetScriptCodeResponse{
+	response := &LegacyGetScriptCodeResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29446,15 +27373,15 @@ func ParseGetScriptCodeResponse(rsp *http.Response) (*GetScriptCodeResponse, err
 	return response, nil
 }
 
-// ParseGetScriptsResponse parses an HTTP response from a GetScriptsWithResponse call
-func ParseGetScriptsResponse(rsp *http.Response) (*GetScriptsResponse, error) {
+// ParseLegacyGetScriptsResponse parses an HTTP response from a LegacyGetScriptsWithResponse call
+func ParseLegacyGetScriptsResponse(rsp *http.Response) (*LegacyGetScriptsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetScriptsResponse{
+	response := &LegacyGetScriptsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29493,15 +27420,15 @@ func ParseGetScriptsResponse(rsp *http.Response) (*GetScriptsResponse, error) {
 	return response, nil
 }
 
-// ParseGetSettingsResponse parses an HTTP response from a GetSettingsWithResponse call
-func ParseGetSettingsResponse(rsp *http.Response) (*GetSettingsResponse, error) {
+// ParseLegacyGetSettingsResponse parses an HTTP response from a LegacyGetSettingsWithResponse call
+func ParseLegacyGetSettingsResponse(rsp *http.Response) (*LegacyGetSettingsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetSettingsResponse{
+	response := &LegacyGetSettingsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29533,15 +27460,15 @@ func ParseGetSettingsResponse(rsp *http.Response) (*GetSettingsResponse, error) 
 	return response, nil
 }
 
-// ParseGetUSNTimeToFixResponse parses an HTTP response from a GetUSNTimeToFixWithResponse call
-func ParseGetUSNTimeToFixResponse(rsp *http.Response) (*GetUSNTimeToFixResponse, error) {
+// ParseLegacyGetUSNTimeToFixResponse parses an HTTP response from a LegacyGetUSNTimeToFixWithResponse call
+func ParseLegacyGetUSNTimeToFixResponse(rsp *http.Response) (*LegacyGetUSNTimeToFixResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetUSNTimeToFixResponse{
+	response := &LegacyGetUSNTimeToFixResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29580,15 +27507,15 @@ func ParseGetUSNTimeToFixResponse(rsp *http.Response) (*GetUSNTimeToFixResponse,
 	return response, nil
 }
 
-// ParseGetUpgradeProfilesResponse parses an HTTP response from a GetUpgradeProfilesWithResponse call
-func ParseGetUpgradeProfilesResponse(rsp *http.Response) (*GetUpgradeProfilesResponse, error) {
+// ParseLegacyGetUpgradeProfilesResponse parses an HTTP response from a LegacyGetUpgradeProfilesWithResponse call
+func ParseLegacyGetUpgradeProfilesResponse(rsp *http.Response) (*LegacyGetUpgradeProfilesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetUpgradeProfilesResponse{
+	response := &LegacyGetUpgradeProfilesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29620,15 +27547,15 @@ func ParseGetUpgradeProfilesResponse(rsp *http.Response) (*GetUpgradeProfilesRes
 	return response, nil
 }
 
-// ParseGetUpgradedComputersByFrequencyResponse parses an HTTP response from a GetUpgradedComputersByFrequencyWithResponse call
-func ParseGetUpgradedComputersByFrequencyResponse(rsp *http.Response) (*GetUpgradedComputersByFrequencyResponse, error) {
+// ParseLegacyGetUpgradedComputersByFrequencyResponse parses an HTTP response from a LegacyGetUpgradedComputersByFrequencyWithResponse call
+func ParseLegacyGetUpgradedComputersByFrequencyResponse(rsp *http.Response) (*LegacyGetUpgradedComputersByFrequencyResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetUpgradedComputersByFrequencyResponse{
+	response := &LegacyGetUpgradedComputersByFrequencyResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29667,15 +27594,15 @@ func ParseGetUpgradedComputersByFrequencyResponse(rsp *http.Response) (*GetUpgra
 	return response, nil
 }
 
-// ParseGetUsersResponse parses an HTTP response from a GetUsersWithResponse call
-func ParseGetUsersResponse(rsp *http.Response) (*GetUsersResponse, error) {
+// ParseLegacyGetUsersResponse parses an HTTP response from a LegacyGetUsersWithResponse call
+func ParseLegacyGetUsersResponse(rsp *http.Response) (*LegacyGetUsersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetUsersResponse{
+	response := &LegacyGetUsersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29714,15 +27641,15 @@ func ParseGetUsersResponse(rsp *http.Response) (*GetUsersResponse, error) {
 	return response, nil
 }
 
-// ParseGetWSLHostsResponse parses an HTTP response from a GetWSLHostsWithResponse call
-func ParseGetWSLHostsResponse(rsp *http.Response) (*GetWSLHostsResponse, error) {
+// ParseLegacyGetWSLHostsResponse parses an HTTP response from a LegacyGetWSLHostsWithResponse call
+func ParseLegacyGetWSLHostsResponse(rsp *http.Response) (*LegacyGetWSLHostsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GetWSLHostsResponse{
+	response := &LegacyGetWSLHostsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29761,15 +27688,15 @@ func ParseGetWSLHostsResponse(rsp *http.Response) (*GetWSLHostsResponse, error) 
 	return response, nil
 }
 
-// ParseImportGPGKeyResponse parses an HTTP response from a ImportGPGKeyWithResponse call
-func ParseImportGPGKeyResponse(rsp *http.Response) (*ImportGPGKeyResponse, error) {
+// ParseLegacyImportGPGKeyResponse parses an HTTP response from a LegacyImportGPGKeyWithResponse call
+func ParseLegacyImportGPGKeyResponse(rsp *http.Response) (*LegacyImportGPGKeyResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ImportGPGKeyResponse{
+	response := &LegacyImportGPGKeyResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29808,15 +27735,15 @@ func ParseImportGPGKeyResponse(rsp *http.Response) (*ImportGPGKeyResponse, error
 	return response, nil
 }
 
-// ParseInstallPackagesResponse parses an HTTP response from a InstallPackagesWithResponse call
-func ParseInstallPackagesResponse(rsp *http.Response) (*InstallPackagesResponse, error) {
+// ParseLegacyInstallPackagesResponse parses an HTTP response from a LegacyInstallPackagesWithResponse call
+func ParseLegacyInstallPackagesResponse(rsp *http.Response) (*LegacyInstallPackagesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &InstallPackagesResponse{
+	response := &LegacyInstallPackagesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29855,15 +27782,15 @@ func ParseInstallPackagesResponse(rsp *http.Response) (*InstallPackagesResponse,
 	return response, nil
 }
 
-// ParseInviteAdministratorResponse parses an HTTP response from a InviteAdministratorWithResponse call
-func ParseInviteAdministratorResponse(rsp *http.Response) (*InviteAdministratorResponse, error) {
+// ParseLegacyInviteAdministratorResponse parses an HTTP response from a LegacyInviteAdministratorWithResponse call
+func ParseLegacyInviteAdministratorResponse(rsp *http.Response) (*LegacyInviteAdministratorResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &InviteAdministratorResponse{
+	response := &LegacyInviteAdministratorResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29902,15 +27829,15 @@ func ParseInviteAdministratorResponse(rsp *http.Response) (*InviteAdministratorR
 	return response, nil
 }
 
-// ParseKillComputerProcessesResponse parses an HTTP response from a KillComputerProcessesWithResponse call
-func ParseKillComputerProcessesResponse(rsp *http.Response) (*KillComputerProcessesResponse, error) {
+// ParseLegacyKillComputerProcessesResponse parses an HTTP response from a LegacyKillComputerProcessesWithResponse call
+func ParseLegacyKillComputerProcessesResponse(rsp *http.Response) (*LegacyKillComputerProcessesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &KillComputerProcessesResponse{
+	response := &LegacyKillComputerProcessesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29949,15 +27876,15 @@ func ParseKillComputerProcessesResponse(rsp *http.Response) (*KillComputerProces
 	return response, nil
 }
 
-// ParseListPocketResponse parses an HTTP response from a ListPocketWithResponse call
-func ParseListPocketResponse(rsp *http.Response) (*ListPocketResponse, error) {
+// ParseLegacyListPocketResponse parses an HTTP response from a LegacyListPocketWithResponse call
+func ParseLegacyListPocketResponse(rsp *http.Response) (*LegacyListPocketResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ListPocketResponse{
+	response := &LegacyListPocketResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -29996,15 +27923,15 @@ func ParseListPocketResponse(rsp *http.Response) (*ListPocketResponse, error) {
 	return response, nil
 }
 
-// ParseModifyPackageProfileResponse parses an HTTP response from a ModifyPackageProfileWithResponse call
-func ParseModifyPackageProfileResponse(rsp *http.Response) (*ModifyPackageProfileResponse, error) {
+// ParseLegacyModifyPackageProfileResponse parses an HTTP response from a LegacyModifyPackageProfileWithResponse call
+func ParseLegacyModifyPackageProfileResponse(rsp *http.Response) (*LegacyModifyPackageProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ModifyPackageProfileResponse{
+	response := &LegacyModifyPackageProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30043,15 +27970,15 @@ func ParseModifyPackageProfileResponse(rsp *http.Response) (*ModifyPackageProfil
 	return response, nil
 }
 
-// ParsePullPackagesToPocketResponse parses an HTTP response from a PullPackagesToPocketWithResponse call
-func ParsePullPackagesToPocketResponse(rsp *http.Response) (*PullPackagesToPocketResponse, error) {
+// ParseLegacyPullPackagesToPocketResponse parses an HTTP response from a LegacyPullPackagesToPocketWithResponse call
+func ParseLegacyPullPackagesToPocketResponse(rsp *http.Response) (*LegacyPullPackagesToPocketResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &PullPackagesToPocketResponse{
+	response := &LegacyPullPackagesToPocketResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30090,15 +28017,15 @@ func ParsePullPackagesToPocketResponse(rsp *http.Response) (*PullPackagesToPocke
 	return response, nil
 }
 
-// ParseRebootComputersResponse parses an HTTP response from a RebootComputersWithResponse call
-func ParseRebootComputersResponse(rsp *http.Response) (*RebootComputersResponse, error) {
+// ParseLegacyRebootComputersResponse parses an HTTP response from a LegacyRebootComputersWithResponse call
+func ParseLegacyRebootComputersResponse(rsp *http.Response) (*LegacyRebootComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RebootComputersResponse{
+	response := &LegacyRebootComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30137,15 +28064,15 @@ func ParseRebootComputersResponse(rsp *http.Response) (*RebootComputersResponse,
 	return response, nil
 }
 
-// ParseRejectPendingComputersResponse parses an HTTP response from a RejectPendingComputersWithResponse call
-func ParseRejectPendingComputersResponse(rsp *http.Response) (*RejectPendingComputersResponse, error) {
+// ParseLegacyRejectPendingComputersResponse parses an HTTP response from a LegacyRejectPendingComputersWithResponse call
+func ParseLegacyRejectPendingComputersResponse(rsp *http.Response) (*LegacyRejectPendingComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RejectPendingComputersResponse{
+	response := &LegacyRejectPendingComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30184,15 +28111,15 @@ func ParseRejectPendingComputersResponse(rsp *http.Response) (*RejectPendingComp
 	return response, nil
 }
 
-// ParseRemoveAPTSourceResponse parses an HTTP response from a RemoveAPTSourceWithResponse call
-func ParseRemoveAPTSourceResponse(rsp *http.Response) (*RemoveAPTSourceResponse, error) {
+// ParseLegacyRemoveAPTSourceResponse parses an HTTP response from a LegacyRemoveAPTSourceWithResponse call
+func ParseLegacyRemoveAPTSourceResponse(rsp *http.Response) (*LegacyRemoveAPTSourceResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveAPTSourceResponse{
+	response := &LegacyRemoveAPTSourceResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30231,15 +28158,15 @@ func ParseRemoveAPTSourceResponse(rsp *http.Response) (*RemoveAPTSourceResponse,
 	return response, nil
 }
 
-// ParseRemoveAPTSourceFromRepositoryProfileResponse parses an HTTP response from a RemoveAPTSourceFromRepositoryProfileWithResponse call
-func ParseRemoveAPTSourceFromRepositoryProfileResponse(rsp *http.Response) (*RemoveAPTSourceFromRepositoryProfileResponse, error) {
+// ParseLegacyRemoveAPTSourceFromRepositoryProfileResponse parses an HTTP response from a LegacyRemoveAPTSourceFromRepositoryProfileWithResponse call
+func ParseLegacyRemoveAPTSourceFromRepositoryProfileResponse(rsp *http.Response) (*LegacyRemoveAPTSourceFromRepositoryProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveAPTSourceFromRepositoryProfileResponse{
+	response := &LegacyRemoveAPTSourceFromRepositoryProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30278,15 +28205,15 @@ func ParseRemoveAPTSourceFromRepositoryProfileResponse(rsp *http.Response) (*Rem
 	return response, nil
 }
 
-// ParseRemoveAPTSourcesResponse parses an HTTP response from a RemoveAPTSourcesWithResponse call
-func ParseRemoveAPTSourcesResponse(rsp *http.Response) (*RemoveAPTSourcesResponse, error) {
+// ParseLegacyRemoveAPTSourcesResponse parses an HTTP response from a LegacyRemoveAPTSourcesWithResponse call
+func ParseLegacyRemoveAPTSourcesResponse(rsp *http.Response) (*LegacyRemoveAPTSourcesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveAPTSourcesResponse{
+	response := &LegacyRemoveAPTSourcesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30325,15 +28252,15 @@ func ParseRemoveAPTSourcesResponse(rsp *http.Response) (*RemoveAPTSourcesRespons
 	return response, nil
 }
 
-// ParseRemoveAPTSourcesFromRepositoryProfileResponse parses an HTTP response from a RemoveAPTSourcesFromRepositoryProfileWithResponse call
-func ParseRemoveAPTSourcesFromRepositoryProfileResponse(rsp *http.Response) (*RemoveAPTSourcesFromRepositoryProfileResponse, error) {
+// ParseLegacyRemoveAPTSourcesFromRepositoryProfileResponse parses an HTTP response from a LegacyRemoveAPTSourcesFromRepositoryProfileWithResponse call
+func ParseLegacyRemoveAPTSourcesFromRepositoryProfileResponse(rsp *http.Response) (*LegacyRemoveAPTSourcesFromRepositoryProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveAPTSourcesFromRepositoryProfileResponse{
+	response := &LegacyRemoveAPTSourcesFromRepositoryProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30372,15 +28299,15 @@ func ParseRemoveAPTSourcesFromRepositoryProfileResponse(rsp *http.Response) (*Re
 	return response, nil
 }
 
-// ParseRemoveAccessGroupResponse parses an HTTP response from a RemoveAccessGroupWithResponse call
-func ParseRemoveAccessGroupResponse(rsp *http.Response) (*RemoveAccessGroupResponse, error) {
+// ParseLegacyRemoveAccessGroupResponse parses an HTTP response from a LegacyRemoveAccessGroupWithResponse call
+func ParseLegacyRemoveAccessGroupResponse(rsp *http.Response) (*LegacyRemoveAccessGroupResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveAccessGroupResponse{
+	response := &LegacyRemoveAccessGroupResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30419,15 +28346,15 @@ func ParseRemoveAccessGroupResponse(rsp *http.Response) (*RemoveAccessGroupRespo
 	return response, nil
 }
 
-// ParseRemoveAccessGroupsFromRoleResponse parses an HTTP response from a RemoveAccessGroupsFromRoleWithResponse call
-func ParseRemoveAccessGroupsFromRoleResponse(rsp *http.Response) (*RemoveAccessGroupsFromRoleResponse, error) {
+// ParseLegacyRemoveAccessGroupsFromRoleResponse parses an HTTP response from a LegacyRemoveAccessGroupsFromRoleWithResponse call
+func ParseLegacyRemoveAccessGroupsFromRoleResponse(rsp *http.Response) (*LegacyRemoveAccessGroupsFromRoleResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveAccessGroupsFromRoleResponse{
+	response := &LegacyRemoveAccessGroupsFromRoleResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30466,15 +28393,15 @@ func ParseRemoveAccessGroupsFromRoleResponse(rsp *http.Response) (*RemoveAccessG
 	return response, nil
 }
 
-// ParseRemoveAnnotationFromComputersResponse parses an HTTP response from a RemoveAnnotationFromComputersWithResponse call
-func ParseRemoveAnnotationFromComputersResponse(rsp *http.Response) (*RemoveAnnotationFromComputersResponse, error) {
+// ParseLegacyRemoveAnnotationFromComputersResponse parses an HTTP response from a LegacyRemoveAnnotationFromComputersWithResponse call
+func ParseLegacyRemoveAnnotationFromComputersResponse(rsp *http.Response) (*LegacyRemoveAnnotationFromComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveAnnotationFromComputersResponse{
+	response := &LegacyRemoveAnnotationFromComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30513,15 +28440,15 @@ func ParseRemoveAnnotationFromComputersResponse(rsp *http.Response) (*RemoveAnno
 	return response, nil
 }
 
-// ParseRemoveComputersResponse parses an HTTP response from a RemoveComputersWithResponse call
-func ParseRemoveComputersResponse(rsp *http.Response) (*RemoveComputersResponse, error) {
+// ParseLegacyRemoveComputersResponse parses an HTTP response from a LegacyRemoveComputersWithResponse call
+func ParseLegacyRemoveComputersResponse(rsp *http.Response) (*LegacyRemoveComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveComputersResponse{
+	response := &LegacyRemoveComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30560,15 +28487,15 @@ func ParseRemoveComputersResponse(rsp *http.Response) (*RemoveComputersResponse,
 	return response, nil
 }
 
-// ParseRemoveDistributionResponse parses an HTTP response from a RemoveDistributionWithResponse call
-func ParseRemoveDistributionResponse(rsp *http.Response) (*RemoveDistributionResponse, error) {
+// ParseLegacyRemoveDistributionResponse parses an HTTP response from a LegacyRemoveDistributionWithResponse call
+func ParseLegacyRemoveDistributionResponse(rsp *http.Response) (*LegacyRemoveDistributionResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveDistributionResponse{
+	response := &LegacyRemoveDistributionResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30607,15 +28534,15 @@ func ParseRemoveDistributionResponse(rsp *http.Response) (*RemoveDistributionRes
 	return response, nil
 }
 
-// ParseRemoveGPGKeyResponse parses an HTTP response from a RemoveGPGKeyWithResponse call
-func ParseRemoveGPGKeyResponse(rsp *http.Response) (*RemoveGPGKeyResponse, error) {
+// ParseLegacyRemoveGPGKeyResponse parses an HTTP response from a LegacyRemoveGPGKeyWithResponse call
+func ParseLegacyRemoveGPGKeyResponse(rsp *http.Response) (*LegacyRemoveGPGKeyResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveGPGKeyResponse{
+	response := &LegacyRemoveGPGKeyResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30654,15 +28581,15 @@ func ParseRemoveGPGKeyResponse(rsp *http.Response) (*RemoveGPGKeyResponse, error
 	return response, nil
 }
 
-// ParseRemovePackageFiltersFromPocketResponse parses an HTTP response from a RemovePackageFiltersFromPocketWithResponse call
-func ParseRemovePackageFiltersFromPocketResponse(rsp *http.Response) (*RemovePackageFiltersFromPocketResponse, error) {
+// ParseLegacyRemovePackageFiltersFromPocketResponse parses an HTTP response from a LegacyRemovePackageFiltersFromPocketWithResponse call
+func ParseLegacyRemovePackageFiltersFromPocketResponse(rsp *http.Response) (*LegacyRemovePackageFiltersFromPocketResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemovePackageFiltersFromPocketResponse{
+	response := &LegacyRemovePackageFiltersFromPocketResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30701,15 +28628,15 @@ func ParseRemovePackageFiltersFromPocketResponse(rsp *http.Response) (*RemovePac
 	return response, nil
 }
 
-// ParseRemovePackageProfileResponse parses an HTTP response from a RemovePackageProfileWithResponse call
-func ParseRemovePackageProfileResponse(rsp *http.Response) (*RemovePackageProfileResponse, error) {
+// ParseLegacyRemovePackageProfileResponse parses an HTTP response from a LegacyRemovePackageProfileWithResponse call
+func ParseLegacyRemovePackageProfileResponse(rsp *http.Response) (*LegacyRemovePackageProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemovePackageProfileResponse{
+	response := &LegacyRemovePackageProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30748,15 +28675,15 @@ func ParseRemovePackageProfileResponse(rsp *http.Response) (*RemovePackageProfil
 	return response, nil
 }
 
-// ParseRemovePackagesResponse parses an HTTP response from a RemovePackagesWithResponse call
-func ParseRemovePackagesResponse(rsp *http.Response) (*RemovePackagesResponse, error) {
+// ParseLegacyRemovePackagesResponse parses an HTTP response from a LegacyRemovePackagesWithResponse call
+func ParseLegacyRemovePackagesResponse(rsp *http.Response) (*LegacyRemovePackagesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemovePackagesResponse{
+	response := &LegacyRemovePackagesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30795,15 +28722,15 @@ func ParseRemovePackagesResponse(rsp *http.Response) (*RemovePackagesResponse, e
 	return response, nil
 }
 
-// ParseRemovePackagesFromPocketResponse parses an HTTP response from a RemovePackagesFromPocketWithResponse call
-func ParseRemovePackagesFromPocketResponse(rsp *http.Response) (*RemovePackagesFromPocketResponse, error) {
+// ParseLegacyRemovePackagesFromPocketResponse parses an HTTP response from a LegacyRemovePackagesFromPocketWithResponse call
+func ParseLegacyRemovePackagesFromPocketResponse(rsp *http.Response) (*LegacyRemovePackagesFromPocketResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemovePackagesFromPocketResponse{
+	response := &LegacyRemovePackagesFromPocketResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30842,15 +28769,15 @@ func ParseRemovePackagesFromPocketResponse(rsp *http.Response) (*RemovePackagesF
 	return response, nil
 }
 
-// ParseRemovePermissionsFromRoleResponse parses an HTTP response from a RemovePermissionsFromRoleWithResponse call
-func ParseRemovePermissionsFromRoleResponse(rsp *http.Response) (*RemovePermissionsFromRoleResponse, error) {
+// ParseLegacyRemovePermissionsFromRoleResponse parses an HTTP response from a LegacyRemovePermissionsFromRoleWithResponse call
+func ParseLegacyRemovePermissionsFromRoleResponse(rsp *http.Response) (*LegacyRemovePermissionsFromRoleResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemovePermissionsFromRoleResponse{
+	response := &LegacyRemovePermissionsFromRoleResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30889,15 +28816,15 @@ func ParseRemovePermissionsFromRoleResponse(rsp *http.Response) (*RemovePermissi
 	return response, nil
 }
 
-// ParseRemovePersonsFromRoleResponse parses an HTTP response from a RemovePersonsFromRoleWithResponse call
-func ParseRemovePersonsFromRoleResponse(rsp *http.Response) (*RemovePersonsFromRoleResponse, error) {
+// ParseLegacyRemovePersonsFromRoleResponse parses an HTTP response from a LegacyRemovePersonsFromRoleWithResponse call
+func ParseLegacyRemovePersonsFromRoleResponse(rsp *http.Response) (*LegacyRemovePersonsFromRoleResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemovePersonsFromRoleResponse{
+	response := &LegacyRemovePersonsFromRoleResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30936,15 +28863,15 @@ func ParseRemovePersonsFromRoleResponse(rsp *http.Response) (*RemovePersonsFromR
 	return response, nil
 }
 
-// ParseRemovePocketResponse parses an HTTP response from a RemovePocketWithResponse call
-func ParseRemovePocketResponse(rsp *http.Response) (*RemovePocketResponse, error) {
+// ParseLegacyRemovePocketResponse parses an HTTP response from a LegacyRemovePocketWithResponse call
+func ParseLegacyRemovePocketResponse(rsp *http.Response) (*LegacyRemovePocketResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemovePocketResponse{
+	response := &LegacyRemovePocketResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -30983,15 +28910,15 @@ func ParseRemovePocketResponse(rsp *http.Response) (*RemovePocketResponse, error
 	return response, nil
 }
 
-// ParseRemovePocketsFromRepositoryProfileResponse parses an HTTP response from a RemovePocketsFromRepositoryProfileWithResponse call
-func ParseRemovePocketsFromRepositoryProfileResponse(rsp *http.Response) (*RemovePocketsFromRepositoryProfileResponse, error) {
+// ParseLegacyRemovePocketsFromRepositoryProfileResponse parses an HTTP response from a LegacyRemovePocketsFromRepositoryProfileWithResponse call
+func ParseLegacyRemovePocketsFromRepositoryProfileResponse(rsp *http.Response) (*LegacyRemovePocketsFromRepositoryProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemovePocketsFromRepositoryProfileResponse{
+	response := &LegacyRemovePocketsFromRepositoryProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31030,15 +28957,15 @@ func ParseRemovePocketsFromRepositoryProfileResponse(rsp *http.Response) (*Remov
 	return response, nil
 }
 
-// ParseRemoveRemovalProfileResponse parses an HTTP response from a RemoveRemovalProfileWithResponse call
-func ParseRemoveRemovalProfileResponse(rsp *http.Response) (*RemoveRemovalProfileResponse, error) {
+// ParseLegacyRemoveRemovalProfileResponse parses an HTTP response from a LegacyRemoveRemovalProfileWithResponse call
+func ParseLegacyRemoveRemovalProfileResponse(rsp *http.Response) (*LegacyRemoveRemovalProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveRemovalProfileResponse{
+	response := &LegacyRemoveRemovalProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31077,15 +29004,15 @@ func ParseRemoveRemovalProfileResponse(rsp *http.Response) (*RemoveRemovalProfil
 	return response, nil
 }
 
-// ParseRemoveRepositoryProfileResponse parses an HTTP response from a RemoveRepositoryProfileWithResponse call
-func ParseRemoveRepositoryProfileResponse(rsp *http.Response) (*RemoveRepositoryProfileResponse, error) {
+// ParseLegacyRemoveRepositoryProfileResponse parses an HTTP response from a LegacyRemoveRepositoryProfileWithResponse call
+func ParseLegacyRemoveRepositoryProfileResponse(rsp *http.Response) (*LegacyRemoveRepositoryProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveRepositoryProfileResponse{
+	response := &LegacyRemoveRepositoryProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31124,15 +29051,15 @@ func ParseRemoveRepositoryProfileResponse(rsp *http.Response) (*RemoveRepository
 	return response, nil
 }
 
-// ParseRemoveRepositoryProfilesResponse parses an HTTP response from a RemoveRepositoryProfilesWithResponse call
-func ParseRemoveRepositoryProfilesResponse(rsp *http.Response) (*RemoveRepositoryProfilesResponse, error) {
+// ParseLegacyRemoveRepositoryProfilesResponse parses an HTTP response from a LegacyRemoveRepositoryProfilesWithResponse call
+func ParseLegacyRemoveRepositoryProfilesResponse(rsp *http.Response) (*LegacyRemoveRepositoryProfilesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveRepositoryProfilesResponse{
+	response := &LegacyRemoveRepositoryProfilesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31171,15 +29098,15 @@ func ParseRemoveRepositoryProfilesResponse(rsp *http.Response) (*RemoveRepositor
 	return response, nil
 }
 
-// ParseRemoveRoleResponse parses an HTTP response from a RemoveRoleWithResponse call
-func ParseRemoveRoleResponse(rsp *http.Response) (*RemoveRoleResponse, error) {
+// ParseLegacyRemoveRoleResponse parses an HTTP response from a LegacyRemoveRoleWithResponse call
+func ParseLegacyRemoveRoleResponse(rsp *http.Response) (*LegacyRemoveRoleResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveRoleResponse{
+	response := &LegacyRemoveRoleResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31218,15 +29145,15 @@ func ParseRemoveRoleResponse(rsp *http.Response) (*RemoveRoleResponse, error) {
 	return response, nil
 }
 
-// ParseRemoveSavedSearchResponse parses an HTTP response from a RemoveSavedSearchWithResponse call
-func ParseRemoveSavedSearchResponse(rsp *http.Response) (*RemoveSavedSearchResponse, error) {
+// ParseLegacyRemoveSavedSearchResponse parses an HTTP response from a LegacyRemoveSavedSearchWithResponse call
+func ParseLegacyRemoveSavedSearchResponse(rsp *http.Response) (*LegacyRemoveSavedSearchResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveSavedSearchResponse{
+	response := &LegacyRemoveSavedSearchResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31265,15 +29192,15 @@ func ParseRemoveSavedSearchResponse(rsp *http.Response) (*RemoveSavedSearchRespo
 	return response, nil
 }
 
-// ParseRemoveScriptResponse parses an HTTP response from a RemoveScriptWithResponse call
-func ParseRemoveScriptResponse(rsp *http.Response) (*RemoveScriptResponse, error) {
+// ParseLegacyRemoveScriptResponse parses an HTTP response from a LegacyRemoveScriptWithResponse call
+func ParseLegacyRemoveScriptResponse(rsp *http.Response) (*LegacyRemoveScriptResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveScriptResponse{
+	response := &LegacyRemoveScriptResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31312,15 +29239,15 @@ func ParseRemoveScriptResponse(rsp *http.Response) (*RemoveScriptResponse, error
 	return response, nil
 }
 
-// ParseRemoveScriptAttachmentResponse parses an HTTP response from a RemoveScriptAttachmentWithResponse call
-func ParseRemoveScriptAttachmentResponse(rsp *http.Response) (*RemoveScriptAttachmentResponse, error) {
+// ParseLegacyRemoveScriptAttachmentResponse parses an HTTP response from a LegacyRemoveScriptAttachmentWithResponse call
+func ParseLegacyRemoveScriptAttachmentResponse(rsp *http.Response) (*LegacyRemoveScriptAttachmentResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveScriptAttachmentResponse{
+	response := &LegacyRemoveScriptAttachmentResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31359,15 +29286,15 @@ func ParseRemoveScriptAttachmentResponse(rsp *http.Response) (*RemoveScriptAttac
 	return response, nil
 }
 
-// ParseRemoveSeriesResponse parses an HTTP response from a RemoveSeriesWithResponse call
-func ParseRemoveSeriesResponse(rsp *http.Response) (*RemoveSeriesResponse, error) {
+// ParseLegacyRemoveSeriesResponse parses an HTTP response from a LegacyRemoveSeriesWithResponse call
+func ParseLegacyRemoveSeriesResponse(rsp *http.Response) (*LegacyRemoveSeriesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveSeriesResponse{
+	response := &LegacyRemoveSeriesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31406,15 +29333,15 @@ func ParseRemoveSeriesResponse(rsp *http.Response) (*RemoveSeriesResponse, error
 	return response, nil
 }
 
-// ParseRemoveTagsFromComputersResponse parses an HTTP response from a RemoveTagsFromComputersWithResponse call
-func ParseRemoveTagsFromComputersResponse(rsp *http.Response) (*RemoveTagsFromComputersResponse, error) {
+// ParseLegacyRemoveTagsFromComputersResponse parses an HTTP response from a LegacyRemoveTagsFromComputersWithResponse call
+func ParseLegacyRemoveTagsFromComputersResponse(rsp *http.Response) (*LegacyRemoveTagsFromComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveTagsFromComputersResponse{
+	response := &LegacyRemoveTagsFromComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31453,15 +29380,15 @@ func ParseRemoveTagsFromComputersResponse(rsp *http.Response) (*RemoveTagsFromCo
 	return response, nil
 }
 
-// ParseRemoveUpgradeProfileResponse parses an HTTP response from a RemoveUpgradeProfileWithResponse call
-func ParseRemoveUpgradeProfileResponse(rsp *http.Response) (*RemoveUpgradeProfileResponse, error) {
+// ParseLegacyRemoveUpgradeProfileResponse parses an HTTP response from a LegacyRemoveUpgradeProfileWithResponse call
+func ParseLegacyRemoveUpgradeProfileResponse(rsp *http.Response) (*LegacyRemoveUpgradeProfileResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveUpgradeProfileResponse{
+	response := &LegacyRemoveUpgradeProfileResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31500,15 +29427,15 @@ func ParseRemoveUpgradeProfileResponse(rsp *http.Response) (*RemoveUpgradeProfil
 	return response, nil
 }
 
-// ParseRemoveUploaderGPGKeysFromPocketResponse parses an HTTP response from a RemoveUploaderGPGKeysFromPocketWithResponse call
-func ParseRemoveUploaderGPGKeysFromPocketResponse(rsp *http.Response) (*RemoveUploaderGPGKeysFromPocketResponse, error) {
+// ParseLegacyRemoveUploaderGPGKeysFromPocketResponse parses an HTTP response from a LegacyRemoveUploaderGPGKeysFromPocketWithResponse call
+func ParseLegacyRemoveUploaderGPGKeysFromPocketResponse(rsp *http.Response) (*LegacyRemoveUploaderGPGKeysFromPocketResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveUploaderGPGKeysFromPocketResponse{
+	response := &LegacyRemoveUploaderGPGKeysFromPocketResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31547,15 +29474,15 @@ func ParseRemoveUploaderGPGKeysFromPocketResponse(rsp *http.Response) (*RemoveUp
 	return response, nil
 }
 
-// ParseRemoveWSLHostsResponse parses an HTTP response from a RemoveWSLHostsWithResponse call
-func ParseRemoveWSLHostsResponse(rsp *http.Response) (*RemoveWSLHostsResponse, error) {
+// ParseLegacyRemoveWSLHostsResponse parses an HTTP response from a LegacyRemoveWSLHostsWithResponse call
+func ParseLegacyRemoveWSLHostsResponse(rsp *http.Response) (*LegacyRemoveWSLHostsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RemoveWSLHostsResponse{
+	response := &LegacyRemoveWSLHostsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31594,15 +29521,15 @@ func ParseRemoveWSLHostsResponse(rsp *http.Response) (*RemoveWSLHostsResponse, e
 	return response, nil
 }
 
-// ParseRenameComputersResponse parses an HTTP response from a RenameComputersWithResponse call
-func ParseRenameComputersResponse(rsp *http.Response) (*RenameComputersResponse, error) {
+// ParseLegacyRenameComputersResponse parses an HTTP response from a LegacyRenameComputersWithResponse call
+func ParseLegacyRenameComputersResponse(rsp *http.Response) (*LegacyRenameComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &RenameComputersResponse{
+	response := &LegacyRenameComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31641,15 +29568,15 @@ func ParseRenameComputersResponse(rsp *http.Response) (*RenameComputersResponse,
 	return response, nil
 }
 
-// ParseSetDefaultChildComputerResponse parses an HTTP response from a SetDefaultChildComputerWithResponse call
-func ParseSetDefaultChildComputerResponse(rsp *http.Response) (*SetDefaultChildComputerResponse, error) {
+// ParseLegacySetDefaultChildComputerResponse parses an HTTP response from a LegacySetDefaultChildComputerWithResponse call
+func ParseLegacySetDefaultChildComputerResponse(rsp *http.Response) (*LegacySetDefaultChildComputerResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &SetDefaultChildComputerResponse{
+	response := &LegacySetDefaultChildComputerResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31688,15 +29615,15 @@ func ParseSetDefaultChildComputerResponse(rsp *http.Response) (*SetDefaultChildC
 	return response, nil
 }
 
-// ParseSetSettingsResponse parses an HTTP response from a SetSettingsWithResponse call
-func ParseSetSettingsResponse(rsp *http.Response) (*SetSettingsResponse, error) {
+// ParseLegacySetSettingsResponse parses an HTTP response from a LegacySetSettingsWithResponse call
+func ParseLegacySetSettingsResponse(rsp *http.Response) (*LegacySetSettingsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &SetSettingsResponse{
+	response := &LegacySetSettingsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31735,15 +29662,15 @@ func ParseSetSettingsResponse(rsp *http.Response) (*SetSettingsResponse, error) 
 	return response, nil
 }
 
-// ParseShutdownComputersResponse parses an HTTP response from a ShutdownComputersWithResponse call
-func ParseShutdownComputersResponse(rsp *http.Response) (*ShutdownComputersResponse, error) {
+// ParseLegacyShutdownComputersResponse parses an HTTP response from a LegacyShutdownComputersWithResponse call
+func ParseLegacyShutdownComputersResponse(rsp *http.Response) (*LegacyShutdownComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ShutdownComputersResponse{
+	response := &LegacyShutdownComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31782,15 +29709,15 @@ func ParseShutdownComputersResponse(rsp *http.Response) (*ShutdownComputersRespo
 	return response, nil
 }
 
-// ParseShutdownHostComputerResponse parses an HTTP response from a ShutdownHostComputerWithResponse call
-func ParseShutdownHostComputerResponse(rsp *http.Response) (*ShutdownHostComputerResponse, error) {
+// ParseLegacyShutdownHostComputerResponse parses an HTTP response from a LegacyShutdownHostComputerWithResponse call
+func ParseLegacyShutdownHostComputerResponse(rsp *http.Response) (*LegacyShutdownHostComputerResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &ShutdownHostComputerResponse{
+	response := &LegacyShutdownHostComputerResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31829,15 +29756,15 @@ func ParseShutdownHostComputerResponse(rsp *http.Response) (*ShutdownHostCompute
 	return response, nil
 }
 
-// ParseStartChildComputersResponse parses an HTTP response from a StartChildComputersWithResponse call
-func ParseStartChildComputersResponse(rsp *http.Response) (*StartChildComputersResponse, error) {
+// ParseLegacyStartChildComputersResponse parses an HTTP response from a LegacyStartChildComputersWithResponse call
+func ParseLegacyStartChildComputersResponse(rsp *http.Response) (*LegacyStartChildComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &StartChildComputersResponse{
+	response := &LegacyStartChildComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31876,15 +29803,15 @@ func ParseStartChildComputersResponse(rsp *http.Response) (*StartChildComputersR
 	return response, nil
 }
 
-// ParseStopChildComputersResponse parses an HTTP response from a StopChildComputersWithResponse call
-func ParseStopChildComputersResponse(rsp *http.Response) (*StopChildComputersResponse, error) {
+// ParseLegacyStopChildComputersResponse parses an HTTP response from a LegacyStopChildComputersWithResponse call
+func ParseLegacyStopChildComputersResponse(rsp *http.Response) (*LegacyStopChildComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &StopChildComputersResponse{
+	response := &LegacyStopChildComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31923,15 +29850,15 @@ func ParseStopChildComputersResponse(rsp *http.Response) (*StopChildComputersRes
 	return response, nil
 }
 
-// ParseSubscribeToAlertResponse parses an HTTP response from a SubscribeToAlertWithResponse call
-func ParseSubscribeToAlertResponse(rsp *http.Response) (*SubscribeToAlertResponse, error) {
+// ParseLegacySubscribeToAlertResponse parses an HTTP response from a LegacySubscribeToAlertWithResponse call
+func ParseLegacySubscribeToAlertResponse(rsp *http.Response) (*LegacySubscribeToAlertResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &SubscribeToAlertResponse{
+	response := &LegacySubscribeToAlertResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -31970,15 +29897,15 @@ func ParseSubscribeToAlertResponse(rsp *http.Response) (*SubscribeToAlertRespons
 	return response, nil
 }
 
-// ParseSyncMirrorPocketResponse parses an HTTP response from a SyncMirrorPocketWithResponse call
-func ParseSyncMirrorPocketResponse(rsp *http.Response) (*SyncMirrorPocketResponse, error) {
+// ParseLegacySyncMirrorPocketResponse parses an HTTP response from a LegacySyncMirrorPocketWithResponse call
+func ParseLegacySyncMirrorPocketResponse(rsp *http.Response) (*LegacySyncMirrorPocketResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &SyncMirrorPocketResponse{
+	response := &LegacySyncMirrorPocketResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -32017,15 +29944,15 @@ func ParseSyncMirrorPocketResponse(rsp *http.Response) (*SyncMirrorPocketRespons
 	return response, nil
 }
 
-// ParseTerminateComputerProcessesResponse parses an HTTP response from a TerminateComputerProcessesWithResponse call
-func ParseTerminateComputerProcessesResponse(rsp *http.Response) (*TerminateComputerProcessesResponse, error) {
+// ParseLegacyTerminateComputerProcessesResponse parses an HTTP response from a LegacyTerminateComputerProcessesWithResponse call
+func ParseLegacyTerminateComputerProcessesResponse(rsp *http.Response) (*LegacyTerminateComputerProcessesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &TerminateComputerProcessesResponse{
+	response := &LegacyTerminateComputerProcessesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -32064,15 +29991,15 @@ func ParseTerminateComputerProcessesResponse(rsp *http.Response) (*TerminateComp
 	return response, nil
 }
 
-// ParseUnsubscribeFromAlertResponse parses an HTTP response from a UnsubscribeFromAlertWithResponse call
-func ParseUnsubscribeFromAlertResponse(rsp *http.Response) (*UnsubscribeFromAlertResponse, error) {
+// ParseLegacyUnsubscribeFromAlertResponse parses an HTTP response from a LegacyUnsubscribeFromAlertWithResponse call
+func ParseLegacyUnsubscribeFromAlertResponse(rsp *http.Response) (*LegacyUnsubscribeFromAlertResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &UnsubscribeFromAlertResponse{
+	response := &LegacyUnsubscribeFromAlertResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -32111,15 +30038,15 @@ func ParseUnsubscribeFromAlertResponse(rsp *http.Response) (*UnsubscribeFromAler
 	return response, nil
 }
 
-// ParseUpgradePackagesResponse parses an HTTP response from a UpgradePackagesWithResponse call
-func ParseUpgradePackagesResponse(rsp *http.Response) (*UpgradePackagesResponse, error) {
+// ParseLegacyUpgradePackagesResponse parses an HTTP response from a LegacyUpgradePackagesWithResponse call
+func ParseLegacyUpgradePackagesResponse(rsp *http.Response) (*LegacyUpgradePackagesResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &UpgradePackagesResponse{
+	response := &LegacyUpgradePackagesResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
