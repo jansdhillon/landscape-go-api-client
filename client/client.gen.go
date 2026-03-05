@@ -573,9 +573,6 @@ type V2Script struct {
 // V2ScriptStatus The current status of the script.
 type V2ScriptStatus string
 
-// LegacyActionParam defines model for LegacyActionParam.
-type LegacyActionParam = string
-
 // LegacyVersionParam defines model for LegacyVersionParam.
 type LegacyVersionParam = string
 
@@ -597,6 +594,9 @@ type ScriptProfileNamesQueryParam = string
 // BadRequest defines model for BadRequest.
 type BadRequest = Error
 
+// Forbidden defines model for Forbidden.
+type Forbidden = Error
+
 // GetScriptProfileActivitiesResponse Paginated list of activity runs for a script profile.
 type GetScriptProfileActivitiesResponse = ScriptProfileActivitiesListResponse
 
@@ -607,9 +607,6 @@ type GetScriptProfileComputersResponse = ScriptProfileComputersListResponse
 type LegacyActionResponse struct {
 	union json.RawMessage
 }
-
-// NotFound defines model for NotFound.
-type NotFound = Error
 
 // ScriptNotFound defines model for ScriptNotFound.
 type ScriptNotFound = Error
@@ -647,13 +644,2443 @@ type ScriptProfilesByScriptResult = []ScriptProfile
 // Unauthorized defines model for Unauthorized.
 type Unauthorized = Error
 
-// InvokeLegacyActionParams defines parameters for InvokeLegacyAction.
-type InvokeLegacyActionParams struct {
+// AcceptPendingComputersParams defines parameters for AcceptPendingComputers.
+type AcceptPendingComputersParams struct {
 	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
 	Version LegacyVersionParam `form:"version" json:"version"`
 
-	// Action The legacy API action name to invoke.
-	Action LegacyActionParam `form:"action" json:"action"`
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerIds A list of computer IDs to accept. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
+	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
+
+	// ExistingIds A mapping from pending computer IDs to existing ones.
+	ExistingIds *map[string]int `form:"existing_ids,omitempty" json:"existing_ids,omitempty"`
+
+	// AccessGroup The access group to put the computers into
+	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
+}
+
+// AddAPTSourcesToRepositoryProfileParams defines parameters for AddAPTSourcesToRepositoryProfile.
+type AddAPTSourcesToRepositoryProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the repository profile.
+	Name string `form:"name" json:"name"`
+
+	// AptSources The names of the APT sources to add. (Use apt_sources.1, apt_sources.2, etc. for multiple values)
+	AptSources []string `form:"apt_sources" json:"apt_sources"`
+}
+
+// AddAccessGroupsToRoleParams defines parameters for AddAccessGroupsToRole.
+type AddAccessGroupsToRoleParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the role to modify.
+	Name string `form:"name" json:"name"`
+
+	// AccessGroups A list of names of access groups to add to the role. (Use access_groups.1, access_groups.2, etc. for multiple values)
+	AccessGroups []string `form:"access_groups" json:"access_groups"`
+}
+
+// AddAnnotationToComputersParams defines parameters for AddAnnotationToComputers.
+type AddAnnotationToComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string used to select the computers to which to add the annotation.
+	Query string `form:"query" json:"query"`
+
+	// Key Annotation key to add to the selected computers.
+	Key string `form:"key" json:"key"`
+
+	// Value Annotation value associated with the provided key to add to the selected computers.
+	Value *string `form:"value,omitempty" json:"value,omitempty"`
+}
+
+// AddPackageFiltersToPocketParams defines parameters for AddPackageFiltersToPocket.
+type AddPackageFiltersToPocketParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the pocket to operate on.
+	Name string `form:"name" json:"name"`
+
+	// Series The name of the series containing the pocket.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution containing the series.
+	Distribution string `form:"distribution" json:"distribution"`
+
+	// Packages A list of names of packages to be added or removed from the pocket filter. (Use packages.1, packages.2, etc. for multiple values)
+	Packages []string `form:"packages" json:"packages"`
+}
+
+// AddPermissionsToRoleParams defines parameters for AddPermissionsToRole.
+type AddPermissionsToRoleParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the role to modify.
+	Name string `form:"name" json:"name"`
+
+	// Permissions A list of permissions to add. (Use permissions.1, permissions.2, etc. for multiple values)
+	Permissions []string `form:"permissions" json:"permissions"`
+}
+
+// AddPersonsToRoleParams defines parameters for AddPersonsToRole.
+type AddPersonsToRoleParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the role to modify.
+	Name string `form:"name" json:"name"`
+
+	// Persons A list of emails of persons to add. (Use persons.1, persons.2, etc. for multiple values)
+	Persons []string `form:"persons" json:"persons"`
+}
+
+// AddPocketsToRepositoryProfileParams defines parameters for AddPocketsToRepositoryProfile.
+type AddPocketsToRepositoryProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the repository profile.
+	Name string `form:"name" json:"name"`
+
+	// Pockets The names of the pockets to add. (Use pockets.1, pockets.2, etc. for multiple values)
+	Pockets []string `form:"pockets" json:"pockets"`
+
+	// Series The name of the series the pockets belongs to.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution the series belongs to.
+	Distribution string `form:"distribution" json:"distribution"`
+}
+
+// AddTagsToComputersParams defines parameters for AddTagsToComputers.
+type AddTagsToComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string used to select the computers to add tags to.
+	Query string `form:"query" json:"query"`
+
+	// Tags Tag names to be applied. (Use tags.1, tags.2, etc. for multiple values)
+	Tags []string `form:"tags" json:"tags"`
+}
+
+// AddUploaderGPGKeysToPocketParams defines parameters for AddUploaderGPGKeysToPocket.
+type AddUploaderGPGKeysToPocketParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the pocket on which to associate keys.
+	Name string `form:"name" json:"name"`
+
+	// Series The name of the series containing the pocket.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution containing the series.
+	Distribution string `form:"distribution" json:"distribution"`
+
+	// GpgKeys A list of GPG keys on which to operate. (Use gpg_keys.1, gpg_keys.2, etc. for multiple values)
+	GpgKeys []string `form:"gpg_keys" json:"gpg_keys"`
+}
+
+// ApproveActivitiesParams defines parameters for ApproveActivities.
+type ApproveActivitiesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string used to select activities on which to operate.
+	Query string `form:"query" json:"query"`
+}
+
+// AssociateAlertParams defines parameters for AssociateAlert.
+type AssociateAlertParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the entity.
+	Name string `form:"name" json:"name"`
+
+	// Tags Tags to change entity association for (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers If true, change the 'all_computers' flag state for the entity. If the flag is enabled, associated tags will be kept, but they will not be effective until the flag is disabled.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// AssociatePackageProfileParams defines parameters for AssociatePackageProfile.
+type AssociatePackageProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the entity.
+	Name string `form:"name" json:"name"`
+
+	// Tags Tags to change entity association for (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers If true, change the 'all_computers' flag state for the entity. If the flag is enabled, associated tags will be kept, but they will not be effective until the flag is disabled.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// AssociateRemovalProfileParams defines parameters for AssociateRemovalProfile.
+type AssociateRemovalProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the entity.
+	Name string `form:"name" json:"name"`
+
+	// Tags Tags to change entity association for (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers If true, change the 'all_computers' flag state for the entity. If the flag is enabled, associated tags will be kept, but they will not be effective until the flag is disabled.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// AssociateRepositoryProfileParams defines parameters for AssociateRepositoryProfile.
+type AssociateRepositoryProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the entity.
+	Name string `form:"name" json:"name"`
+
+	// Tags Tags to change entity association for (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers If true, change the 'all_computers' flag state for the entity. If the flag is enabled, associated tags will be kept, but they will not be effective until the flag is disabled.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// AssociateUpgradeProfileParams defines parameters for AssociateUpgradeProfile.
+type AssociateUpgradeProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the entity.
+	Name string `form:"name" json:"name"`
+
+	// Tags Tags to change entity association for (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers If true, change the 'all_computers' flag state for the entity. If the flag is enabled, associated tags will be kept, but they will not be effective until the flag is disabled.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// CancelActivitiesParams defines parameters for CancelActivities.
+type CancelActivitiesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string used to select activities on which to operate.
+	Query string `form:"query" json:"query"`
+}
+
+// ChangeComputersAccessGroupParams defines parameters for ChangeComputersAccessGroup.
+type ChangeComputersAccessGroupParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string used to select the computers to change access group for.
+	Query string `form:"query" json:"query"`
+
+	// AccessGroup The name of the access group to assign selected computers to.
+	AccessGroup string `form:"access_group" json:"access_group"`
+}
+
+// CopyPackageProfileParams defines parameters for CopyPackageProfile.
+type CopyPackageProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name A name of the existing package profile to copy.
+	Name string `form:"name" json:"name"`
+
+	// DestinationName The profile name of the copied package profile.
+	DestinationName *string `form:"destination_name,omitempty" json:"destination_name,omitempty"`
+
+	// Title A title for the new profile. If not specified, the title of the source profile is used.
+	Title *string `form:"title,omitempty" json:"title,omitempty"`
+
+	// Description A description for the new profile. If not specified, the title of the source profile is used.
+	Description *string `form:"description,omitempty" json:"description,omitempty"`
+
+	// AccessGroup Name of the access group to copy the profile to. Defaults to the origin's access group.
+	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
+}
+
+// CopyRoleParams defines parameters for CopyRole.
+type CopyRoleParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the existing role.
+	Name string `form:"name" json:"name"`
+
+	// DestinationName The name of the new role.
+	DestinationName string `form:"destination_name" json:"destination_name"`
+
+	// Description The description of the new role.
+	Description *string `form:"description,omitempty" json:"description,omitempty"`
+}
+
+// CopyScriptParams defines parameters for CopyScript.
+type CopyScriptParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ScriptId The identity of the existing script.
+	ScriptId int `form:"script_id" json:"script_id"`
+
+	// DestinationTitle The title of the new script.
+	DestinationTitle string `form:"destination_title" json:"destination_title"`
+
+	// AccessGroup The access group for the new script. It defaults to the same access group as the existing script.
+	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
+}
+
+// CreateAPTSourceParams defines parameters for CreateAPTSource.
+type CreateAPTSourceParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the APT source. It must be unique within the account, start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
+	Name string `form:"name" json:"name"`
+
+	// AptLine The APT line of the source.
+	AptLine string `form:"apt_line" json:"apt_line"`
+
+	// GpgKey Name of the GPG key used to sign the repository
+	GpgKey *string `form:"gpg_key,omitempty" json:"gpg_key,omitempty"`
+
+	// AccessGroup An optional name of the access group to create the APT source into.
+	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
+}
+
+// CreateAccessGroupParams defines parameters for CreateAccessGroup.
+type CreateAccessGroupParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Title The title of the access group.
+	Title string `form:"title" json:"title"`
+
+	// Parent The title of the parent access group.
+	Parent *string `form:"parent,omitempty" json:"parent,omitempty"`
+}
+
+// CreateChildComputerParams defines parameters for CreateChildComputer.
+type CreateChildComputerParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerName The name of child computer to create.
+	ComputerName string `form:"computer_name" json:"computer_name"`
+
+	// CloudInit b64 encoded cloud init file contents.
+	CloudInit *string `form:"cloud_init,omitempty" json:"cloud_init,omitempty"`
+
+	// RootfsUrl URL to a WSL rootfs image to download and import from.
+	RootfsUrl *string `form:"rootfs_url,omitempty" json:"rootfs_url,omitempty"`
+
+	// ParentId The id of the parent computer.
+	ParentId int `form:"parent_id" json:"parent_id"`
+}
+
+// CreateDistributionParams defines parameters for CreateDistribution.
+type CreateDistributionParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the distribution. It must be unique within the account, start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
+	Name string `form:"name" json:"name"`
+
+	// AccessGroup An optional name of the access group to create the distribution into.
+	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
+}
+
+// CreatePackageProfileParams defines parameters for CreatePackageProfile.
+type CreatePackageProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Title The title of the package profile to create.
+	Title string `form:"title" json:"title"`
+
+	// Description The description of the new profile.
+	Description string `form:"description" json:"description"`
+
+	// SourceComputerId A computer ID to find a computer which will be used as the basis of the package profile.
+	SourceComputerId *int `form:"source_computer_id,omitempty" json:"source_computer_id,omitempty"`
+
+	// Material Package data in the format of 'dpkg --get-selections' or CSV (as exported by Landscape).
+	Material *string `form:"material,omitempty" json:"material,omitempty"`
+
+	// Constraints Alternative to material, constraint specifications in the form of "depends packagename" or "conflicts packagename < 1.0". (Use constraints.1, constraints.2, etc. for multiple values)
+	Constraints *[]string `form:"constraints,omitempty" json:"constraints,omitempty"`
+
+	// AccessGroup Optional name of the access group to create the profile into
+	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
+}
+
+// CreatePocketParams defines parameters for CreatePocket.
+type CreatePocketParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the pocket. It must be unique within series, start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
+	Name string `form:"name" json:"name"`
+
+	// Series The name of the series to create the pocket in.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution the series belongs to.
+	Distribution string `form:"distribution" json:"distribution"`
+
+	// Components A list of components the pocket will handle. (Use components.1, components.2, etc. for multiple values)
+	Components []string `form:"components" json:"components"`
+
+	// Architectures A list of architectures the pocket will handle. (Use architectures.1, architectures.2, etc. for multiple values)
+	Architectures []string `form:"architectures" json:"architectures"`
+
+	// Mode The pocket mode. Can be 'pull', 'mirror' and 'upload'.
+	Mode string `form:"mode" json:"mode"`
+
+	// GpgKey The name of the GPG key to use to sign packages lists for this pocket. The GPG key provided must have a private key associated with it.
+	GpgKey string `form:"gpg_key" json:"gpg_key"`
+
+	// IncludeUdeb Whether the pocket should include selected components also for .udeb packages (debian-installer). It's 'false' by default.
+	IncludeUdeb *bool `form:"include_udeb,omitempty" json:"include_udeb,omitempty"`
+
+	// MirrorUri The URI to mirror for pockets in 'mirror' mode.
+	MirrorUri *string `form:"mirror_uri,omitempty" json:"mirror_uri,omitempty"`
+
+	// MirrorSuite The repository entry under dists/ to mirror for pockets in 'mirror' mode. This parameter is optional and defaults to the same name as local series and pocket. If the suite name ends with a '/', the remote repository is flat (packages are not grouped in components); in this case a single value can be passed for the 'components' parameter. Packages from the remote repository will be mirrored in the specified component.
+	MirrorSuite *string `form:"mirror_suite,omitempty" json:"mirror_suite,omitempty"`
+
+	// MirrorGpgKey The name of the GPG key to use to verify the mirrored archive signature. If none is given, the stock Ubuntu archive one will be used.
+	MirrorGpgKey *string `form:"mirror_gpg_key,omitempty" json:"mirror_gpg_key,omitempty"`
+
+	// PullSeries The name of the series pull_pocket belongs to. Must be a series in the same distribution series belongs to. If not specified, it defaults to series.
+	PullSeries *string `form:"pull_series,omitempty" json:"pull_series,omitempty"`
+
+	// PullPocket The name of a pocket in current distribution to sync packages from for pockets in 'pull' mode.
+	PullPocket *string `form:"pull_pocket,omitempty" json:"pull_pocket,omitempty"`
+
+	// FilterType If specified, the type of the filter of the pocket. Can be either 'allowlist' or 'blocklist' (Deprecated blacklist and whitelist).
+	FilterType *string `form:"filter_type,omitempty" json:"filter_type,omitempty"`
+
+	// FilterPackages If specified, the package filters to a repository pocket. The pocket must be in pull mode and support blocklist / allowlist filtering (Deprecated blacklist and whitelist). (Use filter_packages.1, filter_packages.2, etc. for multiple values)
+	FilterPackages *[]string `form:"filter_packages,omitempty" json:"filter_packages,omitempty"`
+
+	// UploadAllowUnsigned For pockets in upload mode, a boolean indicating whether uploaded packages are required to be signed or not. It's 'false' by default.
+	UploadAllowUnsigned *bool `form:"upload_allow_unsigned,omitempty" json:"upload_allow_unsigned,omitempty"`
+
+	// Origin The origin of this pocket
+	Origin *string `form:"origin,omitempty" json:"origin,omitempty"`
+}
+
+// CreateRemovalProfileParams defines parameters for CreateRemovalProfile.
+type CreateRemovalProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Title The title of the profile to create.
+	Title string `form:"title" json:"title"`
+
+	// DaysWithoutExchange The length of time after which a computer may be removed.
+	DaysWithoutExchange int `form:"days_without_exchange" json:"days_without_exchange"`
+
+	// AccessGroup An optional name of an access group the profile will apply to.
+	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
+
+	// CascadeToChildren If true, removed computers will also include child computers (e.g. virtual machines, WSL instances).
+	CascadeToChildren *bool `form:"cascade_to_children,omitempty" json:"cascade_to_children,omitempty"`
+
+	// Tags Computer tags to associate with the removal profile. (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers Whether to associate the removal profile with all computers.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// CreateRepositoryProfileParams defines parameters for CreateRepositoryProfile.
+type CreateRepositoryProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Title Title of the repository profile. It must start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
+	Title string `form:"title" json:"title"`
+
+	// Description Description of the repository profile.
+	Description *string `form:"description,omitempty" json:"description,omitempty"`
+
+	// AccessGroup Optional name of the access group to create the profile in.
+	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
+}
+
+// CreateRoleParams defines parameters for CreateRole.
+type CreateRoleParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the role.
+	Name string `form:"name" json:"name"`
+
+	// Description The description of the role.
+	Description *string `form:"description,omitempty" json:"description,omitempty"`
+}
+
+// CreateSavedSearchParams defines parameters for CreateSavedSearch.
+type CreateSavedSearchParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The "slug" name for this saved search. It must consist of only lowercase ASCII letters, numbers and hyphens. This is the text which must be used when using the "search:name" syntax.  If this parameter is not included a name will be generated automatically based on the title.
+	Name *string `form:"name,omitempty" json:"name,omitempty"`
+
+	// Title The display name for the SavedSearch.
+	Title string `form:"title" json:"title"`
+
+	// Search The search string to save.
+	Search string `form:"search" json:"search"`
+}
+
+// CreateScriptParams defines parameters for CreateScript.
+type CreateScriptParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Title The title of the new script.
+	Title string `form:"title" json:"title"`
+
+	// TimeLimit Amount of time to wait for the process to end.
+	TimeLimit *int `form:"time_limit,omitempty" json:"time_limit,omitempty"`
+
+	// Code The filename holding the script contents.
+	Code string `form:"code" json:"code"`
+
+	// Username The user to execute the script as.
+	Username *string `form:"username,omitempty" json:"username,omitempty"`
+
+	// AccessGroup The access group for the new script.
+	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
+
+	// ScriptType The type of script to create (V1 or V2).
+	ScriptType *string `form:"script_type,omitempty" json:"script_type,omitempty"`
+}
+
+// CreateScriptAttachmentParams defines parameters for CreateScriptAttachment.
+type CreateScriptAttachmentParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ScriptId The identity of the script to add the attachment to.
+	ScriptId int `form:"script_id" json:"script_id"`
+
+	// File The file to attach
+	File string `form:"file" json:"file"`
+}
+
+// CreateSeriesParams defines parameters for CreateSeries.
+type CreateSeriesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the series. It must be unique within series within the distribution, start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
+	Name string `form:"name" json:"name"`
+
+	// Distribution The name of the distribution to create the series in.
+	Distribution string `form:"distribution" json:"distribution"`
+
+	// Pockets Pockets that will be created in the series, they will be in mirror mode by default. (Use pockets.1, pockets.2, etc. for multiple values)
+	Pockets *[]string `form:"pockets,omitempty" json:"pockets,omitempty"`
+
+	// Components List of components for the created pockets. This parameter is **optional** if no pocket is specified. (Use components.1, components.2, etc. for multiple values)
+	Components *[]string `form:"components,omitempty" json:"components,omitempty"`
+
+	// Architectures List of architectures for the created pockets. This parameter is **optional** if no pocket is specified (Use architectures.1, architectures.2, etc. for multiple values)
+	Architectures *[]string `form:"architectures,omitempty" json:"architectures,omitempty"`
+
+	// GpgKey The name of the GPG key to use to sign packages lists of the created pockets. This parameter is **optional** if no pocket is specified.
+	GpgKey *string `form:"gpg_key,omitempty" json:"gpg_key,omitempty"`
+
+	// MirrorUri The URI to mirror for the created pockets. This parameter is **optional** if no pocket is specified.
+	MirrorUri *string `form:"mirror_uri,omitempty" json:"mirror_uri,omitempty"`
+
+	// MirrorSeries The remote series to mirror. If not specified, it defaults to the name of the series being created. If a pockets parameter also passed, each of the created pockets will mirror the relevant dists/<mirror_series>-<pocket> repository of the remote archive.
+	MirrorSeries *string `form:"mirror_series,omitempty" json:"mirror_series,omitempty"`
+
+	// MirrorGpgKey The name of the GPG key to use to verify the mirrored repositories for created pockets. If none is given, the stock Ubuntu archive one will be used.
+	MirrorGpgKey *string `form:"mirror_gpg_key,omitempty" json:"mirror_gpg_key,omitempty"`
+
+	// IncludeUdeb Whether the pocket should include selected components also for .udeb packages (debian-installer). It's 'false' by default.
+	IncludeUdeb *bool `form:"include_udeb,omitempty" json:"include_udeb,omitempty"`
+
+	// Origin The origin of the created pocket
+	Origin *string `form:"origin,omitempty" json:"origin,omitempty"`
+}
+
+// CreateUpgradeProfileParams defines parameters for CreateUpgradeProfile.
+type CreateUpgradeProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Title A human readable title for this upgrade profile.
+	Title string `form:"title" json:"title"`
+
+	// Every The frequency at which you wish this upgrade profile to be executed. Valid choices are "hour" and "week".
+	Every string `form:"every" json:"every"`
+
+	// OnDays A list of days of the week on which the upgrade profile will be run. The day names must be abbreviated to their first two letters, as: "mo", "tu", "we", "th", "fr", "sa", "su". Required when the every parameter is "week" but optional when the every parameter is  "hour". (Use on_days.1, on_days.2, etc. for multiple values)
+	OnDays *[]string `form:"on_days,omitempty" json:"on_days,omitempty"`
+
+	// AtHour The hour, in 24h format, at which the upgrade profile will be run.
+	AtHour *int `form:"at_hour,omitempty" json:"at_hour,omitempty"`
+
+	// AtMinute The minute of the hour (0-59) at which the upgrade profile will be run.
+	AtMinute int `form:"at_minute" json:"at_minute"`
+
+	// DeliverWithin An optional number of hours within which the upgrade task should be delivered to computers. The window will be from the time specified by this API call (on_days, at_hour, at_minute) until the provided number of hours later. Defaults to 1 hour.
+	DeliverWithin *int `form:"deliver_within,omitempty" json:"deliver_within,omitempty"`
+
+	// DeliverDelayWindow Randomise delivery within the given timeframe specified in minutes.
+	DeliverDelayWindow *int `form:"deliver_delay_window,omitempty" json:"deliver_delay_window,omitempty"`
+
+	// SecurityUpgrade (Deprecated) Whether this upgrade is a security upgrade or not.
+	SecurityUpgrade *bool `form:"security_upgrade,omitempty" json:"security_upgrade,omitempty"`
+
+	// UpgradeType The type of upgrade profile, either "security" or "all".
+	UpgradeType *string `form:"upgrade_type,omitempty" json:"upgrade_type,omitempty"`
+
+	// Autoremove Whether this upgrade should also autoremove old packages.
+	Autoremove *bool `form:"autoremove,omitempty" json:"autoremove,omitempty"`
+
+	// AccessGroup An optional name of the access group to create the profile into.
+	AccessGroup *string `form:"access_group,omitempty" json:"access_group,omitempty"`
+
+	// Tags Computer tags to associate with the upgrade profile. (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers Whether to associate the upgrade profile with all computers.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// CreateUserParams defines parameters for CreateUser.
+type CreateUserParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerIds The numerical IDs of the computers. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
+	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
+
+	// Username The username of the new user.
+	Username string `form:"username" json:"username"`
+
+	// Name The title name of the new user.
+	Name string `form:"name" json:"name"`
+
+	// Password The password of the new user.
+	Password string `form:"password" json:"password"`
+
+	// RequirePasswordReset Requires the user to reset their password on first login
+	RequirePasswordReset *bool `form:"require_password_reset,omitempty" json:"require_password_reset,omitempty"`
+
+	// PrimaryGroupname The group the new user will be assigned to.
+	PrimaryGroupname *string `form:"primary_groupname,omitempty" json:"primary_groupname,omitempty"`
+
+	// Location The location of the new user.
+	Location *string `form:"location,omitempty" json:"location,omitempty"`
+
+	// HomePhone The home phone number of the new user.
+	HomePhone *string `form:"home_phone,omitempty" json:"home_phone,omitempty"`
+
+	// WorkPhone The work phone number of the new user.
+	WorkPhone *string `form:"work_phone,omitempty" json:"work_phone,omitempty"`
+}
+
+// DeleteChildComputersParams defines parameters for DeleteChildComputers.
+type DeleteChildComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerIds A list of child computer ids to delete. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
+	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
+}
+
+// DeriveSeriesParams defines parameters for DeriveSeries.
+type DeriveSeriesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the derived series. It must be unique within the distribution, start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
+	Name string `form:"name" json:"name"`
+
+	// Origin The name of the origin series.
+	Origin string `form:"origin" json:"origin"`
+
+	// Distribution The name of the distribution to derive the series in.
+	Distribution string `form:"distribution" json:"distribution"`
+}
+
+// DiffPullPocketParams defines parameters for DiffPullPocket.
+type DiffPullPocketParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the pocket.
+	Name string `form:"name" json:"name"`
+
+	// Series The name of the series.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution.
+	Distribution string `form:"distribution" json:"distribution"`
+}
+
+// DisableAdministratorParams defines parameters for DisableAdministrator.
+type DisableAdministratorParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Email The name of the person to disable.
+	Email string `form:"email" json:"email"`
+}
+
+// DisassociateAlertParams defines parameters for DisassociateAlert.
+type DisassociateAlertParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the entity.
+	Name string `form:"name" json:"name"`
+
+	// Tags Tags to change entity association for (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers If true, change the 'all_computers' flag state for the entity. If the flag is enabled, associated tags will be kept, but they will not be effective until the flag is disabled.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// DisassociatePackageProfileParams defines parameters for DisassociatePackageProfile.
+type DisassociatePackageProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the entity.
+	Name string `form:"name" json:"name"`
+
+	// Tags Tags to change entity association for (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers If true, change the 'all_computers' flag state for the entity. If the flag is enabled, associated tags will be kept, but they will not be effective until the flag is disabled.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// DisassociateRemovalProfileParams defines parameters for DisassociateRemovalProfile.
+type DisassociateRemovalProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the entity.
+	Name string `form:"name" json:"name"`
+
+	// Tags Tags to change entity association for (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers If true, change the 'all_computers' flag state for the entity. If the flag is enabled, associated tags will be kept, but they will not be effective until the flag is disabled.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// DisassociateRepositoryProfileParams defines parameters for DisassociateRepositoryProfile.
+type DisassociateRepositoryProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the entity.
+	Name string `form:"name" json:"name"`
+
+	// Tags Tags to change entity association for (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers If true, change the 'all_computers' flag state for the entity. If the flag is enabled, associated tags will be kept, but they will not be effective until the flag is disabled.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// DisassociateUpgradeProfileParams defines parameters for DisassociateUpgradeProfile.
+type DisassociateUpgradeProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the entity.
+	Name string `form:"name" json:"name"`
+
+	// Tags Tags to change entity association for (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers If true, change the 'all_computers' flag state for the entity. If the flag is enabled, associated tags will be kept, but they will not be effective until the flag is disabled.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// EditPackageProfileParams defines parameters for EditPackageProfile.
+type EditPackageProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the package profile.
+	Name string `form:"name" json:"name"`
+
+	// Title The new title of the package profile.
+	Title *string `form:"title,omitempty" json:"title,omitempty"`
+
+	// AddConstraints List of constraints specifications to add in the form of "depends packagename" or "conflicts packagename < 1.0". (Use add_constraints.1, add_constraints.2, etc. for multiple values)
+	AddConstraints *[]string `form:"add_constraints,omitempty" json:"add_constraints,omitempty"`
+
+	// RemoveConstraints List of constraints specifications to remove in the form of "depends packagename" or "conflicts packagename < 1.0". (Use remove_constraints.1, remove_constraints.2, etc. for multiple values)
+	RemoveConstraints *[]string `form:"remove_constraints,omitempty" json:"remove_constraints,omitempty"`
+}
+
+// EditPocketParams defines parameters for EditPocket.
+type EditPocketParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the pocket to edit.
+	Name string `form:"name" json:"name"`
+
+	// Series The name of the series containing the pocket.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution containing the series.
+	Distribution string `form:"distribution" json:"distribution"`
+
+	// Components A list of components the pocket will handle. (Use components.1, components.2, etc. for multiple values)
+	Components *[]string `form:"components,omitempty" json:"components,omitempty"`
+
+	// Architectures A list of architectures the pocket will handle. (Use architectures.1, architectures.2, etc. for multiple values)
+	Architectures *[]string `form:"architectures,omitempty" json:"architectures,omitempty"`
+
+	// GpgKey The name of the GPG key to use to sign packages lists for this pocket. The GPG key provided must have a private key associated with it.
+	GpgKey *string `form:"gpg_key,omitempty" json:"gpg_key,omitempty"`
+
+	// MirrorUri The URI to mirror for pockets in 'mirror' mode.
+	MirrorUri *string `form:"mirror_uri,omitempty" json:"mirror_uri,omitempty"`
+
+	// MirrorSuite The repository entry under dists/ to mirror for pockets in 'mirror' mode.
+	MirrorSuite *string `form:"mirror_suite,omitempty" json:"mirror_suite,omitempty"`
+
+	// MirrorGpgKey The name of the GPG key to use to verify the mirrored archive signature. If '-' is given, the stock Ubuntu archive one will be used.
+	MirrorGpgKey *string `form:"mirror_gpg_key,omitempty" json:"mirror_gpg_key,omitempty"`
+
+	// UploadAllowUnsigned For pockets in upload mode, a boolean indicating whether uploaded packages are required to be signed or not.
+	UploadAllowUnsigned *bool `form:"upload_allow_unsigned,omitempty" json:"upload_allow_unsigned,omitempty"`
+
+	// IncludeUdeb Whether the pocket should include selected components also for .udeb packages (debian-installer).
+	IncludeUdeb *bool `form:"include_udeb,omitempty" json:"include_udeb,omitempty"`
+}
+
+// EditRemovalProfileParams defines parameters for EditRemovalProfile.
+type EditRemovalProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the profile to edit.
+	Name string `form:"name" json:"name"`
+
+	// Title The new title of the profile.
+	Title *string `form:"title,omitempty" json:"title,omitempty"`
+
+	// DaysWithoutExchange The length of time after which a computer may be removed.
+	DaysWithoutExchange *int `form:"days_without_exchange,omitempty" json:"days_without_exchange,omitempty"`
+
+	// Tags Computer tags to associate with the removal profile (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers Whether to associate the removal profile with all computers.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// EditRepositoryProfileParams defines parameters for EditRepositoryProfile.
+type EditRepositoryProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the repository profile to edit.
+	Name string `form:"name" json:"name"`
+
+	// Title Title of the repository profile.
+	Title *string `form:"title,omitempty" json:"title,omitempty"`
+
+	// Description Description of the repository profile.
+	Description *string `form:"description,omitempty" json:"description,omitempty"`
+}
+
+// EditSavedSearchParams defines parameters for EditSavedSearch.
+type EditSavedSearchParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The "slug" name for this saved search, this is the text which must be used when using the "search:name" syntax. A saved search with this name must already exist in the account.
+	Name string `form:"name" json:"name"`
+
+	// Title The new display name for the saved search. If this parameter is not included then the title will not be modified.
+	Title *string `form:"title,omitempty" json:"title,omitempty"`
+
+	// Search The search string to save. If this parameter is not included then the search string will not be modified.
+	Search *string `form:"search,omitempty" json:"search,omitempty"`
+}
+
+// EditScriptParams defines parameters for EditScript.
+type EditScriptParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ScriptId The identifier of the script you wish to edit.
+	ScriptId int `form:"script_id" json:"script_id"`
+
+	// Title The new script title.
+	Title *string `form:"title,omitempty" json:"title,omitempty"`
+
+	// TimeLimit Amount of time to wait for the process to end.
+	TimeLimit *int `form:"time_limit,omitempty" json:"time_limit,omitempty"`
+
+	// Code The filename holding the script contents.
+	Code *string `form:"code,omitempty" json:"code,omitempty"`
+
+	// Username The user to execute the script as.
+	Username *string `form:"username,omitempty" json:"username,omitempty"`
+}
+
+// EditUpgradeProfileParams defines parameters for EditUpgradeProfile.
+type EditUpgradeProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name for this upgrade profile.
+	Name string `form:"name" json:"name"`
+
+	// Title The new title of the upgrade profile.
+	Title *string `form:"title,omitempty" json:"title,omitempty"`
+
+	// Every The frequency at which you wish this upgrade profile to be executed. Valid choices are "hour" and "week".
+	Every *string `form:"every,omitempty" json:"every,omitempty"`
+
+	// OnDays A list of days of the week on which the upgrade profile will be run. The day names must be abbreviated to their first two letters, as: "mo", "tu", "we", "th", "fr", "sa", "su". Required when the every parameter is "week" but optional when the every parameter is  "hour". (Use on_days.1, on_days.2, etc. for multiple values)
+	OnDays *[]string `form:"on_days,omitempty" json:"on_days,omitempty"`
+
+	// AtHour The hour, in 24h format, at which the upgrade profile will be run.
+	AtHour *int `form:"at_hour,omitempty" json:"at_hour,omitempty"`
+
+	// AtMinute The minute of the hour (0-59) at which the upgrade profile will be run.
+	AtMinute *int `form:"at_minute,omitempty" json:"at_minute,omitempty"`
+
+	// DeliverWithin An optional number of hours within which the upgrade task should be delivered to computers. The window will be from the time specified by this API call (on_days, at_hour, at_minute) until the provided number of hours later. Defaults to 1 hour.
+	DeliverWithin *int `form:"deliver_within,omitempty" json:"deliver_within,omitempty"`
+
+	// DeliverDelayWindow Randomise delivery within the given timeframe specified in minutes.
+	DeliverDelayWindow *int `form:"deliver_delay_window,omitempty" json:"deliver_delay_window,omitempty"`
+
+	// SecurityUpgrade (Deprecated) Whether this upgrade is a security upgrade or not.
+	SecurityUpgrade *bool `form:"security_upgrade,omitempty" json:"security_upgrade,omitempty"`
+
+	// UpgradeType The type of upgrade profile, either "security" or "all".
+	UpgradeType *string `form:"upgrade_type,omitempty" json:"upgrade_type,omitempty"`
+
+	// Autoremove Whether this upgrade should also autoremove old packages.
+	Autoremove *bool `form:"autoremove,omitempty" json:"autoremove,omitempty"`
+
+	// Tags Computer tags to associate with the upgrade profile. (Use tags.1, tags.2, etc. for multiple values)
+	Tags *[]string `form:"tags,omitempty" json:"tags,omitempty"`
+
+	// AllComputers Whether to associate the upgrade profile with all computers.
+	AllComputers *bool `form:"all_computers,omitempty" json:"all_computers,omitempty"`
+}
+
+// EditUserParams defines parameters for EditUser.
+type EditUserParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerIds The numerical IDs of the computers. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
+	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
+
+	// Username The username of an existing user.
+	Username string `form:"username" json:"username"`
+
+	// Name The new title name of the existing user.
+	Name *string `form:"name,omitempty" json:"name,omitempty"`
+
+	// Password The new password for the existing user.
+	Password *string `form:"password,omitempty" json:"password,omitempty"`
+
+	// PrimaryGroupname The new group the existing user will be assigned to.
+	PrimaryGroupname *string `form:"primary_groupname,omitempty" json:"primary_groupname,omitempty"`
+
+	// Location The new location of the existing user.
+	Location *string `form:"location,omitempty" json:"location,omitempty"`
+
+	// HomePhone The new home phone number of the existing user.
+	HomePhone *string `form:"home_phone,omitempty" json:"home_phone,omitempty"`
+
+	// WorkPhone The new work phone number of the existing user.
+	WorkPhone *string `form:"work_phone,omitempty" json:"work_phone,omitempty"`
+}
+
+// ExecuteScriptParams defines parameters for ExecuteScript.
+type ExecuteScriptParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string used to select the computers to execute the script on.   Multiple occurrences will be joined with a logical AND.
+	Query string `form:"query" json:"query"`
+
+	// ScriptId The identity of the script stored in the server.
+	ScriptId int `form:"script_id" json:"script_id"`
+
+	// Username The username to execute the script as on the client. Required if the script has no default username.
+	Username *string `form:"username,omitempty" json:"username,omitempty"`
+
+	// DeliverAfter A time in the future to deliver the script.
+	DeliverAfter *string `form:"deliver_after,omitempty" json:"deliver_after,omitempty"`
+
+	// TimeLimit The amount of time to wait for the process to complete before it is killed.
+	TimeLimit *int `form:"time_limit,omitempty" json:"time_limit,omitempty"`
+
+	// InAccessGroup Only execute the script in the given access group.
+	InAccessGroup *string `form:"in_access_group,omitempty" json:"in_access_group,omitempty"`
+}
+
+// GetAPTSourcesParams defines parameters for GetAPTSources.
+type GetAPTSourcesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Names List of names of the APT source to be returned. Multiple names can be supplied. (Use names.1, names.2, etc. for multiple values)
+	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
+}
+
+// GetAccessGroupsParams defines parameters for GetAccessGroups.
+type GetAccessGroupsParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Names The name of the access group. (Use names.1, names.2, etc. for multiple values)
+	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
+}
+
+// GetActivitiesParams defines parameters for GetActivities.
+type GetActivitiesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string with space separated tokens used to filter the returned result objects.
+	Query *string `form:"query,omitempty" json:"query,omitempty"`
+
+	// Limit The maximum number of results returned by the method. It defaults to 1000.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Offset The offset inside the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+}
+
+// GetActivityTypesParams defines parameters for GetActivityTypes.
+type GetActivityTypesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+}
+
+// GetAdministratorsParams defines parameters for GetAdministrators.
+type GetAdministratorsParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+}
+
+// GetAlertSubscribersParams defines parameters for GetAlertSubscribers.
+type GetAlertSubscribersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// AlertType The alert type to check the subscription on.
+	AlertType string `form:"alert_type" json:"alert_type"`
+}
+
+// GetAlertsParams defines parameters for GetAlerts.
+type GetAlertsParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+}
+
+// GetCSVComplianceDataParams defines parameters for GetCSVComplianceData.
+type GetCSVComplianceDataParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string with space separated tokens used to filter the returned result objects.
+	Query *string `form:"query,omitempty" json:"query,omitempty"`
+
+	// Limit The maximum number of results returned by the method. It defaults to 1000.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Offset The offset inside the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// MaxDays Return issues newer than max_days.
+	MaxDays *int `form:"max_days,omitempty" json:"max_days,omitempty"`
+
+	// ByCve If by_cve is false (the default), a key will be added for each USN released in the last max_days. The key name will be the identifier of the USN with timestamp, and the value will indicate whether the issue is present and if it is, whether it has been resolved, and when. If by_cve is true, CVEs will be used as the column key instead.
+	ByCve *bool `form:"by_cve,omitempty" json:"by_cve,omitempty"`
+}
+
+// GetComputerProcessesParams defines parameters for GetComputerProcesses.
+type GetComputerProcessesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerId The numerical ID of the computer.
+	ComputerId int `form:"computer_id" json:"computer_id"`
+
+	// Offset The number of items to skip.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// Limit The number of items per page.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// GetComputersParams defines parameters for GetComputers.
+type GetComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string with space separated tokens used to filter the returned result objects.
+	Query *string `form:"query,omitempty" json:"query,omitempty"`
+
+	// Limit The maximum number of results returned by the method. It defaults to 1000.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Offset The offset inside the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// WithNetwork If true, include the details of all active network devices attached to the computer.
+	WithNetwork *bool `form:"with_network,omitempty" json:"with_network,omitempty"`
+
+	// WithAllNetwork If true, include the details of all active and inactive network devices attached to the computer.
+	WithAllNetwork *bool `form:"with_all_network,omitempty" json:"with_all_network,omitempty"`
+
+	// WithHardware If true, include the details of all known hardware information.
+	WithHardware *bool `form:"with_hardware,omitempty" json:"with_hardware,omitempty"`
+
+	// WithAnnotations If true, include the details of all custom annotation information known.
+	WithAnnotations *bool `form:"with_annotations,omitempty" json:"with_annotations,omitempty"`
+
+	// WithGroupedHardware If true, include the details of all known hardware information grouped by device category.
+	WithGroupedHardware *bool `form:"with_grouped_hardware,omitempty" json:"with_grouped_hardware,omitempty"`
+}
+
+// GetComputersNotUpgradedParams defines parameters for GetComputersNotUpgraded.
+type GetComputersNotUpgradedParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string with space separated tokens used to filter the returned result objects.
+	Query *string `form:"query,omitempty" json:"query,omitempty"`
+
+	// Limit The maximum number of results returned by the method. It defaults to 1000.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Offset The offset inside the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+}
+
+// GetDistributionsParams defines parameters for GetDistributions.
+type GetDistributionsParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Names A list of distribution names to get info for. If this is not provided, the call will return all distributions for the account. (Use names.1, names.2, etc. for multiple values)
+	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
+
+	// IncludeLatestSync Include the status of the latest sync for pull and mirror pockets.
+	IncludeLatestSync *bool `form:"include_latest_sync,omitempty" json:"include_latest_sync,omitempty"`
+}
+
+// GetEventLogParams defines parameters for GetEventLog.
+type GetEventLogParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Days The number of days prior to today from which to fetch log entries. It defaults to 30 days.
+	Days *int `form:"days,omitempty" json:"days,omitempty"`
+
+	// Limit The maximum number of results returned by the method. It defaults to 1000.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Offset The offset inside the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+}
+
+// GetGPGKeysParams defines parameters for GetGPGKeys.
+type GetGPGKeysParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Names A list of GPG keys to get info for. If this is not provided, the call will return all keys for the account. (Use names.1, names.2, etc. for multiple values)
+	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
+}
+
+// GetNotPingingComputersParams defines parameters for GetNotPingingComputers.
+type GetNotPingingComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string with space separated tokens used to filter the returned result objects.
+	Query *string `form:"query,omitempty" json:"query,omitempty"`
+
+	// Limit The maximum number of results returned by the method. It defaults to 1000.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Offset The offset inside the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// SinceMinutes The number of minutes elapsed in which no ping from included computers has been seen.
+	SinceMinutes int `form:"since_minutes" json:"since_minutes"`
+}
+
+// GetPackageProfilesParams defines parameters for GetPackageProfiles.
+type GetPackageProfilesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Names A list of package profile names to limit the result. (Use names.1, names.2, etc. for multiple values)
+	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
+}
+
+// GetPackagesParams defines parameters for GetPackages.
+type GetPackagesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string used to select computers to query packages on.
+	Query string `form:"query" json:"query"`
+
+	// Search A string to restrict the search to.  All fields are searched, not just those returned. (e.g., description)
+	Search *string `form:"search,omitempty" json:"search,omitempty"`
+
+	// Names Restrict the search to these package names. (Use names.1, names.2, etc. for multiple values)
+	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
+
+	// Installed If true only packages in the installed state will be returned, if false only packages not installed will be returned. If not given both installed and not installed packages will be returned.
+	Installed *bool `form:"installed,omitempty" json:"installed,omitempty"`
+
+	// Available If true only packages in the available state will be returned, if false only packages not available will be returned. If not given both available and not available packages will be returned.
+	Available *bool `form:"available,omitempty" json:"available,omitempty"`
+
+	// Upgrade If true, only installable packages that are upgrades for an for an installed one are returned. If false, only installable packages that are not upgrades are returned. If not given, packages will be returned regardless of wether they are upgrades or not.
+	Upgrade *bool `form:"upgrade,omitempty" json:"upgrade,omitempty"`
+
+	// Held If true, only installed packages that are held on computers are returned. If false, only packages that are not held on computers are returned. If not given, packages will be returned regardless of the held state.
+	Held *bool `form:"held,omitempty" json:"held,omitempty"`
+
+	// Offset The offset inside the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// Limit The maximum number of results returned by the method. It defaults to 1000.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// GetPendingComputersParams defines parameters for GetPendingComputers.
+type GetPendingComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+}
+
+// GetPermissionsParams defines parameters for GetPermissions.
+type GetPermissionsParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+}
+
+// GetRemovalProfilesParams defines parameters for GetRemovalProfiles.
+type GetRemovalProfilesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+}
+
+// GetRepoInfoParams defines parameters for GetRepoInfo.
+type GetRepoInfoParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// MirrorUri The name of mirror uri
+	MirrorUri string `form:"mirror_uri" json:"mirror_uri"`
+}
+
+// GetRepositoryProfilesParams defines parameters for GetRepositoryProfiles.
+type GetRepositoryProfilesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Names A list of repository profile names to get info for. If this is not provided, the call will return all repository profiles for the account. (Use names.1, names.2, etc. for multiple values)
+	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
+}
+
+// GetRolesParams defines parameters for GetRoles.
+type GetRolesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Names A list of role names to limit the result. (Use names.1, names.2, etc. for multiple values)
+	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
+}
+
+// GetSavedSearchesParams defines parameters for GetSavedSearches.
+type GetSavedSearchesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Offset The offset inside the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// Limit The maximum number of results returned by the method. It defaults to 1000.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// GetScriptCodeParams defines parameters for GetScriptCode.
+type GetScriptCodeParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ScriptId The identity of the script you wish to get the code for.
+	ScriptId int `form:"script_id" json:"script_id"`
+}
+
+// GetScriptsParams defines parameters for GetScripts.
+type GetScriptsParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Limit The maximum number of results returned by the method. It defaults to 1000.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Offset The offset inside the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// ScriptType The type of script to get (V1, V2, active, archived, redacted, or all).
+	ScriptType *string `form:"script_type,omitempty" json:"script_type,omitempty"`
+}
+
+// GetSettingsParams defines parameters for GetSettings.
+type GetSettingsParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+}
+
+// GetUSNTimeToFixParams defines parameters for GetUSNTimeToFix.
+type GetUSNTimeToFixParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string with space separated tokens used to filter the returned result objects.
+	Query *string `form:"query,omitempty" json:"query,omitempty"`
+
+	// Limit The maximum number of results returned by the method. It defaults to 1000.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Offset The offset inside the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// FixedInDays A list of periods of days to report on USN fixes being applied in (Use fixed_in_days.1, fixed_in_days.2, etc. for multiple values)
+	FixedInDays *[]int `form:"fixed_in_days,omitempty" json:"fixed_in_days,omitempty"`
+
+	// PendingInDays The period of days in the past to search for USNs that are pending on a computer.  This is independent of the in_last argument.
+	PendingInDays *int `form:"pending_in_days,omitempty" json:"pending_in_days,omitempty"`
+
+	// InLast The period of days to look into the past to find USN releases to be considered in these statistics.
+	InLast *int `form:"in_last,omitempty" json:"in_last,omitempty"`
+}
+
+// GetUpgradeProfilesParams defines parameters for GetUpgradeProfiles.
+type GetUpgradeProfilesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// UpgradeType  The type of upgrade you wish to list. This can be either "all" or "security", in which case the result will be a list of upgrade profiles with an upgrade type of "all" or "security" respectively. If omitted, the resulting list will contain all upgrade profiles, regardless of their upgrade type.
+	UpgradeType *string `form:"upgrade_type,omitempty" json:"upgrade_type,omitempty"`
+}
+
+// GetUpgradedComputersByFrequencyParams defines parameters for GetUpgradedComputersByFrequency.
+type GetUpgradedComputersByFrequencyParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string with space separated tokens used to filter the returned result objects.
+	Query *string `form:"query,omitempty" json:"query,omitempty"`
+
+	// Limit The maximum number of results returned by the method. It defaults to 1000.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Offset The offset inside the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+}
+
+// GetUsersParams defines parameters for GetUsers.
+type GetUsersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerId The numerical ID of the computer.
+	ComputerId int `form:"computer_id" json:"computer_id"`
+}
+
+// GetWSLHostsParams defines parameters for GetWSLHosts.
+type GetWSLHostsParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string with space separated tokens used to filter the returned result objects.
+	Query *string `form:"query,omitempty" json:"query,omitempty"`
+
+	// Limit The maximum number of results returned by the method. It defaults to 1000.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Offset The offset inside the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+}
+
+// ImportGPGKeyParams defines parameters for ImportGPGKey.
+type ImportGPGKeyParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the GPG key. It must be unique within the account, start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
+	Name string `form:"name" json:"name"`
+
+	// Material The text representation of the key.
+	Material string `form:"material" json:"material"`
+}
+
+// InstallPackagesParams defines parameters for InstallPackages.
+type InstallPackagesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A qualified criteria to be used in the search.
+	Query string `form:"query" json:"query"`
+
+	// Packages A list of package names on which to operate. Multiple package names can be supplied. (Use packages.1, packages.2, etc. for multiple values)
+	Packages []string `form:"packages" json:"packages"`
+
+	// DeliverAfter A time in the future to perform the package operation.
+	DeliverAfter *string `form:"deliver_after,omitempty" json:"deliver_after,omitempty"`
+
+	// DeliverDelayWindow Randomise delivery within the given time frame specified in minutes
+	DeliverDelayWindow *int `form:"deliver_delay_window,omitempty" json:"deliver_delay_window,omitempty"`
+}
+
+// InviteAdministratorParams defines parameters for InviteAdministrator.
+type InviteAdministratorParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the person to invite.
+	Name string `form:"name" json:"name"`
+
+	// Email The email address of the administrator, to which the invitation will be send.
+	Email string `form:"email" json:"email"`
+
+	// Roles If specified, the roles that the administrator is going to have in your account. Default to GlobalAdmin (Use roles.1, roles.2, etc. for multiple values)
+	Roles *[]string `form:"roles,omitempty" json:"roles,omitempty"`
+}
+
+// KillComputerProcessesParams defines parameters for KillComputerProcesses.
+type KillComputerProcessesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerId The numerical ID of the computer
+	ComputerId int `form:"computer_id" json:"computer_id"`
+
+	// Pids A comma separated list of PIDs of the processes to send a KILL signal (Use pids.1, pids.2, etc. for multiple values)
+	Pids []int `form:"pids" json:"pids"`
+}
+
+// ListPocketParams defines parameters for ListPocket.
+type ListPocketParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the pocket.
+	Name string `form:"name" json:"name"`
+
+	// Series The name of the series.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution.
+	Distribution string `form:"distribution" json:"distribution"`
+
+	// Search Package name to search for.
+	Search *string `form:"search,omitempty" json:"search,omitempty"`
+
+	// Offset The number of packages to skip before starting the list.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// Limit The number of packages to list.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+}
+
+// ModifyPackageProfileParams defines parameters for ModifyPackageProfile.
+type ModifyPackageProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the package profile.
+	Name string `form:"name" json:"name"`
+
+	// Title The new title of the package profile.
+	Title *string `form:"title,omitempty" json:"title,omitempty"`
+
+	// AddConstraints List of constraints specifications to add in the form of "depends packagename" or "conflicts packagename < 1.0". (Use add_constraints.1, add_constraints.2, etc. for multiple values)
+	AddConstraints *[]string `form:"add_constraints,omitempty" json:"add_constraints,omitempty"`
+
+	// RemoveConstraints List of constraints specifications to remove in the form of "depends packagename" or "conflicts packagename < 1.0". (Use remove_constraints.1, remove_constraints.2, etc. for multiple values)
+	RemoveConstraints *[]string `form:"remove_constraints,omitempty" json:"remove_constraints,omitempty"`
+}
+
+// PullPackagesToPocketParams defines parameters for PullPackagesToPocket.
+type PullPackagesToPocketParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the pocket to pull packages to.
+	Name string `form:"name" json:"name"`
+
+	// Series The name of the series.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution.
+	Distribution string `form:"distribution" json:"distribution"`
+}
+
+// RebootComputersParams defines parameters for RebootComputers.
+type RebootComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerIds A list of computer ids to reboot. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
+	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
+
+	// DeliverAfter A time in the future to deliver the script.
+	DeliverAfter *string `form:"deliver_after,omitempty" json:"deliver_after,omitempty"`
+}
+
+// RejectPendingComputersParams defines parameters for RejectPendingComputers.
+type RejectPendingComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerIds A list of computer IDs to reject. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
+	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
+}
+
+// RemoveAPTSourceParams defines parameters for RemoveAPTSource.
+type RemoveAPTSourceParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the apt source to be removed.
+	Name string `form:"name" json:"name"`
+}
+
+// RemoveAPTSourceFromRepositoryProfileParams defines parameters for RemoveAPTSourceFromRepositoryProfile.
+type RemoveAPTSourceFromRepositoryProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the repository profile.
+	Name string `form:"name" json:"name"`
+
+	// AptSource The name of the APT source to remove.
+	AptSource string `form:"apt_source" json:"apt_source"`
+}
+
+// RemoveAPTSourcesParams defines parameters for RemoveAPTSources.
+type RemoveAPTSourcesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Names List of names of the APT sources be removed. Multiple names can be supplied. (Use names.1, names.2, etc. for multiple values)
+	Names []string `form:"names" json:"names"`
+}
+
+// RemoveAPTSourcesFromRepositoryProfileParams defines parameters for RemoveAPTSourcesFromRepositoryProfile.
+type RemoveAPTSourcesFromRepositoryProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the repository profile.
+	Name string `form:"name" json:"name"`
+
+	// AptSources The names of the APT sources to remove. (Use apt_sources.1, apt_sources.2, etc. for multiple values)
+	AptSources []string `form:"apt_sources" json:"apt_sources"`
+}
+
+// RemoveAccessGroupParams defines parameters for RemoveAccessGroup.
+type RemoveAccessGroupParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the access group to remove.
+	Name string `form:"name" json:"name"`
+}
+
+// RemoveAccessGroupsFromRoleParams defines parameters for RemoveAccessGroupsFromRole.
+type RemoveAccessGroupsFromRoleParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the role to modify.
+	Name string `form:"name" json:"name"`
+
+	// AccessGroups A list of names of access groups to remove from the role. (Use access_groups.1, access_groups.2, etc. for multiple values)
+	AccessGroups []string `form:"access_groups" json:"access_groups"`
+}
+
+// RemoveAnnotationFromComputersParams defines parameters for RemoveAnnotationFromComputers.
+type RemoveAnnotationFromComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string used to select the computers from which to remove annotation.
+	Query string `form:"query" json:"query"`
+
+	// Key Annotation key to disassociate.
+	Key string `form:"key" json:"key"`
+}
+
+// RemoveComputersParams defines parameters for RemoveComputers.
+type RemoveComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerIds A list of computer ids to remove. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
+	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
+}
+
+// RemoveDistributionParams defines parameters for RemoveDistribution.
+type RemoveDistributionParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the distribution to remove.
+	Name string `form:"name" json:"name"`
+}
+
+// RemoveGPGKeyParams defines parameters for RemoveGPGKey.
+type RemoveGPGKeyParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the GPG key to remove.
+	Name string `form:"name" json:"name"`
+}
+
+// RemovePackageFiltersFromPocketParams defines parameters for RemovePackageFiltersFromPocket.
+type RemovePackageFiltersFromPocketParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the pocket to operate on.
+	Name string `form:"name" json:"name"`
+
+	// Series The name of the series containing the pocket.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution containing the series.
+	Distribution string `form:"distribution" json:"distribution"`
+
+	// Packages A list of names of packages to be added or removed from the pocket filter. (Use packages.1, packages.2, etc. for multiple values)
+	Packages []string `form:"packages" json:"packages"`
+}
+
+// RemovePackageProfileParams defines parameters for RemovePackageProfile.
+type RemovePackageProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the package profile to remove.
+	Name string `form:"name" json:"name"`
+}
+
+// RemovePackagesParams defines parameters for RemovePackages.
+type RemovePackagesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A qualified criteria to be used in the search.
+	Query string `form:"query" json:"query"`
+
+	// Packages A list of package names on which to operate. Multiple package names can be supplied. (Use packages.1, packages.2, etc. for multiple values)
+	Packages []string `form:"packages" json:"packages"`
+
+	// DeliverAfter A time in the future to perform the package operation.
+	DeliverAfter *string `form:"deliver_after,omitempty" json:"deliver_after,omitempty"`
+
+	// DeliverDelayWindow Randomise delivery within the given time frame specified in minutes
+	DeliverDelayWindow *int `form:"deliver_delay_window,omitempty" json:"deliver_delay_window,omitempty"`
+}
+
+// RemovePackagesFromPocketParams defines parameters for RemovePackagesFromPocket.
+type RemovePackagesFromPocketParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the pocket to remove packages from.
+	Name string `form:"name" json:"name"`
+
+	// Series The name of the series containing the pocket.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution containing the series.
+	Distribution string `form:"distribution" json:"distribution"`
+
+	// Packages A list of names of packages to be removed from the pockets. (Use packages.1, packages.2, etc. for multiple values)
+	Packages []string `form:"packages" json:"packages"`
+}
+
+// RemovePermissionsFromRoleParams defines parameters for RemovePermissionsFromRole.
+type RemovePermissionsFromRoleParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the role to modify.
+	Name string `form:"name" json:"name"`
+
+	// Permissions A list of permissions to remove. (Use permissions.1, permissions.2, etc. for multiple values)
+	Permissions []string `form:"permissions" json:"permissions"`
+}
+
+// RemovePersonsFromRoleParams defines parameters for RemovePersonsFromRole.
+type RemovePersonsFromRoleParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the role to modify.
+	Name string `form:"name" json:"name"`
+
+	// Persons A list of email addresses of people to remove. (Use persons.1, persons.2, etc. for multiple values)
+	Persons []string `form:"persons" json:"persons"`
+}
+
+// RemovePocketParams defines parameters for RemovePocket.
+type RemovePocketParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the pocket to remove.
+	Name string `form:"name" json:"name"`
+
+	// Series The name of the series containing the pocket.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution containing the series.
+	Distribution string `form:"distribution" json:"distribution"`
+}
+
+// RemovePocketsFromRepositoryProfileParams defines parameters for RemovePocketsFromRepositoryProfile.
+type RemovePocketsFromRepositoryProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name Name of the repository profile.
+	Name string `form:"name" json:"name"`
+
+	// Pockets The names of the pockets to remove. (Use pockets.1, pockets.2, etc. for multiple values)
+	Pockets []string `form:"pockets" json:"pockets"`
+
+	// Series The name of the series the pocket belongs to.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution the series belongs to.
+	Distribution string `form:"distribution" json:"distribution"`
+}
+
+// RemoveRemovalProfileParams defines parameters for RemoveRemovalProfile.
+type RemoveRemovalProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the removal profile you wish to remove.
+	Name string `form:"name" json:"name"`
+}
+
+// RemoveRepositoryProfileParams defines parameters for RemoveRepositoryProfile.
+type RemoveRepositoryProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the repository profile to be removed.
+	Name string `form:"name" json:"name"`
+}
+
+// RemoveRepositoryProfilesParams defines parameters for RemoveRepositoryProfiles.
+type RemoveRepositoryProfilesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Names Names of the repository profiles to be removed. (Use names.1, names.2, etc. for multiple values)
+	Names []string `form:"names" json:"names"`
+}
+
+// RemoveRoleParams defines parameters for RemoveRole.
+type RemoveRoleParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the role.
+	Name string `form:"name" json:"name"`
+}
+
+// RemoveSavedSearchParams defines parameters for RemoveSavedSearch.
+type RemoveSavedSearchParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The "slug" name for this saved search.
+	Name string `form:"name" json:"name"`
+}
+
+// RemoveScriptParams defines parameters for RemoveScript.
+type RemoveScriptParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ScriptId The identity of the script to remove.
+	ScriptId int `form:"script_id" json:"script_id"`
+}
+
+// RemoveScriptAttachmentParams defines parameters for RemoveScriptAttachment.
+type RemoveScriptAttachmentParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ScriptId The identity of the script to remove.
+	ScriptId int `form:"script_id" json:"script_id"`
+
+	// Filename The filename of the attachment to remove.
+	Filename string `form:"filename" json:"filename"`
+}
+
+// RemoveSeriesParams defines parameters for RemoveSeries.
+type RemoveSeriesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the series to remove.
+	Name string `form:"name" json:"name"`
+
+	// Distribution The name of the distribution.
+	Distribution string `form:"distribution" json:"distribution"`
+}
+
+// RemoveTagsFromComputersParams defines parameters for RemoveTagsFromComputers.
+type RemoveTagsFromComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A query string used to select the computers to remove tags from.
+	Query string `form:"query" json:"query"`
+
+	// Tags Tag names to be removed. (Use tags.1, tags.2, etc. for multiple values)
+	Tags []string `form:"tags" json:"tags"`
+}
+
+// RemoveUpgradeProfileParams defines parameters for RemoveUpgradeProfile.
+type RemoveUpgradeProfileParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the upgrade profile you wish to cancel.
+	Name string `form:"name" json:"name"`
+}
+
+// RemoveUploaderGPGKeysFromPocketParams defines parameters for RemoveUploaderGPGKeysFromPocket.
+type RemoveUploaderGPGKeysFromPocketParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the pocket on which to associate keys.
+	Name string `form:"name" json:"name"`
+
+	// Series The name of the series containing the pocket.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution containing the series.
+	Distribution string `form:"distribution" json:"distribution"`
+
+	// GpgKeys A list of GPG keys on which to operate. (Use gpg_keys.1, gpg_keys.2, etc. for multiple values)
+	GpgKeys []string `form:"gpg_keys" json:"gpg_keys"`
+}
+
+// RemoveWSLHostsParams defines parameters for RemoveWSLHosts.
+type RemoveWSLHostsParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerIds A list of computer ids to remove. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
+	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
+
+	// CascadeToChildren If true, removed computers will also include child computers.
+	CascadeToChildren *bool `form:"cascade_to_children,omitempty" json:"cascade_to_children,omitempty"`
+}
+
+// RenameComputersParams defines parameters for RenameComputers.
+type RenameComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerTitles mapping of computer_ids to computer titles
+	ComputerTitles map[string]string `form:"computer_titles" json:"computer_titles"`
+}
+
+// SetDefaultChildComputerParams defines parameters for SetDefaultChildComputer.
+type SetDefaultChildComputerParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ParentId The id of the parent host computer.
+	ParentId int `form:"parent_id" json:"parent_id"`
+
+	// ChildId The id of the child computer to set as default.
+	ChildId int `form:"child_id" json:"child_id"`
+}
+
+// SetSettingsParams defines parameters for SetSettings.
+type SetSettingsParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// KeyValues Key/value pairs to set, separated by '='. 'true' and 'false' strings will be interpreted as booleans. (Use key_values.1, key_values.2, etc. for multiple values)
+	KeyValues []string `form:"key_values" json:"key_values"`
+}
+
+// ShutdownComputersParams defines parameters for ShutdownComputers.
+type ShutdownComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerIds A list of computer ids to shutdown. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
+	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
+
+	// DeliverAfter A time in the future to deliver the script.
+	DeliverAfter *string `form:"deliver_after,omitempty" json:"deliver_after,omitempty"`
+}
+
+// ShutdownHostComputerParams defines parameters for ShutdownHostComputer.
+type ShutdownHostComputerParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ParentId The id of the parent host computer.
+	ParentId int `form:"parent_id" json:"parent_id"`
+}
+
+// StartChildComputersParams defines parameters for StartChildComputers.
+type StartChildComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerIds A list of child computer ids to start. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
+	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
+}
+
+// StopChildComputersParams defines parameters for StopChildComputers.
+type StopChildComputersParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerIds A list of child computer ids to stop. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
+	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
+}
+
+// SubscribeToAlertParams defines parameters for SubscribeToAlert.
+type SubscribeToAlertParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// AlertType The alert type to add a subscription to.
+	AlertType string `form:"alert_type" json:"alert_type"`
+}
+
+// SyncMirrorPocketParams defines parameters for SyncMirrorPocket.
+type SyncMirrorPocketParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Name The name of the pocket to synchronize.
+	Name string `form:"name" json:"name"`
+
+	// Series The name of the series.
+	Series string `form:"series" json:"series"`
+
+	// Distribution The name of the distribution.
+	Distribution string `form:"distribution" json:"distribution"`
+}
+
+// TerminateComputerProcessesParams defines parameters for TerminateComputerProcesses.
+type TerminateComputerProcessesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// ComputerId The numerical ID of the computer.
+	ComputerId int `form:"computer_id" json:"computer_id"`
+
+	// Pids A comma separated list of PIDs of the processes to send an TERM signal (Use pids.1, pids.2, etc. for multiple values)
+	Pids []int `form:"pids" json:"pids"`
+}
+
+// UnsubscribeFromAlertParams defines parameters for UnsubscribeFromAlert.
+type UnsubscribeFromAlertParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// AlertType The alert type to remove a subscription from.
+	AlertType string `form:"alert_type" json:"alert_type"`
+}
+
+// UpgradePackagesParams defines parameters for UpgradePackages.
+type UpgradePackagesParams struct {
+	// Version The legacy API version. Landscape currently expects the fixed value `2011-08-01`.
+	Version LegacyVersionParam `form:"version" json:"version"`
+
+	// Action API action
+	Action string `form:"action" json:"action"`
+
+	// Query A qualified criteria to be used in the search.
+	Query string `form:"query" json:"query"`
+
+	// Packages List of package names on which to perform an upgrade. Multiple package names can be supplied like packages.1=foo and packages.2=bar. (Use packages.1, packages.2, etc. for multiple values)
+	Packages *[]string `form:"packages,omitempty" json:"packages,omitempty"`
+
+	// SecurityOnly If 'true' then only packages with USNs, i.e. security upgrades will be applied.
+	SecurityOnly *bool `form:"security_only,omitempty" json:"security_only,omitempty"`
+
+	// DeliverAfter A time in the future to perform the package upgrade.
+	DeliverAfter *string `form:"deliver_after,omitempty" json:"deliver_after,omitempty"`
+
+	// DeliverDelayWindow Randomise delivery within the given time frame specified in minutes
+	DeliverDelayWindow *int `form:"deliver_delay_window,omitempty" json:"deliver_delay_window,omitempty"`
 }
 
 // ListScriptProfilesParams defines parameters for ListScriptProfiles.
@@ -1422,8 +3849,416 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
-	// InvokeLegacyAction request
-	InvokeLegacyAction(ctx context.Context, params *InvokeLegacyActionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// AcceptPendingComputers request
+	AcceptPendingComputers(ctx context.Context, params *AcceptPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AddAPTSourcesToRepositoryProfile request
+	AddAPTSourcesToRepositoryProfile(ctx context.Context, params *AddAPTSourcesToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AddAccessGroupsToRole request
+	AddAccessGroupsToRole(ctx context.Context, params *AddAccessGroupsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AddAnnotationToComputers request
+	AddAnnotationToComputers(ctx context.Context, params *AddAnnotationToComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AddPackageFiltersToPocket request
+	AddPackageFiltersToPocket(ctx context.Context, params *AddPackageFiltersToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AddPermissionsToRole request
+	AddPermissionsToRole(ctx context.Context, params *AddPermissionsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AddPersonsToRole request
+	AddPersonsToRole(ctx context.Context, params *AddPersonsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AddPocketsToRepositoryProfile request
+	AddPocketsToRepositoryProfile(ctx context.Context, params *AddPocketsToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AddTagsToComputers request
+	AddTagsToComputers(ctx context.Context, params *AddTagsToComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AddUploaderGPGKeysToPocket request
+	AddUploaderGPGKeysToPocket(ctx context.Context, params *AddUploaderGPGKeysToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ApproveActivities request
+	ApproveActivities(ctx context.Context, params *ApproveActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AssociateAlert request
+	AssociateAlert(ctx context.Context, params *AssociateAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AssociatePackageProfile request
+	AssociatePackageProfile(ctx context.Context, params *AssociatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AssociateRemovalProfile request
+	AssociateRemovalProfile(ctx context.Context, params *AssociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AssociateRepositoryProfile request
+	AssociateRepositoryProfile(ctx context.Context, params *AssociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// AssociateUpgradeProfile request
+	AssociateUpgradeProfile(ctx context.Context, params *AssociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CancelActivities request
+	CancelActivities(ctx context.Context, params *CancelActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ChangeComputersAccessGroup request
+	ChangeComputersAccessGroup(ctx context.Context, params *ChangeComputersAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CopyPackageProfile request
+	CopyPackageProfile(ctx context.Context, params *CopyPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CopyRole request
+	CopyRole(ctx context.Context, params *CopyRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CopyScript request
+	CopyScript(ctx context.Context, params *CopyScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateAPTSource request
+	CreateAPTSource(ctx context.Context, params *CreateAPTSourceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateAccessGroup request
+	CreateAccessGroup(ctx context.Context, params *CreateAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateChildComputer request
+	CreateChildComputer(ctx context.Context, params *CreateChildComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateDistribution request
+	CreateDistribution(ctx context.Context, params *CreateDistributionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreatePackageProfile request
+	CreatePackageProfile(ctx context.Context, params *CreatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreatePocket request
+	CreatePocket(ctx context.Context, params *CreatePocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateRemovalProfile request
+	CreateRemovalProfile(ctx context.Context, params *CreateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateRepositoryProfile request
+	CreateRepositoryProfile(ctx context.Context, params *CreateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateRole request
+	CreateRole(ctx context.Context, params *CreateRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateSavedSearch request
+	CreateSavedSearch(ctx context.Context, params *CreateSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateScript request
+	CreateScript(ctx context.Context, params *CreateScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateScriptAttachment request
+	CreateScriptAttachment(ctx context.Context, params *CreateScriptAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateSeries request
+	CreateSeries(ctx context.Context, params *CreateSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateUpgradeProfile request
+	CreateUpgradeProfile(ctx context.Context, params *CreateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// CreateUser request
+	CreateUser(ctx context.Context, params *CreateUserParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeleteChildComputers request
+	DeleteChildComputers(ctx context.Context, params *DeleteChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DeriveSeries request
+	DeriveSeries(ctx context.Context, params *DeriveSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DiffPullPocket request
+	DiffPullPocket(ctx context.Context, params *DiffPullPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DisableAdministrator request
+	DisableAdministrator(ctx context.Context, params *DisableAdministratorParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DisassociateAlert request
+	DisassociateAlert(ctx context.Context, params *DisassociateAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DisassociatePackageProfile request
+	DisassociatePackageProfile(ctx context.Context, params *DisassociatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DisassociateRemovalProfile request
+	DisassociateRemovalProfile(ctx context.Context, params *DisassociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DisassociateRepositoryProfile request
+	DisassociateRepositoryProfile(ctx context.Context, params *DisassociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// DisassociateUpgradeProfile request
+	DisassociateUpgradeProfile(ctx context.Context, params *DisassociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EditPackageProfile request
+	EditPackageProfile(ctx context.Context, params *EditPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EditPocket request
+	EditPocket(ctx context.Context, params *EditPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EditRemovalProfile request
+	EditRemovalProfile(ctx context.Context, params *EditRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EditRepositoryProfile request
+	EditRepositoryProfile(ctx context.Context, params *EditRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EditSavedSearch request
+	EditSavedSearch(ctx context.Context, params *EditSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EditScript request
+	EditScript(ctx context.Context, params *EditScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EditUpgradeProfile request
+	EditUpgradeProfile(ctx context.Context, params *EditUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// EditUser request
+	EditUser(ctx context.Context, params *EditUserParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ExecuteScript request
+	ExecuteScript(ctx context.Context, params *ExecuteScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAPTSources request
+	GetAPTSources(ctx context.Context, params *GetAPTSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAccessGroups request
+	GetAccessGroups(ctx context.Context, params *GetAccessGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetActivities request
+	GetActivities(ctx context.Context, params *GetActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetActivityTypes request
+	GetActivityTypes(ctx context.Context, params *GetActivityTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAdministrators request
+	GetAdministrators(ctx context.Context, params *GetAdministratorsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAlertSubscribers request
+	GetAlertSubscribers(ctx context.Context, params *GetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetAlerts request
+	GetAlerts(ctx context.Context, params *GetAlertsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetCSVComplianceData request
+	GetCSVComplianceData(ctx context.Context, params *GetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetComputerProcesses request
+	GetComputerProcesses(ctx context.Context, params *GetComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetComputers request
+	GetComputers(ctx context.Context, params *GetComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetComputersNotUpgraded request
+	GetComputersNotUpgraded(ctx context.Context, params *GetComputersNotUpgradedParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetDistributions request
+	GetDistributions(ctx context.Context, params *GetDistributionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetEventLog request
+	GetEventLog(ctx context.Context, params *GetEventLogParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetGPGKeys request
+	GetGPGKeys(ctx context.Context, params *GetGPGKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetNotPingingComputers request
+	GetNotPingingComputers(ctx context.Context, params *GetNotPingingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetPackageProfiles request
+	GetPackageProfiles(ctx context.Context, params *GetPackageProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetPackages request
+	GetPackages(ctx context.Context, params *GetPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetPendingComputers request
+	GetPendingComputers(ctx context.Context, params *GetPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetPermissions request
+	GetPermissions(ctx context.Context, params *GetPermissionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRemovalProfiles request
+	GetRemovalProfiles(ctx context.Context, params *GetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRepoInfo request
+	GetRepoInfo(ctx context.Context, params *GetRepoInfoParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRepositoryProfiles request
+	GetRepositoryProfiles(ctx context.Context, params *GetRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetRoles request
+	GetRoles(ctx context.Context, params *GetRolesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetSavedSearches request
+	GetSavedSearches(ctx context.Context, params *GetSavedSearchesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetScriptCode request
+	GetScriptCode(ctx context.Context, params *GetScriptCodeParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetScripts request
+	GetScripts(ctx context.Context, params *GetScriptsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetSettings request
+	GetSettings(ctx context.Context, params *GetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetUSNTimeToFix request
+	GetUSNTimeToFix(ctx context.Context, params *GetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetUpgradeProfiles request
+	GetUpgradeProfiles(ctx context.Context, params *GetUpgradeProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetUpgradedComputersByFrequency request
+	GetUpgradedComputersByFrequency(ctx context.Context, params *GetUpgradedComputersByFrequencyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetUsers request
+	GetUsers(ctx context.Context, params *GetUsersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GetWSLHosts request
+	GetWSLHosts(ctx context.Context, params *GetWSLHostsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ImportGPGKey request
+	ImportGPGKey(ctx context.Context, params *ImportGPGKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// InstallPackages request
+	InstallPackages(ctx context.Context, params *InstallPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// InviteAdministrator request
+	InviteAdministrator(ctx context.Context, params *InviteAdministratorParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// KillComputerProcesses request
+	KillComputerProcesses(ctx context.Context, params *KillComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ListPocket request
+	ListPocket(ctx context.Context, params *ListPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ModifyPackageProfile request
+	ModifyPackageProfile(ctx context.Context, params *ModifyPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// PullPackagesToPocket request
+	PullPackagesToPocket(ctx context.Context, params *PullPackagesToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RebootComputers request
+	RebootComputers(ctx context.Context, params *RebootComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RejectPendingComputers request
+	RejectPendingComputers(ctx context.Context, params *RejectPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveAPTSource request
+	RemoveAPTSource(ctx context.Context, params *RemoveAPTSourceParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveAPTSourceFromRepositoryProfile request
+	RemoveAPTSourceFromRepositoryProfile(ctx context.Context, params *RemoveAPTSourceFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveAPTSources request
+	RemoveAPTSources(ctx context.Context, params *RemoveAPTSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveAPTSourcesFromRepositoryProfile request
+	RemoveAPTSourcesFromRepositoryProfile(ctx context.Context, params *RemoveAPTSourcesFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveAccessGroup request
+	RemoveAccessGroup(ctx context.Context, params *RemoveAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveAccessGroupsFromRole request
+	RemoveAccessGroupsFromRole(ctx context.Context, params *RemoveAccessGroupsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveAnnotationFromComputers request
+	RemoveAnnotationFromComputers(ctx context.Context, params *RemoveAnnotationFromComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveComputers request
+	RemoveComputers(ctx context.Context, params *RemoveComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveDistribution request
+	RemoveDistribution(ctx context.Context, params *RemoveDistributionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveGPGKey request
+	RemoveGPGKey(ctx context.Context, params *RemoveGPGKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemovePackageFiltersFromPocket request
+	RemovePackageFiltersFromPocket(ctx context.Context, params *RemovePackageFiltersFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemovePackageProfile request
+	RemovePackageProfile(ctx context.Context, params *RemovePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemovePackages request
+	RemovePackages(ctx context.Context, params *RemovePackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemovePackagesFromPocket request
+	RemovePackagesFromPocket(ctx context.Context, params *RemovePackagesFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemovePermissionsFromRole request
+	RemovePermissionsFromRole(ctx context.Context, params *RemovePermissionsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemovePersonsFromRole request
+	RemovePersonsFromRole(ctx context.Context, params *RemovePersonsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemovePocket request
+	RemovePocket(ctx context.Context, params *RemovePocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemovePocketsFromRepositoryProfile request
+	RemovePocketsFromRepositoryProfile(ctx context.Context, params *RemovePocketsFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveRemovalProfile request
+	RemoveRemovalProfile(ctx context.Context, params *RemoveRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveRepositoryProfile request
+	RemoveRepositoryProfile(ctx context.Context, params *RemoveRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveRepositoryProfiles request
+	RemoveRepositoryProfiles(ctx context.Context, params *RemoveRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveRole request
+	RemoveRole(ctx context.Context, params *RemoveRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveSavedSearch request
+	RemoveSavedSearch(ctx context.Context, params *RemoveSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveScript request
+	RemoveScript(ctx context.Context, params *RemoveScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveScriptAttachment request
+	RemoveScriptAttachment(ctx context.Context, params *RemoveScriptAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveSeries request
+	RemoveSeries(ctx context.Context, params *RemoveSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveTagsFromComputers request
+	RemoveTagsFromComputers(ctx context.Context, params *RemoveTagsFromComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveUpgradeProfile request
+	RemoveUpgradeProfile(ctx context.Context, params *RemoveUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveUploaderGPGKeysFromPocket request
+	RemoveUploaderGPGKeysFromPocket(ctx context.Context, params *RemoveUploaderGPGKeysFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RemoveWSLHosts request
+	RemoveWSLHosts(ctx context.Context, params *RemoveWSLHostsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// RenameComputers request
+	RenameComputers(ctx context.Context, params *RenameComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// SetDefaultChildComputer request
+	SetDefaultChildComputer(ctx context.Context, params *SetDefaultChildComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// SetSettings request
+	SetSettings(ctx context.Context, params *SetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ShutdownComputers request
+	ShutdownComputers(ctx context.Context, params *ShutdownComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// ShutdownHostComputer request
+	ShutdownHostComputer(ctx context.Context, params *ShutdownHostComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// StartChildComputers request
+	StartChildComputers(ctx context.Context, params *StartChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// StopChildComputers request
+	StopChildComputers(ctx context.Context, params *StopChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// SubscribeToAlert request
+	SubscribeToAlert(ctx context.Context, params *SubscribeToAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// SyncMirrorPocket request
+	SyncMirrorPocket(ctx context.Context, params *SyncMirrorPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// TerminateComputerProcesses request
+	TerminateComputerProcesses(ctx context.Context, params *TerminateComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UnsubscribeFromAlert request
+	UnsubscribeFromAlert(ctx context.Context, params *UnsubscribeFromAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// UpgradePackages request
+	UpgradePackages(ctx context.Context, params *UpgradePackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LoginWithPasswordWithBody request with any body
 	LoginWithPasswordWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -1479,8 +4314,1640 @@ type ClientInterface interface {
 	RedactScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
-func (c *Client) InvokeLegacyAction(ctx context.Context, params *InvokeLegacyActionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewInvokeLegacyActionRequest(c.Server, params)
+func (c *Client) AcceptPendingComputers(ctx context.Context, params *AcceptPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAcceptPendingComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AddAPTSourcesToRepositoryProfile(ctx context.Context, params *AddAPTSourcesToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddAPTSourcesToRepositoryProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AddAccessGroupsToRole(ctx context.Context, params *AddAccessGroupsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddAccessGroupsToRoleRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AddAnnotationToComputers(ctx context.Context, params *AddAnnotationToComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddAnnotationToComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AddPackageFiltersToPocket(ctx context.Context, params *AddPackageFiltersToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddPackageFiltersToPocketRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AddPermissionsToRole(ctx context.Context, params *AddPermissionsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddPermissionsToRoleRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AddPersonsToRole(ctx context.Context, params *AddPersonsToRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddPersonsToRoleRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AddPocketsToRepositoryProfile(ctx context.Context, params *AddPocketsToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddPocketsToRepositoryProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AddTagsToComputers(ctx context.Context, params *AddTagsToComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddTagsToComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AddUploaderGPGKeysToPocket(ctx context.Context, params *AddUploaderGPGKeysToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddUploaderGPGKeysToPocketRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ApproveActivities(ctx context.Context, params *ApproveActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewApproveActivitiesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AssociateAlert(ctx context.Context, params *AssociateAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAssociateAlertRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AssociatePackageProfile(ctx context.Context, params *AssociatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAssociatePackageProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AssociateRemovalProfile(ctx context.Context, params *AssociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAssociateRemovalProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AssociateRepositoryProfile(ctx context.Context, params *AssociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAssociateRepositoryProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AssociateUpgradeProfile(ctx context.Context, params *AssociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAssociateUpgradeProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CancelActivities(ctx context.Context, params *CancelActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCancelActivitiesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ChangeComputersAccessGroup(ctx context.Context, params *ChangeComputersAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewChangeComputersAccessGroupRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CopyPackageProfile(ctx context.Context, params *CopyPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCopyPackageProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CopyRole(ctx context.Context, params *CopyRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCopyRoleRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CopyScript(ctx context.Context, params *CopyScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCopyScriptRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateAPTSource(ctx context.Context, params *CreateAPTSourceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAPTSourceRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateAccessGroup(ctx context.Context, params *CreateAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateAccessGroupRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateChildComputer(ctx context.Context, params *CreateChildComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateChildComputerRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistributionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateDistributionRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreatePackageProfile(ctx context.Context, params *CreatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreatePackageProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreatePocket(ctx context.Context, params *CreatePocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreatePocketRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRemovalProfile(ctx context.Context, params *CreateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRemovalProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRepositoryProfile(ctx context.Context, params *CreateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRepositoryProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateRole(ctx context.Context, params *CreateRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateRoleRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateSavedSearch(ctx context.Context, params *CreateSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateSavedSearchRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateScript(ctx context.Context, params *CreateScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScriptRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateScriptAttachment(ctx context.Context, params *CreateScriptAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateScriptAttachmentRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateSeries(ctx context.Context, params *CreateSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateSeriesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateUpgradeProfile(ctx context.Context, params *CreateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateUpgradeProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) CreateUser(ctx context.Context, params *CreateUserParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewCreateUserRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeleteChildComputers(ctx context.Context, params *DeleteChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeleteChildComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DeriveSeries(ctx context.Context, params *DeriveSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDeriveSeriesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DiffPullPocket(ctx context.Context, params *DiffPullPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDiffPullPocketRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DisableAdministrator(ctx context.Context, params *DisableAdministratorParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDisableAdministratorRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DisassociateAlert(ctx context.Context, params *DisassociateAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDisassociateAlertRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DisassociatePackageProfile(ctx context.Context, params *DisassociatePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDisassociatePackageProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DisassociateRemovalProfile(ctx context.Context, params *DisassociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDisassociateRemovalProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DisassociateRepositoryProfile(ctx context.Context, params *DisassociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDisassociateRepositoryProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) DisassociateUpgradeProfile(ctx context.Context, params *DisassociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewDisassociateUpgradeProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EditPackageProfile(ctx context.Context, params *EditPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEditPackageProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EditPocket(ctx context.Context, params *EditPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEditPocketRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EditRemovalProfile(ctx context.Context, params *EditRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEditRemovalProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EditRepositoryProfile(ctx context.Context, params *EditRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEditRepositoryProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EditSavedSearch(ctx context.Context, params *EditSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEditSavedSearchRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EditScript(ctx context.Context, params *EditScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEditScriptRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EditUpgradeProfile(ctx context.Context, params *EditUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEditUpgradeProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) EditUser(ctx context.Context, params *EditUserParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewEditUserRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ExecuteScript(ctx context.Context, params *ExecuteScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewExecuteScriptRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAPTSources(ctx context.Context, params *GetAPTSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAPTSourcesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAccessGroups(ctx context.Context, params *GetAccessGroupsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAccessGroupsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetActivities(ctx context.Context, params *GetActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetActivitiesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetActivityTypes(ctx context.Context, params *GetActivityTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetActivityTypesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAdministrators(ctx context.Context, params *GetAdministratorsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAdministratorsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAlertSubscribers(ctx context.Context, params *GetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAlertSubscribersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetAlerts(ctx context.Context, params *GetAlertsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetAlertsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetCSVComplianceData(ctx context.Context, params *GetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetCSVComplianceDataRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetComputerProcesses(ctx context.Context, params *GetComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetComputerProcessesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetComputers(ctx context.Context, params *GetComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetComputersNotUpgraded(ctx context.Context, params *GetComputersNotUpgradedParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetComputersNotUpgradedRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetDistributions(ctx context.Context, params *GetDistributionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetDistributionsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetEventLog(ctx context.Context, params *GetEventLogParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetEventLogRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetGPGKeys(ctx context.Context, params *GetGPGKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetGPGKeysRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetNotPingingComputers(ctx context.Context, params *GetNotPingingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetNotPingingComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetPackageProfiles(ctx context.Context, params *GetPackageProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPackageProfilesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetPackages(ctx context.Context, params *GetPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPackagesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetPendingComputers(ctx context.Context, params *GetPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPendingComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetPermissions(ctx context.Context, params *GetPermissionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetPermissionsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetRemovalProfiles(ctx context.Context, params *GetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRemovalProfilesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetRepoInfo(ctx context.Context, params *GetRepoInfoParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRepoInfoRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetRepositoryProfiles(ctx context.Context, params *GetRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRepositoryProfilesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetRoles(ctx context.Context, params *GetRolesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetRolesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetSavedSearches(ctx context.Context, params *GetSavedSearchesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetSavedSearchesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetScriptCode(ctx context.Context, params *GetScriptCodeParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetScriptCodeRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetScripts(ctx context.Context, params *GetScriptsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetScriptsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetSettings(ctx context.Context, params *GetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetSettingsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetUSNTimeToFix(ctx context.Context, params *GetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetUSNTimeToFixRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetUpgradeProfiles(ctx context.Context, params *GetUpgradeProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetUpgradeProfilesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetUpgradedComputersByFrequency(ctx context.Context, params *GetUpgradedComputersByFrequencyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetUpgradedComputersByFrequencyRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetUsers(ctx context.Context, params *GetUsersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetUsersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) GetWSLHosts(ctx context.Context, params *GetWSLHostsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGetWSLHostsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ImportGPGKey(ctx context.Context, params *ImportGPGKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewImportGPGKeyRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) InstallPackages(ctx context.Context, params *InstallPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewInstallPackagesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) InviteAdministrator(ctx context.Context, params *InviteAdministratorParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewInviteAdministratorRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) KillComputerProcesses(ctx context.Context, params *KillComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewKillComputerProcessesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ListPocket(ctx context.Context, params *ListPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListPocketRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ModifyPackageProfile(ctx context.Context, params *ModifyPackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewModifyPackageProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) PullPackagesToPocket(ctx context.Context, params *PullPackagesToPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewPullPackagesToPocketRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RebootComputers(ctx context.Context, params *RebootComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRebootComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RejectPendingComputers(ctx context.Context, params *RejectPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRejectPendingComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveAPTSource(ctx context.Context, params *RemoveAPTSourceParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveAPTSourceRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveAPTSourceFromRepositoryProfile(ctx context.Context, params *RemoveAPTSourceFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveAPTSourceFromRepositoryProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveAPTSources(ctx context.Context, params *RemoveAPTSourcesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveAPTSourcesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveAPTSourcesFromRepositoryProfile(ctx context.Context, params *RemoveAPTSourcesFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveAPTSourcesFromRepositoryProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveAccessGroup(ctx context.Context, params *RemoveAccessGroupParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveAccessGroupRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveAccessGroupsFromRole(ctx context.Context, params *RemoveAccessGroupsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveAccessGroupsFromRoleRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveAnnotationFromComputers(ctx context.Context, params *RemoveAnnotationFromComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveAnnotationFromComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveComputers(ctx context.Context, params *RemoveComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveDistribution(ctx context.Context, params *RemoveDistributionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveDistributionRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveGPGKey(ctx context.Context, params *RemoveGPGKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveGPGKeyRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemovePackageFiltersFromPocket(ctx context.Context, params *RemovePackageFiltersFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemovePackageFiltersFromPocketRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemovePackageProfile(ctx context.Context, params *RemovePackageProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemovePackageProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemovePackages(ctx context.Context, params *RemovePackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemovePackagesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemovePackagesFromPocket(ctx context.Context, params *RemovePackagesFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemovePackagesFromPocketRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemovePermissionsFromRole(ctx context.Context, params *RemovePermissionsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemovePermissionsFromRoleRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemovePersonsFromRole(ctx context.Context, params *RemovePersonsFromRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemovePersonsFromRoleRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemovePocket(ctx context.Context, params *RemovePocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemovePocketRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemovePocketsFromRepositoryProfile(ctx context.Context, params *RemovePocketsFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemovePocketsFromRepositoryProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveRemovalProfile(ctx context.Context, params *RemoveRemovalProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveRemovalProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveRepositoryProfile(ctx context.Context, params *RemoveRepositoryProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveRepositoryProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveRepositoryProfiles(ctx context.Context, params *RemoveRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveRepositoryProfilesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveRole(ctx context.Context, params *RemoveRoleParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveRoleRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveSavedSearch(ctx context.Context, params *RemoveSavedSearchParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveSavedSearchRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveScript(ctx context.Context, params *RemoveScriptParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveScriptRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveScriptAttachment(ctx context.Context, params *RemoveScriptAttachmentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveScriptAttachmentRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveSeries(ctx context.Context, params *RemoveSeriesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveSeriesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveTagsFromComputers(ctx context.Context, params *RemoveTagsFromComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveTagsFromComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveUpgradeProfile(ctx context.Context, params *RemoveUpgradeProfileParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveUpgradeProfileRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveUploaderGPGKeysFromPocket(ctx context.Context, params *RemoveUploaderGPGKeysFromPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveUploaderGPGKeysFromPocketRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RemoveWSLHosts(ctx context.Context, params *RemoveWSLHostsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRemoveWSLHostsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) RenameComputers(ctx context.Context, params *RenameComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewRenameComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) SetDefaultChildComputer(ctx context.Context, params *SetDefaultChildComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSetDefaultChildComputerRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) SetSettings(ctx context.Context, params *SetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSetSettingsRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ShutdownComputers(ctx context.Context, params *ShutdownComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewShutdownComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ShutdownHostComputer(ctx context.Context, params *ShutdownHostComputerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewShutdownHostComputerRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) StartChildComputers(ctx context.Context, params *StartChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewStartChildComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) StopChildComputers(ctx context.Context, params *StopChildComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewStopChildComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) SubscribeToAlert(ctx context.Context, params *SubscribeToAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSubscribeToAlertRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) SyncMirrorPocket(ctx context.Context, params *SyncMirrorPocketParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewSyncMirrorPocketRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) TerminateComputerProcesses(ctx context.Context, params *TerminateComputerProcessesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewTerminateComputerProcessesRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UnsubscribeFromAlert(ctx context.Context, params *UnsubscribeFromAlertParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUnsubscribeFromAlertRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) UpgradePackages(ctx context.Context, params *UpgradePackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewUpgradePackagesRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -1719,8 +6186,8 @@ func (c *Client) RedactScript(ctx context.Context, scriptId ScriptIdPathParam, r
 	return c.Client.Do(req)
 }
 
-// NewInvokeLegacyActionRequest generates requests for InvokeLegacyAction
-func NewInvokeLegacyActionRequest(server string, params *InvokeLegacyActionParams) (*http.Request, error) {
+// NewAcceptPendingComputersRequest generates requests for AcceptPendingComputers
+func NewAcceptPendingComputersRequest(server string, params *AcceptPendingComputersParams) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -1728,7 +6195,6604 @@ func NewInvokeLegacyActionRequest(server string, params *InvokeLegacyActionParam
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/api")
+	operationPath := fmt.Sprintf("/api/?action=AcceptPendingComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.ExistingIds != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "existing_ids", runtime.ParamLocationQuery, *params.ExistingIds); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AccessGroup != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_group", runtime.ParamLocationQuery, *params.AccessGroup); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAddAPTSourcesToRepositoryProfileRequest generates requests for AddAPTSourcesToRepositoryProfile
+func NewAddAPTSourcesToRepositoryProfileRequest(server string, params *AddAPTSourcesToRepositoryProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AddAPTSourcesToRepositoryProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "apt_sources", runtime.ParamLocationQuery, params.AptSources); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAddAccessGroupsToRoleRequest generates requests for AddAccessGroupsToRole
+func NewAddAccessGroupsToRoleRequest(server string, params *AddAccessGroupsToRoleParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AddAccessGroupsToRole")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_groups", runtime.ParamLocationQuery, params.AccessGroups); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAddAnnotationToComputersRequest generates requests for AddAnnotationToComputers
+func NewAddAnnotationToComputersRequest(server string, params *AddAnnotationToComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AddAnnotationToComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "key", runtime.ParamLocationQuery, params.Key); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Value != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "value", runtime.ParamLocationQuery, *params.Value); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAddPackageFiltersToPocketRequest generates requests for AddPackageFiltersToPocket
+func NewAddPackageFiltersToPocketRequest(server string, params *AddPackageFiltersToPocketParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AddPackageFiltersToPocket")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "packages", runtime.ParamLocationQuery, params.Packages); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAddPermissionsToRoleRequest generates requests for AddPermissionsToRole
+func NewAddPermissionsToRoleRequest(server string, params *AddPermissionsToRoleParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AddPermissionsToRole")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "permissions", runtime.ParamLocationQuery, params.Permissions); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAddPersonsToRoleRequest generates requests for AddPersonsToRole
+func NewAddPersonsToRoleRequest(server string, params *AddPersonsToRoleParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AddPersonsToRole")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "persons", runtime.ParamLocationQuery, params.Persons); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAddPocketsToRepositoryProfileRequest generates requests for AddPocketsToRepositoryProfile
+func NewAddPocketsToRepositoryProfileRequest(server string, params *AddPocketsToRepositoryProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AddPocketsToRepositoryProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "pockets", runtime.ParamLocationQuery, params.Pockets); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAddTagsToComputersRequest generates requests for AddTagsToComputers
+func NewAddTagsToComputersRequest(server string, params *AddTagsToComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AddTagsToComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, params.Tags); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAddUploaderGPGKeysToPocketRequest generates requests for AddUploaderGPGKeysToPocket
+func NewAddUploaderGPGKeysToPocketRequest(server string, params *AddUploaderGPGKeysToPocketParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AddUploaderGPGKeysToPocket")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "gpg_keys", runtime.ParamLocationQuery, params.GpgKeys); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewApproveActivitiesRequest generates requests for ApproveActivities
+func NewApproveActivitiesRequest(server string, params *ApproveActivitiesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=ApproveActivities")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAssociateAlertRequest generates requests for AssociateAlert
+func NewAssociateAlertRequest(server string, params *AssociateAlertParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AssociateAlert")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAssociatePackageProfileRequest generates requests for AssociatePackageProfile
+func NewAssociatePackageProfileRequest(server string, params *AssociatePackageProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AssociatePackageProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAssociateRemovalProfileRequest generates requests for AssociateRemovalProfile
+func NewAssociateRemovalProfileRequest(server string, params *AssociateRemovalProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AssociateRemovalProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAssociateRepositoryProfileRequest generates requests for AssociateRepositoryProfile
+func NewAssociateRepositoryProfileRequest(server string, params *AssociateRepositoryProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AssociateRepositoryProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewAssociateUpgradeProfileRequest generates requests for AssociateUpgradeProfile
+func NewAssociateUpgradeProfileRequest(server string, params *AssociateUpgradeProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=AssociateUpgradeProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCancelActivitiesRequest generates requests for CancelActivities
+func NewCancelActivitiesRequest(server string, params *CancelActivitiesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CancelActivities")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewChangeComputersAccessGroupRequest generates requests for ChangeComputersAccessGroup
+func NewChangeComputersAccessGroupRequest(server string, params *ChangeComputersAccessGroupParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=ChangeComputersAccessGroup")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_group", runtime.ParamLocationQuery, params.AccessGroup); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCopyPackageProfileRequest generates requests for CopyPackageProfile
+func NewCopyPackageProfileRequest(server string, params *CopyPackageProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CopyPackageProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.DestinationName != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "destination_name", runtime.ParamLocationQuery, *params.DestinationName); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Title != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, *params.Title); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Description != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "description", runtime.ParamLocationQuery, *params.Description); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AccessGroup != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_group", runtime.ParamLocationQuery, *params.AccessGroup); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCopyRoleRequest generates requests for CopyRole
+func NewCopyRoleRequest(server string, params *CopyRoleParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CopyRole")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "destination_name", runtime.ParamLocationQuery, params.DestinationName); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Description != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "description", runtime.ParamLocationQuery, *params.Description); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCopyScriptRequest generates requests for CopyScript
+func NewCopyScriptRequest(server string, params *CopyScriptParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CopyScript")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "destination_title", runtime.ParamLocationQuery, params.DestinationTitle); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.AccessGroup != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_group", runtime.ParamLocationQuery, *params.AccessGroup); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateAPTSourceRequest generates requests for CreateAPTSource
+func NewCreateAPTSourceRequest(server string, params *CreateAPTSourceParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateAPTSource")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "apt_line", runtime.ParamLocationQuery, params.AptLine); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.GpgKey != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "gpg_key", runtime.ParamLocationQuery, *params.GpgKey); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AccessGroup != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_group", runtime.ParamLocationQuery, *params.AccessGroup); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateAccessGroupRequest generates requests for CreateAccessGroup
+func NewCreateAccessGroupRequest(server string, params *CreateAccessGroupParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateAccessGroup")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Parent != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "parent", runtime.ParamLocationQuery, *params.Parent); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateChildComputerRequest generates requests for CreateChildComputer
+func NewCreateChildComputerRequest(server string, params *CreateChildComputerParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateChildComputer")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_name", runtime.ParamLocationQuery, params.ComputerName); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.CloudInit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cloud_init", runtime.ParamLocationQuery, *params.CloudInit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.RootfsUrl != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "rootfs_url", runtime.ParamLocationQuery, *params.RootfsUrl); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "parent_id", runtime.ParamLocationQuery, params.ParentId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateDistributionRequest generates requests for CreateDistribution
+func NewCreateDistributionRequest(server string, params *CreateDistributionParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateDistribution")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.AccessGroup != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_group", runtime.ParamLocationQuery, *params.AccessGroup); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreatePackageProfileRequest generates requests for CreatePackageProfile
+func NewCreatePackageProfileRequest(server string, params *CreatePackageProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreatePackageProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "description", runtime.ParamLocationQuery, params.Description); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.SourceComputerId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "source_computer_id", runtime.ParamLocationQuery, *params.SourceComputerId); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Material != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "material", runtime.ParamLocationQuery, *params.Material); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Constraints != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "constraints", runtime.ParamLocationQuery, *params.Constraints); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AccessGroup != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_group", runtime.ParamLocationQuery, *params.AccessGroup); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreatePocketRequest generates requests for CreatePocket
+func NewCreatePocketRequest(server string, params *CreatePocketParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreatePocket")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "components", runtime.ParamLocationQuery, params.Components); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "architectures", runtime.ParamLocationQuery, params.Architectures); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mode", runtime.ParamLocationQuery, params.Mode); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "gpg_key", runtime.ParamLocationQuery, params.GpgKey); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.IncludeUdeb != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include_udeb", runtime.ParamLocationQuery, *params.IncludeUdeb); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.MirrorUri != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mirror_uri", runtime.ParamLocationQuery, *params.MirrorUri); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.MirrorSuite != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mirror_suite", runtime.ParamLocationQuery, *params.MirrorSuite); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.MirrorGpgKey != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mirror_gpg_key", runtime.ParamLocationQuery, *params.MirrorGpgKey); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PullSeries != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "pull_series", runtime.ParamLocationQuery, *params.PullSeries); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PullPocket != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "pull_pocket", runtime.ParamLocationQuery, *params.PullPocket); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterType != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter_type", runtime.ParamLocationQuery, *params.FilterType); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FilterPackages != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filter_packages", runtime.ParamLocationQuery, *params.FilterPackages); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.UploadAllowUnsigned != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "upload_allow_unsigned", runtime.ParamLocationQuery, *params.UploadAllowUnsigned); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Origin != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "origin", runtime.ParamLocationQuery, *params.Origin); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateRemovalProfileRequest generates requests for CreateRemovalProfile
+func NewCreateRemovalProfileRequest(server string, params *CreateRemovalProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateRemovalProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "days_without_exchange", runtime.ParamLocationQuery, params.DaysWithoutExchange); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.AccessGroup != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_group", runtime.ParamLocationQuery, *params.AccessGroup); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.CascadeToChildren != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cascade_to_children", runtime.ParamLocationQuery, *params.CascadeToChildren); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateRepositoryProfileRequest generates requests for CreateRepositoryProfile
+func NewCreateRepositoryProfileRequest(server string, params *CreateRepositoryProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateRepositoryProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Description != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "description", runtime.ParamLocationQuery, *params.Description); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AccessGroup != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_group", runtime.ParamLocationQuery, *params.AccessGroup); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateRoleRequest generates requests for CreateRole
+func NewCreateRoleRequest(server string, params *CreateRoleParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateRole")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Description != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "description", runtime.ParamLocationQuery, *params.Description); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateSavedSearchRequest generates requests for CreateSavedSearch
+func NewCreateSavedSearchRequest(server string, params *CreateSavedSearchParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateSavedSearch")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Name != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, *params.Name); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "search", runtime.ParamLocationQuery, params.Search); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateScriptRequest generates requests for CreateScript
+func NewCreateScriptRequest(server string, params *CreateScriptParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateScript")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.TimeLimit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "time_limit", runtime.ParamLocationQuery, *params.TimeLimit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "code", runtime.ParamLocationQuery, params.Code); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Username != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "username", runtime.ParamLocationQuery, *params.Username); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AccessGroup != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_group", runtime.ParamLocationQuery, *params.AccessGroup); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.ScriptType != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_type", runtime.ParamLocationQuery, *params.ScriptType); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateScriptAttachmentRequest generates requests for CreateScriptAttachment
+func NewCreateScriptAttachmentRequest(server string, params *CreateScriptAttachmentParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateScriptAttachment")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "file", runtime.ParamLocationQuery, params.File); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateSeriesRequest generates requests for CreateSeries
+func NewCreateSeriesRequest(server string, params *CreateSeriesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateSeries")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Pockets != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "pockets", runtime.ParamLocationQuery, *params.Pockets); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Components != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "components", runtime.ParamLocationQuery, *params.Components); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Architectures != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "architectures", runtime.ParamLocationQuery, *params.Architectures); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.GpgKey != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "gpg_key", runtime.ParamLocationQuery, *params.GpgKey); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.MirrorUri != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mirror_uri", runtime.ParamLocationQuery, *params.MirrorUri); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.MirrorSeries != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mirror_series", runtime.ParamLocationQuery, *params.MirrorSeries); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.MirrorGpgKey != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mirror_gpg_key", runtime.ParamLocationQuery, *params.MirrorGpgKey); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.IncludeUdeb != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include_udeb", runtime.ParamLocationQuery, *params.IncludeUdeb); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Origin != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "origin", runtime.ParamLocationQuery, *params.Origin); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateUpgradeProfileRequest generates requests for CreateUpgradeProfile
+func NewCreateUpgradeProfileRequest(server string, params *CreateUpgradeProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateUpgradeProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "every", runtime.ParamLocationQuery, params.Every); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.OnDays != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "on_days", runtime.ParamLocationQuery, *params.OnDays); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AtHour != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "at_hour", runtime.ParamLocationQuery, *params.AtHour); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "at_minute", runtime.ParamLocationQuery, params.AtMinute); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.DeliverWithin != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_within", runtime.ParamLocationQuery, *params.DeliverWithin); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.DeliverDelayWindow != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_delay_window", runtime.ParamLocationQuery, *params.DeliverDelayWindow); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SecurityUpgrade != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "security_upgrade", runtime.ParamLocationQuery, *params.SecurityUpgrade); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.UpgradeType != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "upgrade_type", runtime.ParamLocationQuery, *params.UpgradeType); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Autoremove != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "autoremove", runtime.ParamLocationQuery, *params.Autoremove); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AccessGroup != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_group", runtime.ParamLocationQuery, *params.AccessGroup); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewCreateUserRequest generates requests for CreateUser
+func NewCreateUserRequest(server string, params *CreateUserParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=CreateUser")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "username", runtime.ParamLocationQuery, params.Username); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "password", runtime.ParamLocationQuery, params.Password); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.RequirePasswordReset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "require_password_reset", runtime.ParamLocationQuery, *params.RequirePasswordReset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PrimaryGroupname != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "primary_groupname", runtime.ParamLocationQuery, *params.PrimaryGroupname); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Location != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "location", runtime.ParamLocationQuery, *params.Location); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.HomePhone != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "home_phone", runtime.ParamLocationQuery, *params.HomePhone); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WorkPhone != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "work_phone", runtime.ParamLocationQuery, *params.WorkPhone); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDeleteChildComputersRequest generates requests for DeleteChildComputers
+func NewDeleteChildComputersRequest(server string, params *DeleteChildComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=DeleteChildComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDeriveSeriesRequest generates requests for DeriveSeries
+func NewDeriveSeriesRequest(server string, params *DeriveSeriesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=DeriveSeries")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "origin", runtime.ParamLocationQuery, params.Origin); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDiffPullPocketRequest generates requests for DiffPullPocket
+func NewDiffPullPocketRequest(server string, params *DiffPullPocketParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=DiffPullPocket")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDisableAdministratorRequest generates requests for DisableAdministrator
+func NewDisableAdministratorRequest(server string, params *DisableAdministratorParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=DisableAdministrator")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "email", runtime.ParamLocationQuery, params.Email); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDisassociateAlertRequest generates requests for DisassociateAlert
+func NewDisassociateAlertRequest(server string, params *DisassociateAlertParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=DisassociateAlert")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDisassociatePackageProfileRequest generates requests for DisassociatePackageProfile
+func NewDisassociatePackageProfileRequest(server string, params *DisassociatePackageProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=DisassociatePackageProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDisassociateRemovalProfileRequest generates requests for DisassociateRemovalProfile
+func NewDisassociateRemovalProfileRequest(server string, params *DisassociateRemovalProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=DisassociateRemovalProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDisassociateRepositoryProfileRequest generates requests for DisassociateRepositoryProfile
+func NewDisassociateRepositoryProfileRequest(server string, params *DisassociateRepositoryProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=DisassociateRepositoryProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewDisassociateUpgradeProfileRequest generates requests for DisassociateUpgradeProfile
+func NewDisassociateUpgradeProfileRequest(server string, params *DisassociateUpgradeProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=DisassociateUpgradeProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEditPackageProfileRequest generates requests for EditPackageProfile
+func NewEditPackageProfileRequest(server string, params *EditPackageProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=EditPackageProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Title != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, *params.Title); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AddConstraints != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "add_constraints", runtime.ParamLocationQuery, *params.AddConstraints); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.RemoveConstraints != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "remove_constraints", runtime.ParamLocationQuery, *params.RemoveConstraints); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEditPocketRequest generates requests for EditPocket
+func NewEditPocketRequest(server string, params *EditPocketParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=EditPocket")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Components != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "components", runtime.ParamLocationQuery, *params.Components); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Architectures != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "architectures", runtime.ParamLocationQuery, *params.Architectures); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.GpgKey != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "gpg_key", runtime.ParamLocationQuery, *params.GpgKey); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.MirrorUri != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mirror_uri", runtime.ParamLocationQuery, *params.MirrorUri); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.MirrorSuite != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mirror_suite", runtime.ParamLocationQuery, *params.MirrorSuite); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.MirrorGpgKey != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mirror_gpg_key", runtime.ParamLocationQuery, *params.MirrorGpgKey); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.UploadAllowUnsigned != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "upload_allow_unsigned", runtime.ParamLocationQuery, *params.UploadAllowUnsigned); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.IncludeUdeb != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include_udeb", runtime.ParamLocationQuery, *params.IncludeUdeb); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEditRemovalProfileRequest generates requests for EditRemovalProfile
+func NewEditRemovalProfileRequest(server string, params *EditRemovalProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=EditRemovalProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Title != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, *params.Title); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.DaysWithoutExchange != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "days_without_exchange", runtime.ParamLocationQuery, *params.DaysWithoutExchange); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEditRepositoryProfileRequest generates requests for EditRepositoryProfile
+func NewEditRepositoryProfileRequest(server string, params *EditRepositoryProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=EditRepositoryProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Title != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, *params.Title); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Description != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "description", runtime.ParamLocationQuery, *params.Description); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEditSavedSearchRequest generates requests for EditSavedSearch
+func NewEditSavedSearchRequest(server string, params *EditSavedSearchParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=EditSavedSearch")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Title != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, *params.Title); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Search != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "search", runtime.ParamLocationQuery, *params.Search); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEditScriptRequest generates requests for EditScript
+func NewEditScriptRequest(server string, params *EditScriptParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=EditScript")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Title != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, *params.Title); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.TimeLimit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "time_limit", runtime.ParamLocationQuery, *params.TimeLimit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Code != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "code", runtime.ParamLocationQuery, *params.Code); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Username != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "username", runtime.ParamLocationQuery, *params.Username); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEditUpgradeProfileRequest generates requests for EditUpgradeProfile
+func NewEditUpgradeProfileRequest(server string, params *EditUpgradeProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=EditUpgradeProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Title != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, *params.Title); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Every != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "every", runtime.ParamLocationQuery, *params.Every); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.OnDays != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "on_days", runtime.ParamLocationQuery, *params.OnDays); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AtHour != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "at_hour", runtime.ParamLocationQuery, *params.AtHour); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AtMinute != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "at_minute", runtime.ParamLocationQuery, *params.AtMinute); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.DeliverWithin != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_within", runtime.ParamLocationQuery, *params.DeliverWithin); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.DeliverDelayWindow != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_delay_window", runtime.ParamLocationQuery, *params.DeliverDelayWindow); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SecurityUpgrade != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "security_upgrade", runtime.ParamLocationQuery, *params.SecurityUpgrade); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.UpgradeType != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "upgrade_type", runtime.ParamLocationQuery, *params.UpgradeType); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Autoremove != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "autoremove", runtime.ParamLocationQuery, *params.Autoremove); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Tags != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, *params.Tags); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AllComputers != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "all_computers", runtime.ParamLocationQuery, *params.AllComputers); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewEditUserRequest generates requests for EditUser
+func NewEditUserRequest(server string, params *EditUserParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=EditUser")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "username", runtime.ParamLocationQuery, params.Username); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Name != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, *params.Name); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Password != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "password", runtime.ParamLocationQuery, *params.Password); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PrimaryGroupname != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "primary_groupname", runtime.ParamLocationQuery, *params.PrimaryGroupname); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Location != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "location", runtime.ParamLocationQuery, *params.Location); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.HomePhone != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "home_phone", runtime.ParamLocationQuery, *params.HomePhone); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WorkPhone != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "work_phone", runtime.ParamLocationQuery, *params.WorkPhone); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewExecuteScriptRequest generates requests for ExecuteScript
+func NewExecuteScriptRequest(server string, params *ExecuteScriptParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=ExecuteScript")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Username != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "username", runtime.ParamLocationQuery, *params.Username); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.DeliverAfter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_after", runtime.ParamLocationQuery, *params.DeliverAfter); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.TimeLimit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "time_limit", runtime.ParamLocationQuery, *params.TimeLimit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.InAccessGroup != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "in_access_group", runtime.ParamLocationQuery, *params.InAccessGroup); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAPTSourcesRequest generates requests for GetAPTSources
+func NewGetAPTSourcesRequest(server string, params *GetAPTSourcesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetAPTSources")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Names != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAccessGroupsRequest generates requests for GetAccessGroups
+func NewGetAccessGroupsRequest(server string, params *GetAccessGroupsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetAccessGroups")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Names != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetActivitiesRequest generates requests for GetActivities
+func NewGetActivitiesRequest(server string, params *GetActivitiesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetActivities")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Query != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, *params.Query); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetActivityTypesRequest generates requests for GetActivityTypes
+func NewGetActivityTypesRequest(server string, params *GetActivityTypesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetActivityTypes")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -1768,7 +12832,6822 @@ func NewInvokeLegacyActionRequest(server string, params *InvokeLegacyActionParam
 		queryURL.RawQuery = queryValues.Encode()
 	}
 
-	req, err := http.NewRequest("POST", queryURL.String(), nil)
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAdministratorsRequest generates requests for GetAdministrators
+func NewGetAdministratorsRequest(server string, params *GetAdministratorsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetAdministrators")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAlertSubscribersRequest generates requests for GetAlertSubscribers
+func NewGetAlertSubscribersRequest(server string, params *GetAlertSubscribersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetAlertSubscribers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "alert_type", runtime.ParamLocationQuery, params.AlertType); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetAlertsRequest generates requests for GetAlerts
+func NewGetAlertsRequest(server string, params *GetAlertsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetAlerts")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetCSVComplianceDataRequest generates requests for GetCSVComplianceData
+func NewGetCSVComplianceDataRequest(server string, params *GetCSVComplianceDataParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetCSVComplianceData")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Query != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, *params.Query); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.MaxDays != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "max_days", runtime.ParamLocationQuery, *params.MaxDays); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.ByCve != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "by_cve", runtime.ParamLocationQuery, *params.ByCve); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetComputerProcessesRequest generates requests for GetComputerProcesses
+func NewGetComputerProcessesRequest(server string, params *GetComputerProcessesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetComputerProcesses")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_id", runtime.ParamLocationQuery, params.ComputerId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetComputersRequest generates requests for GetComputers
+func NewGetComputersRequest(server string, params *GetComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Query != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, *params.Query); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithNetwork != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_network", runtime.ParamLocationQuery, *params.WithNetwork); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithAllNetwork != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_all_network", runtime.ParamLocationQuery, *params.WithAllNetwork); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithHardware != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_hardware", runtime.ParamLocationQuery, *params.WithHardware); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithAnnotations != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_annotations", runtime.ParamLocationQuery, *params.WithAnnotations); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithGroupedHardware != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_grouped_hardware", runtime.ParamLocationQuery, *params.WithGroupedHardware); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetComputersNotUpgradedRequest generates requests for GetComputersNotUpgraded
+func NewGetComputersNotUpgradedRequest(server string, params *GetComputersNotUpgradedParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetComputersNotUpgraded")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Query != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, *params.Query); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetDistributionsRequest generates requests for GetDistributions
+func NewGetDistributionsRequest(server string, params *GetDistributionsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetDistributions")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Names != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.IncludeLatestSync != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "include_latest_sync", runtime.ParamLocationQuery, *params.IncludeLatestSync); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetEventLogRequest generates requests for GetEventLog
+func NewGetEventLogRequest(server string, params *GetEventLogParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetEventLog")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Days != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "days", runtime.ParamLocationQuery, *params.Days); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetGPGKeysRequest generates requests for GetGPGKeys
+func NewGetGPGKeysRequest(server string, params *GetGPGKeysParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetGPGKeys")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Names != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetNotPingingComputersRequest generates requests for GetNotPingingComputers
+func NewGetNotPingingComputersRequest(server string, params *GetNotPingingComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetNotPingingComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Query != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, *params.Query); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "since_minutes", runtime.ParamLocationQuery, params.SinceMinutes); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetPackageProfilesRequest generates requests for GetPackageProfiles
+func NewGetPackageProfilesRequest(server string, params *GetPackageProfilesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetPackageProfiles")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Names != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetPackagesRequest generates requests for GetPackages
+func NewGetPackagesRequest(server string, params *GetPackagesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetPackages")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Search != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "search", runtime.ParamLocationQuery, *params.Search); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Names != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Installed != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "installed", runtime.ParamLocationQuery, *params.Installed); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Available != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "available", runtime.ParamLocationQuery, *params.Available); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Upgrade != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "upgrade", runtime.ParamLocationQuery, *params.Upgrade); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Held != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "held", runtime.ParamLocationQuery, *params.Held); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetPendingComputersRequest generates requests for GetPendingComputers
+func NewGetPendingComputersRequest(server string, params *GetPendingComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetPendingComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetPermissionsRequest generates requests for GetPermissions
+func NewGetPermissionsRequest(server string, params *GetPermissionsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetPermissions")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetRemovalProfilesRequest generates requests for GetRemovalProfiles
+func NewGetRemovalProfilesRequest(server string, params *GetRemovalProfilesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetRemovalProfiles")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetRepoInfoRequest generates requests for GetRepoInfo
+func NewGetRepoInfoRequest(server string, params *GetRepoInfoParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetRepoInfo")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mirror_uri", runtime.ParamLocationQuery, params.MirrorUri); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetRepositoryProfilesRequest generates requests for GetRepositoryProfiles
+func NewGetRepositoryProfilesRequest(server string, params *GetRepositoryProfilesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetRepositoryProfiles")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Names != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetRolesRequest generates requests for GetRoles
+func NewGetRolesRequest(server string, params *GetRolesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetRoles")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Names != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetSavedSearchesRequest generates requests for GetSavedSearches
+func NewGetSavedSearchesRequest(server string, params *GetSavedSearchesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetSavedSearches")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetScriptCodeRequest generates requests for GetScriptCode
+func NewGetScriptCodeRequest(server string, params *GetScriptCodeParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetScriptCode")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetScriptsRequest generates requests for GetScripts
+func NewGetScriptsRequest(server string, params *GetScriptsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetScripts")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.ScriptType != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_type", runtime.ParamLocationQuery, *params.ScriptType); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetSettingsRequest generates requests for GetSettings
+func NewGetSettingsRequest(server string, params *GetSettingsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetSettings")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetUSNTimeToFixRequest generates requests for GetUSNTimeToFix
+func NewGetUSNTimeToFixRequest(server string, params *GetUSNTimeToFixParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetUSNTimeToFix")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Query != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, *params.Query); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.FixedInDays != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "fixed_in_days", runtime.ParamLocationQuery, *params.FixedInDays); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.PendingInDays != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "pending_in_days", runtime.ParamLocationQuery, *params.PendingInDays); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.InLast != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "in_last", runtime.ParamLocationQuery, *params.InLast); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetUpgradeProfilesRequest generates requests for GetUpgradeProfiles
+func NewGetUpgradeProfilesRequest(server string, params *GetUpgradeProfilesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetUpgradeProfiles")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.UpgradeType != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "upgrade_type", runtime.ParamLocationQuery, *params.UpgradeType); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetUpgradedComputersByFrequencyRequest generates requests for GetUpgradedComputersByFrequency
+func NewGetUpgradedComputersByFrequencyRequest(server string, params *GetUpgradedComputersByFrequencyParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetUpgradedComputersByFrequency")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Query != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, *params.Query); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetUsersRequest generates requests for GetUsers
+func NewGetUsersRequest(server string, params *GetUsersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetUsers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_id", runtime.ParamLocationQuery, params.ComputerId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGetWSLHostsRequest generates requests for GetWSLHosts
+func NewGetWSLHostsRequest(server string, params *GetWSLHostsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=GetWSLHosts")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Query != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, *params.Query); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewImportGPGKeyRequest generates requests for ImportGPGKey
+func NewImportGPGKeyRequest(server string, params *ImportGPGKeyParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=ImportGPGKey")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "material", runtime.ParamLocationQuery, params.Material); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewInstallPackagesRequest generates requests for InstallPackages
+func NewInstallPackagesRequest(server string, params *InstallPackagesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=InstallPackages")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "packages", runtime.ParamLocationQuery, params.Packages); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.DeliverAfter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_after", runtime.ParamLocationQuery, *params.DeliverAfter); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.DeliverDelayWindow != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_delay_window", runtime.ParamLocationQuery, *params.DeliverDelayWindow); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewInviteAdministratorRequest generates requests for InviteAdministrator
+func NewInviteAdministratorRequest(server string, params *InviteAdministratorParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=InviteAdministrator")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "email", runtime.ParamLocationQuery, params.Email); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Roles != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "roles", runtime.ParamLocationQuery, *params.Roles); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewKillComputerProcessesRequest generates requests for KillComputerProcesses
+func NewKillComputerProcessesRequest(server string, params *KillComputerProcessesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=KillComputerProcesses")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_id", runtime.ParamLocationQuery, params.ComputerId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "pids", runtime.ParamLocationQuery, params.Pids); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewListPocketRequest generates requests for ListPocket
+func NewListPocketRequest(server string, params *ListPocketParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=ListPocket")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Search != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "search", runtime.ParamLocationQuery, *params.Search); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewModifyPackageProfileRequest generates requests for ModifyPackageProfile
+func NewModifyPackageProfileRequest(server string, params *ModifyPackageProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=ModifyPackageProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Title != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, *params.Title); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.AddConstraints != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "add_constraints", runtime.ParamLocationQuery, *params.AddConstraints); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.RemoveConstraints != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "remove_constraints", runtime.ParamLocationQuery, *params.RemoveConstraints); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewPullPackagesToPocketRequest generates requests for PullPackagesToPocket
+func NewPullPackagesToPocketRequest(server string, params *PullPackagesToPocketParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=PullPackagesToPocket")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRebootComputersRequest generates requests for RebootComputers
+func NewRebootComputersRequest(server string, params *RebootComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RebootComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.DeliverAfter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_after", runtime.ParamLocationQuery, *params.DeliverAfter); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRejectPendingComputersRequest generates requests for RejectPendingComputers
+func NewRejectPendingComputersRequest(server string, params *RejectPendingComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RejectPendingComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveAPTSourceRequest generates requests for RemoveAPTSource
+func NewRemoveAPTSourceRequest(server string, params *RemoveAPTSourceParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveAPTSource")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveAPTSourceFromRepositoryProfileRequest generates requests for RemoveAPTSourceFromRepositoryProfile
+func NewRemoveAPTSourceFromRepositoryProfileRequest(server string, params *RemoveAPTSourceFromRepositoryProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveAPTSourceFromRepositoryProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "apt_source", runtime.ParamLocationQuery, params.AptSource); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveAPTSourcesRequest generates requests for RemoveAPTSources
+func NewRemoveAPTSourcesRequest(server string, params *RemoveAPTSourcesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveAPTSources")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, params.Names); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveAPTSourcesFromRepositoryProfileRequest generates requests for RemoveAPTSourcesFromRepositoryProfile
+func NewRemoveAPTSourcesFromRepositoryProfileRequest(server string, params *RemoveAPTSourcesFromRepositoryProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveAPTSourcesFromRepositoryProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "apt_sources", runtime.ParamLocationQuery, params.AptSources); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveAccessGroupRequest generates requests for RemoveAccessGroup
+func NewRemoveAccessGroupRequest(server string, params *RemoveAccessGroupParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveAccessGroup")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveAccessGroupsFromRoleRequest generates requests for RemoveAccessGroupsFromRole
+func NewRemoveAccessGroupsFromRoleRequest(server string, params *RemoveAccessGroupsFromRoleParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveAccessGroupsFromRole")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "access_groups", runtime.ParamLocationQuery, params.AccessGroups); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveAnnotationFromComputersRequest generates requests for RemoveAnnotationFromComputers
+func NewRemoveAnnotationFromComputersRequest(server string, params *RemoveAnnotationFromComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveAnnotationFromComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "key", runtime.ParamLocationQuery, params.Key); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveComputersRequest generates requests for RemoveComputers
+func NewRemoveComputersRequest(server string, params *RemoveComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveDistributionRequest generates requests for RemoveDistribution
+func NewRemoveDistributionRequest(server string, params *RemoveDistributionParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveDistribution")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveGPGKeyRequest generates requests for RemoveGPGKey
+func NewRemoveGPGKeyRequest(server string, params *RemoveGPGKeyParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveGPGKey")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemovePackageFiltersFromPocketRequest generates requests for RemovePackageFiltersFromPocket
+func NewRemovePackageFiltersFromPocketRequest(server string, params *RemovePackageFiltersFromPocketParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemovePackageFiltersFromPocket")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "packages", runtime.ParamLocationQuery, params.Packages); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemovePackageProfileRequest generates requests for RemovePackageProfile
+func NewRemovePackageProfileRequest(server string, params *RemovePackageProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemovePackageProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemovePackagesRequest generates requests for RemovePackages
+func NewRemovePackagesRequest(server string, params *RemovePackagesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemovePackages")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "packages", runtime.ParamLocationQuery, params.Packages); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.DeliverAfter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_after", runtime.ParamLocationQuery, *params.DeliverAfter); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.DeliverDelayWindow != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_delay_window", runtime.ParamLocationQuery, *params.DeliverDelayWindow); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemovePackagesFromPocketRequest generates requests for RemovePackagesFromPocket
+func NewRemovePackagesFromPocketRequest(server string, params *RemovePackagesFromPocketParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemovePackagesFromPocket")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "packages", runtime.ParamLocationQuery, params.Packages); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemovePermissionsFromRoleRequest generates requests for RemovePermissionsFromRole
+func NewRemovePermissionsFromRoleRequest(server string, params *RemovePermissionsFromRoleParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemovePermissionsFromRole")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "permissions", runtime.ParamLocationQuery, params.Permissions); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemovePersonsFromRoleRequest generates requests for RemovePersonsFromRole
+func NewRemovePersonsFromRoleRequest(server string, params *RemovePersonsFromRoleParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemovePersonsFromRole")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "persons", runtime.ParamLocationQuery, params.Persons); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemovePocketRequest generates requests for RemovePocket
+func NewRemovePocketRequest(server string, params *RemovePocketParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemovePocket")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemovePocketsFromRepositoryProfileRequest generates requests for RemovePocketsFromRepositoryProfile
+func NewRemovePocketsFromRepositoryProfileRequest(server string, params *RemovePocketsFromRepositoryProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemovePocketsFromRepositoryProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "pockets", runtime.ParamLocationQuery, params.Pockets); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveRemovalProfileRequest generates requests for RemoveRemovalProfile
+func NewRemoveRemovalProfileRequest(server string, params *RemoveRemovalProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveRemovalProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveRepositoryProfileRequest generates requests for RemoveRepositoryProfile
+func NewRemoveRepositoryProfileRequest(server string, params *RemoveRepositoryProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveRepositoryProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveRepositoryProfilesRequest generates requests for RemoveRepositoryProfiles
+func NewRemoveRepositoryProfilesRequest(server string, params *RemoveRepositoryProfilesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveRepositoryProfiles")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, params.Names); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveRoleRequest generates requests for RemoveRole
+func NewRemoveRoleRequest(server string, params *RemoveRoleParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveRole")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveSavedSearchRequest generates requests for RemoveSavedSearch
+func NewRemoveSavedSearchRequest(server string, params *RemoveSavedSearchParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveSavedSearch")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveScriptRequest generates requests for RemoveScript
+func NewRemoveScriptRequest(server string, params *RemoveScriptParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveScript")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveScriptAttachmentRequest generates requests for RemoveScriptAttachment
+func NewRemoveScriptAttachmentRequest(server string, params *RemoveScriptAttachmentParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveScriptAttachment")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "filename", runtime.ParamLocationQuery, params.Filename); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveSeriesRequest generates requests for RemoveSeries
+func NewRemoveSeriesRequest(server string, params *RemoveSeriesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveSeries")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveTagsFromComputersRequest generates requests for RemoveTagsFromComputers
+func NewRemoveTagsFromComputersRequest(server string, params *RemoveTagsFromComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveTagsFromComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "tags", runtime.ParamLocationQuery, params.Tags); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveUpgradeProfileRequest generates requests for RemoveUpgradeProfile
+func NewRemoveUpgradeProfileRequest(server string, params *RemoveUpgradeProfileParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveUpgradeProfile")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveUploaderGPGKeysFromPocketRequest generates requests for RemoveUploaderGPGKeysFromPocket
+func NewRemoveUploaderGPGKeysFromPocketRequest(server string, params *RemoveUploaderGPGKeysFromPocketParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveUploaderGPGKeysFromPocket")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "gpg_keys", runtime.ParamLocationQuery, params.GpgKeys); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRemoveWSLHostsRequest generates requests for RemoveWSLHosts
+func NewRemoveWSLHostsRequest(server string, params *RemoveWSLHostsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RemoveWSLHosts")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.CascadeToChildren != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cascade_to_children", runtime.ParamLocationQuery, *params.CascadeToChildren); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewRenameComputersRequest generates requests for RenameComputers
+func NewRenameComputersRequest(server string, params *RenameComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=RenameComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_titles", runtime.ParamLocationQuery, params.ComputerTitles); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewSetDefaultChildComputerRequest generates requests for SetDefaultChildComputer
+func NewSetDefaultChildComputerRequest(server string, params *SetDefaultChildComputerParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=SetDefaultChildComputer")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "parent_id", runtime.ParamLocationQuery, params.ParentId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "child_id", runtime.ParamLocationQuery, params.ChildId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewSetSettingsRequest generates requests for SetSettings
+func NewSetSettingsRequest(server string, params *SetSettingsParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=SetSettings")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "key_values", runtime.ParamLocationQuery, params.KeyValues); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewShutdownComputersRequest generates requests for ShutdownComputers
+func NewShutdownComputersRequest(server string, params *ShutdownComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=ShutdownComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.DeliverAfter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_after", runtime.ParamLocationQuery, *params.DeliverAfter); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewShutdownHostComputerRequest generates requests for ShutdownHostComputer
+func NewShutdownHostComputerRequest(server string, params *ShutdownHostComputerParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=ShutdownHostComputer")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "parent_id", runtime.ParamLocationQuery, params.ParentId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewStartChildComputersRequest generates requests for StartChildComputers
+func NewStartChildComputersRequest(server string, params *StartChildComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=StartChildComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewStopChildComputersRequest generates requests for StopChildComputers
+func NewStopChildComputersRequest(server string, params *StopChildComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=StopChildComputers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewSubscribeToAlertRequest generates requests for SubscribeToAlert
+func NewSubscribeToAlertRequest(server string, params *SubscribeToAlertParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=SubscribeToAlert")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "alert_type", runtime.ParamLocationQuery, params.AlertType); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewSyncMirrorPocketRequest generates requests for SyncMirrorPocket
+func NewSyncMirrorPocketRequest(server string, params *SyncMirrorPocketParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=SyncMirrorPocket")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "series", runtime.ParamLocationQuery, params.Series); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "distribution", runtime.ParamLocationQuery, params.Distribution); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewTerminateComputerProcessesRequest generates requests for TerminateComputerProcesses
+func NewTerminateComputerProcessesRequest(server string, params *TerminateComputerProcessesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=TerminateComputerProcesses")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_id", runtime.ParamLocationQuery, params.ComputerId); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "pids", runtime.ParamLocationQuery, params.Pids); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUnsubscribeFromAlertRequest generates requests for UnsubscribeFromAlert
+func NewUnsubscribeFromAlertRequest(server string, params *UnsubscribeFromAlertParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=UnsubscribeFromAlert")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "alert_type", runtime.ParamLocationQuery, params.AlertType); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewUpgradePackagesRequest generates requests for UpgradePackages
+func NewUpgradePackagesRequest(server string, params *UpgradePackagesParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/?action=UpgradePackages")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "version", runtime.ParamLocationQuery, params.Version); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+		if params.Packages != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "packages", runtime.ParamLocationQuery, *params.Packages); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.SecurityOnly != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "security_only", runtime.ParamLocationQuery, *params.SecurityOnly); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.DeliverAfter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_after", runtime.ParamLocationQuery, *params.DeliverAfter); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.DeliverDelayWindow != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "deliver_delay_window", runtime.ParamLocationQuery, *params.DeliverDelayWindow); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -2391,8 +20270,416 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
-	// InvokeLegacyActionWithResponse request
-	InvokeLegacyActionWithResponse(ctx context.Context, params *InvokeLegacyActionParams, reqEditors ...RequestEditorFn) (*InvokeLegacyActionResponse, error)
+	// AcceptPendingComputersWithResponse request
+	AcceptPendingComputersWithResponse(ctx context.Context, params *AcceptPendingComputersParams, reqEditors ...RequestEditorFn) (*AcceptPendingComputersResponse, error)
+
+	// AddAPTSourcesToRepositoryProfileWithResponse request
+	AddAPTSourcesToRepositoryProfileWithResponse(ctx context.Context, params *AddAPTSourcesToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*AddAPTSourcesToRepositoryProfileResponse, error)
+
+	// AddAccessGroupsToRoleWithResponse request
+	AddAccessGroupsToRoleWithResponse(ctx context.Context, params *AddAccessGroupsToRoleParams, reqEditors ...RequestEditorFn) (*AddAccessGroupsToRoleResponse, error)
+
+	// AddAnnotationToComputersWithResponse request
+	AddAnnotationToComputersWithResponse(ctx context.Context, params *AddAnnotationToComputersParams, reqEditors ...RequestEditorFn) (*AddAnnotationToComputersResponse, error)
+
+	// AddPackageFiltersToPocketWithResponse request
+	AddPackageFiltersToPocketWithResponse(ctx context.Context, params *AddPackageFiltersToPocketParams, reqEditors ...RequestEditorFn) (*AddPackageFiltersToPocketResponse, error)
+
+	// AddPermissionsToRoleWithResponse request
+	AddPermissionsToRoleWithResponse(ctx context.Context, params *AddPermissionsToRoleParams, reqEditors ...RequestEditorFn) (*AddPermissionsToRoleResponse, error)
+
+	// AddPersonsToRoleWithResponse request
+	AddPersonsToRoleWithResponse(ctx context.Context, params *AddPersonsToRoleParams, reqEditors ...RequestEditorFn) (*AddPersonsToRoleResponse, error)
+
+	// AddPocketsToRepositoryProfileWithResponse request
+	AddPocketsToRepositoryProfileWithResponse(ctx context.Context, params *AddPocketsToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*AddPocketsToRepositoryProfileResponse, error)
+
+	// AddTagsToComputersWithResponse request
+	AddTagsToComputersWithResponse(ctx context.Context, params *AddTagsToComputersParams, reqEditors ...RequestEditorFn) (*AddTagsToComputersResponse, error)
+
+	// AddUploaderGPGKeysToPocketWithResponse request
+	AddUploaderGPGKeysToPocketWithResponse(ctx context.Context, params *AddUploaderGPGKeysToPocketParams, reqEditors ...RequestEditorFn) (*AddUploaderGPGKeysToPocketResponse, error)
+
+	// ApproveActivitiesWithResponse request
+	ApproveActivitiesWithResponse(ctx context.Context, params *ApproveActivitiesParams, reqEditors ...RequestEditorFn) (*ApproveActivitiesResponse, error)
+
+	// AssociateAlertWithResponse request
+	AssociateAlertWithResponse(ctx context.Context, params *AssociateAlertParams, reqEditors ...RequestEditorFn) (*AssociateAlertResponse, error)
+
+	// AssociatePackageProfileWithResponse request
+	AssociatePackageProfileWithResponse(ctx context.Context, params *AssociatePackageProfileParams, reqEditors ...RequestEditorFn) (*AssociatePackageProfileResponse, error)
+
+	// AssociateRemovalProfileWithResponse request
+	AssociateRemovalProfileWithResponse(ctx context.Context, params *AssociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*AssociateRemovalProfileResponse, error)
+
+	// AssociateRepositoryProfileWithResponse request
+	AssociateRepositoryProfileWithResponse(ctx context.Context, params *AssociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*AssociateRepositoryProfileResponse, error)
+
+	// AssociateUpgradeProfileWithResponse request
+	AssociateUpgradeProfileWithResponse(ctx context.Context, params *AssociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*AssociateUpgradeProfileResponse, error)
+
+	// CancelActivitiesWithResponse request
+	CancelActivitiesWithResponse(ctx context.Context, params *CancelActivitiesParams, reqEditors ...RequestEditorFn) (*CancelActivitiesResponse, error)
+
+	// ChangeComputersAccessGroupWithResponse request
+	ChangeComputersAccessGroupWithResponse(ctx context.Context, params *ChangeComputersAccessGroupParams, reqEditors ...RequestEditorFn) (*ChangeComputersAccessGroupResponse, error)
+
+	// CopyPackageProfileWithResponse request
+	CopyPackageProfileWithResponse(ctx context.Context, params *CopyPackageProfileParams, reqEditors ...RequestEditorFn) (*CopyPackageProfileResponse, error)
+
+	// CopyRoleWithResponse request
+	CopyRoleWithResponse(ctx context.Context, params *CopyRoleParams, reqEditors ...RequestEditorFn) (*CopyRoleResponse, error)
+
+	// CopyScriptWithResponse request
+	CopyScriptWithResponse(ctx context.Context, params *CopyScriptParams, reqEditors ...RequestEditorFn) (*CopyScriptResponse, error)
+
+	// CreateAPTSourceWithResponse request
+	CreateAPTSourceWithResponse(ctx context.Context, params *CreateAPTSourceParams, reqEditors ...RequestEditorFn) (*CreateAPTSourceResponse, error)
+
+	// CreateAccessGroupWithResponse request
+	CreateAccessGroupWithResponse(ctx context.Context, params *CreateAccessGroupParams, reqEditors ...RequestEditorFn) (*CreateAccessGroupResponse, error)
+
+	// CreateChildComputerWithResponse request
+	CreateChildComputerWithResponse(ctx context.Context, params *CreateChildComputerParams, reqEditors ...RequestEditorFn) (*CreateChildComputerResponse, error)
+
+	// CreateDistributionWithResponse request
+	CreateDistributionWithResponse(ctx context.Context, params *CreateDistributionParams, reqEditors ...RequestEditorFn) (*CreateDistributionResponse, error)
+
+	// CreatePackageProfileWithResponse request
+	CreatePackageProfileWithResponse(ctx context.Context, params *CreatePackageProfileParams, reqEditors ...RequestEditorFn) (*CreatePackageProfileResponse, error)
+
+	// CreatePocketWithResponse request
+	CreatePocketWithResponse(ctx context.Context, params *CreatePocketParams, reqEditors ...RequestEditorFn) (*CreatePocketResponse, error)
+
+	// CreateRemovalProfileWithResponse request
+	CreateRemovalProfileWithResponse(ctx context.Context, params *CreateRemovalProfileParams, reqEditors ...RequestEditorFn) (*CreateRemovalProfileResponse, error)
+
+	// CreateRepositoryProfileWithResponse request
+	CreateRepositoryProfileWithResponse(ctx context.Context, params *CreateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*CreateRepositoryProfileResponse, error)
+
+	// CreateRoleWithResponse request
+	CreateRoleWithResponse(ctx context.Context, params *CreateRoleParams, reqEditors ...RequestEditorFn) (*CreateRoleResponse, error)
+
+	// CreateSavedSearchWithResponse request
+	CreateSavedSearchWithResponse(ctx context.Context, params *CreateSavedSearchParams, reqEditors ...RequestEditorFn) (*CreateSavedSearchResponse, error)
+
+	// CreateScriptWithResponse request
+	CreateScriptWithResponse(ctx context.Context, params *CreateScriptParams, reqEditors ...RequestEditorFn) (*CreateScriptResponse, error)
+
+	// CreateScriptAttachmentWithResponse request
+	CreateScriptAttachmentWithResponse(ctx context.Context, params *CreateScriptAttachmentParams, reqEditors ...RequestEditorFn) (*CreateScriptAttachmentResponse, error)
+
+	// CreateSeriesWithResponse request
+	CreateSeriesWithResponse(ctx context.Context, params *CreateSeriesParams, reqEditors ...RequestEditorFn) (*CreateSeriesResponse, error)
+
+	// CreateUpgradeProfileWithResponse request
+	CreateUpgradeProfileWithResponse(ctx context.Context, params *CreateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*CreateUpgradeProfileResponse, error)
+
+	// CreateUserWithResponse request
+	CreateUserWithResponse(ctx context.Context, params *CreateUserParams, reqEditors ...RequestEditorFn) (*CreateUserResponse, error)
+
+	// DeleteChildComputersWithResponse request
+	DeleteChildComputersWithResponse(ctx context.Context, params *DeleteChildComputersParams, reqEditors ...RequestEditorFn) (*DeleteChildComputersResponse, error)
+
+	// DeriveSeriesWithResponse request
+	DeriveSeriesWithResponse(ctx context.Context, params *DeriveSeriesParams, reqEditors ...RequestEditorFn) (*DeriveSeriesResponse, error)
+
+	// DiffPullPocketWithResponse request
+	DiffPullPocketWithResponse(ctx context.Context, params *DiffPullPocketParams, reqEditors ...RequestEditorFn) (*DiffPullPocketResponse, error)
+
+	// DisableAdministratorWithResponse request
+	DisableAdministratorWithResponse(ctx context.Context, params *DisableAdministratorParams, reqEditors ...RequestEditorFn) (*DisableAdministratorResponse, error)
+
+	// DisassociateAlertWithResponse request
+	DisassociateAlertWithResponse(ctx context.Context, params *DisassociateAlertParams, reqEditors ...RequestEditorFn) (*DisassociateAlertResponse, error)
+
+	// DisassociatePackageProfileWithResponse request
+	DisassociatePackageProfileWithResponse(ctx context.Context, params *DisassociatePackageProfileParams, reqEditors ...RequestEditorFn) (*DisassociatePackageProfileResponse, error)
+
+	// DisassociateRemovalProfileWithResponse request
+	DisassociateRemovalProfileWithResponse(ctx context.Context, params *DisassociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*DisassociateRemovalProfileResponse, error)
+
+	// DisassociateRepositoryProfileWithResponse request
+	DisassociateRepositoryProfileWithResponse(ctx context.Context, params *DisassociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*DisassociateRepositoryProfileResponse, error)
+
+	// DisassociateUpgradeProfileWithResponse request
+	DisassociateUpgradeProfileWithResponse(ctx context.Context, params *DisassociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*DisassociateUpgradeProfileResponse, error)
+
+	// EditPackageProfileWithResponse request
+	EditPackageProfileWithResponse(ctx context.Context, params *EditPackageProfileParams, reqEditors ...RequestEditorFn) (*EditPackageProfileResponse, error)
+
+	// EditPocketWithResponse request
+	EditPocketWithResponse(ctx context.Context, params *EditPocketParams, reqEditors ...RequestEditorFn) (*EditPocketResponse, error)
+
+	// EditRemovalProfileWithResponse request
+	EditRemovalProfileWithResponse(ctx context.Context, params *EditRemovalProfileParams, reqEditors ...RequestEditorFn) (*EditRemovalProfileResponse, error)
+
+	// EditRepositoryProfileWithResponse request
+	EditRepositoryProfileWithResponse(ctx context.Context, params *EditRepositoryProfileParams, reqEditors ...RequestEditorFn) (*EditRepositoryProfileResponse, error)
+
+	// EditSavedSearchWithResponse request
+	EditSavedSearchWithResponse(ctx context.Context, params *EditSavedSearchParams, reqEditors ...RequestEditorFn) (*EditSavedSearchResponse, error)
+
+	// EditScriptWithResponse request
+	EditScriptWithResponse(ctx context.Context, params *EditScriptParams, reqEditors ...RequestEditorFn) (*EditScriptResponse, error)
+
+	// EditUpgradeProfileWithResponse request
+	EditUpgradeProfileWithResponse(ctx context.Context, params *EditUpgradeProfileParams, reqEditors ...RequestEditorFn) (*EditUpgradeProfileResponse, error)
+
+	// EditUserWithResponse request
+	EditUserWithResponse(ctx context.Context, params *EditUserParams, reqEditors ...RequestEditorFn) (*EditUserResponse, error)
+
+	// ExecuteScriptWithResponse request
+	ExecuteScriptWithResponse(ctx context.Context, params *ExecuteScriptParams, reqEditors ...RequestEditorFn) (*ExecuteScriptResponse, error)
+
+	// GetAPTSourcesWithResponse request
+	GetAPTSourcesWithResponse(ctx context.Context, params *GetAPTSourcesParams, reqEditors ...RequestEditorFn) (*GetAPTSourcesResponse, error)
+
+	// GetAccessGroupsWithResponse request
+	GetAccessGroupsWithResponse(ctx context.Context, params *GetAccessGroupsParams, reqEditors ...RequestEditorFn) (*GetAccessGroupsResponse, error)
+
+	// GetActivitiesWithResponse request
+	GetActivitiesWithResponse(ctx context.Context, params *GetActivitiesParams, reqEditors ...RequestEditorFn) (*GetActivitiesResponse, error)
+
+	// GetActivityTypesWithResponse request
+	GetActivityTypesWithResponse(ctx context.Context, params *GetActivityTypesParams, reqEditors ...RequestEditorFn) (*GetActivityTypesResponse, error)
+
+	// GetAdministratorsWithResponse request
+	GetAdministratorsWithResponse(ctx context.Context, params *GetAdministratorsParams, reqEditors ...RequestEditorFn) (*GetAdministratorsResponse, error)
+
+	// GetAlertSubscribersWithResponse request
+	GetAlertSubscribersWithResponse(ctx context.Context, params *GetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*GetAlertSubscribersResponse, error)
+
+	// GetAlertsWithResponse request
+	GetAlertsWithResponse(ctx context.Context, params *GetAlertsParams, reqEditors ...RequestEditorFn) (*GetAlertsResponse, error)
+
+	// GetCSVComplianceDataWithResponse request
+	GetCSVComplianceDataWithResponse(ctx context.Context, params *GetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*GetCSVComplianceDataResponse, error)
+
+	// GetComputerProcessesWithResponse request
+	GetComputerProcessesWithResponse(ctx context.Context, params *GetComputerProcessesParams, reqEditors ...RequestEditorFn) (*GetComputerProcessesResponse, error)
+
+	// GetComputersWithResponse request
+	GetComputersWithResponse(ctx context.Context, params *GetComputersParams, reqEditors ...RequestEditorFn) (*GetComputersResponse, error)
+
+	// GetComputersNotUpgradedWithResponse request
+	GetComputersNotUpgradedWithResponse(ctx context.Context, params *GetComputersNotUpgradedParams, reqEditors ...RequestEditorFn) (*GetComputersNotUpgradedResponse, error)
+
+	// GetDistributionsWithResponse request
+	GetDistributionsWithResponse(ctx context.Context, params *GetDistributionsParams, reqEditors ...RequestEditorFn) (*GetDistributionsResponse, error)
+
+	// GetEventLogWithResponse request
+	GetEventLogWithResponse(ctx context.Context, params *GetEventLogParams, reqEditors ...RequestEditorFn) (*GetEventLogResponse, error)
+
+	// GetGPGKeysWithResponse request
+	GetGPGKeysWithResponse(ctx context.Context, params *GetGPGKeysParams, reqEditors ...RequestEditorFn) (*GetGPGKeysResponse, error)
+
+	// GetNotPingingComputersWithResponse request
+	GetNotPingingComputersWithResponse(ctx context.Context, params *GetNotPingingComputersParams, reqEditors ...RequestEditorFn) (*GetNotPingingComputersResponse, error)
+
+	// GetPackageProfilesWithResponse request
+	GetPackageProfilesWithResponse(ctx context.Context, params *GetPackageProfilesParams, reqEditors ...RequestEditorFn) (*GetPackageProfilesResponse, error)
+
+	// GetPackagesWithResponse request
+	GetPackagesWithResponse(ctx context.Context, params *GetPackagesParams, reqEditors ...RequestEditorFn) (*GetPackagesResponse, error)
+
+	// GetPendingComputersWithResponse request
+	GetPendingComputersWithResponse(ctx context.Context, params *GetPendingComputersParams, reqEditors ...RequestEditorFn) (*GetPendingComputersResponse, error)
+
+	// GetPermissionsWithResponse request
+	GetPermissionsWithResponse(ctx context.Context, params *GetPermissionsParams, reqEditors ...RequestEditorFn) (*GetPermissionsResponse, error)
+
+	// GetRemovalProfilesWithResponse request
+	GetRemovalProfilesWithResponse(ctx context.Context, params *GetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*GetRemovalProfilesResponse, error)
+
+	// GetRepoInfoWithResponse request
+	GetRepoInfoWithResponse(ctx context.Context, params *GetRepoInfoParams, reqEditors ...RequestEditorFn) (*GetRepoInfoResponse, error)
+
+	// GetRepositoryProfilesWithResponse request
+	GetRepositoryProfilesWithResponse(ctx context.Context, params *GetRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*GetRepositoryProfilesResponse, error)
+
+	// GetRolesWithResponse request
+	GetRolesWithResponse(ctx context.Context, params *GetRolesParams, reqEditors ...RequestEditorFn) (*GetRolesResponse, error)
+
+	// GetSavedSearchesWithResponse request
+	GetSavedSearchesWithResponse(ctx context.Context, params *GetSavedSearchesParams, reqEditors ...RequestEditorFn) (*GetSavedSearchesResponse, error)
+
+	// GetScriptCodeWithResponse request
+	GetScriptCodeWithResponse(ctx context.Context, params *GetScriptCodeParams, reqEditors ...RequestEditorFn) (*GetScriptCodeResponse, error)
+
+	// GetScriptsWithResponse request
+	GetScriptsWithResponse(ctx context.Context, params *GetScriptsParams, reqEditors ...RequestEditorFn) (*GetScriptsResponse, error)
+
+	// GetSettingsWithResponse request
+	GetSettingsWithResponse(ctx context.Context, params *GetSettingsParams, reqEditors ...RequestEditorFn) (*GetSettingsResponse, error)
+
+	// GetUSNTimeToFixWithResponse request
+	GetUSNTimeToFixWithResponse(ctx context.Context, params *GetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*GetUSNTimeToFixResponse, error)
+
+	// GetUpgradeProfilesWithResponse request
+	GetUpgradeProfilesWithResponse(ctx context.Context, params *GetUpgradeProfilesParams, reqEditors ...RequestEditorFn) (*GetUpgradeProfilesResponse, error)
+
+	// GetUpgradedComputersByFrequencyWithResponse request
+	GetUpgradedComputersByFrequencyWithResponse(ctx context.Context, params *GetUpgradedComputersByFrequencyParams, reqEditors ...RequestEditorFn) (*GetUpgradedComputersByFrequencyResponse, error)
+
+	// GetUsersWithResponse request
+	GetUsersWithResponse(ctx context.Context, params *GetUsersParams, reqEditors ...RequestEditorFn) (*GetUsersResponse, error)
+
+	// GetWSLHostsWithResponse request
+	GetWSLHostsWithResponse(ctx context.Context, params *GetWSLHostsParams, reqEditors ...RequestEditorFn) (*GetWSLHostsResponse, error)
+
+	// ImportGPGKeyWithResponse request
+	ImportGPGKeyWithResponse(ctx context.Context, params *ImportGPGKeyParams, reqEditors ...RequestEditorFn) (*ImportGPGKeyResponse, error)
+
+	// InstallPackagesWithResponse request
+	InstallPackagesWithResponse(ctx context.Context, params *InstallPackagesParams, reqEditors ...RequestEditorFn) (*InstallPackagesResponse, error)
+
+	// InviteAdministratorWithResponse request
+	InviteAdministratorWithResponse(ctx context.Context, params *InviteAdministratorParams, reqEditors ...RequestEditorFn) (*InviteAdministratorResponse, error)
+
+	// KillComputerProcessesWithResponse request
+	KillComputerProcessesWithResponse(ctx context.Context, params *KillComputerProcessesParams, reqEditors ...RequestEditorFn) (*KillComputerProcessesResponse, error)
+
+	// ListPocketWithResponse request
+	ListPocketWithResponse(ctx context.Context, params *ListPocketParams, reqEditors ...RequestEditorFn) (*ListPocketResponse, error)
+
+	// ModifyPackageProfileWithResponse request
+	ModifyPackageProfileWithResponse(ctx context.Context, params *ModifyPackageProfileParams, reqEditors ...RequestEditorFn) (*ModifyPackageProfileResponse, error)
+
+	// PullPackagesToPocketWithResponse request
+	PullPackagesToPocketWithResponse(ctx context.Context, params *PullPackagesToPocketParams, reqEditors ...RequestEditorFn) (*PullPackagesToPocketResponse, error)
+
+	// RebootComputersWithResponse request
+	RebootComputersWithResponse(ctx context.Context, params *RebootComputersParams, reqEditors ...RequestEditorFn) (*RebootComputersResponse, error)
+
+	// RejectPendingComputersWithResponse request
+	RejectPendingComputersWithResponse(ctx context.Context, params *RejectPendingComputersParams, reqEditors ...RequestEditorFn) (*RejectPendingComputersResponse, error)
+
+	// RemoveAPTSourceWithResponse request
+	RemoveAPTSourceWithResponse(ctx context.Context, params *RemoveAPTSourceParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourceResponse, error)
+
+	// RemoveAPTSourceFromRepositoryProfileWithResponse request
+	RemoveAPTSourceFromRepositoryProfileWithResponse(ctx context.Context, params *RemoveAPTSourceFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourceFromRepositoryProfileResponse, error)
+
+	// RemoveAPTSourcesWithResponse request
+	RemoveAPTSourcesWithResponse(ctx context.Context, params *RemoveAPTSourcesParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourcesResponse, error)
+
+	// RemoveAPTSourcesFromRepositoryProfileWithResponse request
+	RemoveAPTSourcesFromRepositoryProfileWithResponse(ctx context.Context, params *RemoveAPTSourcesFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourcesFromRepositoryProfileResponse, error)
+
+	// RemoveAccessGroupWithResponse request
+	RemoveAccessGroupWithResponse(ctx context.Context, params *RemoveAccessGroupParams, reqEditors ...RequestEditorFn) (*RemoveAccessGroupResponse, error)
+
+	// RemoveAccessGroupsFromRoleWithResponse request
+	RemoveAccessGroupsFromRoleWithResponse(ctx context.Context, params *RemoveAccessGroupsFromRoleParams, reqEditors ...RequestEditorFn) (*RemoveAccessGroupsFromRoleResponse, error)
+
+	// RemoveAnnotationFromComputersWithResponse request
+	RemoveAnnotationFromComputersWithResponse(ctx context.Context, params *RemoveAnnotationFromComputersParams, reqEditors ...RequestEditorFn) (*RemoveAnnotationFromComputersResponse, error)
+
+	// RemoveComputersWithResponse request
+	RemoveComputersWithResponse(ctx context.Context, params *RemoveComputersParams, reqEditors ...RequestEditorFn) (*RemoveComputersResponse, error)
+
+	// RemoveDistributionWithResponse request
+	RemoveDistributionWithResponse(ctx context.Context, params *RemoveDistributionParams, reqEditors ...RequestEditorFn) (*RemoveDistributionResponse, error)
+
+	// RemoveGPGKeyWithResponse request
+	RemoveGPGKeyWithResponse(ctx context.Context, params *RemoveGPGKeyParams, reqEditors ...RequestEditorFn) (*RemoveGPGKeyResponse, error)
+
+	// RemovePackageFiltersFromPocketWithResponse request
+	RemovePackageFiltersFromPocketWithResponse(ctx context.Context, params *RemovePackageFiltersFromPocketParams, reqEditors ...RequestEditorFn) (*RemovePackageFiltersFromPocketResponse, error)
+
+	// RemovePackageProfileWithResponse request
+	RemovePackageProfileWithResponse(ctx context.Context, params *RemovePackageProfileParams, reqEditors ...RequestEditorFn) (*RemovePackageProfileResponse, error)
+
+	// RemovePackagesWithResponse request
+	RemovePackagesWithResponse(ctx context.Context, params *RemovePackagesParams, reqEditors ...RequestEditorFn) (*RemovePackagesResponse, error)
+
+	// RemovePackagesFromPocketWithResponse request
+	RemovePackagesFromPocketWithResponse(ctx context.Context, params *RemovePackagesFromPocketParams, reqEditors ...RequestEditorFn) (*RemovePackagesFromPocketResponse, error)
+
+	// RemovePermissionsFromRoleWithResponse request
+	RemovePermissionsFromRoleWithResponse(ctx context.Context, params *RemovePermissionsFromRoleParams, reqEditors ...RequestEditorFn) (*RemovePermissionsFromRoleResponse, error)
+
+	// RemovePersonsFromRoleWithResponse request
+	RemovePersonsFromRoleWithResponse(ctx context.Context, params *RemovePersonsFromRoleParams, reqEditors ...RequestEditorFn) (*RemovePersonsFromRoleResponse, error)
+
+	// RemovePocketWithResponse request
+	RemovePocketWithResponse(ctx context.Context, params *RemovePocketParams, reqEditors ...RequestEditorFn) (*RemovePocketResponse, error)
+
+	// RemovePocketsFromRepositoryProfileWithResponse request
+	RemovePocketsFromRepositoryProfileWithResponse(ctx context.Context, params *RemovePocketsFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemovePocketsFromRepositoryProfileResponse, error)
+
+	// RemoveRemovalProfileWithResponse request
+	RemoveRemovalProfileWithResponse(ctx context.Context, params *RemoveRemovalProfileParams, reqEditors ...RequestEditorFn) (*RemoveRemovalProfileResponse, error)
+
+	// RemoveRepositoryProfileWithResponse request
+	RemoveRepositoryProfileWithResponse(ctx context.Context, params *RemoveRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemoveRepositoryProfileResponse, error)
+
+	// RemoveRepositoryProfilesWithResponse request
+	RemoveRepositoryProfilesWithResponse(ctx context.Context, params *RemoveRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*RemoveRepositoryProfilesResponse, error)
+
+	// RemoveRoleWithResponse request
+	RemoveRoleWithResponse(ctx context.Context, params *RemoveRoleParams, reqEditors ...RequestEditorFn) (*RemoveRoleResponse, error)
+
+	// RemoveSavedSearchWithResponse request
+	RemoveSavedSearchWithResponse(ctx context.Context, params *RemoveSavedSearchParams, reqEditors ...RequestEditorFn) (*RemoveSavedSearchResponse, error)
+
+	// RemoveScriptWithResponse request
+	RemoveScriptWithResponse(ctx context.Context, params *RemoveScriptParams, reqEditors ...RequestEditorFn) (*RemoveScriptResponse, error)
+
+	// RemoveScriptAttachmentWithResponse request
+	RemoveScriptAttachmentWithResponse(ctx context.Context, params *RemoveScriptAttachmentParams, reqEditors ...RequestEditorFn) (*RemoveScriptAttachmentResponse, error)
+
+	// RemoveSeriesWithResponse request
+	RemoveSeriesWithResponse(ctx context.Context, params *RemoveSeriesParams, reqEditors ...RequestEditorFn) (*RemoveSeriesResponse, error)
+
+	// RemoveTagsFromComputersWithResponse request
+	RemoveTagsFromComputersWithResponse(ctx context.Context, params *RemoveTagsFromComputersParams, reqEditors ...RequestEditorFn) (*RemoveTagsFromComputersResponse, error)
+
+	// RemoveUpgradeProfileWithResponse request
+	RemoveUpgradeProfileWithResponse(ctx context.Context, params *RemoveUpgradeProfileParams, reqEditors ...RequestEditorFn) (*RemoveUpgradeProfileResponse, error)
+
+	// RemoveUploaderGPGKeysFromPocketWithResponse request
+	RemoveUploaderGPGKeysFromPocketWithResponse(ctx context.Context, params *RemoveUploaderGPGKeysFromPocketParams, reqEditors ...RequestEditorFn) (*RemoveUploaderGPGKeysFromPocketResponse, error)
+
+	// RemoveWSLHostsWithResponse request
+	RemoveWSLHostsWithResponse(ctx context.Context, params *RemoveWSLHostsParams, reqEditors ...RequestEditorFn) (*RemoveWSLHostsResponse, error)
+
+	// RenameComputersWithResponse request
+	RenameComputersWithResponse(ctx context.Context, params *RenameComputersParams, reqEditors ...RequestEditorFn) (*RenameComputersResponse, error)
+
+	// SetDefaultChildComputerWithResponse request
+	SetDefaultChildComputerWithResponse(ctx context.Context, params *SetDefaultChildComputerParams, reqEditors ...RequestEditorFn) (*SetDefaultChildComputerResponse, error)
+
+	// SetSettingsWithResponse request
+	SetSettingsWithResponse(ctx context.Context, params *SetSettingsParams, reqEditors ...RequestEditorFn) (*SetSettingsResponse, error)
+
+	// ShutdownComputersWithResponse request
+	ShutdownComputersWithResponse(ctx context.Context, params *ShutdownComputersParams, reqEditors ...RequestEditorFn) (*ShutdownComputersResponse, error)
+
+	// ShutdownHostComputerWithResponse request
+	ShutdownHostComputerWithResponse(ctx context.Context, params *ShutdownHostComputerParams, reqEditors ...RequestEditorFn) (*ShutdownHostComputerResponse, error)
+
+	// StartChildComputersWithResponse request
+	StartChildComputersWithResponse(ctx context.Context, params *StartChildComputersParams, reqEditors ...RequestEditorFn) (*StartChildComputersResponse, error)
+
+	// StopChildComputersWithResponse request
+	StopChildComputersWithResponse(ctx context.Context, params *StopChildComputersParams, reqEditors ...RequestEditorFn) (*StopChildComputersResponse, error)
+
+	// SubscribeToAlertWithResponse request
+	SubscribeToAlertWithResponse(ctx context.Context, params *SubscribeToAlertParams, reqEditors ...RequestEditorFn) (*SubscribeToAlertResponse, error)
+
+	// SyncMirrorPocketWithResponse request
+	SyncMirrorPocketWithResponse(ctx context.Context, params *SyncMirrorPocketParams, reqEditors ...RequestEditorFn) (*SyncMirrorPocketResponse, error)
+
+	// TerminateComputerProcessesWithResponse request
+	TerminateComputerProcessesWithResponse(ctx context.Context, params *TerminateComputerProcessesParams, reqEditors ...RequestEditorFn) (*TerminateComputerProcessesResponse, error)
+
+	// UnsubscribeFromAlertWithResponse request
+	UnsubscribeFromAlertWithResponse(ctx context.Context, params *UnsubscribeFromAlertParams, reqEditors ...RequestEditorFn) (*UnsubscribeFromAlertResponse, error)
+
+	// UpgradePackagesWithResponse request
+	UpgradePackagesWithResponse(ctx context.Context, params *UpgradePackagesParams, reqEditors ...RequestEditorFn) (*UpgradePackagesResponse, error)
 
 	// LoginWithPasswordWithBodyWithResponse request with any body
 	LoginWithPasswordWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LoginWithPasswordResponse, error)
@@ -2448,17 +20735,17 @@ type ClientWithResponsesInterface interface {
 	RedactScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*RedactScriptResponse, error)
 }
 
-type InvokeLegacyActionResponse struct {
+type AcceptPendingComputersResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *LegacyActionResponse
 	JSON400      *BadRequest
 	JSON401      *Unauthorized
-	JSON404      *NotFound
+	JSON403      *Forbidden
 }
 
 // Status returns HTTPResponse.Status
-func (r InvokeLegacyActionResponse) Status() string {
+func (r AcceptPendingComputersResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -2466,7 +20753,3393 @@ func (r InvokeLegacyActionResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r InvokeLegacyActionResponse) StatusCode() int {
+func (r AcceptPendingComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AddAPTSourcesToRepositoryProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AddAPTSourcesToRepositoryProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AddAPTSourcesToRepositoryProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AddAccessGroupsToRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AddAccessGroupsToRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AddAccessGroupsToRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AddAnnotationToComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AddAnnotationToComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AddAnnotationToComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AddPackageFiltersToPocketResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AddPackageFiltersToPocketResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AddPackageFiltersToPocketResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AddPermissionsToRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AddPermissionsToRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AddPermissionsToRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AddPersonsToRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AddPersonsToRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AddPersonsToRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AddPocketsToRepositoryProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AddPocketsToRepositoryProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AddPocketsToRepositoryProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AddTagsToComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AddTagsToComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AddTagsToComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AddUploaderGPGKeysToPocketResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AddUploaderGPGKeysToPocketResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AddUploaderGPGKeysToPocketResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ApproveActivitiesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r ApproveActivitiesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ApproveActivitiesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AssociateAlertResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AssociateAlertResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AssociateAlertResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AssociatePackageProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AssociatePackageProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AssociatePackageProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AssociateRemovalProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AssociateRemovalProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AssociateRemovalProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AssociateRepositoryProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AssociateRepositoryProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AssociateRepositoryProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type AssociateUpgradeProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r AssociateUpgradeProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AssociateUpgradeProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CancelActivitiesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CancelActivitiesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CancelActivitiesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ChangeComputersAccessGroupResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r ChangeComputersAccessGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ChangeComputersAccessGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CopyPackageProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CopyPackageProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CopyPackageProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CopyRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CopyRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CopyRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CopyScriptResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CopyScriptResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CopyScriptResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateAPTSourceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateAPTSourceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateAPTSourceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateAccessGroupResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateAccessGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateAccessGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateChildComputerResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateChildComputerResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateChildComputerResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateDistributionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateDistributionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateDistributionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreatePackageProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreatePackageProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreatePackageProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreatePocketResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreatePocketResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreatePocketResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateRemovalProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateRemovalProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateRemovalProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateRepositoryProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateRepositoryProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateRepositoryProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateSavedSearchResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateSavedSearchResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateSavedSearchResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateScriptResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateScriptResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateScriptResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateScriptAttachmentResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateScriptAttachmentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateScriptAttachmentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateSeriesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateSeriesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateSeriesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateUpgradeProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateUpgradeProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateUpgradeProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type CreateUserResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r CreateUserResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r CreateUserResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeleteChildComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r DeleteChildComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeleteChildComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DeriveSeriesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r DeriveSeriesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DeriveSeriesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DiffPullPocketResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r DiffPullPocketResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DiffPullPocketResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DisableAdministratorResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r DisableAdministratorResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DisableAdministratorResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DisassociateAlertResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r DisassociateAlertResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DisassociateAlertResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DisassociatePackageProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r DisassociatePackageProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DisassociatePackageProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DisassociateRemovalProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r DisassociateRemovalProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DisassociateRemovalProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DisassociateRepositoryProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r DisassociateRepositoryProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DisassociateRepositoryProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type DisassociateUpgradeProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r DisassociateUpgradeProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r DisassociateUpgradeProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type EditPackageProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r EditPackageProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EditPackageProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type EditPocketResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r EditPocketResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EditPocketResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type EditRemovalProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r EditRemovalProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EditRemovalProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type EditRepositoryProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r EditRepositoryProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EditRepositoryProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type EditSavedSearchResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r EditSavedSearchResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EditSavedSearchResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type EditScriptResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r EditScriptResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EditScriptResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type EditUpgradeProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r EditUpgradeProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EditUpgradeProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type EditUserResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r EditUserResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r EditUserResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ExecuteScriptResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r ExecuteScriptResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ExecuteScriptResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAPTSourcesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAPTSourcesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAPTSourcesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAccessGroupsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAccessGroupsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAccessGroupsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetActivitiesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetActivitiesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetActivitiesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetActivityTypesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetActivityTypesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetActivityTypesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAdministratorsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAdministratorsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAdministratorsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAlertSubscribersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAlertSubscribersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAlertSubscribersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetAlertsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetAlertsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetAlertsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetCSVComplianceDataResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetCSVComplianceDataResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetCSVComplianceDataResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetComputerProcessesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetComputerProcessesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetComputerProcessesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetComputersNotUpgradedResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetComputersNotUpgradedResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetComputersNotUpgradedResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetDistributionsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetDistributionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetDistributionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetEventLogResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetEventLogResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetEventLogResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetGPGKeysResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetGPGKeysResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetGPGKeysResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetNotPingingComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetNotPingingComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetNotPingingComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetPackageProfilesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetPackageProfilesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetPackageProfilesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetPackagesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetPackagesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetPackagesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetPendingComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetPendingComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetPendingComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetPermissionsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetPermissionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetPermissionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetRemovalProfilesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRemovalProfilesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRemovalProfilesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetRepoInfoResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRepoInfoResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRepoInfoResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetRepositoryProfilesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRepositoryProfilesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRepositoryProfilesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetRolesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetRolesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetRolesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetSavedSearchesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetSavedSearchesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetSavedSearchesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetScriptCodeResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetScriptCodeResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetScriptCodeResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetScriptsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetScriptsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetScriptsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetSettingsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetSettingsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetSettingsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetUSNTimeToFixResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetUSNTimeToFixResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetUSNTimeToFixResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetUpgradeProfilesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetUpgradeProfilesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetUpgradeProfilesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetUpgradedComputersByFrequencyResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetUpgradedComputersByFrequencyResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetUpgradedComputersByFrequencyResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetUsersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetUsersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetUsersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type GetWSLHostsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r GetWSLHostsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GetWSLHostsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ImportGPGKeyResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r ImportGPGKeyResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ImportGPGKeyResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type InstallPackagesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r InstallPackagesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r InstallPackagesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type InviteAdministratorResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r InviteAdministratorResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r InviteAdministratorResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type KillComputerProcessesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r KillComputerProcessesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r KillComputerProcessesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ListPocketResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r ListPocketResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListPocketResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ModifyPackageProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r ModifyPackageProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ModifyPackageProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type PullPackagesToPocketResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r PullPackagesToPocketResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r PullPackagesToPocketResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RebootComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RebootComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RebootComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RejectPendingComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RejectPendingComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RejectPendingComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveAPTSourceResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveAPTSourceResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveAPTSourceResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveAPTSourceFromRepositoryProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveAPTSourceFromRepositoryProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveAPTSourceFromRepositoryProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveAPTSourcesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveAPTSourcesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveAPTSourcesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveAPTSourcesFromRepositoryProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveAPTSourcesFromRepositoryProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveAPTSourcesFromRepositoryProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveAccessGroupResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveAccessGroupResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveAccessGroupResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveAccessGroupsFromRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveAccessGroupsFromRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveAccessGroupsFromRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveAnnotationFromComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveAnnotationFromComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveAnnotationFromComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveDistributionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveDistributionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveDistributionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveGPGKeyResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveGPGKeyResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveGPGKeyResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemovePackageFiltersFromPocketResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemovePackageFiltersFromPocketResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemovePackageFiltersFromPocketResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemovePackageProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemovePackageProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemovePackageProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemovePackagesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemovePackagesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemovePackagesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemovePackagesFromPocketResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemovePackagesFromPocketResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemovePackagesFromPocketResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemovePermissionsFromRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemovePermissionsFromRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemovePermissionsFromRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemovePersonsFromRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemovePersonsFromRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemovePersonsFromRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemovePocketResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemovePocketResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemovePocketResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemovePocketsFromRepositoryProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemovePocketsFromRepositoryProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemovePocketsFromRepositoryProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveRemovalProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveRemovalProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveRemovalProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveRepositoryProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveRepositoryProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveRepositoryProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveRepositoryProfilesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveRepositoryProfilesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveRepositoryProfilesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveRoleResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveRoleResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveRoleResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveSavedSearchResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveSavedSearchResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveSavedSearchResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveScriptResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveScriptResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveScriptResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveScriptAttachmentResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveScriptAttachmentResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveScriptAttachmentResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveSeriesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveSeriesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveSeriesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveTagsFromComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveTagsFromComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveTagsFromComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveUpgradeProfileResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveUpgradeProfileResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveUpgradeProfileResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveUploaderGPGKeysFromPocketResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveUploaderGPGKeysFromPocketResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveUploaderGPGKeysFromPocketResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RemoveWSLHostsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RemoveWSLHostsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RemoveWSLHostsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type RenameComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r RenameComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r RenameComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type SetDefaultChildComputerResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r SetDefaultChildComputerResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r SetDefaultChildComputerResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type SetSettingsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r SetSettingsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r SetSettingsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ShutdownComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r ShutdownComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ShutdownComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ShutdownHostComputerResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r ShutdownHostComputerResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ShutdownHostComputerResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type StartChildComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r StartChildComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r StartChildComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type StopChildComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r StopChildComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r StopChildComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type SubscribeToAlertResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r SubscribeToAlertResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r SubscribeToAlertResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type SyncMirrorPocketResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r SyncMirrorPocketResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r SyncMirrorPocketResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type TerminateComputerProcessesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r TerminateComputerProcessesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r TerminateComputerProcessesResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UnsubscribeFromAlertResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r UnsubscribeFromAlertResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UnsubscribeFromAlertResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type UpgradePackagesResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *LegacyActionResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+	JSON403      *Forbidden
+}
+
+// Status returns HTTPResponse.Status
+func (r UpgradePackagesResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r UpgradePackagesResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -2837,13 +24510,1237 @@ func (r RedactScriptResponse) StatusCode() int {
 	return 0
 }
 
-// InvokeLegacyActionWithResponse request returning *InvokeLegacyActionResponse
-func (c *ClientWithResponses) InvokeLegacyActionWithResponse(ctx context.Context, params *InvokeLegacyActionParams, reqEditors ...RequestEditorFn) (*InvokeLegacyActionResponse, error) {
-	rsp, err := c.InvokeLegacyAction(ctx, params, reqEditors...)
+// AcceptPendingComputersWithResponse request returning *AcceptPendingComputersResponse
+func (c *ClientWithResponses) AcceptPendingComputersWithResponse(ctx context.Context, params *AcceptPendingComputersParams, reqEditors ...RequestEditorFn) (*AcceptPendingComputersResponse, error) {
+	rsp, err := c.AcceptPendingComputers(ctx, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseInvokeLegacyActionResponse(rsp)
+	return ParseAcceptPendingComputersResponse(rsp)
+}
+
+// AddAPTSourcesToRepositoryProfileWithResponse request returning *AddAPTSourcesToRepositoryProfileResponse
+func (c *ClientWithResponses) AddAPTSourcesToRepositoryProfileWithResponse(ctx context.Context, params *AddAPTSourcesToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*AddAPTSourcesToRepositoryProfileResponse, error) {
+	rsp, err := c.AddAPTSourcesToRepositoryProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddAPTSourcesToRepositoryProfileResponse(rsp)
+}
+
+// AddAccessGroupsToRoleWithResponse request returning *AddAccessGroupsToRoleResponse
+func (c *ClientWithResponses) AddAccessGroupsToRoleWithResponse(ctx context.Context, params *AddAccessGroupsToRoleParams, reqEditors ...RequestEditorFn) (*AddAccessGroupsToRoleResponse, error) {
+	rsp, err := c.AddAccessGroupsToRole(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddAccessGroupsToRoleResponse(rsp)
+}
+
+// AddAnnotationToComputersWithResponse request returning *AddAnnotationToComputersResponse
+func (c *ClientWithResponses) AddAnnotationToComputersWithResponse(ctx context.Context, params *AddAnnotationToComputersParams, reqEditors ...RequestEditorFn) (*AddAnnotationToComputersResponse, error) {
+	rsp, err := c.AddAnnotationToComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddAnnotationToComputersResponse(rsp)
+}
+
+// AddPackageFiltersToPocketWithResponse request returning *AddPackageFiltersToPocketResponse
+func (c *ClientWithResponses) AddPackageFiltersToPocketWithResponse(ctx context.Context, params *AddPackageFiltersToPocketParams, reqEditors ...RequestEditorFn) (*AddPackageFiltersToPocketResponse, error) {
+	rsp, err := c.AddPackageFiltersToPocket(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddPackageFiltersToPocketResponse(rsp)
+}
+
+// AddPermissionsToRoleWithResponse request returning *AddPermissionsToRoleResponse
+func (c *ClientWithResponses) AddPermissionsToRoleWithResponse(ctx context.Context, params *AddPermissionsToRoleParams, reqEditors ...RequestEditorFn) (*AddPermissionsToRoleResponse, error) {
+	rsp, err := c.AddPermissionsToRole(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddPermissionsToRoleResponse(rsp)
+}
+
+// AddPersonsToRoleWithResponse request returning *AddPersonsToRoleResponse
+func (c *ClientWithResponses) AddPersonsToRoleWithResponse(ctx context.Context, params *AddPersonsToRoleParams, reqEditors ...RequestEditorFn) (*AddPersonsToRoleResponse, error) {
+	rsp, err := c.AddPersonsToRole(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddPersonsToRoleResponse(rsp)
+}
+
+// AddPocketsToRepositoryProfileWithResponse request returning *AddPocketsToRepositoryProfileResponse
+func (c *ClientWithResponses) AddPocketsToRepositoryProfileWithResponse(ctx context.Context, params *AddPocketsToRepositoryProfileParams, reqEditors ...RequestEditorFn) (*AddPocketsToRepositoryProfileResponse, error) {
+	rsp, err := c.AddPocketsToRepositoryProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddPocketsToRepositoryProfileResponse(rsp)
+}
+
+// AddTagsToComputersWithResponse request returning *AddTagsToComputersResponse
+func (c *ClientWithResponses) AddTagsToComputersWithResponse(ctx context.Context, params *AddTagsToComputersParams, reqEditors ...RequestEditorFn) (*AddTagsToComputersResponse, error) {
+	rsp, err := c.AddTagsToComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddTagsToComputersResponse(rsp)
+}
+
+// AddUploaderGPGKeysToPocketWithResponse request returning *AddUploaderGPGKeysToPocketResponse
+func (c *ClientWithResponses) AddUploaderGPGKeysToPocketWithResponse(ctx context.Context, params *AddUploaderGPGKeysToPocketParams, reqEditors ...RequestEditorFn) (*AddUploaderGPGKeysToPocketResponse, error) {
+	rsp, err := c.AddUploaderGPGKeysToPocket(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddUploaderGPGKeysToPocketResponse(rsp)
+}
+
+// ApproveActivitiesWithResponse request returning *ApproveActivitiesResponse
+func (c *ClientWithResponses) ApproveActivitiesWithResponse(ctx context.Context, params *ApproveActivitiesParams, reqEditors ...RequestEditorFn) (*ApproveActivitiesResponse, error) {
+	rsp, err := c.ApproveActivities(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseApproveActivitiesResponse(rsp)
+}
+
+// AssociateAlertWithResponse request returning *AssociateAlertResponse
+func (c *ClientWithResponses) AssociateAlertWithResponse(ctx context.Context, params *AssociateAlertParams, reqEditors ...RequestEditorFn) (*AssociateAlertResponse, error) {
+	rsp, err := c.AssociateAlert(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAssociateAlertResponse(rsp)
+}
+
+// AssociatePackageProfileWithResponse request returning *AssociatePackageProfileResponse
+func (c *ClientWithResponses) AssociatePackageProfileWithResponse(ctx context.Context, params *AssociatePackageProfileParams, reqEditors ...RequestEditorFn) (*AssociatePackageProfileResponse, error) {
+	rsp, err := c.AssociatePackageProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAssociatePackageProfileResponse(rsp)
+}
+
+// AssociateRemovalProfileWithResponse request returning *AssociateRemovalProfileResponse
+func (c *ClientWithResponses) AssociateRemovalProfileWithResponse(ctx context.Context, params *AssociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*AssociateRemovalProfileResponse, error) {
+	rsp, err := c.AssociateRemovalProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAssociateRemovalProfileResponse(rsp)
+}
+
+// AssociateRepositoryProfileWithResponse request returning *AssociateRepositoryProfileResponse
+func (c *ClientWithResponses) AssociateRepositoryProfileWithResponse(ctx context.Context, params *AssociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*AssociateRepositoryProfileResponse, error) {
+	rsp, err := c.AssociateRepositoryProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAssociateRepositoryProfileResponse(rsp)
+}
+
+// AssociateUpgradeProfileWithResponse request returning *AssociateUpgradeProfileResponse
+func (c *ClientWithResponses) AssociateUpgradeProfileWithResponse(ctx context.Context, params *AssociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*AssociateUpgradeProfileResponse, error) {
+	rsp, err := c.AssociateUpgradeProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAssociateUpgradeProfileResponse(rsp)
+}
+
+// CancelActivitiesWithResponse request returning *CancelActivitiesResponse
+func (c *ClientWithResponses) CancelActivitiesWithResponse(ctx context.Context, params *CancelActivitiesParams, reqEditors ...RequestEditorFn) (*CancelActivitiesResponse, error) {
+	rsp, err := c.CancelActivities(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCancelActivitiesResponse(rsp)
+}
+
+// ChangeComputersAccessGroupWithResponse request returning *ChangeComputersAccessGroupResponse
+func (c *ClientWithResponses) ChangeComputersAccessGroupWithResponse(ctx context.Context, params *ChangeComputersAccessGroupParams, reqEditors ...RequestEditorFn) (*ChangeComputersAccessGroupResponse, error) {
+	rsp, err := c.ChangeComputersAccessGroup(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseChangeComputersAccessGroupResponse(rsp)
+}
+
+// CopyPackageProfileWithResponse request returning *CopyPackageProfileResponse
+func (c *ClientWithResponses) CopyPackageProfileWithResponse(ctx context.Context, params *CopyPackageProfileParams, reqEditors ...RequestEditorFn) (*CopyPackageProfileResponse, error) {
+	rsp, err := c.CopyPackageProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCopyPackageProfileResponse(rsp)
+}
+
+// CopyRoleWithResponse request returning *CopyRoleResponse
+func (c *ClientWithResponses) CopyRoleWithResponse(ctx context.Context, params *CopyRoleParams, reqEditors ...RequestEditorFn) (*CopyRoleResponse, error) {
+	rsp, err := c.CopyRole(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCopyRoleResponse(rsp)
+}
+
+// CopyScriptWithResponse request returning *CopyScriptResponse
+func (c *ClientWithResponses) CopyScriptWithResponse(ctx context.Context, params *CopyScriptParams, reqEditors ...RequestEditorFn) (*CopyScriptResponse, error) {
+	rsp, err := c.CopyScript(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCopyScriptResponse(rsp)
+}
+
+// CreateAPTSourceWithResponse request returning *CreateAPTSourceResponse
+func (c *ClientWithResponses) CreateAPTSourceWithResponse(ctx context.Context, params *CreateAPTSourceParams, reqEditors ...RequestEditorFn) (*CreateAPTSourceResponse, error) {
+	rsp, err := c.CreateAPTSource(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAPTSourceResponse(rsp)
+}
+
+// CreateAccessGroupWithResponse request returning *CreateAccessGroupResponse
+func (c *ClientWithResponses) CreateAccessGroupWithResponse(ctx context.Context, params *CreateAccessGroupParams, reqEditors ...RequestEditorFn) (*CreateAccessGroupResponse, error) {
+	rsp, err := c.CreateAccessGroup(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateAccessGroupResponse(rsp)
+}
+
+// CreateChildComputerWithResponse request returning *CreateChildComputerResponse
+func (c *ClientWithResponses) CreateChildComputerWithResponse(ctx context.Context, params *CreateChildComputerParams, reqEditors ...RequestEditorFn) (*CreateChildComputerResponse, error) {
+	rsp, err := c.CreateChildComputer(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateChildComputerResponse(rsp)
+}
+
+// CreateDistributionWithResponse request returning *CreateDistributionResponse
+func (c *ClientWithResponses) CreateDistributionWithResponse(ctx context.Context, params *CreateDistributionParams, reqEditors ...RequestEditorFn) (*CreateDistributionResponse, error) {
+	rsp, err := c.CreateDistribution(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateDistributionResponse(rsp)
+}
+
+// CreatePackageProfileWithResponse request returning *CreatePackageProfileResponse
+func (c *ClientWithResponses) CreatePackageProfileWithResponse(ctx context.Context, params *CreatePackageProfileParams, reqEditors ...RequestEditorFn) (*CreatePackageProfileResponse, error) {
+	rsp, err := c.CreatePackageProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreatePackageProfileResponse(rsp)
+}
+
+// CreatePocketWithResponse request returning *CreatePocketResponse
+func (c *ClientWithResponses) CreatePocketWithResponse(ctx context.Context, params *CreatePocketParams, reqEditors ...RequestEditorFn) (*CreatePocketResponse, error) {
+	rsp, err := c.CreatePocket(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreatePocketResponse(rsp)
+}
+
+// CreateRemovalProfileWithResponse request returning *CreateRemovalProfileResponse
+func (c *ClientWithResponses) CreateRemovalProfileWithResponse(ctx context.Context, params *CreateRemovalProfileParams, reqEditors ...RequestEditorFn) (*CreateRemovalProfileResponse, error) {
+	rsp, err := c.CreateRemovalProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRemovalProfileResponse(rsp)
+}
+
+// CreateRepositoryProfileWithResponse request returning *CreateRepositoryProfileResponse
+func (c *ClientWithResponses) CreateRepositoryProfileWithResponse(ctx context.Context, params *CreateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*CreateRepositoryProfileResponse, error) {
+	rsp, err := c.CreateRepositoryProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRepositoryProfileResponse(rsp)
+}
+
+// CreateRoleWithResponse request returning *CreateRoleResponse
+func (c *ClientWithResponses) CreateRoleWithResponse(ctx context.Context, params *CreateRoleParams, reqEditors ...RequestEditorFn) (*CreateRoleResponse, error) {
+	rsp, err := c.CreateRole(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateRoleResponse(rsp)
+}
+
+// CreateSavedSearchWithResponse request returning *CreateSavedSearchResponse
+func (c *ClientWithResponses) CreateSavedSearchWithResponse(ctx context.Context, params *CreateSavedSearchParams, reqEditors ...RequestEditorFn) (*CreateSavedSearchResponse, error) {
+	rsp, err := c.CreateSavedSearch(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateSavedSearchResponse(rsp)
+}
+
+// CreateScriptWithResponse request returning *CreateScriptResponse
+func (c *ClientWithResponses) CreateScriptWithResponse(ctx context.Context, params *CreateScriptParams, reqEditors ...RequestEditorFn) (*CreateScriptResponse, error) {
+	rsp, err := c.CreateScript(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScriptResponse(rsp)
+}
+
+// CreateScriptAttachmentWithResponse request returning *CreateScriptAttachmentResponse
+func (c *ClientWithResponses) CreateScriptAttachmentWithResponse(ctx context.Context, params *CreateScriptAttachmentParams, reqEditors ...RequestEditorFn) (*CreateScriptAttachmentResponse, error) {
+	rsp, err := c.CreateScriptAttachment(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateScriptAttachmentResponse(rsp)
+}
+
+// CreateSeriesWithResponse request returning *CreateSeriesResponse
+func (c *ClientWithResponses) CreateSeriesWithResponse(ctx context.Context, params *CreateSeriesParams, reqEditors ...RequestEditorFn) (*CreateSeriesResponse, error) {
+	rsp, err := c.CreateSeries(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateSeriesResponse(rsp)
+}
+
+// CreateUpgradeProfileWithResponse request returning *CreateUpgradeProfileResponse
+func (c *ClientWithResponses) CreateUpgradeProfileWithResponse(ctx context.Context, params *CreateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*CreateUpgradeProfileResponse, error) {
+	rsp, err := c.CreateUpgradeProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateUpgradeProfileResponse(rsp)
+}
+
+// CreateUserWithResponse request returning *CreateUserResponse
+func (c *ClientWithResponses) CreateUserWithResponse(ctx context.Context, params *CreateUserParams, reqEditors ...RequestEditorFn) (*CreateUserResponse, error) {
+	rsp, err := c.CreateUser(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseCreateUserResponse(rsp)
+}
+
+// DeleteChildComputersWithResponse request returning *DeleteChildComputersResponse
+func (c *ClientWithResponses) DeleteChildComputersWithResponse(ctx context.Context, params *DeleteChildComputersParams, reqEditors ...RequestEditorFn) (*DeleteChildComputersResponse, error) {
+	rsp, err := c.DeleteChildComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeleteChildComputersResponse(rsp)
+}
+
+// DeriveSeriesWithResponse request returning *DeriveSeriesResponse
+func (c *ClientWithResponses) DeriveSeriesWithResponse(ctx context.Context, params *DeriveSeriesParams, reqEditors ...RequestEditorFn) (*DeriveSeriesResponse, error) {
+	rsp, err := c.DeriveSeries(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDeriveSeriesResponse(rsp)
+}
+
+// DiffPullPocketWithResponse request returning *DiffPullPocketResponse
+func (c *ClientWithResponses) DiffPullPocketWithResponse(ctx context.Context, params *DiffPullPocketParams, reqEditors ...RequestEditorFn) (*DiffPullPocketResponse, error) {
+	rsp, err := c.DiffPullPocket(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDiffPullPocketResponse(rsp)
+}
+
+// DisableAdministratorWithResponse request returning *DisableAdministratorResponse
+func (c *ClientWithResponses) DisableAdministratorWithResponse(ctx context.Context, params *DisableAdministratorParams, reqEditors ...RequestEditorFn) (*DisableAdministratorResponse, error) {
+	rsp, err := c.DisableAdministrator(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDisableAdministratorResponse(rsp)
+}
+
+// DisassociateAlertWithResponse request returning *DisassociateAlertResponse
+func (c *ClientWithResponses) DisassociateAlertWithResponse(ctx context.Context, params *DisassociateAlertParams, reqEditors ...RequestEditorFn) (*DisassociateAlertResponse, error) {
+	rsp, err := c.DisassociateAlert(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDisassociateAlertResponse(rsp)
+}
+
+// DisassociatePackageProfileWithResponse request returning *DisassociatePackageProfileResponse
+func (c *ClientWithResponses) DisassociatePackageProfileWithResponse(ctx context.Context, params *DisassociatePackageProfileParams, reqEditors ...RequestEditorFn) (*DisassociatePackageProfileResponse, error) {
+	rsp, err := c.DisassociatePackageProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDisassociatePackageProfileResponse(rsp)
+}
+
+// DisassociateRemovalProfileWithResponse request returning *DisassociateRemovalProfileResponse
+func (c *ClientWithResponses) DisassociateRemovalProfileWithResponse(ctx context.Context, params *DisassociateRemovalProfileParams, reqEditors ...RequestEditorFn) (*DisassociateRemovalProfileResponse, error) {
+	rsp, err := c.DisassociateRemovalProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDisassociateRemovalProfileResponse(rsp)
+}
+
+// DisassociateRepositoryProfileWithResponse request returning *DisassociateRepositoryProfileResponse
+func (c *ClientWithResponses) DisassociateRepositoryProfileWithResponse(ctx context.Context, params *DisassociateRepositoryProfileParams, reqEditors ...RequestEditorFn) (*DisassociateRepositoryProfileResponse, error) {
+	rsp, err := c.DisassociateRepositoryProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDisassociateRepositoryProfileResponse(rsp)
+}
+
+// DisassociateUpgradeProfileWithResponse request returning *DisassociateUpgradeProfileResponse
+func (c *ClientWithResponses) DisassociateUpgradeProfileWithResponse(ctx context.Context, params *DisassociateUpgradeProfileParams, reqEditors ...RequestEditorFn) (*DisassociateUpgradeProfileResponse, error) {
+	rsp, err := c.DisassociateUpgradeProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseDisassociateUpgradeProfileResponse(rsp)
+}
+
+// EditPackageProfileWithResponse request returning *EditPackageProfileResponse
+func (c *ClientWithResponses) EditPackageProfileWithResponse(ctx context.Context, params *EditPackageProfileParams, reqEditors ...RequestEditorFn) (*EditPackageProfileResponse, error) {
+	rsp, err := c.EditPackageProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEditPackageProfileResponse(rsp)
+}
+
+// EditPocketWithResponse request returning *EditPocketResponse
+func (c *ClientWithResponses) EditPocketWithResponse(ctx context.Context, params *EditPocketParams, reqEditors ...RequestEditorFn) (*EditPocketResponse, error) {
+	rsp, err := c.EditPocket(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEditPocketResponse(rsp)
+}
+
+// EditRemovalProfileWithResponse request returning *EditRemovalProfileResponse
+func (c *ClientWithResponses) EditRemovalProfileWithResponse(ctx context.Context, params *EditRemovalProfileParams, reqEditors ...RequestEditorFn) (*EditRemovalProfileResponse, error) {
+	rsp, err := c.EditRemovalProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEditRemovalProfileResponse(rsp)
+}
+
+// EditRepositoryProfileWithResponse request returning *EditRepositoryProfileResponse
+func (c *ClientWithResponses) EditRepositoryProfileWithResponse(ctx context.Context, params *EditRepositoryProfileParams, reqEditors ...RequestEditorFn) (*EditRepositoryProfileResponse, error) {
+	rsp, err := c.EditRepositoryProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEditRepositoryProfileResponse(rsp)
+}
+
+// EditSavedSearchWithResponse request returning *EditSavedSearchResponse
+func (c *ClientWithResponses) EditSavedSearchWithResponse(ctx context.Context, params *EditSavedSearchParams, reqEditors ...RequestEditorFn) (*EditSavedSearchResponse, error) {
+	rsp, err := c.EditSavedSearch(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEditSavedSearchResponse(rsp)
+}
+
+// EditScriptWithResponse request returning *EditScriptResponse
+func (c *ClientWithResponses) EditScriptWithResponse(ctx context.Context, params *EditScriptParams, reqEditors ...RequestEditorFn) (*EditScriptResponse, error) {
+	rsp, err := c.EditScript(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEditScriptResponse(rsp)
+}
+
+// EditUpgradeProfileWithResponse request returning *EditUpgradeProfileResponse
+func (c *ClientWithResponses) EditUpgradeProfileWithResponse(ctx context.Context, params *EditUpgradeProfileParams, reqEditors ...RequestEditorFn) (*EditUpgradeProfileResponse, error) {
+	rsp, err := c.EditUpgradeProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEditUpgradeProfileResponse(rsp)
+}
+
+// EditUserWithResponse request returning *EditUserResponse
+func (c *ClientWithResponses) EditUserWithResponse(ctx context.Context, params *EditUserParams, reqEditors ...RequestEditorFn) (*EditUserResponse, error) {
+	rsp, err := c.EditUser(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseEditUserResponse(rsp)
+}
+
+// ExecuteScriptWithResponse request returning *ExecuteScriptResponse
+func (c *ClientWithResponses) ExecuteScriptWithResponse(ctx context.Context, params *ExecuteScriptParams, reqEditors ...RequestEditorFn) (*ExecuteScriptResponse, error) {
+	rsp, err := c.ExecuteScript(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseExecuteScriptResponse(rsp)
+}
+
+// GetAPTSourcesWithResponse request returning *GetAPTSourcesResponse
+func (c *ClientWithResponses) GetAPTSourcesWithResponse(ctx context.Context, params *GetAPTSourcesParams, reqEditors ...RequestEditorFn) (*GetAPTSourcesResponse, error) {
+	rsp, err := c.GetAPTSources(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAPTSourcesResponse(rsp)
+}
+
+// GetAccessGroupsWithResponse request returning *GetAccessGroupsResponse
+func (c *ClientWithResponses) GetAccessGroupsWithResponse(ctx context.Context, params *GetAccessGroupsParams, reqEditors ...RequestEditorFn) (*GetAccessGroupsResponse, error) {
+	rsp, err := c.GetAccessGroups(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAccessGroupsResponse(rsp)
+}
+
+// GetActivitiesWithResponse request returning *GetActivitiesResponse
+func (c *ClientWithResponses) GetActivitiesWithResponse(ctx context.Context, params *GetActivitiesParams, reqEditors ...RequestEditorFn) (*GetActivitiesResponse, error) {
+	rsp, err := c.GetActivities(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetActivitiesResponse(rsp)
+}
+
+// GetActivityTypesWithResponse request returning *GetActivityTypesResponse
+func (c *ClientWithResponses) GetActivityTypesWithResponse(ctx context.Context, params *GetActivityTypesParams, reqEditors ...RequestEditorFn) (*GetActivityTypesResponse, error) {
+	rsp, err := c.GetActivityTypes(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetActivityTypesResponse(rsp)
+}
+
+// GetAdministratorsWithResponse request returning *GetAdministratorsResponse
+func (c *ClientWithResponses) GetAdministratorsWithResponse(ctx context.Context, params *GetAdministratorsParams, reqEditors ...RequestEditorFn) (*GetAdministratorsResponse, error) {
+	rsp, err := c.GetAdministrators(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAdministratorsResponse(rsp)
+}
+
+// GetAlertSubscribersWithResponse request returning *GetAlertSubscribersResponse
+func (c *ClientWithResponses) GetAlertSubscribersWithResponse(ctx context.Context, params *GetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*GetAlertSubscribersResponse, error) {
+	rsp, err := c.GetAlertSubscribers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAlertSubscribersResponse(rsp)
+}
+
+// GetAlertsWithResponse request returning *GetAlertsResponse
+func (c *ClientWithResponses) GetAlertsWithResponse(ctx context.Context, params *GetAlertsParams, reqEditors ...RequestEditorFn) (*GetAlertsResponse, error) {
+	rsp, err := c.GetAlerts(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetAlertsResponse(rsp)
+}
+
+// GetCSVComplianceDataWithResponse request returning *GetCSVComplianceDataResponse
+func (c *ClientWithResponses) GetCSVComplianceDataWithResponse(ctx context.Context, params *GetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*GetCSVComplianceDataResponse, error) {
+	rsp, err := c.GetCSVComplianceData(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetCSVComplianceDataResponse(rsp)
+}
+
+// GetComputerProcessesWithResponse request returning *GetComputerProcessesResponse
+func (c *ClientWithResponses) GetComputerProcessesWithResponse(ctx context.Context, params *GetComputerProcessesParams, reqEditors ...RequestEditorFn) (*GetComputerProcessesResponse, error) {
+	rsp, err := c.GetComputerProcesses(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetComputerProcessesResponse(rsp)
+}
+
+// GetComputersWithResponse request returning *GetComputersResponse
+func (c *ClientWithResponses) GetComputersWithResponse(ctx context.Context, params *GetComputersParams, reqEditors ...RequestEditorFn) (*GetComputersResponse, error) {
+	rsp, err := c.GetComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetComputersResponse(rsp)
+}
+
+// GetComputersNotUpgradedWithResponse request returning *GetComputersNotUpgradedResponse
+func (c *ClientWithResponses) GetComputersNotUpgradedWithResponse(ctx context.Context, params *GetComputersNotUpgradedParams, reqEditors ...RequestEditorFn) (*GetComputersNotUpgradedResponse, error) {
+	rsp, err := c.GetComputersNotUpgraded(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetComputersNotUpgradedResponse(rsp)
+}
+
+// GetDistributionsWithResponse request returning *GetDistributionsResponse
+func (c *ClientWithResponses) GetDistributionsWithResponse(ctx context.Context, params *GetDistributionsParams, reqEditors ...RequestEditorFn) (*GetDistributionsResponse, error) {
+	rsp, err := c.GetDistributions(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetDistributionsResponse(rsp)
+}
+
+// GetEventLogWithResponse request returning *GetEventLogResponse
+func (c *ClientWithResponses) GetEventLogWithResponse(ctx context.Context, params *GetEventLogParams, reqEditors ...RequestEditorFn) (*GetEventLogResponse, error) {
+	rsp, err := c.GetEventLog(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetEventLogResponse(rsp)
+}
+
+// GetGPGKeysWithResponse request returning *GetGPGKeysResponse
+func (c *ClientWithResponses) GetGPGKeysWithResponse(ctx context.Context, params *GetGPGKeysParams, reqEditors ...RequestEditorFn) (*GetGPGKeysResponse, error) {
+	rsp, err := c.GetGPGKeys(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetGPGKeysResponse(rsp)
+}
+
+// GetNotPingingComputersWithResponse request returning *GetNotPingingComputersResponse
+func (c *ClientWithResponses) GetNotPingingComputersWithResponse(ctx context.Context, params *GetNotPingingComputersParams, reqEditors ...RequestEditorFn) (*GetNotPingingComputersResponse, error) {
+	rsp, err := c.GetNotPingingComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetNotPingingComputersResponse(rsp)
+}
+
+// GetPackageProfilesWithResponse request returning *GetPackageProfilesResponse
+func (c *ClientWithResponses) GetPackageProfilesWithResponse(ctx context.Context, params *GetPackageProfilesParams, reqEditors ...RequestEditorFn) (*GetPackageProfilesResponse, error) {
+	rsp, err := c.GetPackageProfiles(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetPackageProfilesResponse(rsp)
+}
+
+// GetPackagesWithResponse request returning *GetPackagesResponse
+func (c *ClientWithResponses) GetPackagesWithResponse(ctx context.Context, params *GetPackagesParams, reqEditors ...RequestEditorFn) (*GetPackagesResponse, error) {
+	rsp, err := c.GetPackages(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetPackagesResponse(rsp)
+}
+
+// GetPendingComputersWithResponse request returning *GetPendingComputersResponse
+func (c *ClientWithResponses) GetPendingComputersWithResponse(ctx context.Context, params *GetPendingComputersParams, reqEditors ...RequestEditorFn) (*GetPendingComputersResponse, error) {
+	rsp, err := c.GetPendingComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetPendingComputersResponse(rsp)
+}
+
+// GetPermissionsWithResponse request returning *GetPermissionsResponse
+func (c *ClientWithResponses) GetPermissionsWithResponse(ctx context.Context, params *GetPermissionsParams, reqEditors ...RequestEditorFn) (*GetPermissionsResponse, error) {
+	rsp, err := c.GetPermissions(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetPermissionsResponse(rsp)
+}
+
+// GetRemovalProfilesWithResponse request returning *GetRemovalProfilesResponse
+func (c *ClientWithResponses) GetRemovalProfilesWithResponse(ctx context.Context, params *GetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*GetRemovalProfilesResponse, error) {
+	rsp, err := c.GetRemovalProfiles(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRemovalProfilesResponse(rsp)
+}
+
+// GetRepoInfoWithResponse request returning *GetRepoInfoResponse
+func (c *ClientWithResponses) GetRepoInfoWithResponse(ctx context.Context, params *GetRepoInfoParams, reqEditors ...RequestEditorFn) (*GetRepoInfoResponse, error) {
+	rsp, err := c.GetRepoInfo(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRepoInfoResponse(rsp)
+}
+
+// GetRepositoryProfilesWithResponse request returning *GetRepositoryProfilesResponse
+func (c *ClientWithResponses) GetRepositoryProfilesWithResponse(ctx context.Context, params *GetRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*GetRepositoryProfilesResponse, error) {
+	rsp, err := c.GetRepositoryProfiles(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRepositoryProfilesResponse(rsp)
+}
+
+// GetRolesWithResponse request returning *GetRolesResponse
+func (c *ClientWithResponses) GetRolesWithResponse(ctx context.Context, params *GetRolesParams, reqEditors ...RequestEditorFn) (*GetRolesResponse, error) {
+	rsp, err := c.GetRoles(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetRolesResponse(rsp)
+}
+
+// GetSavedSearchesWithResponse request returning *GetSavedSearchesResponse
+func (c *ClientWithResponses) GetSavedSearchesWithResponse(ctx context.Context, params *GetSavedSearchesParams, reqEditors ...RequestEditorFn) (*GetSavedSearchesResponse, error) {
+	rsp, err := c.GetSavedSearches(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetSavedSearchesResponse(rsp)
+}
+
+// GetScriptCodeWithResponse request returning *GetScriptCodeResponse
+func (c *ClientWithResponses) GetScriptCodeWithResponse(ctx context.Context, params *GetScriptCodeParams, reqEditors ...RequestEditorFn) (*GetScriptCodeResponse, error) {
+	rsp, err := c.GetScriptCode(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetScriptCodeResponse(rsp)
+}
+
+// GetScriptsWithResponse request returning *GetScriptsResponse
+func (c *ClientWithResponses) GetScriptsWithResponse(ctx context.Context, params *GetScriptsParams, reqEditors ...RequestEditorFn) (*GetScriptsResponse, error) {
+	rsp, err := c.GetScripts(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetScriptsResponse(rsp)
+}
+
+// GetSettingsWithResponse request returning *GetSettingsResponse
+func (c *ClientWithResponses) GetSettingsWithResponse(ctx context.Context, params *GetSettingsParams, reqEditors ...RequestEditorFn) (*GetSettingsResponse, error) {
+	rsp, err := c.GetSettings(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetSettingsResponse(rsp)
+}
+
+// GetUSNTimeToFixWithResponse request returning *GetUSNTimeToFixResponse
+func (c *ClientWithResponses) GetUSNTimeToFixWithResponse(ctx context.Context, params *GetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*GetUSNTimeToFixResponse, error) {
+	rsp, err := c.GetUSNTimeToFix(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetUSNTimeToFixResponse(rsp)
+}
+
+// GetUpgradeProfilesWithResponse request returning *GetUpgradeProfilesResponse
+func (c *ClientWithResponses) GetUpgradeProfilesWithResponse(ctx context.Context, params *GetUpgradeProfilesParams, reqEditors ...RequestEditorFn) (*GetUpgradeProfilesResponse, error) {
+	rsp, err := c.GetUpgradeProfiles(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetUpgradeProfilesResponse(rsp)
+}
+
+// GetUpgradedComputersByFrequencyWithResponse request returning *GetUpgradedComputersByFrequencyResponse
+func (c *ClientWithResponses) GetUpgradedComputersByFrequencyWithResponse(ctx context.Context, params *GetUpgradedComputersByFrequencyParams, reqEditors ...RequestEditorFn) (*GetUpgradedComputersByFrequencyResponse, error) {
+	rsp, err := c.GetUpgradedComputersByFrequency(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetUpgradedComputersByFrequencyResponse(rsp)
+}
+
+// GetUsersWithResponse request returning *GetUsersResponse
+func (c *ClientWithResponses) GetUsersWithResponse(ctx context.Context, params *GetUsersParams, reqEditors ...RequestEditorFn) (*GetUsersResponse, error) {
+	rsp, err := c.GetUsers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetUsersResponse(rsp)
+}
+
+// GetWSLHostsWithResponse request returning *GetWSLHostsResponse
+func (c *ClientWithResponses) GetWSLHostsWithResponse(ctx context.Context, params *GetWSLHostsParams, reqEditors ...RequestEditorFn) (*GetWSLHostsResponse, error) {
+	rsp, err := c.GetWSLHosts(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGetWSLHostsResponse(rsp)
+}
+
+// ImportGPGKeyWithResponse request returning *ImportGPGKeyResponse
+func (c *ClientWithResponses) ImportGPGKeyWithResponse(ctx context.Context, params *ImportGPGKeyParams, reqEditors ...RequestEditorFn) (*ImportGPGKeyResponse, error) {
+	rsp, err := c.ImportGPGKey(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseImportGPGKeyResponse(rsp)
+}
+
+// InstallPackagesWithResponse request returning *InstallPackagesResponse
+func (c *ClientWithResponses) InstallPackagesWithResponse(ctx context.Context, params *InstallPackagesParams, reqEditors ...RequestEditorFn) (*InstallPackagesResponse, error) {
+	rsp, err := c.InstallPackages(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseInstallPackagesResponse(rsp)
+}
+
+// InviteAdministratorWithResponse request returning *InviteAdministratorResponse
+func (c *ClientWithResponses) InviteAdministratorWithResponse(ctx context.Context, params *InviteAdministratorParams, reqEditors ...RequestEditorFn) (*InviteAdministratorResponse, error) {
+	rsp, err := c.InviteAdministrator(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseInviteAdministratorResponse(rsp)
+}
+
+// KillComputerProcessesWithResponse request returning *KillComputerProcessesResponse
+func (c *ClientWithResponses) KillComputerProcessesWithResponse(ctx context.Context, params *KillComputerProcessesParams, reqEditors ...RequestEditorFn) (*KillComputerProcessesResponse, error) {
+	rsp, err := c.KillComputerProcesses(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseKillComputerProcessesResponse(rsp)
+}
+
+// ListPocketWithResponse request returning *ListPocketResponse
+func (c *ClientWithResponses) ListPocketWithResponse(ctx context.Context, params *ListPocketParams, reqEditors ...RequestEditorFn) (*ListPocketResponse, error) {
+	rsp, err := c.ListPocket(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListPocketResponse(rsp)
+}
+
+// ModifyPackageProfileWithResponse request returning *ModifyPackageProfileResponse
+func (c *ClientWithResponses) ModifyPackageProfileWithResponse(ctx context.Context, params *ModifyPackageProfileParams, reqEditors ...RequestEditorFn) (*ModifyPackageProfileResponse, error) {
+	rsp, err := c.ModifyPackageProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseModifyPackageProfileResponse(rsp)
+}
+
+// PullPackagesToPocketWithResponse request returning *PullPackagesToPocketResponse
+func (c *ClientWithResponses) PullPackagesToPocketWithResponse(ctx context.Context, params *PullPackagesToPocketParams, reqEditors ...RequestEditorFn) (*PullPackagesToPocketResponse, error) {
+	rsp, err := c.PullPackagesToPocket(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParsePullPackagesToPocketResponse(rsp)
+}
+
+// RebootComputersWithResponse request returning *RebootComputersResponse
+func (c *ClientWithResponses) RebootComputersWithResponse(ctx context.Context, params *RebootComputersParams, reqEditors ...RequestEditorFn) (*RebootComputersResponse, error) {
+	rsp, err := c.RebootComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRebootComputersResponse(rsp)
+}
+
+// RejectPendingComputersWithResponse request returning *RejectPendingComputersResponse
+func (c *ClientWithResponses) RejectPendingComputersWithResponse(ctx context.Context, params *RejectPendingComputersParams, reqEditors ...RequestEditorFn) (*RejectPendingComputersResponse, error) {
+	rsp, err := c.RejectPendingComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRejectPendingComputersResponse(rsp)
+}
+
+// RemoveAPTSourceWithResponse request returning *RemoveAPTSourceResponse
+func (c *ClientWithResponses) RemoveAPTSourceWithResponse(ctx context.Context, params *RemoveAPTSourceParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourceResponse, error) {
+	rsp, err := c.RemoveAPTSource(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveAPTSourceResponse(rsp)
+}
+
+// RemoveAPTSourceFromRepositoryProfileWithResponse request returning *RemoveAPTSourceFromRepositoryProfileResponse
+func (c *ClientWithResponses) RemoveAPTSourceFromRepositoryProfileWithResponse(ctx context.Context, params *RemoveAPTSourceFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourceFromRepositoryProfileResponse, error) {
+	rsp, err := c.RemoveAPTSourceFromRepositoryProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveAPTSourceFromRepositoryProfileResponse(rsp)
+}
+
+// RemoveAPTSourcesWithResponse request returning *RemoveAPTSourcesResponse
+func (c *ClientWithResponses) RemoveAPTSourcesWithResponse(ctx context.Context, params *RemoveAPTSourcesParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourcesResponse, error) {
+	rsp, err := c.RemoveAPTSources(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveAPTSourcesResponse(rsp)
+}
+
+// RemoveAPTSourcesFromRepositoryProfileWithResponse request returning *RemoveAPTSourcesFromRepositoryProfileResponse
+func (c *ClientWithResponses) RemoveAPTSourcesFromRepositoryProfileWithResponse(ctx context.Context, params *RemoveAPTSourcesFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemoveAPTSourcesFromRepositoryProfileResponse, error) {
+	rsp, err := c.RemoveAPTSourcesFromRepositoryProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveAPTSourcesFromRepositoryProfileResponse(rsp)
+}
+
+// RemoveAccessGroupWithResponse request returning *RemoveAccessGroupResponse
+func (c *ClientWithResponses) RemoveAccessGroupWithResponse(ctx context.Context, params *RemoveAccessGroupParams, reqEditors ...RequestEditorFn) (*RemoveAccessGroupResponse, error) {
+	rsp, err := c.RemoveAccessGroup(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveAccessGroupResponse(rsp)
+}
+
+// RemoveAccessGroupsFromRoleWithResponse request returning *RemoveAccessGroupsFromRoleResponse
+func (c *ClientWithResponses) RemoveAccessGroupsFromRoleWithResponse(ctx context.Context, params *RemoveAccessGroupsFromRoleParams, reqEditors ...RequestEditorFn) (*RemoveAccessGroupsFromRoleResponse, error) {
+	rsp, err := c.RemoveAccessGroupsFromRole(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveAccessGroupsFromRoleResponse(rsp)
+}
+
+// RemoveAnnotationFromComputersWithResponse request returning *RemoveAnnotationFromComputersResponse
+func (c *ClientWithResponses) RemoveAnnotationFromComputersWithResponse(ctx context.Context, params *RemoveAnnotationFromComputersParams, reqEditors ...RequestEditorFn) (*RemoveAnnotationFromComputersResponse, error) {
+	rsp, err := c.RemoveAnnotationFromComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveAnnotationFromComputersResponse(rsp)
+}
+
+// RemoveComputersWithResponse request returning *RemoveComputersResponse
+func (c *ClientWithResponses) RemoveComputersWithResponse(ctx context.Context, params *RemoveComputersParams, reqEditors ...RequestEditorFn) (*RemoveComputersResponse, error) {
+	rsp, err := c.RemoveComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveComputersResponse(rsp)
+}
+
+// RemoveDistributionWithResponse request returning *RemoveDistributionResponse
+func (c *ClientWithResponses) RemoveDistributionWithResponse(ctx context.Context, params *RemoveDistributionParams, reqEditors ...RequestEditorFn) (*RemoveDistributionResponse, error) {
+	rsp, err := c.RemoveDistribution(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveDistributionResponse(rsp)
+}
+
+// RemoveGPGKeyWithResponse request returning *RemoveGPGKeyResponse
+func (c *ClientWithResponses) RemoveGPGKeyWithResponse(ctx context.Context, params *RemoveGPGKeyParams, reqEditors ...RequestEditorFn) (*RemoveGPGKeyResponse, error) {
+	rsp, err := c.RemoveGPGKey(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveGPGKeyResponse(rsp)
+}
+
+// RemovePackageFiltersFromPocketWithResponse request returning *RemovePackageFiltersFromPocketResponse
+func (c *ClientWithResponses) RemovePackageFiltersFromPocketWithResponse(ctx context.Context, params *RemovePackageFiltersFromPocketParams, reqEditors ...RequestEditorFn) (*RemovePackageFiltersFromPocketResponse, error) {
+	rsp, err := c.RemovePackageFiltersFromPocket(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemovePackageFiltersFromPocketResponse(rsp)
+}
+
+// RemovePackageProfileWithResponse request returning *RemovePackageProfileResponse
+func (c *ClientWithResponses) RemovePackageProfileWithResponse(ctx context.Context, params *RemovePackageProfileParams, reqEditors ...RequestEditorFn) (*RemovePackageProfileResponse, error) {
+	rsp, err := c.RemovePackageProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemovePackageProfileResponse(rsp)
+}
+
+// RemovePackagesWithResponse request returning *RemovePackagesResponse
+func (c *ClientWithResponses) RemovePackagesWithResponse(ctx context.Context, params *RemovePackagesParams, reqEditors ...RequestEditorFn) (*RemovePackagesResponse, error) {
+	rsp, err := c.RemovePackages(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemovePackagesResponse(rsp)
+}
+
+// RemovePackagesFromPocketWithResponse request returning *RemovePackagesFromPocketResponse
+func (c *ClientWithResponses) RemovePackagesFromPocketWithResponse(ctx context.Context, params *RemovePackagesFromPocketParams, reqEditors ...RequestEditorFn) (*RemovePackagesFromPocketResponse, error) {
+	rsp, err := c.RemovePackagesFromPocket(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemovePackagesFromPocketResponse(rsp)
+}
+
+// RemovePermissionsFromRoleWithResponse request returning *RemovePermissionsFromRoleResponse
+func (c *ClientWithResponses) RemovePermissionsFromRoleWithResponse(ctx context.Context, params *RemovePermissionsFromRoleParams, reqEditors ...RequestEditorFn) (*RemovePermissionsFromRoleResponse, error) {
+	rsp, err := c.RemovePermissionsFromRole(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemovePermissionsFromRoleResponse(rsp)
+}
+
+// RemovePersonsFromRoleWithResponse request returning *RemovePersonsFromRoleResponse
+func (c *ClientWithResponses) RemovePersonsFromRoleWithResponse(ctx context.Context, params *RemovePersonsFromRoleParams, reqEditors ...RequestEditorFn) (*RemovePersonsFromRoleResponse, error) {
+	rsp, err := c.RemovePersonsFromRole(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemovePersonsFromRoleResponse(rsp)
+}
+
+// RemovePocketWithResponse request returning *RemovePocketResponse
+func (c *ClientWithResponses) RemovePocketWithResponse(ctx context.Context, params *RemovePocketParams, reqEditors ...RequestEditorFn) (*RemovePocketResponse, error) {
+	rsp, err := c.RemovePocket(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemovePocketResponse(rsp)
+}
+
+// RemovePocketsFromRepositoryProfileWithResponse request returning *RemovePocketsFromRepositoryProfileResponse
+func (c *ClientWithResponses) RemovePocketsFromRepositoryProfileWithResponse(ctx context.Context, params *RemovePocketsFromRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemovePocketsFromRepositoryProfileResponse, error) {
+	rsp, err := c.RemovePocketsFromRepositoryProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemovePocketsFromRepositoryProfileResponse(rsp)
+}
+
+// RemoveRemovalProfileWithResponse request returning *RemoveRemovalProfileResponse
+func (c *ClientWithResponses) RemoveRemovalProfileWithResponse(ctx context.Context, params *RemoveRemovalProfileParams, reqEditors ...RequestEditorFn) (*RemoveRemovalProfileResponse, error) {
+	rsp, err := c.RemoveRemovalProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveRemovalProfileResponse(rsp)
+}
+
+// RemoveRepositoryProfileWithResponse request returning *RemoveRepositoryProfileResponse
+func (c *ClientWithResponses) RemoveRepositoryProfileWithResponse(ctx context.Context, params *RemoveRepositoryProfileParams, reqEditors ...RequestEditorFn) (*RemoveRepositoryProfileResponse, error) {
+	rsp, err := c.RemoveRepositoryProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveRepositoryProfileResponse(rsp)
+}
+
+// RemoveRepositoryProfilesWithResponse request returning *RemoveRepositoryProfilesResponse
+func (c *ClientWithResponses) RemoveRepositoryProfilesWithResponse(ctx context.Context, params *RemoveRepositoryProfilesParams, reqEditors ...RequestEditorFn) (*RemoveRepositoryProfilesResponse, error) {
+	rsp, err := c.RemoveRepositoryProfiles(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveRepositoryProfilesResponse(rsp)
+}
+
+// RemoveRoleWithResponse request returning *RemoveRoleResponse
+func (c *ClientWithResponses) RemoveRoleWithResponse(ctx context.Context, params *RemoveRoleParams, reqEditors ...RequestEditorFn) (*RemoveRoleResponse, error) {
+	rsp, err := c.RemoveRole(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveRoleResponse(rsp)
+}
+
+// RemoveSavedSearchWithResponse request returning *RemoveSavedSearchResponse
+func (c *ClientWithResponses) RemoveSavedSearchWithResponse(ctx context.Context, params *RemoveSavedSearchParams, reqEditors ...RequestEditorFn) (*RemoveSavedSearchResponse, error) {
+	rsp, err := c.RemoveSavedSearch(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveSavedSearchResponse(rsp)
+}
+
+// RemoveScriptWithResponse request returning *RemoveScriptResponse
+func (c *ClientWithResponses) RemoveScriptWithResponse(ctx context.Context, params *RemoveScriptParams, reqEditors ...RequestEditorFn) (*RemoveScriptResponse, error) {
+	rsp, err := c.RemoveScript(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveScriptResponse(rsp)
+}
+
+// RemoveScriptAttachmentWithResponse request returning *RemoveScriptAttachmentResponse
+func (c *ClientWithResponses) RemoveScriptAttachmentWithResponse(ctx context.Context, params *RemoveScriptAttachmentParams, reqEditors ...RequestEditorFn) (*RemoveScriptAttachmentResponse, error) {
+	rsp, err := c.RemoveScriptAttachment(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveScriptAttachmentResponse(rsp)
+}
+
+// RemoveSeriesWithResponse request returning *RemoveSeriesResponse
+func (c *ClientWithResponses) RemoveSeriesWithResponse(ctx context.Context, params *RemoveSeriesParams, reqEditors ...RequestEditorFn) (*RemoveSeriesResponse, error) {
+	rsp, err := c.RemoveSeries(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveSeriesResponse(rsp)
+}
+
+// RemoveTagsFromComputersWithResponse request returning *RemoveTagsFromComputersResponse
+func (c *ClientWithResponses) RemoveTagsFromComputersWithResponse(ctx context.Context, params *RemoveTagsFromComputersParams, reqEditors ...RequestEditorFn) (*RemoveTagsFromComputersResponse, error) {
+	rsp, err := c.RemoveTagsFromComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveTagsFromComputersResponse(rsp)
+}
+
+// RemoveUpgradeProfileWithResponse request returning *RemoveUpgradeProfileResponse
+func (c *ClientWithResponses) RemoveUpgradeProfileWithResponse(ctx context.Context, params *RemoveUpgradeProfileParams, reqEditors ...RequestEditorFn) (*RemoveUpgradeProfileResponse, error) {
+	rsp, err := c.RemoveUpgradeProfile(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveUpgradeProfileResponse(rsp)
+}
+
+// RemoveUploaderGPGKeysFromPocketWithResponse request returning *RemoveUploaderGPGKeysFromPocketResponse
+func (c *ClientWithResponses) RemoveUploaderGPGKeysFromPocketWithResponse(ctx context.Context, params *RemoveUploaderGPGKeysFromPocketParams, reqEditors ...RequestEditorFn) (*RemoveUploaderGPGKeysFromPocketResponse, error) {
+	rsp, err := c.RemoveUploaderGPGKeysFromPocket(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveUploaderGPGKeysFromPocketResponse(rsp)
+}
+
+// RemoveWSLHostsWithResponse request returning *RemoveWSLHostsResponse
+func (c *ClientWithResponses) RemoveWSLHostsWithResponse(ctx context.Context, params *RemoveWSLHostsParams, reqEditors ...RequestEditorFn) (*RemoveWSLHostsResponse, error) {
+	rsp, err := c.RemoveWSLHosts(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRemoveWSLHostsResponse(rsp)
+}
+
+// RenameComputersWithResponse request returning *RenameComputersResponse
+func (c *ClientWithResponses) RenameComputersWithResponse(ctx context.Context, params *RenameComputersParams, reqEditors ...RequestEditorFn) (*RenameComputersResponse, error) {
+	rsp, err := c.RenameComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseRenameComputersResponse(rsp)
+}
+
+// SetDefaultChildComputerWithResponse request returning *SetDefaultChildComputerResponse
+func (c *ClientWithResponses) SetDefaultChildComputerWithResponse(ctx context.Context, params *SetDefaultChildComputerParams, reqEditors ...RequestEditorFn) (*SetDefaultChildComputerResponse, error) {
+	rsp, err := c.SetDefaultChildComputer(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseSetDefaultChildComputerResponse(rsp)
+}
+
+// SetSettingsWithResponse request returning *SetSettingsResponse
+func (c *ClientWithResponses) SetSettingsWithResponse(ctx context.Context, params *SetSettingsParams, reqEditors ...RequestEditorFn) (*SetSettingsResponse, error) {
+	rsp, err := c.SetSettings(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseSetSettingsResponse(rsp)
+}
+
+// ShutdownComputersWithResponse request returning *ShutdownComputersResponse
+func (c *ClientWithResponses) ShutdownComputersWithResponse(ctx context.Context, params *ShutdownComputersParams, reqEditors ...RequestEditorFn) (*ShutdownComputersResponse, error) {
+	rsp, err := c.ShutdownComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseShutdownComputersResponse(rsp)
+}
+
+// ShutdownHostComputerWithResponse request returning *ShutdownHostComputerResponse
+func (c *ClientWithResponses) ShutdownHostComputerWithResponse(ctx context.Context, params *ShutdownHostComputerParams, reqEditors ...RequestEditorFn) (*ShutdownHostComputerResponse, error) {
+	rsp, err := c.ShutdownHostComputer(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseShutdownHostComputerResponse(rsp)
+}
+
+// StartChildComputersWithResponse request returning *StartChildComputersResponse
+func (c *ClientWithResponses) StartChildComputersWithResponse(ctx context.Context, params *StartChildComputersParams, reqEditors ...RequestEditorFn) (*StartChildComputersResponse, error) {
+	rsp, err := c.StartChildComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseStartChildComputersResponse(rsp)
+}
+
+// StopChildComputersWithResponse request returning *StopChildComputersResponse
+func (c *ClientWithResponses) StopChildComputersWithResponse(ctx context.Context, params *StopChildComputersParams, reqEditors ...RequestEditorFn) (*StopChildComputersResponse, error) {
+	rsp, err := c.StopChildComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseStopChildComputersResponse(rsp)
+}
+
+// SubscribeToAlertWithResponse request returning *SubscribeToAlertResponse
+func (c *ClientWithResponses) SubscribeToAlertWithResponse(ctx context.Context, params *SubscribeToAlertParams, reqEditors ...RequestEditorFn) (*SubscribeToAlertResponse, error) {
+	rsp, err := c.SubscribeToAlert(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseSubscribeToAlertResponse(rsp)
+}
+
+// SyncMirrorPocketWithResponse request returning *SyncMirrorPocketResponse
+func (c *ClientWithResponses) SyncMirrorPocketWithResponse(ctx context.Context, params *SyncMirrorPocketParams, reqEditors ...RequestEditorFn) (*SyncMirrorPocketResponse, error) {
+	rsp, err := c.SyncMirrorPocket(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseSyncMirrorPocketResponse(rsp)
+}
+
+// TerminateComputerProcessesWithResponse request returning *TerminateComputerProcessesResponse
+func (c *ClientWithResponses) TerminateComputerProcessesWithResponse(ctx context.Context, params *TerminateComputerProcessesParams, reqEditors ...RequestEditorFn) (*TerminateComputerProcessesResponse, error) {
+	rsp, err := c.TerminateComputerProcesses(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseTerminateComputerProcessesResponse(rsp)
+}
+
+// UnsubscribeFromAlertWithResponse request returning *UnsubscribeFromAlertResponse
+func (c *ClientWithResponses) UnsubscribeFromAlertWithResponse(ctx context.Context, params *UnsubscribeFromAlertParams, reqEditors ...RequestEditorFn) (*UnsubscribeFromAlertResponse, error) {
+	rsp, err := c.UnsubscribeFromAlert(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUnsubscribeFromAlertResponse(rsp)
+}
+
+// UpgradePackagesWithResponse request returning *UpgradePackagesResponse
+func (c *ClientWithResponses) UpgradePackagesWithResponse(ctx context.Context, params *UpgradePackagesParams, reqEditors ...RequestEditorFn) (*UpgradePackagesResponse, error) {
+	rsp, err := c.UpgradePackages(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseUpgradePackagesResponse(rsp)
 }
 
 // LoginWithPasswordWithBodyWithResponse request with arbitrary body returning *LoginWithPasswordResponse
@@ -3013,15 +25910,15 @@ func (c *ClientWithResponses) RedactScriptWithResponse(ctx context.Context, scri
 	return ParseRedactScriptResponse(rsp)
 }
 
-// ParseInvokeLegacyActionResponse parses an HTTP response from a InvokeLegacyActionWithResponse call
-func ParseInvokeLegacyActionResponse(rsp *http.Response) (*InvokeLegacyActionResponse, error) {
+// ParseAcceptPendingComputersResponse parses an HTTP response from a AcceptPendingComputersWithResponse call
+func ParseAcceptPendingComputersResponse(rsp *http.Response) (*AcceptPendingComputersResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &InvokeLegacyActionResponse{
+	response := &AcceptPendingComputersResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -3048,12 +25945,6306 @@ func ParseInvokeLegacyActionResponse(rsp *http.Response) (*InvokeLegacyActionRes
 		}
 		response.JSON401 = &dest
 
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest NotFound
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
-		response.JSON404 = &dest
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAddAPTSourcesToRepositoryProfileResponse parses an HTTP response from a AddAPTSourcesToRepositoryProfileWithResponse call
+func ParseAddAPTSourcesToRepositoryProfileResponse(rsp *http.Response) (*AddAPTSourcesToRepositoryProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AddAPTSourcesToRepositoryProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAddAccessGroupsToRoleResponse parses an HTTP response from a AddAccessGroupsToRoleWithResponse call
+func ParseAddAccessGroupsToRoleResponse(rsp *http.Response) (*AddAccessGroupsToRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AddAccessGroupsToRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAddAnnotationToComputersResponse parses an HTTP response from a AddAnnotationToComputersWithResponse call
+func ParseAddAnnotationToComputersResponse(rsp *http.Response) (*AddAnnotationToComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AddAnnotationToComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAddPackageFiltersToPocketResponse parses an HTTP response from a AddPackageFiltersToPocketWithResponse call
+func ParseAddPackageFiltersToPocketResponse(rsp *http.Response) (*AddPackageFiltersToPocketResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AddPackageFiltersToPocketResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAddPermissionsToRoleResponse parses an HTTP response from a AddPermissionsToRoleWithResponse call
+func ParseAddPermissionsToRoleResponse(rsp *http.Response) (*AddPermissionsToRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AddPermissionsToRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAddPersonsToRoleResponse parses an HTTP response from a AddPersonsToRoleWithResponse call
+func ParseAddPersonsToRoleResponse(rsp *http.Response) (*AddPersonsToRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AddPersonsToRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAddPocketsToRepositoryProfileResponse parses an HTTP response from a AddPocketsToRepositoryProfileWithResponse call
+func ParseAddPocketsToRepositoryProfileResponse(rsp *http.Response) (*AddPocketsToRepositoryProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AddPocketsToRepositoryProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAddTagsToComputersResponse parses an HTTP response from a AddTagsToComputersWithResponse call
+func ParseAddTagsToComputersResponse(rsp *http.Response) (*AddTagsToComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AddTagsToComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAddUploaderGPGKeysToPocketResponse parses an HTTP response from a AddUploaderGPGKeysToPocketWithResponse call
+func ParseAddUploaderGPGKeysToPocketResponse(rsp *http.Response) (*AddUploaderGPGKeysToPocketResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AddUploaderGPGKeysToPocketResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseApproveActivitiesResponse parses an HTTP response from a ApproveActivitiesWithResponse call
+func ParseApproveActivitiesResponse(rsp *http.Response) (*ApproveActivitiesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ApproveActivitiesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAssociateAlertResponse parses an HTTP response from a AssociateAlertWithResponse call
+func ParseAssociateAlertResponse(rsp *http.Response) (*AssociateAlertResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AssociateAlertResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAssociatePackageProfileResponse parses an HTTP response from a AssociatePackageProfileWithResponse call
+func ParseAssociatePackageProfileResponse(rsp *http.Response) (*AssociatePackageProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AssociatePackageProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAssociateRemovalProfileResponse parses an HTTP response from a AssociateRemovalProfileWithResponse call
+func ParseAssociateRemovalProfileResponse(rsp *http.Response) (*AssociateRemovalProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AssociateRemovalProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAssociateRepositoryProfileResponse parses an HTTP response from a AssociateRepositoryProfileWithResponse call
+func ParseAssociateRepositoryProfileResponse(rsp *http.Response) (*AssociateRepositoryProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AssociateRepositoryProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseAssociateUpgradeProfileResponse parses an HTTP response from a AssociateUpgradeProfileWithResponse call
+func ParseAssociateUpgradeProfileResponse(rsp *http.Response) (*AssociateUpgradeProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AssociateUpgradeProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCancelActivitiesResponse parses an HTTP response from a CancelActivitiesWithResponse call
+func ParseCancelActivitiesResponse(rsp *http.Response) (*CancelActivitiesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CancelActivitiesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseChangeComputersAccessGroupResponse parses an HTTP response from a ChangeComputersAccessGroupWithResponse call
+func ParseChangeComputersAccessGroupResponse(rsp *http.Response) (*ChangeComputersAccessGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ChangeComputersAccessGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCopyPackageProfileResponse parses an HTTP response from a CopyPackageProfileWithResponse call
+func ParseCopyPackageProfileResponse(rsp *http.Response) (*CopyPackageProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CopyPackageProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCopyRoleResponse parses an HTTP response from a CopyRoleWithResponse call
+func ParseCopyRoleResponse(rsp *http.Response) (*CopyRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CopyRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCopyScriptResponse parses an HTTP response from a CopyScriptWithResponse call
+func ParseCopyScriptResponse(rsp *http.Response) (*CopyScriptResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CopyScriptResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateAPTSourceResponse parses an HTTP response from a CreateAPTSourceWithResponse call
+func ParseCreateAPTSourceResponse(rsp *http.Response) (*CreateAPTSourceResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateAPTSourceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateAccessGroupResponse parses an HTTP response from a CreateAccessGroupWithResponse call
+func ParseCreateAccessGroupResponse(rsp *http.Response) (*CreateAccessGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateAccessGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateChildComputerResponse parses an HTTP response from a CreateChildComputerWithResponse call
+func ParseCreateChildComputerResponse(rsp *http.Response) (*CreateChildComputerResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateChildComputerResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateDistributionResponse parses an HTTP response from a CreateDistributionWithResponse call
+func ParseCreateDistributionResponse(rsp *http.Response) (*CreateDistributionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateDistributionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreatePackageProfileResponse parses an HTTP response from a CreatePackageProfileWithResponse call
+func ParseCreatePackageProfileResponse(rsp *http.Response) (*CreatePackageProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreatePackageProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreatePocketResponse parses an HTTP response from a CreatePocketWithResponse call
+func ParseCreatePocketResponse(rsp *http.Response) (*CreatePocketResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreatePocketResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateRemovalProfileResponse parses an HTTP response from a CreateRemovalProfileWithResponse call
+func ParseCreateRemovalProfileResponse(rsp *http.Response) (*CreateRemovalProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateRemovalProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateRepositoryProfileResponse parses an HTTP response from a CreateRepositoryProfileWithResponse call
+func ParseCreateRepositoryProfileResponse(rsp *http.Response) (*CreateRepositoryProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateRepositoryProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateRoleResponse parses an HTTP response from a CreateRoleWithResponse call
+func ParseCreateRoleResponse(rsp *http.Response) (*CreateRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateSavedSearchResponse parses an HTTP response from a CreateSavedSearchWithResponse call
+func ParseCreateSavedSearchResponse(rsp *http.Response) (*CreateSavedSearchResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateSavedSearchResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateScriptResponse parses an HTTP response from a CreateScriptWithResponse call
+func ParseCreateScriptResponse(rsp *http.Response) (*CreateScriptResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateScriptResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateScriptAttachmentResponse parses an HTTP response from a CreateScriptAttachmentWithResponse call
+func ParseCreateScriptAttachmentResponse(rsp *http.Response) (*CreateScriptAttachmentResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateScriptAttachmentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateSeriesResponse parses an HTTP response from a CreateSeriesWithResponse call
+func ParseCreateSeriesResponse(rsp *http.Response) (*CreateSeriesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateSeriesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateUpgradeProfileResponse parses an HTTP response from a CreateUpgradeProfileWithResponse call
+func ParseCreateUpgradeProfileResponse(rsp *http.Response) (*CreateUpgradeProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateUpgradeProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseCreateUserResponse parses an HTTP response from a CreateUserWithResponse call
+func ParseCreateUserResponse(rsp *http.Response) (*CreateUserResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &CreateUserResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeleteChildComputersResponse parses an HTTP response from a DeleteChildComputersWithResponse call
+func ParseDeleteChildComputersResponse(rsp *http.Response) (*DeleteChildComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeleteChildComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDeriveSeriesResponse parses an HTTP response from a DeriveSeriesWithResponse call
+func ParseDeriveSeriesResponse(rsp *http.Response) (*DeriveSeriesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DeriveSeriesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDiffPullPocketResponse parses an HTTP response from a DiffPullPocketWithResponse call
+func ParseDiffPullPocketResponse(rsp *http.Response) (*DiffPullPocketResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DiffPullPocketResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDisableAdministratorResponse parses an HTTP response from a DisableAdministratorWithResponse call
+func ParseDisableAdministratorResponse(rsp *http.Response) (*DisableAdministratorResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DisableAdministratorResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDisassociateAlertResponse parses an HTTP response from a DisassociateAlertWithResponse call
+func ParseDisassociateAlertResponse(rsp *http.Response) (*DisassociateAlertResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DisassociateAlertResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDisassociatePackageProfileResponse parses an HTTP response from a DisassociatePackageProfileWithResponse call
+func ParseDisassociatePackageProfileResponse(rsp *http.Response) (*DisassociatePackageProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DisassociatePackageProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDisassociateRemovalProfileResponse parses an HTTP response from a DisassociateRemovalProfileWithResponse call
+func ParseDisassociateRemovalProfileResponse(rsp *http.Response) (*DisassociateRemovalProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DisassociateRemovalProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDisassociateRepositoryProfileResponse parses an HTTP response from a DisassociateRepositoryProfileWithResponse call
+func ParseDisassociateRepositoryProfileResponse(rsp *http.Response) (*DisassociateRepositoryProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DisassociateRepositoryProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseDisassociateUpgradeProfileResponse parses an HTTP response from a DisassociateUpgradeProfileWithResponse call
+func ParseDisassociateUpgradeProfileResponse(rsp *http.Response) (*DisassociateUpgradeProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &DisassociateUpgradeProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEditPackageProfileResponse parses an HTTP response from a EditPackageProfileWithResponse call
+func ParseEditPackageProfileResponse(rsp *http.Response) (*EditPackageProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EditPackageProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEditPocketResponse parses an HTTP response from a EditPocketWithResponse call
+func ParseEditPocketResponse(rsp *http.Response) (*EditPocketResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EditPocketResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEditRemovalProfileResponse parses an HTTP response from a EditRemovalProfileWithResponse call
+func ParseEditRemovalProfileResponse(rsp *http.Response) (*EditRemovalProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EditRemovalProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEditRepositoryProfileResponse parses an HTTP response from a EditRepositoryProfileWithResponse call
+func ParseEditRepositoryProfileResponse(rsp *http.Response) (*EditRepositoryProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EditRepositoryProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEditSavedSearchResponse parses an HTTP response from a EditSavedSearchWithResponse call
+func ParseEditSavedSearchResponse(rsp *http.Response) (*EditSavedSearchResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EditSavedSearchResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEditScriptResponse parses an HTTP response from a EditScriptWithResponse call
+func ParseEditScriptResponse(rsp *http.Response) (*EditScriptResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EditScriptResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEditUpgradeProfileResponse parses an HTTP response from a EditUpgradeProfileWithResponse call
+func ParseEditUpgradeProfileResponse(rsp *http.Response) (*EditUpgradeProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EditUpgradeProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseEditUserResponse parses an HTTP response from a EditUserWithResponse call
+func ParseEditUserResponse(rsp *http.Response) (*EditUserResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &EditUserResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseExecuteScriptResponse parses an HTTP response from a ExecuteScriptWithResponse call
+func ParseExecuteScriptResponse(rsp *http.Response) (*ExecuteScriptResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ExecuteScriptResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAPTSourcesResponse parses an HTTP response from a GetAPTSourcesWithResponse call
+func ParseGetAPTSourcesResponse(rsp *http.Response) (*GetAPTSourcesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAPTSourcesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAccessGroupsResponse parses an HTTP response from a GetAccessGroupsWithResponse call
+func ParseGetAccessGroupsResponse(rsp *http.Response) (*GetAccessGroupsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAccessGroupsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetActivitiesResponse parses an HTTP response from a GetActivitiesWithResponse call
+func ParseGetActivitiesResponse(rsp *http.Response) (*GetActivitiesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetActivitiesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetActivityTypesResponse parses an HTTP response from a GetActivityTypesWithResponse call
+func ParseGetActivityTypesResponse(rsp *http.Response) (*GetActivityTypesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetActivityTypesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAdministratorsResponse parses an HTTP response from a GetAdministratorsWithResponse call
+func ParseGetAdministratorsResponse(rsp *http.Response) (*GetAdministratorsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAdministratorsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAlertSubscribersResponse parses an HTTP response from a GetAlertSubscribersWithResponse call
+func ParseGetAlertSubscribersResponse(rsp *http.Response) (*GetAlertSubscribersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAlertSubscribersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetAlertsResponse parses an HTTP response from a GetAlertsWithResponse call
+func ParseGetAlertsResponse(rsp *http.Response) (*GetAlertsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetAlertsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetCSVComplianceDataResponse parses an HTTP response from a GetCSVComplianceDataWithResponse call
+func ParseGetCSVComplianceDataResponse(rsp *http.Response) (*GetCSVComplianceDataResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetCSVComplianceDataResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetComputerProcessesResponse parses an HTTP response from a GetComputerProcessesWithResponse call
+func ParseGetComputerProcessesResponse(rsp *http.Response) (*GetComputerProcessesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetComputerProcessesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetComputersResponse parses an HTTP response from a GetComputersWithResponse call
+func ParseGetComputersResponse(rsp *http.Response) (*GetComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetComputersNotUpgradedResponse parses an HTTP response from a GetComputersNotUpgradedWithResponse call
+func ParseGetComputersNotUpgradedResponse(rsp *http.Response) (*GetComputersNotUpgradedResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetComputersNotUpgradedResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetDistributionsResponse parses an HTTP response from a GetDistributionsWithResponse call
+func ParseGetDistributionsResponse(rsp *http.Response) (*GetDistributionsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetDistributionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetEventLogResponse parses an HTTP response from a GetEventLogWithResponse call
+func ParseGetEventLogResponse(rsp *http.Response) (*GetEventLogResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetEventLogResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetGPGKeysResponse parses an HTTP response from a GetGPGKeysWithResponse call
+func ParseGetGPGKeysResponse(rsp *http.Response) (*GetGPGKeysResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetGPGKeysResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetNotPingingComputersResponse parses an HTTP response from a GetNotPingingComputersWithResponse call
+func ParseGetNotPingingComputersResponse(rsp *http.Response) (*GetNotPingingComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetNotPingingComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetPackageProfilesResponse parses an HTTP response from a GetPackageProfilesWithResponse call
+func ParseGetPackageProfilesResponse(rsp *http.Response) (*GetPackageProfilesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetPackageProfilesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetPackagesResponse parses an HTTP response from a GetPackagesWithResponse call
+func ParseGetPackagesResponse(rsp *http.Response) (*GetPackagesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetPackagesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetPendingComputersResponse parses an HTTP response from a GetPendingComputersWithResponse call
+func ParseGetPendingComputersResponse(rsp *http.Response) (*GetPendingComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetPendingComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetPermissionsResponse parses an HTTP response from a GetPermissionsWithResponse call
+func ParseGetPermissionsResponse(rsp *http.Response) (*GetPermissionsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetPermissionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetRemovalProfilesResponse parses an HTTP response from a GetRemovalProfilesWithResponse call
+func ParseGetRemovalProfilesResponse(rsp *http.Response) (*GetRemovalProfilesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRemovalProfilesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetRepoInfoResponse parses an HTTP response from a GetRepoInfoWithResponse call
+func ParseGetRepoInfoResponse(rsp *http.Response) (*GetRepoInfoResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRepoInfoResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetRepositoryProfilesResponse parses an HTTP response from a GetRepositoryProfilesWithResponse call
+func ParseGetRepositoryProfilesResponse(rsp *http.Response) (*GetRepositoryProfilesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRepositoryProfilesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetRolesResponse parses an HTTP response from a GetRolesWithResponse call
+func ParseGetRolesResponse(rsp *http.Response) (*GetRolesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetRolesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetSavedSearchesResponse parses an HTTP response from a GetSavedSearchesWithResponse call
+func ParseGetSavedSearchesResponse(rsp *http.Response) (*GetSavedSearchesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetSavedSearchesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetScriptCodeResponse parses an HTTP response from a GetScriptCodeWithResponse call
+func ParseGetScriptCodeResponse(rsp *http.Response) (*GetScriptCodeResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetScriptCodeResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetScriptsResponse parses an HTTP response from a GetScriptsWithResponse call
+func ParseGetScriptsResponse(rsp *http.Response) (*GetScriptsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetScriptsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetSettingsResponse parses an HTTP response from a GetSettingsWithResponse call
+func ParseGetSettingsResponse(rsp *http.Response) (*GetSettingsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetSettingsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetUSNTimeToFixResponse parses an HTTP response from a GetUSNTimeToFixWithResponse call
+func ParseGetUSNTimeToFixResponse(rsp *http.Response) (*GetUSNTimeToFixResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetUSNTimeToFixResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetUpgradeProfilesResponse parses an HTTP response from a GetUpgradeProfilesWithResponse call
+func ParseGetUpgradeProfilesResponse(rsp *http.Response) (*GetUpgradeProfilesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetUpgradeProfilesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetUpgradedComputersByFrequencyResponse parses an HTTP response from a GetUpgradedComputersByFrequencyWithResponse call
+func ParseGetUpgradedComputersByFrequencyResponse(rsp *http.Response) (*GetUpgradedComputersByFrequencyResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetUpgradedComputersByFrequencyResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetUsersResponse parses an HTTP response from a GetUsersWithResponse call
+func ParseGetUsersResponse(rsp *http.Response) (*GetUsersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetUsersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGetWSLHostsResponse parses an HTTP response from a GetWSLHostsWithResponse call
+func ParseGetWSLHostsResponse(rsp *http.Response) (*GetWSLHostsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GetWSLHostsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseImportGPGKeyResponse parses an HTTP response from a ImportGPGKeyWithResponse call
+func ParseImportGPGKeyResponse(rsp *http.Response) (*ImportGPGKeyResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ImportGPGKeyResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseInstallPackagesResponse parses an HTTP response from a InstallPackagesWithResponse call
+func ParseInstallPackagesResponse(rsp *http.Response) (*InstallPackagesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &InstallPackagesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseInviteAdministratorResponse parses an HTTP response from a InviteAdministratorWithResponse call
+func ParseInviteAdministratorResponse(rsp *http.Response) (*InviteAdministratorResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &InviteAdministratorResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseKillComputerProcessesResponse parses an HTTP response from a KillComputerProcessesWithResponse call
+func ParseKillComputerProcessesResponse(rsp *http.Response) (*KillComputerProcessesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &KillComputerProcessesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseListPocketResponse parses an HTTP response from a ListPocketWithResponse call
+func ParseListPocketResponse(rsp *http.Response) (*ListPocketResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListPocketResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseModifyPackageProfileResponse parses an HTTP response from a ModifyPackageProfileWithResponse call
+func ParseModifyPackageProfileResponse(rsp *http.Response) (*ModifyPackageProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ModifyPackageProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParsePullPackagesToPocketResponse parses an HTTP response from a PullPackagesToPocketWithResponse call
+func ParsePullPackagesToPocketResponse(rsp *http.Response) (*PullPackagesToPocketResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &PullPackagesToPocketResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRebootComputersResponse parses an HTTP response from a RebootComputersWithResponse call
+func ParseRebootComputersResponse(rsp *http.Response) (*RebootComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RebootComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRejectPendingComputersResponse parses an HTTP response from a RejectPendingComputersWithResponse call
+func ParseRejectPendingComputersResponse(rsp *http.Response) (*RejectPendingComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RejectPendingComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveAPTSourceResponse parses an HTTP response from a RemoveAPTSourceWithResponse call
+func ParseRemoveAPTSourceResponse(rsp *http.Response) (*RemoveAPTSourceResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveAPTSourceResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveAPTSourceFromRepositoryProfileResponse parses an HTTP response from a RemoveAPTSourceFromRepositoryProfileWithResponse call
+func ParseRemoveAPTSourceFromRepositoryProfileResponse(rsp *http.Response) (*RemoveAPTSourceFromRepositoryProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveAPTSourceFromRepositoryProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveAPTSourcesResponse parses an HTTP response from a RemoveAPTSourcesWithResponse call
+func ParseRemoveAPTSourcesResponse(rsp *http.Response) (*RemoveAPTSourcesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveAPTSourcesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveAPTSourcesFromRepositoryProfileResponse parses an HTTP response from a RemoveAPTSourcesFromRepositoryProfileWithResponse call
+func ParseRemoveAPTSourcesFromRepositoryProfileResponse(rsp *http.Response) (*RemoveAPTSourcesFromRepositoryProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveAPTSourcesFromRepositoryProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveAccessGroupResponse parses an HTTP response from a RemoveAccessGroupWithResponse call
+func ParseRemoveAccessGroupResponse(rsp *http.Response) (*RemoveAccessGroupResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveAccessGroupResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveAccessGroupsFromRoleResponse parses an HTTP response from a RemoveAccessGroupsFromRoleWithResponse call
+func ParseRemoveAccessGroupsFromRoleResponse(rsp *http.Response) (*RemoveAccessGroupsFromRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveAccessGroupsFromRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveAnnotationFromComputersResponse parses an HTTP response from a RemoveAnnotationFromComputersWithResponse call
+func ParseRemoveAnnotationFromComputersResponse(rsp *http.Response) (*RemoveAnnotationFromComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveAnnotationFromComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveComputersResponse parses an HTTP response from a RemoveComputersWithResponse call
+func ParseRemoveComputersResponse(rsp *http.Response) (*RemoveComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveDistributionResponse parses an HTTP response from a RemoveDistributionWithResponse call
+func ParseRemoveDistributionResponse(rsp *http.Response) (*RemoveDistributionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveDistributionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveGPGKeyResponse parses an HTTP response from a RemoveGPGKeyWithResponse call
+func ParseRemoveGPGKeyResponse(rsp *http.Response) (*RemoveGPGKeyResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveGPGKeyResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemovePackageFiltersFromPocketResponse parses an HTTP response from a RemovePackageFiltersFromPocketWithResponse call
+func ParseRemovePackageFiltersFromPocketResponse(rsp *http.Response) (*RemovePackageFiltersFromPocketResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemovePackageFiltersFromPocketResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemovePackageProfileResponse parses an HTTP response from a RemovePackageProfileWithResponse call
+func ParseRemovePackageProfileResponse(rsp *http.Response) (*RemovePackageProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemovePackageProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemovePackagesResponse parses an HTTP response from a RemovePackagesWithResponse call
+func ParseRemovePackagesResponse(rsp *http.Response) (*RemovePackagesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemovePackagesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemovePackagesFromPocketResponse parses an HTTP response from a RemovePackagesFromPocketWithResponse call
+func ParseRemovePackagesFromPocketResponse(rsp *http.Response) (*RemovePackagesFromPocketResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemovePackagesFromPocketResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemovePermissionsFromRoleResponse parses an HTTP response from a RemovePermissionsFromRoleWithResponse call
+func ParseRemovePermissionsFromRoleResponse(rsp *http.Response) (*RemovePermissionsFromRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemovePermissionsFromRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemovePersonsFromRoleResponse parses an HTTP response from a RemovePersonsFromRoleWithResponse call
+func ParseRemovePersonsFromRoleResponse(rsp *http.Response) (*RemovePersonsFromRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemovePersonsFromRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemovePocketResponse parses an HTTP response from a RemovePocketWithResponse call
+func ParseRemovePocketResponse(rsp *http.Response) (*RemovePocketResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemovePocketResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemovePocketsFromRepositoryProfileResponse parses an HTTP response from a RemovePocketsFromRepositoryProfileWithResponse call
+func ParseRemovePocketsFromRepositoryProfileResponse(rsp *http.Response) (*RemovePocketsFromRepositoryProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemovePocketsFromRepositoryProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveRemovalProfileResponse parses an HTTP response from a RemoveRemovalProfileWithResponse call
+func ParseRemoveRemovalProfileResponse(rsp *http.Response) (*RemoveRemovalProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveRemovalProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveRepositoryProfileResponse parses an HTTP response from a RemoveRepositoryProfileWithResponse call
+func ParseRemoveRepositoryProfileResponse(rsp *http.Response) (*RemoveRepositoryProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveRepositoryProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveRepositoryProfilesResponse parses an HTTP response from a RemoveRepositoryProfilesWithResponse call
+func ParseRemoveRepositoryProfilesResponse(rsp *http.Response) (*RemoveRepositoryProfilesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveRepositoryProfilesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveRoleResponse parses an HTTP response from a RemoveRoleWithResponse call
+func ParseRemoveRoleResponse(rsp *http.Response) (*RemoveRoleResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveRoleResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveSavedSearchResponse parses an HTTP response from a RemoveSavedSearchWithResponse call
+func ParseRemoveSavedSearchResponse(rsp *http.Response) (*RemoveSavedSearchResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveSavedSearchResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveScriptResponse parses an HTTP response from a RemoveScriptWithResponse call
+func ParseRemoveScriptResponse(rsp *http.Response) (*RemoveScriptResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveScriptResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveScriptAttachmentResponse parses an HTTP response from a RemoveScriptAttachmentWithResponse call
+func ParseRemoveScriptAttachmentResponse(rsp *http.Response) (*RemoveScriptAttachmentResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveScriptAttachmentResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveSeriesResponse parses an HTTP response from a RemoveSeriesWithResponse call
+func ParseRemoveSeriesResponse(rsp *http.Response) (*RemoveSeriesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveSeriesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveTagsFromComputersResponse parses an HTTP response from a RemoveTagsFromComputersWithResponse call
+func ParseRemoveTagsFromComputersResponse(rsp *http.Response) (*RemoveTagsFromComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveTagsFromComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveUpgradeProfileResponse parses an HTTP response from a RemoveUpgradeProfileWithResponse call
+func ParseRemoveUpgradeProfileResponse(rsp *http.Response) (*RemoveUpgradeProfileResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveUpgradeProfileResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveUploaderGPGKeysFromPocketResponse parses an HTTP response from a RemoveUploaderGPGKeysFromPocketWithResponse call
+func ParseRemoveUploaderGPGKeysFromPocketResponse(rsp *http.Response) (*RemoveUploaderGPGKeysFromPocketResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveUploaderGPGKeysFromPocketResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRemoveWSLHostsResponse parses an HTTP response from a RemoveWSLHostsWithResponse call
+func ParseRemoveWSLHostsResponse(rsp *http.Response) (*RemoveWSLHostsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RemoveWSLHostsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseRenameComputersResponse parses an HTTP response from a RenameComputersWithResponse call
+func ParseRenameComputersResponse(rsp *http.Response) (*RenameComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &RenameComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseSetDefaultChildComputerResponse parses an HTTP response from a SetDefaultChildComputerWithResponse call
+func ParseSetDefaultChildComputerResponse(rsp *http.Response) (*SetDefaultChildComputerResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &SetDefaultChildComputerResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseSetSettingsResponse parses an HTTP response from a SetSettingsWithResponse call
+func ParseSetSettingsResponse(rsp *http.Response) (*SetSettingsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &SetSettingsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseShutdownComputersResponse parses an HTTP response from a ShutdownComputersWithResponse call
+func ParseShutdownComputersResponse(rsp *http.Response) (*ShutdownComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ShutdownComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseShutdownHostComputerResponse parses an HTTP response from a ShutdownHostComputerWithResponse call
+func ParseShutdownHostComputerResponse(rsp *http.Response) (*ShutdownHostComputerResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ShutdownHostComputerResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseStartChildComputersResponse parses an HTTP response from a StartChildComputersWithResponse call
+func ParseStartChildComputersResponse(rsp *http.Response) (*StartChildComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &StartChildComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseStopChildComputersResponse parses an HTTP response from a StopChildComputersWithResponse call
+func ParseStopChildComputersResponse(rsp *http.Response) (*StopChildComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &StopChildComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseSubscribeToAlertResponse parses an HTTP response from a SubscribeToAlertWithResponse call
+func ParseSubscribeToAlertResponse(rsp *http.Response) (*SubscribeToAlertResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &SubscribeToAlertResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseSyncMirrorPocketResponse parses an HTTP response from a SyncMirrorPocketWithResponse call
+func ParseSyncMirrorPocketResponse(rsp *http.Response) (*SyncMirrorPocketResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &SyncMirrorPocketResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseTerminateComputerProcessesResponse parses an HTTP response from a TerminateComputerProcessesWithResponse call
+func ParseTerminateComputerProcessesResponse(rsp *http.Response) (*TerminateComputerProcessesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &TerminateComputerProcessesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUnsubscribeFromAlertResponse parses an HTTP response from a UnsubscribeFromAlertWithResponse call
+func ParseUnsubscribeFromAlertResponse(rsp *http.Response) (*UnsubscribeFromAlertResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UnsubscribeFromAlertResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseUpgradePackagesResponse parses an HTTP response from a UpgradePackagesWithResponse call
+func ParseUpgradePackagesResponse(rsp *http.Response) (*UpgradePackagesResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &UpgradePackagesResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest LegacyActionResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 403:
+		var dest Forbidden
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON403 = &dest
 
 	}
 
