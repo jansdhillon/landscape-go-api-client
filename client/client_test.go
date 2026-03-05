@@ -243,14 +243,9 @@ func TestLegacyScriptActions(t *testing.T) {
 			t.Fatal("expected JSON200 payload, got nil")
 		}
 
-		script, err := resp.JSON200.AsScriptResult()
+		parsedScript, err := ParseLegacyResponse[V1Script](resp.Body)
 		if err != nil {
-			t.Fatalf("failed to decode script from union: %v", err)
-		}
-
-		parsedScript, err := script.AsV1Script()
-		if err != nil {
-			t.Fatalf("failed to decode script from union: %v", err)
+			t.Fatalf("failed to decode script from response: %v", err)
 		}
 
 		if parsedScript.Title != "new script" || parsedScript.Id != 42 {
@@ -283,14 +278,9 @@ func TestLegacyScriptActions(t *testing.T) {
 			t.Fatal("expected JSON200 payload, got nil")
 		}
 
-		script, err := resp.JSON200.AsScriptResult()
+		parsedScript, err := ParseLegacyResponse[V1Script](resp.Body)
 		if err != nil {
-			t.Fatalf("failed to decode script from union: %v", err)
-		}
-
-		parsedScript, err := script.AsV1Script()
-		if err != nil {
-			t.Fatalf("failed to decode script from union: %v", err)
+			t.Fatalf("failed to decode script from response: %v", err)
 		}
 
 		if parsedScript.Title != "edited title" {
@@ -322,14 +312,9 @@ func TestLegacyScriptActions(t *testing.T) {
 			t.Fatal("expected JSON200 payload, got nil")
 		}
 
-		script, err := resp.JSON200.AsScriptResult()
+		parsedScript, err := ParseLegacyResponse[V1Script](resp.Body)
 		if err != nil {
-			t.Fatalf("failed to decode script from union: %v", err)
-		}
-
-		parsedScript, err := script.AsV1Script()
-		if err != nil {
-			t.Fatalf("failed to decode script from union: %v", err)
+			t.Fatalf("failed to decode script from response: %v", err)
 		}
 
 		if parsedScript.Id != 99 || parsedScript.Title != "copy title" {
@@ -407,7 +392,7 @@ func TestLegacyScriptActions(t *testing.T) {
 			t.Fatal("expected JSON200 payload, got nil")
 		}
 
-		attachment, err := resp.JSON200.AsLegacyScriptAttachment()
+		attachment, err := ParseLegacyResponse[LegacyScriptAttachment](resp.Body)
 		if err != nil {
 			t.Fatalf("failed to decode attachment result: %v", err)
 		}

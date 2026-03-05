@@ -4,12 +4,25 @@ package client
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"net/url"
 
 	openapi_types "github.com/oapi-codegen/runtime/types"
 )
+
+// ParseLegacyResponse decodes the raw body bytes from a legacy API action
+// response into T. Use this instead of the JSON200 field on legacy action
+// responses, which is an untyped map[string]any that cannot carry
+// typed methods.
+func ParseLegacyResponse[T any](body []byte) (T, error) {
+	var result T
+	if err := json.Unmarshal(body, &result); err != nil {
+		return result, err
+	}
+	return result, nil
+}
 
 // LoginProvider is an interface that knows how to obtain a JWT token
 // given a pre-configured API client (ClientWithResponses). Implementations

@@ -59,14 +59,9 @@ func main() {
 		log.Fatalf("error creating script: %s", createdScriptRes.Status())
 	}
 
-	script, err := createdScriptRes.JSON200.AsScriptResult()
+	createdScript, err := client.ParseLegacyResponse[client.V1Script](createdScriptRes.Body)
 	if err != nil {
 		log.Fatalf("failed to parse response as script: %v", err)
-	}
-
-	createdScript, err := script.AsV1Script()
-	if err != nil {
-		log.Fatalf("failed to parse response as V2 script: %v", err)
 	}
 
 	raw := "#!/bin/bash\necho \"newcode\" > /home/ubuntu/myscript.txt"
@@ -89,14 +84,9 @@ func main() {
 		log.Fatalf("failed to edit script: %s", res.Status())
 	}
 
-	script, err = res.JSON200.AsScriptResult()
+	editedScript, err := client.ParseLegacyResponse[client.V2Script](res.Body)
 	if err != nil {
-		log.Fatalf("failed to parse response as script: %s", err)
-	}
-
-	editedScript, err := script.AsV2Script()
-	if err != nil {
-		log.Fatalf("failed to script as V2 script: %s", err)
+		log.Fatalf("failed to parse response as V2 script: %s", err)
 	}
 
 	log.Printf("edited script title: %s", editedScript.Title)

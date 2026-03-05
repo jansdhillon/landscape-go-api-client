@@ -9,7 +9,7 @@ cd client && go generate ./...
 ```
 
 > [!NOTE]
-> There is [a workflow](https://github.com/jansdhillon/landscape-openapi-spec/tree/main?tab=readme-ov-file#syncing) that automatically syncs the generated portions of this repository with the OpenAPI spec.
+> There is [a workflow](./.github/workflows/release.yaml) that automatically regenerates the client when a new version of the OpenAPI spec is released.
 
 ## Using the API client
 
