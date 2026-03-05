@@ -101,8 +101,12 @@ func (p *AccessKeyProvider) Login(ctx context.Context, c *ClientWithResponses) (
 // NewLandscapeAPIClient creates a new Landscape API client configured with authentication
 // provided by the given LoginProvider. The provider is used to obtain a JWT token which
 // is then applied to subsequent requests as a Bearer token.
-func NewLandscapeAPIClient(baseURL string, loginProvider LoginProvider) (*ClientWithResponses, error) {
-	tempClient, err := NewClientWithResponses(baseURL)
+//
+// opts are passed directly to the underlying generated client. Use
+// WithHTTPClient to supply a custom *http.Client, ex. one configured with
+// a custom TLS cert pool for self-signed server certificates.
+func NewLandscapeAPIClient(baseURL string, loginProvider LoginProvider, opts ...ClientOption) (*ClientWithResponses, error) {
+	tempClient, err := NewClientWithResponses(baseURL, opts...)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create temp client: %w", err)
 	}
@@ -117,7 +121,8 @@ func NewLandscapeAPIClient(baseURL string, loginProvider LoginProvider) (*Client
 		return nil
 	}
 
-	return NewClientWithResponses(baseURL, WithRequestEditorFn(authEditor))
+	opts = append(opts, WithRequestEditorFn(authEditor))
+	return NewClientWithResponses(baseURL, opts...)
 }
 
 // EncodeQueryRequestEditor returns a RequestEditorFn that

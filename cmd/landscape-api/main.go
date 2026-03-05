@@ -5,6 +5,8 @@ package main
 import (
 	"bytes"
 	"context"
+	"crypto/tls"
+	"crypto/x509"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -27,6 +29,7 @@ const (
 	emailFlag     = "email"
 	passwordFlag  = "password"
 	accountFlag   = "account"
+	caCertFlag    = "ca-cert"
 )
 
 func main() {
@@ -79,6 +82,12 @@ func main() {
 				Usage:   "An account to login into the Landscape API with (can also be set via LANDSCAPE_ACCOUNT env var). If provided, you must also provide the -email and -password flags or set the LANDSCAPE_EMAIL and LANDSCAPE_PASSWORD env vars.",
 				Sources: cli.EnvVars("LANDSCAPE_ACCOUNT"),
 			},
+			&cli.StringFlag{
+				Name:    caCertFlag,
+				Aliases: []string{"ca"},
+				Usage:   "Path to a PEM-encoded CA certificate file for verifying the server's TLS certificate. Can also be set via LANDSCAPE_CA_CERT env var.",
+				Sources: cli.EnvVars("LANDSCAPE_CA_CERT"),
+			},
 		},
 		Before: func(ctx context.Context, c *cli.Command) (context.Context, error) {
 			baseURL := c.String(baseURLFlag)
@@ -110,7 +119,28 @@ func main() {
 				lp = client.NewAccessKeyProvider(accessKey, secretKey)
 			}
 
-			api, err := client.NewLandscapeAPIClient(baseURL, lp)
+			var extraOpts []client.ClientOption
+			if certPath := c.String(caCertFlag); certPath != "" {
+				pemData, err := os.ReadFile(certPath)
+				if err != nil {
+					return ctx, fmt.Errorf("failed to read CA cert file: %w", err)
+				}
+				pool, err := x509.SystemCertPool()
+				if err != nil {
+					pool = x509.NewCertPool()
+				}
+				if !pool.AppendCertsFromPEM(pemData) {
+					return ctx, fmt.Errorf("failed to parse CA cert: invalid PEM data")
+				}
+				tlsClient := &http.Client{
+					Transport: &http.Transport{
+						TLSClientConfig: &tls.Config{RootCAs: pool},
+					},
+				}
+				extraOpts = append(extraOpts, client.WithHTTPClient(tlsClient))
+			}
+
+			api, err := client.NewLandscapeAPIClient(baseURL, lp, extraOpts...)
 			if err != nil {
 				return ctx, err
 			}
