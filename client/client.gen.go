@@ -638,9 +638,6 @@ type Unauthorized = Error
 
 // LegacyAcceptPendingComputersParams defines parameters for LegacyAcceptPendingComputers.
 type LegacyAcceptPendingComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerIds A list of computer IDs to accept. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 
@@ -653,9 +650,6 @@ type LegacyAcceptPendingComputersParams struct {
 
 // LegacyAddAPTSourcesToRepositoryProfileParams defines parameters for LegacyAddAPTSourcesToRepositoryProfile.
 type LegacyAddAPTSourcesToRepositoryProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the repository profile.
 	Name string `form:"name" json:"name"`
 
@@ -665,9 +659,6 @@ type LegacyAddAPTSourcesToRepositoryProfileParams struct {
 
 // LegacyAddAccessGroupsToRoleParams defines parameters for LegacyAddAccessGroupsToRole.
 type LegacyAddAccessGroupsToRoleParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the role to modify.
 	Name string `form:"name" json:"name"`
 
@@ -677,9 +668,6 @@ type LegacyAddAccessGroupsToRoleParams struct {
 
 // LegacyAddAnnotationToComputersParams defines parameters for LegacyAddAnnotationToComputers.
 type LegacyAddAnnotationToComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string used to select the computers to which to add the annotation.
 	Query string `form:"query" json:"query"`
 
@@ -692,9 +680,6 @@ type LegacyAddAnnotationToComputersParams struct {
 
 // LegacyAddPackageFiltersToPocketParams defines parameters for LegacyAddPackageFiltersToPocket.
 type LegacyAddPackageFiltersToPocketParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the pocket to operate on.
 	Name string `form:"name" json:"name"`
 
@@ -710,9 +695,6 @@ type LegacyAddPackageFiltersToPocketParams struct {
 
 // LegacyAddPermissionsToRoleParams defines parameters for LegacyAddPermissionsToRole.
 type LegacyAddPermissionsToRoleParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the role to modify.
 	Name string `form:"name" json:"name"`
 
@@ -722,9 +704,6 @@ type LegacyAddPermissionsToRoleParams struct {
 
 // LegacyAddPersonsToRoleParams defines parameters for LegacyAddPersonsToRole.
 type LegacyAddPersonsToRoleParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the role to modify.
 	Name string `form:"name" json:"name"`
 
@@ -734,9 +713,6 @@ type LegacyAddPersonsToRoleParams struct {
 
 // LegacyAddPocketsToRepositoryProfileParams defines parameters for LegacyAddPocketsToRepositoryProfile.
 type LegacyAddPocketsToRepositoryProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the repository profile.
 	Name string `form:"name" json:"name"`
 
@@ -752,9 +728,6 @@ type LegacyAddPocketsToRepositoryProfileParams struct {
 
 // LegacyAddTagsToComputersParams defines parameters for LegacyAddTagsToComputers.
 type LegacyAddTagsToComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string used to select the computers to add tags to.
 	Query string `form:"query" json:"query"`
 
@@ -764,9 +737,6 @@ type LegacyAddTagsToComputersParams struct {
 
 // LegacyAddUploaderGPGKeysToPocketParams defines parameters for LegacyAddUploaderGPGKeysToPocket.
 type LegacyAddUploaderGPGKeysToPocketParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the pocket on which to associate keys.
 	Name string `form:"name" json:"name"`
 
@@ -782,18 +752,12 @@ type LegacyAddUploaderGPGKeysToPocketParams struct {
 
 // LegacyApproveActivitiesParams defines parameters for LegacyApproveActivities.
 type LegacyApproveActivitiesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string used to select activities on which to operate.
 	Query string `form:"query" json:"query"`
 }
 
 // LegacyAssociateAlertParams defines parameters for LegacyAssociateAlert.
 type LegacyAssociateAlertParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the entity.
 	Name string `form:"name" json:"name"`
 
@@ -806,9 +770,6 @@ type LegacyAssociateAlertParams struct {
 
 // LegacyAssociatePackageProfileParams defines parameters for LegacyAssociatePackageProfile.
 type LegacyAssociatePackageProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the entity.
 	Name string `form:"name" json:"name"`
 
@@ -821,9 +782,6 @@ type LegacyAssociatePackageProfileParams struct {
 
 // LegacyAssociateRemovalProfileParams defines parameters for LegacyAssociateRemovalProfile.
 type LegacyAssociateRemovalProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the entity.
 	Name string `form:"name" json:"name"`
 
@@ -836,9 +794,6 @@ type LegacyAssociateRemovalProfileParams struct {
 
 // LegacyAssociateRepositoryProfileParams defines parameters for LegacyAssociateRepositoryProfile.
 type LegacyAssociateRepositoryProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the entity.
 	Name string `form:"name" json:"name"`
 
@@ -851,9 +806,6 @@ type LegacyAssociateRepositoryProfileParams struct {
 
 // LegacyAssociateUpgradeProfileParams defines parameters for LegacyAssociateUpgradeProfile.
 type LegacyAssociateUpgradeProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the entity.
 	Name string `form:"name" json:"name"`
 
@@ -866,18 +818,12 @@ type LegacyAssociateUpgradeProfileParams struct {
 
 // LegacyCancelActivitiesParams defines parameters for LegacyCancelActivities.
 type LegacyCancelActivitiesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string used to select activities on which to operate.
 	Query string `form:"query" json:"query"`
 }
 
 // LegacyChangeComputersAccessGroupParams defines parameters for LegacyChangeComputersAccessGroup.
 type LegacyChangeComputersAccessGroupParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string used to select the computers to change access group for.
 	Query string `form:"query" json:"query"`
 
@@ -887,9 +833,6 @@ type LegacyChangeComputersAccessGroupParams struct {
 
 // LegacyCopyPackageProfileParams defines parameters for LegacyCopyPackageProfile.
 type LegacyCopyPackageProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name A name of the existing package profile to copy.
 	Name string `form:"name" json:"name"`
 
@@ -908,9 +851,6 @@ type LegacyCopyPackageProfileParams struct {
 
 // LegacyCopyRoleParams defines parameters for LegacyCopyRole.
 type LegacyCopyRoleParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the existing role.
 	Name string `form:"name" json:"name"`
 
@@ -923,9 +863,6 @@ type LegacyCopyRoleParams struct {
 
 // LegacyCopyScriptParams defines parameters for LegacyCopyScript.
 type LegacyCopyScriptParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ScriptId The identity of the existing script.
 	ScriptId int `form:"script_id" json:"script_id"`
 
@@ -938,9 +875,6 @@ type LegacyCopyScriptParams struct {
 
 // LegacyCreateAPTSourceParams defines parameters for LegacyCreateAPTSource.
 type LegacyCreateAPTSourceParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the APT source. It must be unique within the account, start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
 	Name string `form:"name" json:"name"`
 
@@ -956,9 +890,6 @@ type LegacyCreateAPTSourceParams struct {
 
 // LegacyCreateAccessGroupParams defines parameters for LegacyCreateAccessGroup.
 type LegacyCreateAccessGroupParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Title The title of the access group.
 	Title string `form:"title" json:"title"`
 
@@ -968,9 +899,6 @@ type LegacyCreateAccessGroupParams struct {
 
 // LegacyCreateChildComputerParams defines parameters for LegacyCreateChildComputer.
 type LegacyCreateChildComputerParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerName The name of child computer to create.
 	ComputerName string `form:"computer_name" json:"computer_name"`
 
@@ -986,9 +914,6 @@ type LegacyCreateChildComputerParams struct {
 
 // LegacyCreateDistributionParams defines parameters for LegacyCreateDistribution.
 type LegacyCreateDistributionParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the distribution. It must be unique within the account, start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
 	Name string `form:"name" json:"name"`
 
@@ -998,9 +923,6 @@ type LegacyCreateDistributionParams struct {
 
 // LegacyCreatePackageProfileParams defines parameters for LegacyCreatePackageProfile.
 type LegacyCreatePackageProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Title The title of the package profile to create.
 	Title string `form:"title" json:"title"`
 
@@ -1022,9 +944,6 @@ type LegacyCreatePackageProfileParams struct {
 
 // LegacyCreatePocketParams defines parameters for LegacyCreatePocket.
 type LegacyCreatePocketParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the pocket. It must be unique within series, start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
 	Name string `form:"name" json:"name"`
 
@@ -1079,9 +998,6 @@ type LegacyCreatePocketParams struct {
 
 // LegacyCreateRemovalProfileParams defines parameters for LegacyCreateRemovalProfile.
 type LegacyCreateRemovalProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Title The title of the profile to create.
 	Title string `form:"title" json:"title"`
 
@@ -1103,9 +1019,6 @@ type LegacyCreateRemovalProfileParams struct {
 
 // LegacyCreateRepositoryProfileParams defines parameters for LegacyCreateRepositoryProfile.
 type LegacyCreateRepositoryProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Title Title of the repository profile. It must start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
 	Title string `form:"title" json:"title"`
 
@@ -1118,9 +1031,6 @@ type LegacyCreateRepositoryProfileParams struct {
 
 // LegacyCreateRoleParams defines parameters for LegacyCreateRole.
 type LegacyCreateRoleParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the role.
 	Name string `form:"name" json:"name"`
 
@@ -1130,9 +1040,6 @@ type LegacyCreateRoleParams struct {
 
 // LegacyCreateSavedSearchParams defines parameters for LegacyCreateSavedSearch.
 type LegacyCreateSavedSearchParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The "slug" name for this saved search. It must consist of only lowercase ASCII letters, numbers and hyphens. This is the text which must be used when using the "search:name" syntax.  If this parameter is not included a name will be generated automatically based on the title.
 	Name *string `form:"name,omitempty" json:"name,omitempty"`
 
@@ -1145,9 +1052,6 @@ type LegacyCreateSavedSearchParams struct {
 
 // LegacyCreateScriptParams defines parameters for LegacyCreateScript.
 type LegacyCreateScriptParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Title The title of the new script.
 	Title string `form:"title" json:"title"`
 
@@ -1169,9 +1073,6 @@ type LegacyCreateScriptParams struct {
 
 // LegacyCreateScriptAttachmentParams defines parameters for LegacyCreateScriptAttachment.
 type LegacyCreateScriptAttachmentParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ScriptId The identity of the script to add the attachment to.
 	ScriptId int `form:"script_id" json:"script_id"`
 
@@ -1181,9 +1082,6 @@ type LegacyCreateScriptAttachmentParams struct {
 
 // LegacyCreateSeriesParams defines parameters for LegacyCreateSeries.
 type LegacyCreateSeriesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the series. It must be unique within series within the distribution, start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
 	Name string `form:"name" json:"name"`
 
@@ -1220,9 +1118,6 @@ type LegacyCreateSeriesParams struct {
 
 // LegacyCreateUpgradeProfileParams defines parameters for LegacyCreateUpgradeProfile.
 type LegacyCreateUpgradeProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Title A human readable title for this upgrade profile.
 	Title string `form:"title" json:"title"`
 
@@ -1265,9 +1160,6 @@ type LegacyCreateUpgradeProfileParams struct {
 
 // LegacyCreateUserParams defines parameters for LegacyCreateUser.
 type LegacyCreateUserParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerIds The numerical IDs of the computers. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 
@@ -1298,18 +1190,12 @@ type LegacyCreateUserParams struct {
 
 // LegacyDeleteChildComputersParams defines parameters for LegacyDeleteChildComputers.
 type LegacyDeleteChildComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerIds A list of child computer ids to delete. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 }
 
 // LegacyDeriveSeriesParams defines parameters for LegacyDeriveSeries.
 type LegacyDeriveSeriesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the derived series. It must be unique within the distribution, start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
 	Name string `form:"name" json:"name"`
 
@@ -1322,9 +1208,6 @@ type LegacyDeriveSeriesParams struct {
 
 // LegacyDiffPullPocketParams defines parameters for LegacyDiffPullPocket.
 type LegacyDiffPullPocketParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the pocket.
 	Name string `form:"name" json:"name"`
 
@@ -1337,18 +1220,12 @@ type LegacyDiffPullPocketParams struct {
 
 // LegacyDisableAdministratorParams defines parameters for LegacyDisableAdministrator.
 type LegacyDisableAdministratorParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Email The name of the person to disable.
 	Email string `form:"email" json:"email"`
 }
 
 // LegacyDisassociateAlertParams defines parameters for LegacyDisassociateAlert.
 type LegacyDisassociateAlertParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the entity.
 	Name string `form:"name" json:"name"`
 
@@ -1361,9 +1238,6 @@ type LegacyDisassociateAlertParams struct {
 
 // LegacyDisassociatePackageProfileParams defines parameters for LegacyDisassociatePackageProfile.
 type LegacyDisassociatePackageProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the entity.
 	Name string `form:"name" json:"name"`
 
@@ -1376,9 +1250,6 @@ type LegacyDisassociatePackageProfileParams struct {
 
 // LegacyDisassociateRemovalProfileParams defines parameters for LegacyDisassociateRemovalProfile.
 type LegacyDisassociateRemovalProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the entity.
 	Name string `form:"name" json:"name"`
 
@@ -1391,9 +1262,6 @@ type LegacyDisassociateRemovalProfileParams struct {
 
 // LegacyDisassociateRepositoryProfileParams defines parameters for LegacyDisassociateRepositoryProfile.
 type LegacyDisassociateRepositoryProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the entity.
 	Name string `form:"name" json:"name"`
 
@@ -1406,9 +1274,6 @@ type LegacyDisassociateRepositoryProfileParams struct {
 
 // LegacyDisassociateUpgradeProfileParams defines parameters for LegacyDisassociateUpgradeProfile.
 type LegacyDisassociateUpgradeProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the entity.
 	Name string `form:"name" json:"name"`
 
@@ -1421,9 +1286,6 @@ type LegacyDisassociateUpgradeProfileParams struct {
 
 // LegacyEditPackageProfileParams defines parameters for LegacyEditPackageProfile.
 type LegacyEditPackageProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the package profile.
 	Name string `form:"name" json:"name"`
 
@@ -1439,9 +1301,6 @@ type LegacyEditPackageProfileParams struct {
 
 // LegacyEditPocketParams defines parameters for LegacyEditPocket.
 type LegacyEditPocketParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the pocket to edit.
 	Name string `form:"name" json:"name"`
 
@@ -1478,9 +1337,6 @@ type LegacyEditPocketParams struct {
 
 // LegacyEditRemovalProfileParams defines parameters for LegacyEditRemovalProfile.
 type LegacyEditRemovalProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the profile to edit.
 	Name string `form:"name" json:"name"`
 
@@ -1499,9 +1355,6 @@ type LegacyEditRemovalProfileParams struct {
 
 // LegacyEditRepositoryProfileParams defines parameters for LegacyEditRepositoryProfile.
 type LegacyEditRepositoryProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the repository profile to edit.
 	Name string `form:"name" json:"name"`
 
@@ -1514,9 +1367,6 @@ type LegacyEditRepositoryProfileParams struct {
 
 // LegacyEditSavedSearchParams defines parameters for LegacyEditSavedSearch.
 type LegacyEditSavedSearchParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The "slug" name for this saved search, this is the text which must be used when using the "search:name" syntax. A saved search with this name must already exist in the account.
 	Name string `form:"name" json:"name"`
 
@@ -1529,9 +1379,6 @@ type LegacyEditSavedSearchParams struct {
 
 // LegacyEditScriptParams defines parameters for LegacyEditScript.
 type LegacyEditScriptParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ScriptId The identifier of the script you wish to edit.
 	ScriptId int `form:"script_id" json:"script_id"`
 
@@ -1550,9 +1397,6 @@ type LegacyEditScriptParams struct {
 
 // LegacyEditUpgradeProfileParams defines parameters for LegacyEditUpgradeProfile.
 type LegacyEditUpgradeProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name for this upgrade profile.
 	Name string `form:"name" json:"name"`
 
@@ -1595,9 +1439,6 @@ type LegacyEditUpgradeProfileParams struct {
 
 // LegacyEditUserParams defines parameters for LegacyEditUser.
 type LegacyEditUserParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerIds The numerical IDs of the computers. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 
@@ -1625,9 +1466,6 @@ type LegacyEditUserParams struct {
 
 // LegacyExecuteScriptParams defines parameters for LegacyExecuteScript.
 type LegacyExecuteScriptParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string used to select the computers to execute the script on.   Multiple occurrences will be joined with a logical AND.
 	Query string `form:"query" json:"query"`
 
@@ -1649,27 +1487,18 @@ type LegacyExecuteScriptParams struct {
 
 // LegacyGetAPTSourcesParams defines parameters for LegacyGetAPTSources.
 type LegacyGetAPTSourcesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Names List of names of the APT source to be returned. Multiple names can be supplied. (Use names.1, names.2, etc. for multiple values)
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 }
 
 // LegacyGetAccessGroupsParams defines parameters for LegacyGetAccessGroups.
 type LegacyGetAccessGroupsParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Names The name of the access group. (Use names.1, names.2, etc. for multiple values)
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 }
 
 // LegacyGetActivitiesParams defines parameters for LegacyGetActivities.
 type LegacyGetActivitiesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string with space separated tokens used to filter the returned result objects.
 	Query *string `form:"query,omitempty" json:"query,omitempty"`
 
@@ -1680,38 +1509,14 @@ type LegacyGetActivitiesParams struct {
 	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
 }
 
-// LegacyGetActivityTypesParams defines parameters for LegacyGetActivityTypes.
-type LegacyGetActivityTypesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-}
-
-// LegacyGetAdministratorsParams defines parameters for LegacyGetAdministrators.
-type LegacyGetAdministratorsParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-}
-
 // LegacyGetAlertSubscribersParams defines parameters for LegacyGetAlertSubscribers.
 type LegacyGetAlertSubscribersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// AlertType The alert type to check the subscription on.
 	AlertType string `form:"alert_type" json:"alert_type"`
 }
 
-// LegacyGetAlertsParams defines parameters for LegacyGetAlerts.
-type LegacyGetAlertsParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-}
-
 // LegacyGetCSVComplianceDataParams defines parameters for LegacyGetCSVComplianceData.
 type LegacyGetCSVComplianceDataParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string with space separated tokens used to filter the returned result objects.
 	Query *string `form:"query,omitempty" json:"query,omitempty"`
 
@@ -1730,9 +1535,6 @@ type LegacyGetCSVComplianceDataParams struct {
 
 // LegacyGetComputerProcessesParams defines parameters for LegacyGetComputerProcesses.
 type LegacyGetComputerProcessesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerId The numerical ID of the computer.
 	ComputerId int `form:"computer_id" json:"computer_id"`
 
@@ -1745,9 +1547,6 @@ type LegacyGetComputerProcessesParams struct {
 
 // LegacyGetComputersParams defines parameters for LegacyGetComputers.
 type LegacyGetComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string with space separated tokens used to filter the returned result objects.
 	Query *string `form:"query,omitempty" json:"query,omitempty"`
 
@@ -1775,9 +1574,6 @@ type LegacyGetComputersParams struct {
 
 // LegacyGetComputersNotUpgradedParams defines parameters for LegacyGetComputersNotUpgraded.
 type LegacyGetComputersNotUpgradedParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string with space separated tokens used to filter the returned result objects.
 	Query *string `form:"query,omitempty" json:"query,omitempty"`
 
@@ -1790,9 +1586,6 @@ type LegacyGetComputersNotUpgradedParams struct {
 
 // LegacyGetDistributionsParams defines parameters for LegacyGetDistributions.
 type LegacyGetDistributionsParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Names A list of distribution names to get info for. If this is not provided, the call will return all distributions for the account. (Use names.1, names.2, etc. for multiple values)
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 
@@ -1802,9 +1595,6 @@ type LegacyGetDistributionsParams struct {
 
 // LegacyGetEventLogParams defines parameters for LegacyGetEventLog.
 type LegacyGetEventLogParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Days The number of days prior to today from which to fetch log entries. It defaults to 30 days.
 	Days *int `form:"days,omitempty" json:"days,omitempty"`
 
@@ -1817,18 +1607,12 @@ type LegacyGetEventLogParams struct {
 
 // LegacyGetGPGKeysParams defines parameters for LegacyGetGPGKeys.
 type LegacyGetGPGKeysParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Names A list of GPG keys to get info for. If this is not provided, the call will return all keys for the account. (Use names.1, names.2, etc. for multiple values)
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 }
 
 // LegacyGetNotPingingComputersParams defines parameters for LegacyGetNotPingingComputers.
 type LegacyGetNotPingingComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string with space separated tokens used to filter the returned result objects.
 	Query *string `form:"query,omitempty" json:"query,omitempty"`
 
@@ -1844,18 +1628,12 @@ type LegacyGetNotPingingComputersParams struct {
 
 // LegacyGetPackageProfilesParams defines parameters for LegacyGetPackageProfiles.
 type LegacyGetPackageProfilesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Names A list of package profile names to limit the result. (Use names.1, names.2, etc. for multiple values)
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 }
 
 // LegacyGetPackagesParams defines parameters for LegacyGetPackages.
 type LegacyGetPackagesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string used to select computers to query packages on.
 	Query string `form:"query" json:"query"`
 
@@ -1884,56 +1662,26 @@ type LegacyGetPackagesParams struct {
 	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
 }
 
-// LegacyGetPendingComputersParams defines parameters for LegacyGetPendingComputers.
-type LegacyGetPendingComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-}
-
-// LegacyGetPermissionsParams defines parameters for LegacyGetPermissions.
-type LegacyGetPermissionsParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-}
-
-// LegacyGetRemovalProfilesParams defines parameters for LegacyGetRemovalProfiles.
-type LegacyGetRemovalProfilesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-}
-
 // LegacyGetRepoInfoParams defines parameters for LegacyGetRepoInfo.
 type LegacyGetRepoInfoParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// MirrorUri The name of mirror uri
 	MirrorUri string `form:"mirror_uri" json:"mirror_uri"`
 }
 
 // LegacyGetRepositoryProfilesParams defines parameters for LegacyGetRepositoryProfiles.
 type LegacyGetRepositoryProfilesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Names A list of repository profile names to get info for. If this is not provided, the call will return all repository profiles for the account. (Use names.1, names.2, etc. for multiple values)
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 }
 
 // LegacyGetRolesParams defines parameters for LegacyGetRoles.
 type LegacyGetRolesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Names A list of role names to limit the result. (Use names.1, names.2, etc. for multiple values)
 	Names *[]string `form:"names,omitempty" json:"names,omitempty"`
 }
 
 // LegacyGetSavedSearchesParams defines parameters for LegacyGetSavedSearches.
 type LegacyGetSavedSearchesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Offset The offset inside the list of results.
 	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
 
@@ -1943,18 +1691,12 @@ type LegacyGetSavedSearchesParams struct {
 
 // LegacyGetScriptCodeParams defines parameters for LegacyGetScriptCode.
 type LegacyGetScriptCodeParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ScriptId The identity of the script you wish to get the code for.
 	ScriptId int `form:"script_id" json:"script_id"`
 }
 
 // LegacyGetScriptsParams defines parameters for LegacyGetScripts.
 type LegacyGetScriptsParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Limit The maximum number of results returned by the method. It defaults to 1000.
 	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
 
@@ -1965,17 +1707,8 @@ type LegacyGetScriptsParams struct {
 	ScriptType *string `form:"script_type,omitempty" json:"script_type,omitempty"`
 }
 
-// LegacyGetSettingsParams defines parameters for LegacyGetSettings.
-type LegacyGetSettingsParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-}
-
 // LegacyGetUSNTimeToFixParams defines parameters for LegacyGetUSNTimeToFix.
 type LegacyGetUSNTimeToFixParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string with space separated tokens used to filter the returned result objects.
 	Query *string `form:"query,omitempty" json:"query,omitempty"`
 
@@ -1997,18 +1730,12 @@ type LegacyGetUSNTimeToFixParams struct {
 
 // LegacyGetUpgradeProfilesParams defines parameters for LegacyGetUpgradeProfiles.
 type LegacyGetUpgradeProfilesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// UpgradeType  The type of upgrade you wish to list. This can be either "all" or "security", in which case the result will be a list of upgrade profiles with an upgrade type of "all" or "security" respectively. If omitted, the resulting list will contain all upgrade profiles, regardless of their upgrade type.
 	UpgradeType *string `form:"upgrade_type,omitempty" json:"upgrade_type,omitempty"`
 }
 
 // LegacyGetUpgradedComputersByFrequencyParams defines parameters for LegacyGetUpgradedComputersByFrequency.
 type LegacyGetUpgradedComputersByFrequencyParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string with space separated tokens used to filter the returned result objects.
 	Query *string `form:"query,omitempty" json:"query,omitempty"`
 
@@ -2021,18 +1748,12 @@ type LegacyGetUpgradedComputersByFrequencyParams struct {
 
 // LegacyGetUsersParams defines parameters for LegacyGetUsers.
 type LegacyGetUsersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerId The numerical ID of the computer.
 	ComputerId int `form:"computer_id" json:"computer_id"`
 }
 
 // LegacyGetWSLHostsParams defines parameters for LegacyGetWSLHosts.
 type LegacyGetWSLHostsParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string with space separated tokens used to filter the returned result objects.
 	Query *string `form:"query,omitempty" json:"query,omitempty"`
 
@@ -2045,9 +1766,6 @@ type LegacyGetWSLHostsParams struct {
 
 // LegacyImportGPGKeyParams defines parameters for LegacyImportGPGKey.
 type LegacyImportGPGKeyParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the GPG key. It must be unique within the account, start with an alphanumeric character and only contain lowercase letters, numbers and - or + signs.
 	Name string `form:"name" json:"name"`
 
@@ -2057,9 +1775,6 @@ type LegacyImportGPGKeyParams struct {
 
 // LegacyInstallPackagesParams defines parameters for LegacyInstallPackages.
 type LegacyInstallPackagesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A qualified criteria to be used in the search.
 	Query string `form:"query" json:"query"`
 
@@ -2075,9 +1790,6 @@ type LegacyInstallPackagesParams struct {
 
 // LegacyInviteAdministratorParams defines parameters for LegacyInviteAdministrator.
 type LegacyInviteAdministratorParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the person to invite.
 	Name string `form:"name" json:"name"`
 
@@ -2090,9 +1802,6 @@ type LegacyInviteAdministratorParams struct {
 
 // LegacyKillComputerProcessesParams defines parameters for LegacyKillComputerProcesses.
 type LegacyKillComputerProcessesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerId The numerical ID of the computer
 	ComputerId int `form:"computer_id" json:"computer_id"`
 
@@ -2102,9 +1811,6 @@ type LegacyKillComputerProcessesParams struct {
 
 // LegacyListPocketParams defines parameters for LegacyListPocket.
 type LegacyListPocketParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the pocket.
 	Name string `form:"name" json:"name"`
 
@@ -2126,9 +1832,6 @@ type LegacyListPocketParams struct {
 
 // LegacyModifyPackageProfileParams defines parameters for LegacyModifyPackageProfile.
 type LegacyModifyPackageProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the package profile.
 	Name string `form:"name" json:"name"`
 
@@ -2144,9 +1847,6 @@ type LegacyModifyPackageProfileParams struct {
 
 // LegacyPullPackagesToPocketParams defines parameters for LegacyPullPackagesToPocket.
 type LegacyPullPackagesToPocketParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the pocket to pull packages to.
 	Name string `form:"name" json:"name"`
 
@@ -2159,9 +1859,6 @@ type LegacyPullPackagesToPocketParams struct {
 
 // LegacyRebootComputersParams defines parameters for LegacyRebootComputers.
 type LegacyRebootComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerIds A list of computer ids to reboot. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 
@@ -2171,27 +1868,18 @@ type LegacyRebootComputersParams struct {
 
 // LegacyRejectPendingComputersParams defines parameters for LegacyRejectPendingComputers.
 type LegacyRejectPendingComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerIds A list of computer IDs to reject. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 }
 
 // LegacyRemoveAPTSourceParams defines parameters for LegacyRemoveAPTSource.
 type LegacyRemoveAPTSourceParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the apt source to be removed.
 	Name string `form:"name" json:"name"`
 }
 
 // LegacyRemoveAPTSourceFromRepositoryProfileParams defines parameters for LegacyRemoveAPTSourceFromRepositoryProfile.
 type LegacyRemoveAPTSourceFromRepositoryProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the repository profile.
 	Name string `form:"name" json:"name"`
 
@@ -2201,18 +1889,12 @@ type LegacyRemoveAPTSourceFromRepositoryProfileParams struct {
 
 // LegacyRemoveAPTSourcesParams defines parameters for LegacyRemoveAPTSources.
 type LegacyRemoveAPTSourcesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Names List of names of the APT sources be removed. Multiple names can be supplied. (Use names.1, names.2, etc. for multiple values)
 	Names []string `form:"names" json:"names"`
 }
 
 // LegacyRemoveAPTSourcesFromRepositoryProfileParams defines parameters for LegacyRemoveAPTSourcesFromRepositoryProfile.
 type LegacyRemoveAPTSourcesFromRepositoryProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the repository profile.
 	Name string `form:"name" json:"name"`
 
@@ -2222,18 +1904,12 @@ type LegacyRemoveAPTSourcesFromRepositoryProfileParams struct {
 
 // LegacyRemoveAccessGroupParams defines parameters for LegacyRemoveAccessGroup.
 type LegacyRemoveAccessGroupParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the access group to remove.
 	Name string `form:"name" json:"name"`
 }
 
 // LegacyRemoveAccessGroupsFromRoleParams defines parameters for LegacyRemoveAccessGroupsFromRole.
 type LegacyRemoveAccessGroupsFromRoleParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the role to modify.
 	Name string `form:"name" json:"name"`
 
@@ -2243,9 +1919,6 @@ type LegacyRemoveAccessGroupsFromRoleParams struct {
 
 // LegacyRemoveAnnotationFromComputersParams defines parameters for LegacyRemoveAnnotationFromComputers.
 type LegacyRemoveAnnotationFromComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string used to select the computers from which to remove annotation.
 	Query string `form:"query" json:"query"`
 
@@ -2255,36 +1928,24 @@ type LegacyRemoveAnnotationFromComputersParams struct {
 
 // LegacyRemoveComputersParams defines parameters for LegacyRemoveComputers.
 type LegacyRemoveComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerIds A list of computer ids to remove. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 }
 
 // LegacyRemoveDistributionParams defines parameters for LegacyRemoveDistribution.
 type LegacyRemoveDistributionParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the distribution to remove.
 	Name string `form:"name" json:"name"`
 }
 
 // LegacyRemoveGPGKeyParams defines parameters for LegacyRemoveGPGKey.
 type LegacyRemoveGPGKeyParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the GPG key to remove.
 	Name string `form:"name" json:"name"`
 }
 
 // LegacyRemovePackageFiltersFromPocketParams defines parameters for LegacyRemovePackageFiltersFromPocket.
 type LegacyRemovePackageFiltersFromPocketParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the pocket to operate on.
 	Name string `form:"name" json:"name"`
 
@@ -2300,18 +1961,12 @@ type LegacyRemovePackageFiltersFromPocketParams struct {
 
 // LegacyRemovePackageProfileParams defines parameters for LegacyRemovePackageProfile.
 type LegacyRemovePackageProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the package profile to remove.
 	Name string `form:"name" json:"name"`
 }
 
 // LegacyRemovePackagesParams defines parameters for LegacyRemovePackages.
 type LegacyRemovePackagesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A qualified criteria to be used in the search.
 	Query string `form:"query" json:"query"`
 
@@ -2327,9 +1982,6 @@ type LegacyRemovePackagesParams struct {
 
 // LegacyRemovePackagesFromPocketParams defines parameters for LegacyRemovePackagesFromPocket.
 type LegacyRemovePackagesFromPocketParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the pocket to remove packages from.
 	Name string `form:"name" json:"name"`
 
@@ -2345,9 +1997,6 @@ type LegacyRemovePackagesFromPocketParams struct {
 
 // LegacyRemovePermissionsFromRoleParams defines parameters for LegacyRemovePermissionsFromRole.
 type LegacyRemovePermissionsFromRoleParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the role to modify.
 	Name string `form:"name" json:"name"`
 
@@ -2357,9 +2006,6 @@ type LegacyRemovePermissionsFromRoleParams struct {
 
 // LegacyRemovePersonsFromRoleParams defines parameters for LegacyRemovePersonsFromRole.
 type LegacyRemovePersonsFromRoleParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the role to modify.
 	Name string `form:"name" json:"name"`
 
@@ -2369,9 +2015,6 @@ type LegacyRemovePersonsFromRoleParams struct {
 
 // LegacyRemovePocketParams defines parameters for LegacyRemovePocket.
 type LegacyRemovePocketParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the pocket to remove.
 	Name string `form:"name" json:"name"`
 
@@ -2384,9 +2027,6 @@ type LegacyRemovePocketParams struct {
 
 // LegacyRemovePocketsFromRepositoryProfileParams defines parameters for LegacyRemovePocketsFromRepositoryProfile.
 type LegacyRemovePocketsFromRepositoryProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name Name of the repository profile.
 	Name string `form:"name" json:"name"`
 
@@ -2402,63 +2042,42 @@ type LegacyRemovePocketsFromRepositoryProfileParams struct {
 
 // LegacyRemoveRemovalProfileParams defines parameters for LegacyRemoveRemovalProfile.
 type LegacyRemoveRemovalProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the removal profile you wish to remove.
 	Name string `form:"name" json:"name"`
 }
 
 // LegacyRemoveRepositoryProfileParams defines parameters for LegacyRemoveRepositoryProfile.
 type LegacyRemoveRepositoryProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the repository profile to be removed.
 	Name string `form:"name" json:"name"`
 }
 
 // LegacyRemoveRepositoryProfilesParams defines parameters for LegacyRemoveRepositoryProfiles.
 type LegacyRemoveRepositoryProfilesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Names Names of the repository profiles to be removed. (Use names.1, names.2, etc. for multiple values)
 	Names []string `form:"names" json:"names"`
 }
 
 // LegacyRemoveRoleParams defines parameters for LegacyRemoveRole.
 type LegacyRemoveRoleParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the role.
 	Name string `form:"name" json:"name"`
 }
 
 // LegacyRemoveSavedSearchParams defines parameters for LegacyRemoveSavedSearch.
 type LegacyRemoveSavedSearchParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The "slug" name for this saved search.
 	Name string `form:"name" json:"name"`
 }
 
 // LegacyRemoveScriptParams defines parameters for LegacyRemoveScript.
 type LegacyRemoveScriptParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ScriptId The identity of the script to remove.
 	ScriptId int `form:"script_id" json:"script_id"`
 }
 
 // LegacyRemoveScriptAttachmentParams defines parameters for LegacyRemoveScriptAttachment.
 type LegacyRemoveScriptAttachmentParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ScriptId The identity of the script to remove.
 	ScriptId int `form:"script_id" json:"script_id"`
 
@@ -2468,9 +2087,6 @@ type LegacyRemoveScriptAttachmentParams struct {
 
 // LegacyRemoveSeriesParams defines parameters for LegacyRemoveSeries.
 type LegacyRemoveSeriesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the series to remove.
 	Name string `form:"name" json:"name"`
 
@@ -2480,9 +2096,6 @@ type LegacyRemoveSeriesParams struct {
 
 // LegacyRemoveTagsFromComputersParams defines parameters for LegacyRemoveTagsFromComputers.
 type LegacyRemoveTagsFromComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A query string used to select the computers to remove tags from.
 	Query string `form:"query" json:"query"`
 
@@ -2492,18 +2105,12 @@ type LegacyRemoveTagsFromComputersParams struct {
 
 // LegacyRemoveUpgradeProfileParams defines parameters for LegacyRemoveUpgradeProfile.
 type LegacyRemoveUpgradeProfileParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the upgrade profile you wish to cancel.
 	Name string `form:"name" json:"name"`
 }
 
 // LegacyRemoveUploaderGPGKeysFromPocketParams defines parameters for LegacyRemoveUploaderGPGKeysFromPocket.
 type LegacyRemoveUploaderGPGKeysFromPocketParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the pocket on which to associate keys.
 	Name string `form:"name" json:"name"`
 
@@ -2519,9 +2126,6 @@ type LegacyRemoveUploaderGPGKeysFromPocketParams struct {
 
 // LegacyRemoveWSLHostsParams defines parameters for LegacyRemoveWSLHosts.
 type LegacyRemoveWSLHostsParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerIds A list of computer ids to remove. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 
@@ -2531,18 +2135,12 @@ type LegacyRemoveWSLHostsParams struct {
 
 // LegacyRenameComputersParams defines parameters for LegacyRenameComputers.
 type LegacyRenameComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerTitles mapping of computer_ids to computer titles
 	ComputerTitles map[string]string `form:"computer_titles" json:"computer_titles"`
 }
 
 // LegacySetDefaultChildComputerParams defines parameters for LegacySetDefaultChildComputer.
 type LegacySetDefaultChildComputerParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ParentId The id of the parent host computer.
 	ParentId int `form:"parent_id" json:"parent_id"`
 
@@ -2552,18 +2150,12 @@ type LegacySetDefaultChildComputerParams struct {
 
 // LegacySetSettingsParams defines parameters for LegacySetSettings.
 type LegacySetSettingsParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// KeyValues Key/value pairs to set, separated by '='. 'true' and 'false' strings will be interpreted as booleans. (Use key_values.1, key_values.2, etc. for multiple values)
 	KeyValues []string `form:"key_values" json:"key_values"`
 }
 
 // LegacyShutdownComputersParams defines parameters for LegacyShutdownComputers.
 type LegacyShutdownComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerIds A list of computer ids to shutdown. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 
@@ -2573,27 +2165,18 @@ type LegacyShutdownComputersParams struct {
 
 // LegacyShutdownHostComputerParams defines parameters for LegacyShutdownHostComputer.
 type LegacyShutdownHostComputerParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ParentId The id of the parent host computer.
 	ParentId int `form:"parent_id" json:"parent_id"`
 }
 
 // LegacyStartChildComputersParams defines parameters for LegacyStartChildComputers.
 type LegacyStartChildComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerIds A list of child computer ids to start. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 }
 
 // LegacyStopChildComputersParams defines parameters for LegacyStopChildComputers.
 type LegacyStopChildComputersParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerIds A list of child computer ids to stop. (Use computer_ids.1, computer_ids.2, etc. for multiple values)
 	ComputerIds []int `form:"computer_ids" json:"computer_ids"`
 }
@@ -2606,9 +2189,6 @@ type LegacySubscribeToAlertParams struct {
 
 // LegacySyncMirrorPocketParams defines parameters for LegacySyncMirrorPocket.
 type LegacySyncMirrorPocketParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Name The name of the pocket to synchronize.
 	Name string `form:"name" json:"name"`
 
@@ -2621,9 +2201,6 @@ type LegacySyncMirrorPocketParams struct {
 
 // LegacyTerminateComputerProcessesParams defines parameters for LegacyTerminateComputerProcesses.
 type LegacyTerminateComputerProcessesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// ComputerId The numerical ID of the computer.
 	ComputerId int `form:"computer_id" json:"computer_id"`
 
@@ -2633,18 +2210,12 @@ type LegacyTerminateComputerProcessesParams struct {
 
 // LegacyUnsubscribeFromAlertParams defines parameters for LegacyUnsubscribeFromAlert.
 type LegacyUnsubscribeFromAlertParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// AlertType The alert type to remove a subscription from.
 	AlertType string `form:"alert_type" json:"alert_type"`
 }
 
 // LegacyUpgradePackagesParams defines parameters for LegacyUpgradePackages.
 type LegacyUpgradePackagesParams struct {
-	// Action API action
-	Action string `form:"action" json:"action"`
-
 	// Query A qualified criteria to be used in the search.
 	Query string `form:"query" json:"query"`
 
@@ -3511,16 +3082,16 @@ type ClientInterface interface {
 	LegacyGetActivities(ctx context.Context, params *LegacyGetActivitiesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LegacyGetActivityTypes request
-	LegacyGetActivityTypes(ctx context.Context, params *LegacyGetActivityTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	LegacyGetActivityTypes(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LegacyGetAdministrators request
-	LegacyGetAdministrators(ctx context.Context, params *LegacyGetAdministratorsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	LegacyGetAdministrators(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LegacyGetAlertSubscribers request
 	LegacyGetAlertSubscribers(ctx context.Context, params *LegacyGetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LegacyGetAlerts request
-	LegacyGetAlerts(ctx context.Context, params *LegacyGetAlertsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	LegacyGetAlerts(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LegacyGetCSVComplianceData request
 	LegacyGetCSVComplianceData(ctx context.Context, params *LegacyGetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -3553,13 +3124,13 @@ type ClientInterface interface {
 	LegacyGetPackages(ctx context.Context, params *LegacyGetPackagesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LegacyGetPendingComputers request
-	LegacyGetPendingComputers(ctx context.Context, params *LegacyGetPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	LegacyGetPendingComputers(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LegacyGetPermissions request
-	LegacyGetPermissions(ctx context.Context, params *LegacyGetPermissionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	LegacyGetPermissions(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LegacyGetRemovalProfiles request
-	LegacyGetRemovalProfiles(ctx context.Context, params *LegacyGetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	LegacyGetRemovalProfiles(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LegacyGetRepoInfo request
 	LegacyGetRepoInfo(ctx context.Context, params *LegacyGetRepoInfoParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -3580,7 +3151,7 @@ type ClientInterface interface {
 	LegacyGetScripts(ctx context.Context, params *LegacyGetScriptsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LegacyGetSettings request
-	LegacyGetSettings(ctx context.Context, params *LegacyGetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	LegacyGetSettings(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// LegacyGetUSNTimeToFix request
 	LegacyGetUSNTimeToFix(ctx context.Context, params *LegacyGetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -4488,8 +4059,8 @@ func (c *Client) LegacyGetActivities(ctx context.Context, params *LegacyGetActiv
 	return c.Client.Do(req)
 }
 
-func (c *Client) LegacyGetActivityTypes(ctx context.Context, params *LegacyGetActivityTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewLegacyGetActivityTypesRequest(c.Server, params)
+func (c *Client) LegacyGetActivityTypes(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetActivityTypesRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -4500,8 +4071,8 @@ func (c *Client) LegacyGetActivityTypes(ctx context.Context, params *LegacyGetAc
 	return c.Client.Do(req)
 }
 
-func (c *Client) LegacyGetAdministrators(ctx context.Context, params *LegacyGetAdministratorsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewLegacyGetAdministratorsRequest(c.Server, params)
+func (c *Client) LegacyGetAdministrators(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetAdministratorsRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -4524,8 +4095,8 @@ func (c *Client) LegacyGetAlertSubscribers(ctx context.Context, params *LegacyGe
 	return c.Client.Do(req)
 }
 
-func (c *Client) LegacyGetAlerts(ctx context.Context, params *LegacyGetAlertsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewLegacyGetAlertsRequest(c.Server, params)
+func (c *Client) LegacyGetAlerts(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetAlertsRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -4656,8 +4227,8 @@ func (c *Client) LegacyGetPackages(ctx context.Context, params *LegacyGetPackage
 	return c.Client.Do(req)
 }
 
-func (c *Client) LegacyGetPendingComputers(ctx context.Context, params *LegacyGetPendingComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewLegacyGetPendingComputersRequest(c.Server, params)
+func (c *Client) LegacyGetPendingComputers(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetPendingComputersRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -4668,8 +4239,8 @@ func (c *Client) LegacyGetPendingComputers(ctx context.Context, params *LegacyGe
 	return c.Client.Do(req)
 }
 
-func (c *Client) LegacyGetPermissions(ctx context.Context, params *LegacyGetPermissionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewLegacyGetPermissionsRequest(c.Server, params)
+func (c *Client) LegacyGetPermissions(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetPermissionsRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -4680,8 +4251,8 @@ func (c *Client) LegacyGetPermissions(ctx context.Context, params *LegacyGetPerm
 	return c.Client.Do(req)
 }
 
-func (c *Client) LegacyGetRemovalProfiles(ctx context.Context, params *LegacyGetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewLegacyGetRemovalProfilesRequest(c.Server, params)
+func (c *Client) LegacyGetRemovalProfiles(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetRemovalProfilesRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -4764,8 +4335,8 @@ func (c *Client) LegacyGetScripts(ctx context.Context, params *LegacyGetScriptsP
 	return c.Client.Do(req)
 }
 
-func (c *Client) LegacyGetSettings(ctx context.Context, params *LegacyGetSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewLegacyGetSettingsRequest(c.Server, params)
+func (c *Client) LegacyGetSettings(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewLegacyGetSettingsRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -5698,18 +5269,6 @@ func NewLegacyAcceptPendingComputersRequest(server string, params *LegacyAcceptP
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -5787,18 +5346,6 @@ func NewLegacyAddAPTSourcesToRepositoryProfileRequest(server string, params *Leg
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -5856,18 +5403,6 @@ func NewLegacyAddAccessGroupsToRoleRequest(server string, params *LegacyAddAcces
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -5924,18 +5459,6 @@ func NewLegacyAddAnnotationToComputersRequest(server string, params *LegacyAddAn
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
 			return nil, err
@@ -6009,18 +5532,6 @@ func NewLegacyAddPackageFiltersToPocketRequest(server string, params *LegacyAddP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -6103,18 +5614,6 @@ func NewLegacyAddPermissionsToRoleRequest(server string, params *LegacyAddPermis
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -6172,18 +5671,6 @@ func NewLegacyAddPersonsToRoleRequest(server string, params *LegacyAddPersonsToR
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -6240,18 +5727,6 @@ func NewLegacyAddPocketsToRepositoryProfileRequest(server string, params *Legacy
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -6334,18 +5809,6 @@ func NewLegacyAddTagsToComputersRequest(server string, params *LegacyAddTagsToCo
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -6402,18 +5865,6 @@ func NewLegacyAddUploaderGPGKeysToPocketRequest(server string, params *LegacyAdd
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -6496,18 +5947,6 @@ func NewLegacyApproveActivitiesRequest(server string, params *LegacyApproveActiv
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -6552,18 +5991,6 @@ func NewLegacyAssociateAlertRequest(server string, params *LegacyAssociateAlertP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -6642,18 +6069,6 @@ func NewLegacyAssociatePackageProfileRequest(server string, params *LegacyAssoci
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -6730,18 +6145,6 @@ func NewLegacyAssociateRemovalProfileRequest(server string, params *LegacyAssoci
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -6820,18 +6223,6 @@ func NewLegacyAssociateRepositoryProfileRequest(server string, params *LegacyAss
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -6908,18 +6299,6 @@ func NewLegacyAssociateUpgradeProfileRequest(server string, params *LegacyAssoci
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -6998,18 +6377,6 @@ func NewLegacyCancelActivitiesRequest(server string, params *LegacyCancelActivit
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -7054,18 +6421,6 @@ func NewLegacyChangeComputersAccessGroupRequest(server string, params *LegacyCha
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
 			return nil, err
@@ -7123,18 +6478,6 @@ func NewLegacyCopyPackageProfileRequest(server string, params *LegacyCopyPackage
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -7245,18 +6588,6 @@ func NewLegacyCopyRoleRequest(server string, params *LegacyCopyRoleParams) (*htt
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -7330,18 +6661,6 @@ func NewLegacyCopyScriptRequest(server string, params *LegacyCopyScriptParams) (
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -7414,18 +6733,6 @@ func NewLegacyCreateAPTSourceRequest(server string, params *LegacyCreateAPTSourc
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -7516,18 +6823,6 @@ func NewLegacyCreateAccessGroupRequest(server string, params *LegacyCreateAccess
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -7588,18 +6883,6 @@ func NewLegacyCreateChildComputerRequest(server string, params *LegacyCreateChil
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_name", runtime.ParamLocationQuery, params.ComputerName); err != nil {
 			return nil, err
@@ -7690,18 +6973,6 @@ func NewLegacyCreateDistributionRequest(server string, params *LegacyCreateDistr
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -7762,18 +7033,6 @@ func NewLegacyCreatePackageProfileRequest(server string, params *LegacyCreatePac
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
 			return nil, err
@@ -7895,18 +7154,6 @@ func NewLegacyCreatePocketRequest(server string, params *LegacyCreatePocketParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -8185,18 +7432,6 @@ func NewLegacyCreateRemovalProfileRequest(server string, params *LegacyCreateRem
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -8318,18 +7553,6 @@ func NewLegacyCreateRepositoryProfileRequest(server string, params *LegacyCreate
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -8407,18 +7630,6 @@ func NewLegacyCreateRoleRequest(server string, params *LegacyCreateRoleParams) (
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -8479,18 +7690,6 @@ func NewLegacyCreateSavedSearchRequest(server string, params *LegacyCreateSavedS
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if params.Name != nil {
 
@@ -8564,18 +7763,6 @@ func NewLegacyCreateScriptRequest(server string, params *LegacyCreateScriptParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
 			return nil, err
@@ -8698,18 +7885,6 @@ func NewLegacyCreateScriptAttachmentRequest(server string, params *LegacyCreateS
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -8766,18 +7941,6 @@ func NewLegacyCreateSeriesRequest(server string, params *LegacyCreateSeriesParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -8979,18 +8142,6 @@ func NewLegacyCreateUpgradeProfileRequest(server string, params *LegacyCreateUpg
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "title", runtime.ParamLocationQuery, params.Title); err != nil {
 			return nil, err
@@ -9221,18 +8372,6 @@ func NewLegacyCreateUserRequest(server string, params *LegacyCreateUserParams) (
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -9394,18 +8533,6 @@ func NewLegacyDeleteChildComputersRequest(server string, params *LegacyDeleteChi
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -9450,18 +8577,6 @@ func NewLegacyDeriveSeriesRequest(server string, params *LegacyDeriveSeriesParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -9532,18 +8647,6 @@ func NewLegacyDiffPullPocketRequest(server string, params *LegacyDiffPullPocketP
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -9613,18 +8716,6 @@ func NewLegacyDisableAdministratorRequest(server string, params *LegacyDisableAd
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "email", runtime.ParamLocationQuery, params.Email); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -9669,18 +8760,6 @@ func NewLegacyDisassociateAlertRequest(server string, params *LegacyDisassociate
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -9759,18 +8838,6 @@ func NewLegacyDisassociatePackageProfileRequest(server string, params *LegacyDis
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -9847,18 +8914,6 @@ func NewLegacyDisassociateRemovalProfileRequest(server string, params *LegacyDis
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -9937,18 +8992,6 @@ func NewLegacyDisassociateRepositoryProfileRequest(server string, params *Legacy
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -10026,18 +9069,6 @@ func NewLegacyDisassociateUpgradeProfileRequest(server string, params *LegacyDis
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -10114,18 +9145,6 @@ func NewLegacyEditPackageProfileRequest(server string, params *LegacyEditPackage
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -10219,18 +9238,6 @@ func NewLegacyEditPocketRequest(server string, params *LegacyEditPocketParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -10429,18 +9436,6 @@ func NewLegacyEditRemovalProfileRequest(server string, params *LegacyEditRemoval
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -10550,18 +9545,6 @@ func NewLegacyEditRepositoryProfileRequest(server string, params *LegacyEditRepo
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -10639,18 +9622,6 @@ func NewLegacyEditSavedSearchRequest(server string, params *LegacyEditSavedSearc
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -10727,18 +9698,6 @@ func NewLegacyEditScriptRequest(server string, params *LegacyEditScriptParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
 			return nil, err
@@ -10848,18 +9807,6 @@ func NewLegacyEditUpgradeProfileRequest(server string, params *LegacyEditUpgrade
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -11098,18 +10045,6 @@ func NewLegacyEditUserRequest(server string, params *LegacyEditUserParams) (*htt
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -11263,18 +10198,6 @@ func NewLegacyExecuteScriptRequest(server string, params *LegacyExecuteScriptPar
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -11396,18 +10319,6 @@ func NewLegacyGetAPTSourcesRequest(server string, params *LegacyGetAPTSourcesPar
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if params.Names != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
@@ -11457,18 +10368,6 @@ func NewLegacyGetAccessGroupsRequest(server string, params *LegacyGetAccessGroup
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if params.Names != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
@@ -11517,18 +10416,6 @@ func NewLegacyGetActivitiesRequest(server string, params *LegacyGetActivitiesPar
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if params.Query != nil {
 
@@ -11590,7 +10477,7 @@ func NewLegacyGetActivitiesRequest(server string, params *LegacyGetActivitiesPar
 }
 
 // NewLegacyGetActivityTypesRequest generates requests for LegacyGetActivityTypes
-func NewLegacyGetActivityTypesRequest(server string, params *LegacyGetActivityTypesParams) (*http.Request, error) {
+func NewLegacyGetActivityTypesRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -11608,24 +10495,6 @@ func NewLegacyGetActivityTypesRequest(server string, params *LegacyGetActivityTy
 		return nil, err
 	}
 
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
 	if err != nil {
 		return nil, err
@@ -11635,7 +10504,7 @@ func NewLegacyGetActivityTypesRequest(server string, params *LegacyGetActivityTy
 }
 
 // NewLegacyGetAdministratorsRequest generates requests for LegacyGetAdministrators
-func NewLegacyGetAdministratorsRequest(server string, params *LegacyGetAdministratorsParams) (*http.Request, error) {
+func NewLegacyGetAdministratorsRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -11651,24 +10520,6 @@ func NewLegacyGetAdministratorsRequest(server string, params *LegacyGetAdministr
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -11701,18 +10552,6 @@ func NewLegacyGetAlertSubscribersRequest(server string, params *LegacyGetAlertSu
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "alert_type", runtime.ParamLocationQuery, params.AlertType); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -11737,7 +10576,7 @@ func NewLegacyGetAlertSubscribersRequest(server string, params *LegacyGetAlertSu
 }
 
 // NewLegacyGetAlertsRequest generates requests for LegacyGetAlerts
-func NewLegacyGetAlertsRequest(server string, params *LegacyGetAlertsParams) (*http.Request, error) {
+func NewLegacyGetAlertsRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -11753,24 +10592,6 @@ func NewLegacyGetAlertsRequest(server string, params *LegacyGetAlertsParams) (*h
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -11802,18 +10623,6 @@ func NewLegacyGetCSVComplianceDataRequest(server string, params *LegacyGetCSVCom
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if params.Query != nil {
 
@@ -11928,18 +10737,6 @@ func NewLegacyGetComputerProcessesRequest(server string, params *LegacyGetComput
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_id", runtime.ParamLocationQuery, params.ComputerId); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -12016,18 +10813,6 @@ func NewLegacyGetComputersRequest(server string, params *LegacyGetComputersParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if params.Query != nil {
 
@@ -12190,18 +10975,6 @@ func NewLegacyGetComputersNotUpgradedRequest(server string, params *LegacyGetCom
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if params.Query != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, *params.Query); err != nil {
@@ -12283,18 +11056,6 @@ func NewLegacyGetDistributionsRequest(server string, params *LegacyGetDistributi
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if params.Names != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
@@ -12359,18 +11120,6 @@ func NewLegacyGetEventLogRequest(server string, params *LegacyGetEventLogParams)
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if params.Days != nil {
 
@@ -12453,18 +11202,6 @@ func NewLegacyGetGPGKeysRequest(server string, params *LegacyGetGPGKeysParams) (
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if params.Names != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
@@ -12513,18 +11250,6 @@ func NewLegacyGetNotPingingComputersRequest(server string, params *LegacyGetNotP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if params.Query != nil {
 
@@ -12619,18 +11344,6 @@ func NewLegacyGetPackageProfilesRequest(server string, params *LegacyGetPackageP
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if params.Names != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
@@ -12679,18 +11392,6 @@ func NewLegacyGetPackagesRequest(server string, params *LegacyGetPackagesParams)
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
 			return nil, err
@@ -12844,7 +11545,7 @@ func NewLegacyGetPackagesRequest(server string, params *LegacyGetPackagesParams)
 }
 
 // NewLegacyGetPendingComputersRequest generates requests for LegacyGetPendingComputers
-func NewLegacyGetPendingComputersRequest(server string, params *LegacyGetPendingComputersParams) (*http.Request, error) {
+func NewLegacyGetPendingComputersRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12862,24 +11563,6 @@ func NewLegacyGetPendingComputersRequest(server string, params *LegacyGetPending
 		return nil, err
 	}
 
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
 	if err != nil {
 		return nil, err
@@ -12889,7 +11572,7 @@ func NewLegacyGetPendingComputersRequest(server string, params *LegacyGetPending
 }
 
 // NewLegacyGetPermissionsRequest generates requests for LegacyGetPermissions
-func NewLegacyGetPermissionsRequest(server string, params *LegacyGetPermissionsParams) (*http.Request, error) {
+func NewLegacyGetPermissionsRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12907,24 +11590,6 @@ func NewLegacyGetPermissionsRequest(server string, params *LegacyGetPermissionsP
 		return nil, err
 	}
 
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
-	}
-
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
 	if err != nil {
 		return nil, err
@@ -12934,7 +11599,7 @@ func NewLegacyGetPermissionsRequest(server string, params *LegacyGetPermissionsP
 }
 
 // NewLegacyGetRemovalProfilesRequest generates requests for LegacyGetRemovalProfiles
-func NewLegacyGetRemovalProfilesRequest(server string, params *LegacyGetRemovalProfilesParams) (*http.Request, error) {
+func NewLegacyGetRemovalProfilesRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -12950,24 +11615,6 @@ func NewLegacyGetRemovalProfilesRequest(server string, params *LegacyGetRemovalP
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -12999,18 +11646,6 @@ func NewLegacyGetRepoInfoRequest(server string, params *LegacyGetRepoInfoParams)
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "mirror_uri", runtime.ParamLocationQuery, params.MirrorUri); err != nil {
 			return nil, err
@@ -13056,18 +11691,6 @@ func NewLegacyGetRepositoryProfilesRequest(server string, params *LegacyGetRepos
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if params.Names != nil {
 
@@ -13118,18 +11741,6 @@ func NewLegacyGetRolesRequest(server string, params *LegacyGetRolesParams) (*htt
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if params.Names != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, *params.Names); err != nil {
@@ -13178,18 +11789,6 @@ func NewLegacyGetSavedSearchesRequest(server string, params *LegacyGetSavedSearc
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if params.Offset != nil {
 
@@ -13256,18 +11855,6 @@ func NewLegacyGetScriptCodeRequest(server string, params *LegacyGetScriptCodePar
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -13312,18 +11899,6 @@ func NewLegacyGetScriptsRequest(server string, params *LegacyGetScriptsParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if params.Limit != nil {
 
@@ -13385,7 +11960,7 @@ func NewLegacyGetScriptsRequest(server string, params *LegacyGetScriptsParams) (
 }
 
 // NewLegacyGetSettingsRequest generates requests for LegacyGetSettings
-func NewLegacyGetSettingsRequest(server string, params *LegacyGetSettingsParams) (*http.Request, error) {
+func NewLegacyGetSettingsRequest(server string) (*http.Request, error) {
 	var err error
 
 	serverURL, err := url.Parse(server)
@@ -13401,24 +11976,6 @@ func NewLegacyGetSettingsRequest(server string, params *LegacyGetSettingsParams)
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
-	}
-
-	if params != nil {
-		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-		queryURL.RawQuery = queryValues.Encode()
 	}
 
 	req, err := http.NewRequest("GET", queryURL.String(), nil)
@@ -13450,18 +12007,6 @@ func NewLegacyGetUSNTimeToFixRequest(server string, params *LegacyGetUSNTimeToFi
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if params.Query != nil {
 
@@ -13592,18 +12137,6 @@ func NewLegacyGetUpgradeProfilesRequest(server string, params *LegacyGetUpgradeP
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if params.UpgradeType != nil {
 
 			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "upgrade_type", runtime.ParamLocationQuery, *params.UpgradeType); err != nil {
@@ -13652,18 +12185,6 @@ func NewLegacyGetUpgradedComputersByFrequencyRequest(server string, params *Lega
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if params.Query != nil {
 
@@ -13746,18 +12267,6 @@ func NewLegacyGetUsersRequest(server string, params *LegacyGetUsersParams) (*htt
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_id", runtime.ParamLocationQuery, params.ComputerId); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -13802,18 +12311,6 @@ func NewLegacyGetWSLHostsRequest(server string, params *LegacyGetWSLHostsParams)
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if params.Query != nil {
 
@@ -13896,18 +12393,6 @@ func NewLegacyImportGPGKeyRequest(server string, params *LegacyImportGPGKeyParam
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -13964,18 +12449,6 @@ func NewLegacyInstallPackagesRequest(server string, params *LegacyInstallPackage
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
 			return nil, err
@@ -14066,18 +12539,6 @@ func NewLegacyInviteAdministratorRequest(server string, params *LegacyInviteAdmi
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -14151,18 +12612,6 @@ func NewLegacyKillComputerProcessesRequest(server string, params *LegacyKillComp
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_id", runtime.ParamLocationQuery, params.ComputerId); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -14219,18 +12668,6 @@ func NewLegacyListPocketRequest(server string, params *LegacyListPocketParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -14349,18 +12786,6 @@ func NewLegacyModifyPackageProfileRequest(server string, params *LegacyModifyPac
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -14454,18 +12879,6 @@ func NewLegacyPullPackagesToPocketRequest(server string, params *LegacyPullPacka
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -14535,18 +12948,6 @@ func NewLegacyRebootComputersRequest(server string, params *LegacyRebootComputer
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -14608,18 +13009,6 @@ func NewLegacyRejectPendingComputersRequest(server string, params *LegacyRejectP
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -14665,18 +13054,6 @@ func NewLegacyRemoveAPTSourceRequest(server string, params *LegacyRemoveAPTSourc
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -14721,18 +13098,6 @@ func NewLegacyRemoveAPTSourceFromRepositoryProfileRequest(server string, params 
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -14791,18 +13156,6 @@ func NewLegacyRemoveAPTSourcesRequest(server string, params *LegacyRemoveAPTSour
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, params.Names); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -14847,18 +13200,6 @@ func NewLegacyRemoveAPTSourcesFromRepositoryProfileRequest(server string, params
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -14917,18 +13258,6 @@ func NewLegacyRemoveAccessGroupRequest(server string, params *LegacyRemoveAccess
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -14973,18 +13302,6 @@ func NewLegacyRemoveAccessGroupsFromRoleRequest(server string, params *LegacyRem
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -15043,18 +13360,6 @@ func NewLegacyRemoveAnnotationFromComputersRequest(server string, params *Legacy
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -15112,18 +13417,6 @@ func NewLegacyRemoveComputersRequest(server string, params *LegacyRemoveComputer
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -15168,18 +13461,6 @@ func NewLegacyRemoveDistributionRequest(server string, params *LegacyRemoveDistr
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -15226,18 +13507,6 @@ func NewLegacyRemoveGPGKeyRequest(server string, params *LegacyRemoveGPGKeyParam
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -15282,18 +13551,6 @@ func NewLegacyRemovePackageFiltersFromPocketRequest(server string, params *Legac
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -15376,18 +13633,6 @@ func NewLegacyRemovePackageProfileRequest(server string, params *LegacyRemovePac
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -15432,18 +13677,6 @@ func NewLegacyRemovePackagesRequest(server string, params *LegacyRemovePackagesP
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
 			return nil, err
@@ -15534,18 +13767,6 @@ func NewLegacyRemovePackagesFromPocketRequest(server string, params *LegacyRemov
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -15627,18 +13848,6 @@ func NewLegacyRemovePermissionsFromRoleRequest(server string, params *LegacyRemo
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -15696,18 +13905,6 @@ func NewLegacyRemovePersonsFromRoleRequest(server string, params *LegacyRemovePe
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -15764,18 +13961,6 @@ func NewLegacyRemovePocketRequest(server string, params *LegacyRemovePocketParam
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -15845,18 +14030,6 @@ func NewLegacyRemovePocketsFromRepositoryProfileRequest(server string, params *L
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -15939,18 +14112,6 @@ func NewLegacyRemoveRemovalProfileRequest(server string, params *LegacyRemoveRem
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -15995,18 +14156,6 @@ func NewLegacyRemoveRepositoryProfileRequest(server string, params *LegacyRemove
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -16053,18 +14202,6 @@ func NewLegacyRemoveRepositoryProfilesRequest(server string, params *LegacyRemov
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "names", runtime.ParamLocationQuery, params.Names); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -16109,18 +14246,6 @@ func NewLegacyRemoveRoleRequest(server string, params *LegacyRemoveRoleParams) (
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -16167,18 +14292,6 @@ func NewLegacyRemoveSavedSearchRequest(server string, params *LegacyRemoveSavedS
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -16224,18 +14337,6 @@ func NewLegacyRemoveScriptRequest(server string, params *LegacyRemoveScriptParam
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -16280,18 +14381,6 @@ func NewLegacyRemoveScriptAttachmentRequest(server string, params *LegacyRemoveS
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "script_id", runtime.ParamLocationQuery, params.ScriptId); err != nil {
 			return nil, err
@@ -16350,18 +14439,6 @@ func NewLegacyRemoveSeriesRequest(server string, params *LegacyRemoveSeriesParam
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -16418,18 +14495,6 @@ func NewLegacyRemoveTagsFromComputersRequest(server string, params *LegacyRemove
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
 			return nil, err
@@ -16488,18 +14553,6 @@ func NewLegacyRemoveUpgradeProfileRequest(server string, params *LegacyRemoveUpg
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -16544,18 +14597,6 @@ func NewLegacyRemoveUploaderGPGKeysFromPocketRequest(server string, params *Lega
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
@@ -16638,18 +14679,6 @@ func NewLegacyRemoveWSLHostsRequest(server string, params *LegacyRemoveWSLHostsP
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -16711,18 +14740,6 @@ func NewLegacyRenameComputersRequest(server string, params *LegacyRenameComputer
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_titles", runtime.ParamLocationQuery, params.ComputerTitles); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -16767,18 +14784,6 @@ func NewLegacySetDefaultChildComputerRequest(server string, params *LegacySetDef
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "parent_id", runtime.ParamLocationQuery, params.ParentId); err != nil {
 			return nil, err
@@ -16837,18 +14842,6 @@ func NewLegacySetSettingsRequest(server string, params *LegacySetSettingsParams)
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "key_values", runtime.ParamLocationQuery, params.KeyValues); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -16893,18 +14886,6 @@ func NewLegacyShutdownComputersRequest(server string, params *LegacyShutdownComp
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
 			return nil, err
@@ -16967,18 +14948,6 @@ func NewLegacyShutdownHostComputerRequest(server string, params *LegacyShutdownH
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "parent_id", runtime.ParamLocationQuery, params.ParentId); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -17024,18 +14993,6 @@ func NewLegacyStartChildComputersRequest(server string, params *LegacyStartChild
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -17080,18 +15037,6 @@ func NewLegacyStopChildComputersRequest(server string, params *LegacyStopChildCo
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_ids", runtime.ParamLocationQuery, params.ComputerIds); err != nil {
 			return nil, err
@@ -17183,18 +15128,6 @@ func NewLegacySyncMirrorPocketRequest(server string, params *LegacySyncMirrorPoc
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "name", runtime.ParamLocationQuery, params.Name); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -17264,18 +15197,6 @@ func NewLegacyTerminateComputerProcessesRequest(server string, params *LegacyTer
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "computer_id", runtime.ParamLocationQuery, params.ComputerId); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -17333,18 +15254,6 @@ func NewLegacyUnsubscribeFromAlertRequest(server string, params *LegacyUnsubscri
 	if params != nil {
 		queryValues := queryURL.Query()
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "alert_type", runtime.ParamLocationQuery, params.AlertType); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
@@ -17389,18 +15298,6 @@ func NewLegacyUpgradePackagesRequest(server string, params *LegacyUpgradePackage
 
 	if params != nil {
 		queryValues := queryURL.Query()
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "action", runtime.ParamLocationQuery, params.Action); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, params.Query); err != nil {
 			return nil, err
@@ -18276,16 +16173,16 @@ type ClientWithResponsesInterface interface {
 	LegacyGetActivitiesWithResponse(ctx context.Context, params *LegacyGetActivitiesParams, reqEditors ...RequestEditorFn) (*LegacyGetActivitiesResponse, error)
 
 	// LegacyGetActivityTypesWithResponse request
-	LegacyGetActivityTypesWithResponse(ctx context.Context, params *LegacyGetActivityTypesParams, reqEditors ...RequestEditorFn) (*LegacyGetActivityTypesResponse, error)
+	LegacyGetActivityTypesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetActivityTypesResponse, error)
 
 	// LegacyGetAdministratorsWithResponse request
-	LegacyGetAdministratorsWithResponse(ctx context.Context, params *LegacyGetAdministratorsParams, reqEditors ...RequestEditorFn) (*LegacyGetAdministratorsResponse, error)
+	LegacyGetAdministratorsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetAdministratorsResponse, error)
 
 	// LegacyGetAlertSubscribersWithResponse request
 	LegacyGetAlertSubscribersWithResponse(ctx context.Context, params *LegacyGetAlertSubscribersParams, reqEditors ...RequestEditorFn) (*LegacyGetAlertSubscribersResponse, error)
 
 	// LegacyGetAlertsWithResponse request
-	LegacyGetAlertsWithResponse(ctx context.Context, params *LegacyGetAlertsParams, reqEditors ...RequestEditorFn) (*LegacyGetAlertsResponse, error)
+	LegacyGetAlertsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetAlertsResponse, error)
 
 	// LegacyGetCSVComplianceDataWithResponse request
 	LegacyGetCSVComplianceDataWithResponse(ctx context.Context, params *LegacyGetCSVComplianceDataParams, reqEditors ...RequestEditorFn) (*LegacyGetCSVComplianceDataResponse, error)
@@ -18318,13 +16215,13 @@ type ClientWithResponsesInterface interface {
 	LegacyGetPackagesWithResponse(ctx context.Context, params *LegacyGetPackagesParams, reqEditors ...RequestEditorFn) (*LegacyGetPackagesResponse, error)
 
 	// LegacyGetPendingComputersWithResponse request
-	LegacyGetPendingComputersWithResponse(ctx context.Context, params *LegacyGetPendingComputersParams, reqEditors ...RequestEditorFn) (*LegacyGetPendingComputersResponse, error)
+	LegacyGetPendingComputersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetPendingComputersResponse, error)
 
 	// LegacyGetPermissionsWithResponse request
-	LegacyGetPermissionsWithResponse(ctx context.Context, params *LegacyGetPermissionsParams, reqEditors ...RequestEditorFn) (*LegacyGetPermissionsResponse, error)
+	LegacyGetPermissionsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetPermissionsResponse, error)
 
 	// LegacyGetRemovalProfilesWithResponse request
-	LegacyGetRemovalProfilesWithResponse(ctx context.Context, params *LegacyGetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*LegacyGetRemovalProfilesResponse, error)
+	LegacyGetRemovalProfilesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetRemovalProfilesResponse, error)
 
 	// LegacyGetRepoInfoWithResponse request
 	LegacyGetRepoInfoWithResponse(ctx context.Context, params *LegacyGetRepoInfoParams, reqEditors ...RequestEditorFn) (*LegacyGetRepoInfoResponse, error)
@@ -18345,7 +16242,7 @@ type ClientWithResponsesInterface interface {
 	LegacyGetScriptsWithResponse(ctx context.Context, params *LegacyGetScriptsParams, reqEditors ...RequestEditorFn) (*LegacyGetScriptsResponse, error)
 
 	// LegacyGetSettingsWithResponse request
-	LegacyGetSettingsWithResponse(ctx context.Context, params *LegacyGetSettingsParams, reqEditors ...RequestEditorFn) (*LegacyGetSettingsResponse, error)
+	LegacyGetSettingsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetSettingsResponse, error)
 
 	// LegacyGetUSNTimeToFixWithResponse request
 	LegacyGetUSNTimeToFixWithResponse(ctx context.Context, params *LegacyGetUSNTimeToFixParams, reqEditors ...RequestEditorFn) (*LegacyGetUSNTimeToFixResponse, error)
@@ -22858,8 +20755,8 @@ func (c *ClientWithResponses) LegacyGetActivitiesWithResponse(ctx context.Contex
 }
 
 // LegacyGetActivityTypesWithResponse request returning *LegacyGetActivityTypesResponse
-func (c *ClientWithResponses) LegacyGetActivityTypesWithResponse(ctx context.Context, params *LegacyGetActivityTypesParams, reqEditors ...RequestEditorFn) (*LegacyGetActivityTypesResponse, error) {
-	rsp, err := c.LegacyGetActivityTypes(ctx, params, reqEditors...)
+func (c *ClientWithResponses) LegacyGetActivityTypesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetActivityTypesResponse, error) {
+	rsp, err := c.LegacyGetActivityTypes(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -22867,8 +20764,8 @@ func (c *ClientWithResponses) LegacyGetActivityTypesWithResponse(ctx context.Con
 }
 
 // LegacyGetAdministratorsWithResponse request returning *LegacyGetAdministratorsResponse
-func (c *ClientWithResponses) LegacyGetAdministratorsWithResponse(ctx context.Context, params *LegacyGetAdministratorsParams, reqEditors ...RequestEditorFn) (*LegacyGetAdministratorsResponse, error) {
-	rsp, err := c.LegacyGetAdministrators(ctx, params, reqEditors...)
+func (c *ClientWithResponses) LegacyGetAdministratorsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetAdministratorsResponse, error) {
+	rsp, err := c.LegacyGetAdministrators(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -22885,8 +20782,8 @@ func (c *ClientWithResponses) LegacyGetAlertSubscribersWithResponse(ctx context.
 }
 
 // LegacyGetAlertsWithResponse request returning *LegacyGetAlertsResponse
-func (c *ClientWithResponses) LegacyGetAlertsWithResponse(ctx context.Context, params *LegacyGetAlertsParams, reqEditors ...RequestEditorFn) (*LegacyGetAlertsResponse, error) {
-	rsp, err := c.LegacyGetAlerts(ctx, params, reqEditors...)
+func (c *ClientWithResponses) LegacyGetAlertsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetAlertsResponse, error) {
+	rsp, err := c.LegacyGetAlerts(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -22984,8 +20881,8 @@ func (c *ClientWithResponses) LegacyGetPackagesWithResponse(ctx context.Context,
 }
 
 // LegacyGetPendingComputersWithResponse request returning *LegacyGetPendingComputersResponse
-func (c *ClientWithResponses) LegacyGetPendingComputersWithResponse(ctx context.Context, params *LegacyGetPendingComputersParams, reqEditors ...RequestEditorFn) (*LegacyGetPendingComputersResponse, error) {
-	rsp, err := c.LegacyGetPendingComputers(ctx, params, reqEditors...)
+func (c *ClientWithResponses) LegacyGetPendingComputersWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetPendingComputersResponse, error) {
+	rsp, err := c.LegacyGetPendingComputers(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -22993,8 +20890,8 @@ func (c *ClientWithResponses) LegacyGetPendingComputersWithResponse(ctx context.
 }
 
 // LegacyGetPermissionsWithResponse request returning *LegacyGetPermissionsResponse
-func (c *ClientWithResponses) LegacyGetPermissionsWithResponse(ctx context.Context, params *LegacyGetPermissionsParams, reqEditors ...RequestEditorFn) (*LegacyGetPermissionsResponse, error) {
-	rsp, err := c.LegacyGetPermissions(ctx, params, reqEditors...)
+func (c *ClientWithResponses) LegacyGetPermissionsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetPermissionsResponse, error) {
+	rsp, err := c.LegacyGetPermissions(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -23002,8 +20899,8 @@ func (c *ClientWithResponses) LegacyGetPermissionsWithResponse(ctx context.Conte
 }
 
 // LegacyGetRemovalProfilesWithResponse request returning *LegacyGetRemovalProfilesResponse
-func (c *ClientWithResponses) LegacyGetRemovalProfilesWithResponse(ctx context.Context, params *LegacyGetRemovalProfilesParams, reqEditors ...RequestEditorFn) (*LegacyGetRemovalProfilesResponse, error) {
-	rsp, err := c.LegacyGetRemovalProfiles(ctx, params, reqEditors...)
+func (c *ClientWithResponses) LegacyGetRemovalProfilesWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetRemovalProfilesResponse, error) {
+	rsp, err := c.LegacyGetRemovalProfiles(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
@@ -23065,8 +20962,8 @@ func (c *ClientWithResponses) LegacyGetScriptsWithResponse(ctx context.Context, 
 }
 
 // LegacyGetSettingsWithResponse request returning *LegacyGetSettingsResponse
-func (c *ClientWithResponses) LegacyGetSettingsWithResponse(ctx context.Context, params *LegacyGetSettingsParams, reqEditors ...RequestEditorFn) (*LegacyGetSettingsResponse, error) {
-	rsp, err := c.LegacyGetSettings(ctx, params, reqEditors...)
+func (c *ClientWithResponses) LegacyGetSettingsWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LegacyGetSettingsResponse, error) {
+	rsp, err := c.LegacyGetSettings(ctx, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
