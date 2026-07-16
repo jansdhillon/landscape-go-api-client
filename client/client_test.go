@@ -103,6 +103,12 @@ func TestGetScript(t *testing.T) {
 
 func TestLegacyScriptActions(t *testing.T) {
 	handler := http.NewServeMux()
+	handler.HandleFunc("/api/login/access-key", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		if err := json.NewEncoder(w).Encode(map[string]string{"token": "test-token"}); err != nil {
+			t.Fatalf("failed to encode login response: %v", err)
+		}
+	})
 	legacyHandler := func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Query().Get("version") == "" {
 			w.WriteHeader(http.StatusBadRequest)
@@ -158,23 +164,23 @@ func TestLegacyScriptActions(t *testing.T) {
 	defer server.Close()
 
 	httpClient := server.Client()
-
-	authEditor := func(ctx context.Context, req *http.Request) error {
-		req.Header.Set("Authorization", "Bearer test-token")
-		return nil
-	}
-
 	baseURL := server.URL
 
-	t.Run("create script raw response", func(t *testing.T) {
-		client, err := NewClient(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
+	newTestClient := func(t *testing.T) *LandscapeAPIClient {
+		t.Helper()
+		c, err := NewLandscapeAPIClient(context.Background(), httpClient, baseURL, NewAccessKeyProvider("ak", "sk"))
 		if err != nil {
-			t.Fatalf("failed to init client: %v", err)
+			t.Fatalf("failed to init Landscape API client: %v", err)
 		}
+		return c
+	}
 
-		resp, err := client.LegacyCreateScript(context.Background(), &LegacyCreateScriptParams{
-			Title: "new script",
-			Code:  "ZWNobyAiSGVsbG8i",
+	t.Run("create script raw response", func(t *testing.T) {
+		c := newTestClient(t)
+
+		resp, err := c.LegacyAPIRequest(context.Background(), "CreateScript", map[string]any{
+			"title": "new script",
+			"code":  "ZWNobyAiSGVsbG8i",
 		})
 		if err != nil {
 			t.Fatalf("CreateScript failed: %v", err)
@@ -196,110 +202,82 @@ func TestLegacyScriptActions(t *testing.T) {
 	})
 
 	t.Run("create script typed response", func(t *testing.T) {
-		client, err := NewClientWithResponses(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
-		if err != nil {
-			t.Fatalf("failed to init client with responses: %v", err)
-		}
+		c := newTestClient(t)
 
-		resp, err := client.LegacyCreateScriptWithResponse(context.Background(), &LegacyCreateScriptParams{
-			Title: "new script",
-			Code:  "ZWNobyAiSGVsbG8i",
+		resp, err := LegacyAPIRequestWithResponse[V1Script](context.Background(), c, "CreateScript", map[string]any{
+			"title": "new script",
+			"code":  "ZWNobyAiSGVsbG8i",
 		})
 		if err != nil {
-			t.Fatalf("CreateScriptWithResponse failed: %v", err)
+			t.Fatalf("CreateScript failed: %v", err)
 		}
 
 		if resp.StatusCode() != http.StatusOK {
 			t.Fatalf("expected HTTP 200 but received %d", resp.StatusCode())
 		}
 
-		if resp.JSON200 == nil {
-			t.Fatal("expected JSON200 payload, got nil")
+		if resp.JSON == nil {
+			t.Fatal("expected JSON payload, got nil")
 		}
 
-		parsedScript, err := ParseLegacyResponse[V1Script](resp.Body)
-		if err != nil {
-			t.Fatalf("failed to decode script from response: %v", err)
-		}
-
-		if parsedScript.Title != "new script" || parsedScript.Id != 42 {
-			t.Fatalf("unexpected script payload: %+v", parsedScript)
+		if resp.JSON.Title != "new script" || resp.JSON.Id != 42 {
+			t.Fatalf("unexpected script payload: %+v", resp.JSON)
 		}
 	})
 
 	t.Run("edit script typed response", func(t *testing.T) {
-		title := "edited title"
-		client, err := NewClientWithResponses(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
-		if err != nil {
-			t.Fatalf("failed to init client with responses: %v", err)
-		}
+		c := newTestClient(t)
 
-		resp, err := client.LegacyEditScriptWithResponse(context.Background(), &LegacyEditScriptParams{
-			ScriptId: 42,
-			Title:    &title,
+		resp, err := LegacyAPIRequestWithResponse[V1Script](context.Background(), c, "EditScript", map[string]any{
+			"script_id": 42,
+			"title":     "edited title",
 		})
 		if err != nil {
-			t.Fatalf("EditScriptWithResponse failed: %v", err)
+			t.Fatalf("EditScript failed: %v", err)
 		}
 
 		if resp.StatusCode() != http.StatusOK {
 			t.Fatalf("expected HTTP 200 but received %d", resp.StatusCode())
 		}
 
-		if resp.JSON200 == nil {
-			t.Fatal("expected JSON200 payload, got nil")
+		if resp.JSON == nil {
+			t.Fatal("expected JSON payload, got nil")
 		}
 
-		parsedScript, err := ParseLegacyResponse[V1Script](resp.Body)
-		if err != nil {
-			t.Fatalf("failed to decode script from response: %v", err)
-		}
-
-		if parsedScript.Title != "edited title" {
-			t.Fatalf("unexpected script payload: %+v", parsedScript)
+		if resp.JSON.Title != "edited title" {
+			t.Fatalf("unexpected script payload: %+v", resp.JSON)
 		}
 	})
 
 	t.Run("copy script typed response", func(t *testing.T) {
-		client, err := NewClientWithResponses(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
-		if err != nil {
-			t.Fatalf("failed to init client with responses: %v", err)
-		}
+		c := newTestClient(t)
 
-		resp, err := client.LegacyCopyScriptWithResponse(context.Background(), &LegacyCopyScriptParams{
-			ScriptId:         42,
-			DestinationTitle: "copy title",
+		resp, err := LegacyAPIRequestWithResponse[V1Script](context.Background(), c, "CopyScript", map[string]any{
+			"script_id":         42,
+			"destination_title": "copy title",
 		})
 		if err != nil {
-			t.Fatalf("CopyScriptWithResponse failed: %v", err)
+			t.Fatalf("CopyScript failed: %v", err)
 		}
 
 		if resp.StatusCode() != http.StatusOK {
 			t.Fatalf("expected HTTP 200 but received %d", resp.StatusCode())
 		}
 
-		if resp.JSON200 == nil {
-			t.Fatal("expected JSON200 payload, got nil")
+		if resp.JSON == nil {
+			t.Fatal("expected JSON payload, got nil")
 		}
 
-		parsedScript, err := ParseLegacyResponse[V1Script](resp.Body)
-		if err != nil {
-			t.Fatalf("failed to decode script from response: %v", err)
-		}
-
-		if parsedScript.Id != 99 || parsedScript.Title != "copy title" {
-			t.Fatalf("unexpected script payload: %+v", parsedScript)
+		if resp.JSON.Id != 99 || resp.JSON.Title != "copy title" {
+			t.Fatalf("unexpected script payload: %+v", resp.JSON)
 		}
 	})
 
 	t.Run("remove script raw response", func(t *testing.T) {
-		client, err := NewClient(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
-		if err != nil {
-			t.Fatalf("failed to init client: %v", err)
-		}
+		c := newTestClient(t)
 
-		resp, err := client.LegacyRemoveScript(context.Background(), &LegacyRemoveScriptParams{
-			ScriptId: 42,
+		resp, err := c.LegacyAPIRequest(context.Background(), "RemoveScript", map[string]any{
+			"script_id": 42,
 		})
 		if err != nil {
 			t.Fatalf("RemoveScript failed: %v", err)
@@ -312,62 +290,50 @@ func TestLegacyScriptActions(t *testing.T) {
 	})
 
 	t.Run("remove attachment typed response", func(t *testing.T) {
-		client, err := NewClientWithResponses(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
-		if err != nil {
-			t.Fatalf("failed to init client with responses: %v", err)
-		}
+		c := newTestClient(t)
 
-		resp, err := client.LegacyRemoveScriptAttachmentWithResponse(context.Background(), &LegacyRemoveScriptAttachmentParams{
-			ScriptId: 42,
-			Filename: "note.txt",
+		resp, err := LegacyAPIRequestWithResponse[struct{}](context.Background(), c, "RemoveScriptAttachment", map[string]any{
+			"script_id": 42,
+			"filename":  "note.txt",
 		})
 		if err != nil {
-			t.Fatalf("RemoveScriptAttachmentWithResponse failed: %v", err)
+			t.Fatalf("RemoveScriptAttachment failed: %v", err)
 		}
 
 		if resp.StatusCode() != http.StatusNoContent {
 			t.Fatalf("expected HTTP 204 but received %d", resp.StatusCode())
 		}
 
-		if resp.JSON200 != nil {
-			t.Fatalf("expected no payload for 204 response, got %#v", resp.JSON200)
+		if len(resp.Body) > 0 {
+			t.Fatalf("expected no payload for 204 response, got %q", resp.Body)
 		}
 	})
 
 	t.Run("create attachment typed response", func(t *testing.T) {
-		client, err := NewClientWithResponses(baseURL, WithHTTPClient(httpClient), WithRequestEditorFn(authEditor))
-		if err != nil {
-			t.Fatalf("failed to init client with responses: %v", err)
-		}
+		c := newTestClient(t)
 
-		resp, err := client.LegacyCreateScriptAttachmentWithResponse(context.Background(), &LegacyCreateScriptAttachmentParams{
-			ScriptId: 42,
-			File:     "note.txt$$Zm9v",
+		resp, err := LegacyAPIRequestWithResponse[LegacyScriptAttachment](context.Background(), c, "CreateScriptAttachment", map[string]any{
+			"script_id": 42,
+			"file":      "note.txt$$Zm9v",
 		})
 		if err != nil {
-			t.Fatalf("CreateScriptAttachmentWithResponse failed: %v", err)
+			t.Fatalf("CreateScriptAttachment failed: %v", err)
 		}
 
 		if resp.StatusCode() != http.StatusOK {
 			t.Fatalf("expected HTTP 200 but received %d", resp.StatusCode())
 		}
 
-		if resp.JSON200 == nil {
-			t.Fatal("expected JSON200 payload, got nil")
+		if resp.JSON == nil {
+			t.Fatal("expected JSON payload, got nil")
 		}
 
-		attachment, err := ParseLegacyResponse[LegacyScriptAttachment](resp.Body)
-		if err != nil {
-			t.Fatalf("failed to decode attachment result: %v", err)
-		}
-
-		if attachment != "note.txt" {
-			t.Fatalf("unexpected attachment result: %+v", attachment)
+		if *resp.JSON != "note.txt" {
+			t.Fatalf("unexpected attachment result: %+v", *resp.JSON)
 		}
 	})
 
 }
-
 func TestArchiveAndRedactScript(t *testing.T) {
 	handler := http.NewServeMux()
 	handler.HandleFunc("/api/scripts/1:archive", func(w http.ResponseWriter, r *http.Request) {

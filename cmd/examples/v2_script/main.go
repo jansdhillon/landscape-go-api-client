@@ -7,6 +7,7 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/jansdhillon/landscape-go-api-client/client"
@@ -31,6 +32,8 @@ func main() {
 	}
 
 	landscapeAPIClient, err := client.NewLandscapeAPIClient(
+		ctx,
+		http.DefaultClient,
 		baseURL,
 		client.NewAccessKeyProvider(ak, sk),
 	)
@@ -42,48 +45,40 @@ func main() {
 	// Create a V2 script
 	rawCode := "#!/bin/bash\n \"hello\" > /home/ubuntu/hello.txt"
 	enc := base64.StdEncoding.EncodeToString([]byte(rawCode))
-	scriptType := "V2"
-	createdScriptRes, err := landscapeAPIClient.LegacyCreateScriptWithResponse(ctx, &client.LegacyCreateScriptParams{
-		Title:      rand.Text(),
-		Code:       enc,
-		ScriptType: &scriptType,
+	createdScriptRes, err := client.LegacyAPIRequestWithResponse[client.V1Script](ctx, landscapeAPIClient, "CreateScript", map[string]any{
+		"title":       rand.Text(),
+		"code":        enc,
+		"script_type": "V2",
 	})
 	if err != nil {
 		log.Fatalf("failed to create script: %v", err)
 	}
 
 	log.Printf("raw create script response: %s", createdScriptRes.Body)
-	if createdScriptRes.JSON200 == nil {
-		log.Fatalf("error creating script: %s", createdScriptRes.Status())
+	if createdScriptRes.JSON == nil {
+		log.Fatalf("error creating script: %d", createdScriptRes.StatusCode())
 	}
 
-	createdScript, err := client.ParseLegacyResponse[client.V1Script](createdScriptRes.Body)
-	if err != nil {
-		log.Fatalf("failed to parse response as script: %v", err)
-	}
+	createdScript := createdScriptRes.JSON
 
 	raw := "#!/bin/bash\necho \"newcode\" > /home/ubuntu/myscript.txt"
 	enc = base64.StdEncoding.EncodeToString([]byte(raw))
-	username := "jim"
 
-	res, err := landscapeAPIClient.LegacyEditScriptWithResponse(ctx, &client.LegacyEditScriptParams{
-		ScriptId: createdScript.Id,
-		Username: &username,
-		Code:     &enc,
+	res, err := client.LegacyAPIRequestWithResponse[client.V2Script](ctx, landscapeAPIClient, "EditScript", map[string]any{
+		"script_id": createdScript.Id,
+		"username":  "jim",
+		"code":      enc,
 	})
 	if err != nil {
 		log.Fatalf("failed to invoke legacy action: %v", err)
 	}
 
 	log.Printf("raw edit script response: %s", res.Body)
-	if res.JSON200 == nil {
-		log.Fatalf("failed to edit script: %s", res.Status())
+	if res.JSON == nil {
+		log.Fatalf("failed to edit script: %d", res.StatusCode())
 	}
 
-	editedScript, err := client.ParseLegacyResponse[client.V2Script](res.Body)
-	if err != nil {
-		log.Fatalf("failed to parse response as V2 script: %s", err)
-	}
+	editedScript := res.JSON
 
 	log.Printf("edited script title: %s", editedScript.Title)
 	if editedScript.Attachments != nil {

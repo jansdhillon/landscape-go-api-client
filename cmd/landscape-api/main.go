@@ -119,7 +119,7 @@ func main() {
 				lp = client.NewAccessKeyProvider(accessKey, secretKey)
 			}
 
-			var extraOpts []client.ClientOption
+			hc := &http.Client{}
 			if certPath := c.String(caCertFlag); certPath != "" {
 				pemData, err := os.ReadFile(certPath)
 				if err != nil {
@@ -132,15 +132,14 @@ func main() {
 				if !pool.AppendCertsFromPEM(pemData) {
 					return ctx, fmt.Errorf("failed to parse CA cert: invalid PEM data")
 				}
-				tlsClient := &http.Client{
+				hc = &http.Client{
 					Transport: &http.Transport{
 						TLSClientConfig: &tls.Config{RootCAs: pool},
 					},
 				}
-				extraOpts = append(extraOpts, client.WithHTTPClient(tlsClient))
 			}
 
-			api, err := client.NewLandscapeAPIClient(baseURL, lp, extraOpts...)
+			api, err := client.NewLandscapeAPIClient(ctx, hc, baseURL, lp)
 			if err != nil {
 				return ctx, err
 			}
