@@ -62,6 +62,9 @@ func (p *EmailPasswordProvider) Login(ctx context.Context, c *ClientWithResponse
 	if resp.StatusCode() != http.StatusOK {
 		return "", fmt.Errorf("login failed with status: %d", resp.StatusCode())
 	}
+	if resp.JSON200 == nil {
+		return "", fmt.Errorf("login response missing JSON body (status: %d)", resp.StatusCode())
+	}
 
 	return resp.JSON200.Token, nil
 }
@@ -93,6 +96,9 @@ func (p *AccessKeyProvider) Login(ctx context.Context, c *ClientWithResponses) (
 	}
 	if resp.StatusCode() != http.StatusOK {
 		return "", fmt.Errorf("login failed with status: %d", resp.StatusCode())
+	}
+	if resp.JSON200 == nil {
+		return "", fmt.Errorf("login response missing JSON body (status: %d)", resp.StatusCode())
 	}
 
 	return resp.JSON200.Token, nil
