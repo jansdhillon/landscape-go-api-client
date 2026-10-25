@@ -13,6 +13,13 @@ import (
 	"github.com/jansdhillon/landscape-go-api-client/client"
 )
 
+// script is the subset of a legacy CreateScript response this example uses.
+// Legacy responses are not in the OpenAPI spec, so callers define their own.
+type script struct {
+	Id    int    `json:"id"`
+	Title string `json:"title"`
+}
+
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -45,7 +52,7 @@ func main() {
 	// Create a V2 script
 	rawCode := "#!/bin/bash\n \"hello\" > /home/ubuntu/hello.txt"
 	enc := base64.StdEncoding.EncodeToString([]byte(rawCode))
-	createdScriptRes, err := client.LegacyAPIRequestWithResponse[client.V1Script](ctx, landscapeAPIClient, "CreateScript", map[string]any{
+	createdScriptRes, err := client.LegacyAPIRequestWithResponse[script](ctx, landscapeAPIClient, "CreateScript", map[string]any{
 		"title":       rand.Text(),
 		"code":        enc,
 		"script_type": "V2",

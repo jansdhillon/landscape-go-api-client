@@ -17,7 +17,7 @@ func TestGetScript(t *testing.T) {
 			t.Fatalf("expected GET, got %s", r.Method)
 		}
 
-		resp := V1Script{
+		resp := V2Script{
 			Id:    1,
 			Title: "diagnostic script",
 		}
@@ -61,7 +61,7 @@ func TestGetScript(t *testing.T) {
 			t.Fatalf("failed to read response body: %v", err)
 		}
 
-		var payload V1Script
+		var payload V2Script
 		if err := json.Unmarshal(bodyBytes, &payload); err != nil {
 			t.Fatalf("failed to unmarshal response body: %v", err)
 		}
@@ -90,15 +90,18 @@ func TestGetScript(t *testing.T) {
 			t.Fatal("expected JSON200 payload, got nil")
 		}
 
-		v1Script, err := resp.JSON200.AsV1Script()
-		if err != nil {
-			t.Fatalf("err converting to v1 script")
-		}
-
-		if v1Script.Id != 1 || v1Script.Title != "diagnostic script" {
-			t.Fatalf("unexpected v1 script: %+v", v1Script)
+		if resp.JSON200.Id != 1 || resp.JSON200.Title != "diagnostic script" {
+			t.Fatalf("unexpected script: %+v", resp.JSON200)
 		}
 	})
+}
+
+// legacyScript is the subset of a legacy (action-based) script response the
+// tests check. Legacy responses are not in the OpenAPI spec, so callers supply
+// their own type to LegacyAPIRequestWithResponse.
+type legacyScript struct {
+	Id    int    `json:"id"`
+	Title string `json:"title"`
 }
 
 func TestLegacyScriptActions(t *testing.T) {
@@ -119,7 +122,7 @@ func TestLegacyScriptActions(t *testing.T) {
 		switch action {
 		case "CreateScript":
 			w.Header().Set("Content-Type", "application/json")
-			resp := V1Script{
+			resp := legacyScript{
 				Id:    42,
 				Title: r.URL.Query().Get("title"),
 			}
@@ -134,7 +137,7 @@ func TestLegacyScriptActions(t *testing.T) {
 			}
 		case "EditScript":
 			w.Header().Set("Content-Type", "application/json")
-			resp := V1Script{
+			resp := legacyScript{
 				Id:    42,
 				Title: r.URL.Query().Get("title"),
 			}
@@ -143,7 +146,7 @@ func TestLegacyScriptActions(t *testing.T) {
 			}
 		case "CopyScript":
 			w.Header().Set("Content-Type", "application/json")
-			resp := V1Script{
+			resp := legacyScript{
 				Id:    99,
 				Title: r.URL.Query().Get("destination_title"),
 			}
@@ -204,7 +207,7 @@ func TestLegacyScriptActions(t *testing.T) {
 	t.Run("create script typed response", func(t *testing.T) {
 		c := newTestClient(t)
 
-		resp, err := LegacyAPIRequestWithResponse[V1Script](context.Background(), c, "CreateScript", map[string]any{
+		resp, err := LegacyAPIRequestWithResponse[legacyScript](context.Background(), c, "CreateScript", map[string]any{
 			"title": "new script",
 			"code":  "ZWNobyAiSGVsbG8i",
 		})
@@ -228,7 +231,7 @@ func TestLegacyScriptActions(t *testing.T) {
 	t.Run("edit script typed response", func(t *testing.T) {
 		c := newTestClient(t)
 
-		resp, err := LegacyAPIRequestWithResponse[V1Script](context.Background(), c, "EditScript", map[string]any{
+		resp, err := LegacyAPIRequestWithResponse[legacyScript](context.Background(), c, "EditScript", map[string]any{
 			"script_id": 42,
 			"title":     "edited title",
 		})
@@ -252,7 +255,7 @@ func TestLegacyScriptActions(t *testing.T) {
 	t.Run("copy script typed response", func(t *testing.T) {
 		c := newTestClient(t)
 
-		resp, err := LegacyAPIRequestWithResponse[V1Script](context.Background(), c, "CopyScript", map[string]any{
+		resp, err := LegacyAPIRequestWithResponse[legacyScript](context.Background(), c, "CopyScript", map[string]any{
 			"script_id":         42,
 			"destination_title": "copy title",
 		})
@@ -312,7 +315,7 @@ func TestLegacyScriptActions(t *testing.T) {
 	t.Run("create attachment typed response", func(t *testing.T) {
 		c := newTestClient(t)
 
-		resp, err := LegacyAPIRequestWithResponse[LegacyScriptAttachment](context.Background(), c, "CreateScriptAttachment", map[string]any{
+		resp, err := LegacyAPIRequestWithResponse[string](context.Background(), c, "CreateScriptAttachment", map[string]any{
 			"script_id": 42,
 			"file":      "note.txt$$Zm9v",
 		})
