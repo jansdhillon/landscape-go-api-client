@@ -244,7 +244,7 @@ var mirrorCmd = &cli.Command{
 }
 
 func importGPGKeyAction(ctx context.Context, cmd *cli.Command) error {
-	api, ok := ctx.Value(apiClientKey).(*client.ClientWithResponses)
+	api, ok := ctx.Value(apiClientKey).(*client.LandscapeAPIClient)
 	if !ok || api == nil {
 		return fmt.Errorf("api client not initialized")
 	}
@@ -262,9 +262,9 @@ func importGPGKeyAction(ctx context.Context, cmd *cli.Command) error {
 		return fmt.Errorf("one of --file or --material must be provided")
 	}
 
-	res, err := api.LegacyImportGPGKey(ctx, &client.LegacyImportGPGKeyParams{
-		Name:     cmd.String(nameFlag),
-		Material: material,
+	res, err := api.LegacyAPIRequest(ctx, "ImportGPGKey", map[string]any{
+		"name":     cmd.String(nameFlag),
+		"material": material,
 	})
 	if err != nil {
 		return err
@@ -273,20 +273,20 @@ func importGPGKeyAction(ctx context.Context, cmd *cli.Command) error {
 }
 
 func createDistributionAction(ctx context.Context, cmd *cli.Command) error {
-	api, ok := ctx.Value(apiClientKey).(*client.ClientWithResponses)
+	api, ok := ctx.Value(apiClientKey).(*client.LandscapeAPIClient)
 	if !ok || api == nil {
 		return fmt.Errorf("api client not initialized")
 	}
 
-	params := &client.LegacyCreateDistributionParams{
-		Name: cmd.String(nameFlag),
+	kwargs := map[string]any{
+		"name": cmd.String(nameFlag),
 	}
 
 	if ag := cmd.String(accessGroupFlag); ag != "" {
-		params.AccessGroup = &ag
+		kwargs["access_group"] = ag
 	}
 
-	res, err := api.LegacyCreateDistribution(ctx, params)
+	res, err := api.LegacyAPIRequest(ctx, "CreateDistribution", kwargs)
 	if err != nil {
 		return err
 	}
@@ -294,35 +294,35 @@ func createDistributionAction(ctx context.Context, cmd *cli.Command) error {
 }
 
 func createPocketAction(ctx context.Context, cmd *cli.Command) error {
-	api, ok := ctx.Value(apiClientKey).(*client.ClientWithResponses)
+	api, ok := ctx.Value(apiClientKey).(*client.LandscapeAPIClient)
 	if !ok || api == nil {
 		return fmt.Errorf("api client not initialized")
 	}
 
-	params := &client.LegacyCreatePocketParams{
-		Name:          cmd.String(nameFlag),
-		Series:        cmd.String(seriesFlag),
-		Distribution:  cmd.String(distributionFlag),
-		Components:    cmd.StringSlice(componentsFlag),
-		Architectures: cmd.StringSlice(architecturesFlag),
-		Mode:          cmd.String(modeFlag),
-		GpgKey:        cmd.String(gpgKeyFlag),
+	kwargs := map[string]any{
+		"name":          cmd.String(nameFlag),
+		"series":        cmd.String(seriesFlag),
+		"distribution":  cmd.String(distributionFlag),
+		"components":    cmd.StringSlice(componentsFlag),
+		"architectures": cmd.StringSlice(architecturesFlag),
+		"mode":          cmd.String(modeFlag),
+		"gpg_key":       cmd.String(gpgKeyFlag),
 	}
 
 	if v := cmd.String(mirrorURIFlag); v != "" {
-		params.MirrorUri = &v
+		kwargs["mirror_uri"] = v
 	}
 	if v := cmd.String(mirrorSuiteFlag); v != "" {
-		params.MirrorSuite = &v
+		kwargs["mirror_suite"] = v
 	}
 	if v := cmd.String(mirrorGpgKeyFlag); v != "" {
-		params.MirrorGpgKey = &v
+		kwargs["mirror_gpg_key"] = v
 	}
 	if v := cmd.String(originFlag); v != "" {
-		params.Origin = &v
+		kwargs["origin"] = v
 	}
 
-	res, err := api.LegacyCreatePocket(ctx, params)
+	res, err := api.LegacyAPIRequest(ctx, "CreatePocket", kwargs)
 	if err != nil {
 		return err
 	}
@@ -330,32 +330,32 @@ func createPocketAction(ctx context.Context, cmd *cli.Command) error {
 }
 
 func createMirrorAction(ctx context.Context, cmd *cli.Command) error {
-	api, ok := ctx.Value(apiClientKey).(*client.ClientWithResponses)
+	api, ok := ctx.Value(apiClientKey).(*client.LandscapeAPIClient)
 	if !ok || api == nil {
 		return fmt.Errorf("api client not initialized")
 	}
 
-	params := &client.LegacyCreatePocketParams{
-		Name:          cmd.String(nameFlag),
-		Series:        cmd.String(seriesFlag),
-		Distribution:  cmd.String(distributionFlag),
-		Components:    cmd.StringSlice(componentsFlag),
-		Architectures: cmd.StringSlice(architecturesFlag),
-		Mode:          "mirror",
-		GpgKey:        cmd.String(gpgKeyFlag),
+	kwargs := map[string]any{
+		"name":          cmd.String(nameFlag),
+		"series":        cmd.String(seriesFlag),
+		"distribution":  cmd.String(distributionFlag),
+		"components":    cmd.StringSlice(componentsFlag),
+		"architectures": cmd.StringSlice(architecturesFlag),
+		"mode":          "mirror",
+		"gpg_key":       cmd.String(gpgKeyFlag),
 	}
 
 	if v := cmd.String(mirrorURIFlag); v != "" {
-		params.MirrorUri = &v
+		kwargs["mirror_uri"] = v
 	}
 	if v := cmd.String(mirrorSuiteFlag); v != "" {
-		params.MirrorSuite = &v
+		kwargs["mirror_suite"] = v
 	}
 	if v := cmd.String(mirrorGpgKeyFlag); v != "" {
-		params.MirrorGpgKey = &v
+		kwargs["mirror_gpg_key"] = v
 	}
 
-	res, err := api.LegacyCreatePocket(ctx, params)
+	res, err := api.LegacyAPIRequest(ctx, "CreatePocket", kwargs)
 	if err != nil {
 		return err
 	}
@@ -419,39 +419,39 @@ var seriesCmd = &cli.Command{
 }
 
 func createSeriesAction(ctx context.Context, cmd *cli.Command) error {
-	api, ok := ctx.Value(apiClientKey).(*client.ClientWithResponses)
+	api, ok := ctx.Value(apiClientKey).(*client.LandscapeAPIClient)
 	if !ok || api == nil {
 		return fmt.Errorf("api client not initialized")
 	}
 
-	params := &client.LegacyCreateSeriesParams{
-		Name:         cmd.String(nameFlag),
-		Distribution: cmd.String(distributionFlag),
+	kwargs := map[string]any{
+		"name":         cmd.String(nameFlag),
+		"distribution": cmd.String(distributionFlag),
 	}
 
 	if v := cmd.StringSlice(componentsFlag); len(v) > 0 {
-		params.Components = &v
+		kwargs["components"] = v
 	}
 	if v := cmd.StringSlice(architecturesFlag); len(v) > 0 {
-		params.Architectures = &v
+		kwargs["architectures"] = v
 	}
 	if v := cmd.StringSlice("pockets"); len(v) > 0 {
-		params.Pockets = &v
+		kwargs["pockets"] = v
 	}
 	if v := cmd.String(gpgKeyFlag); v != "" {
-		params.GpgKey = &v
+		kwargs["gpg_key"] = v
 	}
 	if v := cmd.String(mirrorURIFlag); v != "" {
-		params.MirrorUri = &v
+		kwargs["mirror_uri"] = v
 	}
 	if v := cmd.String(mirrorSeriesFlag); v != "" {
-		params.MirrorSeries = &v
+		kwargs["mirror_series"] = v
 	}
 	if v := cmd.String(mirrorGpgKeyFlag); v != "" {
-		params.MirrorGpgKey = &v
+		kwargs["mirror_gpg_key"] = v
 	}
 
-	res, err := api.LegacyCreateSeries(ctx, params)
+	res, err := api.LegacyAPIRequest(ctx, "CreateSeries", kwargs)
 	if err != nil {
 		return err
 	}
@@ -459,15 +459,15 @@ func createSeriesAction(ctx context.Context, cmd *cli.Command) error {
 }
 
 func syncMirrorAction(ctx context.Context, cmd *cli.Command) error {
-	api, ok := ctx.Value(apiClientKey).(*client.ClientWithResponses)
+	api, ok := ctx.Value(apiClientKey).(*client.LandscapeAPIClient)
 	if !ok || api == nil {
 		return fmt.Errorf("api client not initialized")
 	}
 
-	res, err := api.LegacySyncMirrorPocket(ctx, &client.LegacySyncMirrorPocketParams{
-		Name:         cmd.String(nameFlag),
-		Series:       cmd.String(seriesFlag),
-		Distribution: cmd.String(distributionFlag),
+	res, err := api.LegacyAPIRequest(ctx, "SyncMirrorPocket", map[string]any{
+		"name":         cmd.String(nameFlag),
+		"series":       cmd.String(seriesFlag),
+		"distribution": cmd.String(distributionFlag),
 	})
 	if err != nil {
 		return err
