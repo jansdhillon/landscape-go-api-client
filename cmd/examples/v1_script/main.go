@@ -8,10 +8,18 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/jansdhillon/landscape-go-api-client/client"
 )
+
+// script is the subset of a legacy CreateScript response this example uses.
+// Legacy responses are not in the OpenAPI spec, so callers define their own.
+type script struct {
+	Id    int    `json:"id"`
+	Title string `json:"title"`
+}
 
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())
@@ -32,6 +40,8 @@ func main() {
 	}
 
 	landscapeAPIClient, err := client.NewLandscapeAPIClient(
+		ctx,
+		http.DefaultClient,
 		baseURL,
 		client.NewAccessKeyProvider(ak, sk),
 	)
@@ -43,28 +53,22 @@ func main() {
 	// Create a V1 script
 	rawCode := "#!/bin/bash\n \"hello\" > /home/ubuntu/hello.txt"
 	enc := base64.StdEncoding.EncodeToString([]byte(rawCode))
-	scriptType := "V1"
-	createParams := &client.LegacyCreateScriptParams{
-		Title:      rand.Text(),
-		Code:       enc,
-		ScriptType: &scriptType,
-	}
-	createdScriptRes, err := landscapeAPIClient.LegacyCreateScriptWithResponse(ctx, createParams)
+	createdScriptRes, err := client.LegacyAPIRequestWithResponse[script](ctx, landscapeAPIClient, "CreateScript", map[string]any{
+		"title":       rand.Text(),
+		"code":        enc,
+		"script_type": "V1",
+	})
 
 	if err != nil {
 		log.Fatalf("failed to invoke legacy action: %v", err)
 	}
 
 	log.Printf("raw create script response: %s", createdScriptRes.Body)
-	if createdScriptRes.JSON200 == nil {
-		log.Fatalf("error creating script: %s", createdScriptRes.Status())
+	if createdScriptRes.JSON == nil {
+		log.Fatalf("error creating script: %d", createdScriptRes.StatusCode())
 	}
 
-	script, err := client.ParseLegacyResponse[client.V1Script](createdScriptRes.Body)
-	if err != nil {
-		log.Fatalf("failed to parse script response: %v", err)
-	}
-	out, _ := json.MarshalIndent(script, "", "  ")
+	out, _ := json.MarshalIndent(createdScriptRes.JSON, "", "  ")
 	log.Printf("created script:\n%s", out)
 
 }

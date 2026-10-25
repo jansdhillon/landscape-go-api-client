@@ -120,7 +120,7 @@ var scriptCmd = &cli.Command{
 }
 
 func createScriptAction(ctx context.Context, cmd *cli.Command) error {
-	api, ok := ctx.Value(apiClientKey).(*client.ClientWithResponses)
+	api, ok := ctx.Value(apiClientKey).(*client.LandscapeAPIClient)
 	if !ok || api == nil {
 		return fmt.Errorf("api client not initialized")
 	}
@@ -131,10 +131,10 @@ func createScriptAction(ctx context.Context, cmd *cli.Command) error {
 
 	enc := base64.StdEncoding.EncodeToString([]byte(code))
 
-	res, err := api.LegacyCreateScript(ctx, &client.LegacyCreateScriptParams{
-		Title:      title,
-		Code:       enc,
-		ScriptType: &scriptType,
+	res, err := api.LegacyAPIRequest(ctx, "CreateScript", map[string]any{
+		"title":       title,
+		"code":        enc,
+		"script_type": scriptType,
 	})
 	if err != nil {
 		return err
@@ -143,7 +143,7 @@ func createScriptAction(ctx context.Context, cmd *cli.Command) error {
 }
 
 func editScriptAction(ctx context.Context, cmd *cli.Command) error {
-	api, ok := ctx.Value(apiClientKey).(*client.ClientWithResponses)
+	api, ok := ctx.Value(apiClientKey).(*client.LandscapeAPIClient)
 	if !ok || api == nil {
 		return fmt.Errorf("api not initialized")
 	}
@@ -164,10 +164,10 @@ func editScriptAction(ctx context.Context, cmd *cli.Command) error {
 
 	enc := base64.StdEncoding.EncodeToString([]byte(code))
 
-	res, err := api.LegacyEditScript(ctx, &client.LegacyEditScriptParams{
-		ScriptId: scriptID,
-		Title:    &title,
-		Code:     &enc,
+	res, err := api.LegacyAPIRequest(ctx, "EditScript", map[string]any{
+		"script_id": scriptID,
+		"title":     title,
+		"code":      enc,
 	})
 	if err != nil {
 		return err
@@ -176,7 +176,7 @@ func editScriptAction(ctx context.Context, cmd *cli.Command) error {
 }
 
 func getScriptAction(ctx context.Context, cmd *cli.Command) error {
-	api, ok := ctx.Value(apiClientKey).(*client.ClientWithResponses)
+	api, ok := ctx.Value(apiClientKey).(*client.LandscapeAPIClient)
 	if !ok || api == nil {
 		return fmt.Errorf("api client not initialized")
 	}
@@ -201,7 +201,7 @@ func getScriptAction(ctx context.Context, cmd *cli.Command) error {
 }
 
 func getScriptAttachmentAction(ctx context.Context, cmd *cli.Command) error {
-	api, ok := ctx.Value(apiClientKey).(*client.ClientWithResponses)
+	api, ok := ctx.Value(apiClientKey).(*client.LandscapeAPIClient)
 	if !ok || api == nil {
 		return fmt.Errorf("api client not initialized")
 	}
@@ -218,7 +218,7 @@ func getScriptAttachmentAction(ctx context.Context, cmd *cli.Command) error {
 }
 
 func createScriptAttachmentAction(ctx context.Context, cmd *cli.Command) error {
-	api, ok := ctx.Value(apiClientKey).(*client.ClientWithResponses)
+	api, ok := ctx.Value(apiClientKey).(*client.LandscapeAPIClient)
 	if !ok || api == nil {
 		return fmt.Errorf("api client not initialized")
 	}
@@ -226,9 +226,9 @@ func createScriptAttachmentAction(ctx context.Context, cmd *cli.Command) error {
 	scriptID := cmd.Int64(scriptIDFlag)
 	file := cmd.String(fileFlag)
 
-	res, err := api.LegacyCreateScriptAttachment(ctx, &client.LegacyCreateScriptAttachmentParams{
-		ScriptId: int(scriptID),
-		File:     file,
+	res, err := api.LegacyAPIRequest(ctx, "CreateScriptAttachment", map[string]any{
+		"script_id": int(scriptID),
+		"file":      file,
 	})
 	if err != nil {
 		return err
