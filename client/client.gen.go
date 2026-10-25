@@ -88,6 +88,112 @@ type AccessKeyLoginRequest struct {
 	SecretKey string `json:"secret_key" tfsdk:"secret_key"`
 }
 
+// Computer A computer registered in Landscape.
+type Computer struct {
+	// AccessGroup The access group the computer belongs to.
+	AccessGroup *string `json:"access_group,omitempty"`
+
+	// Alerts Present when with_alerts is set.
+	Alerts *[]struct {
+		Severity *string `json:"severity,omitempty"`
+		Summary  *string `json:"summary,omitempty"`
+		Type     *string `json:"type,omitempty"`
+	} `json:"alerts,omitempty"`
+
+	// Annotations Present when with_annotations is set.
+	Annotations *map[string]interface{} `json:"annotations,omitempty"`
+
+	// Children Child instances (e.g. WSL instances) of this computer. Children are
+	// serialized without their own children or parent, per landscape-server's
+	// Computer.serialize(include_children=False).
+	Children *[]Computer_Children_Item `json:"children,omitempty"`
+
+	// Comment A free-form comment attached to the computer.
+	Comment *string `json:"comment,omitempty"`
+
+	// Distribution The Ubuntu release running on the computer (e.g. "24.04").
+	Distribution *string `json:"distribution,omitempty"`
+
+	// GroupedHardware Present when with_grouped_hardware is set.
+	GroupedHardware *map[string]interface{} `json:"grouped_hardware,omitempty"`
+
+	// Hardware Present when with_hardware is set.
+	Hardware *map[string]interface{} `json:"hardware,omitempty"`
+
+	// Hostname The hostname reported by the computer.
+	Hostname *string `json:"hostname,omitempty"`
+
+	// Id The computer's ID.
+	Id *int `json:"id,omitempty"`
+
+	// IsDefaultChild Whether this computer is the default WSL child instance.
+	IsDefaultChild *bool `json:"is_default_child"`
+
+	// IsWslInstance Whether the computer is a WSL instance.
+	IsWslInstance *bool `json:"is_wsl_instance,omitempty"`
+
+	// LastExchangeTime When the computer last exchanged data with the server.
+	LastExchangeTime *string `json:"last_exchange_time"`
+
+	// LastPingTime When the computer last pinged the server.
+	LastPingTime *string `json:"last_ping_time"`
+
+	// NetworkDevices Present when with_network or with_all_network is set.
+	NetworkDevices *[]struct {
+		BroadcastAddress *string `json:"broadcast_address,omitempty"`
+		Interface        *string `json:"interface,omitempty"`
+		IpAddress        *string `json:"ip_address,omitempty"`
+		MacAddress       *string `json:"mac_address,omitempty"`
+		Netmask          *string `json:"netmask,omitempty"`
+	} `json:"network_devices,omitempty"`
+
+	// RebootRequiredFlag Whether the computer needs a reboot.
+	RebootRequiredFlag *bool `json:"reboot_required_flag,omitempty"`
+
+	// Tags Tags assigned to the computer.
+	Tags *[]string `json:"tags,omitempty"`
+
+	// Title The display name of the computer.
+	Title *string `json:"title,omitempty"`
+
+	// TotalMemory Total RAM of the computer, in megabytes.
+	TotalMemory *int `json:"total_memory"`
+
+	// TotalSwap Total swap of the computer, in megabytes.
+	TotalSwap *int `json:"total_swap"`
+
+	// Upgrades Pending upgrade counts (present with with_upgrades).
+	Upgrades *struct {
+		Regular  *int `json:"regular,omitempty"`
+		Security *int `json:"security,omitempty"`
+	} `json:"upgrades,omitempty"`
+	AdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// Computer_Children_Item A child instance of a computer, without its own children.
+type Computer_Children_Item struct {
+	Hostname             *string                `json:"hostname,omitempty"`
+	Id                   *int                   `json:"id,omitempty"`
+	IsWslInstance        *bool                  `json:"is_wsl_instance,omitempty"`
+	Title                *string                `json:"title,omitempty"`
+	AdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// ComputerListResponse defines model for ComputerListResponse.
+type ComputerListResponse struct {
+	// Count Total number of computers matching the query.
+	Count int `json:"count"`
+
+	// Next URL of the next page of results, if any.
+	Next *string `json:"next"`
+
+	// Previous URL of the previous page of results, if any.
+	Previous *string `json:"previous"`
+
+	// Results The page of computers.
+	Results []Computer `json:"results"`
+}
+
 // Error defines model for Error.
 type Error struct {
 	// Code HTTP status code for the error.
@@ -575,6 +681,61 @@ type ScriptProfilesByScriptResult = []ScriptProfile
 // Unauthorized defines model for Unauthorized.
 type Unauthorized = Error
 
+// ListComputersParams defines parameters for ListComputers.
+type ListComputersParams struct {
+	// Query Search query (see description above for syntax).
+	Query *string `form:"query,omitempty" json:"query,omitempty"`
+
+	// Limit Maximum number of results to return.
+	Limit *int `form:"limit,omitempty" json:"limit,omitempty"`
+
+	// Offset Offset into the list of results.
+	Offset *int `form:"offset,omitempty" json:"offset,omitempty"`
+
+	// RootOnly Include only the root member of each computer family tree.
+	RootOnly *bool `form:"root_only,omitempty" json:"root_only,omitempty"`
+
+	// ArchivedOnly Only include archived computers.
+	ArchivedOnly *bool `form:"archived_only,omitempty" json:"archived_only,omitempty"`
+
+	// WithNetwork Include all active network devices.
+	WithNetwork *bool `form:"with_network,omitempty" json:"with_network,omitempty"`
+
+	// WithAllNetwork Include all active and inactive network devices.
+	WithAllNetwork *bool `form:"with_all_network,omitempty" json:"with_all_network,omitempty"`
+
+	// WithHardware Include all known hardware information.
+	WithHardware *bool `form:"with_hardware,omitempty" json:"with_hardware,omitempty"`
+
+	// WithGroupedHardware Include hardware information grouped by device category.
+	WithGroupedHardware *bool `form:"with_grouped_hardware,omitempty" json:"with_grouped_hardware,omitempty"`
+
+	// WithAnnotations Include custom annotation information.
+	WithAnnotations *bool `form:"with_annotations,omitempty" json:"with_annotations,omitempty"`
+
+	// WithAlerts Include active alert information per computer.
+	WithAlerts *bool `form:"with_alerts,omitempty" json:"with_alerts,omitempty"`
+
+	// WithUpgrades Include counts of regular and security upgrades.
+	WithUpgrades *bool `form:"with_upgrades,omitempty" json:"with_upgrades,omitempty"`
+
+	// WithReleaseUpgrades Include whether a release upgrade is available.
+	WithReleaseUpgrades *bool `form:"with_release_upgrades,omitempty" json:"with_release_upgrades,omitempty"`
+
+	// WithRebootPackages Include packages needing a reboot.
+	WithRebootPackages *bool `form:"with_reboot_packages,omitempty" json:"with_reboot_packages,omitempty"`
+
+	// WithWslProfiles Include WSL profiles associated with Windows computers.
+	WithWslProfiles *bool `form:"with_wsl_profiles,omitempty" json:"with_wsl_profiles,omitempty"`
+
+	// WslParents Restrict to WSL parent instances (inclusive with wsl_children).
+	WslParents *bool `form:"wsl_parents,omitempty" json:"wsl_parents,omitempty"`
+
+	// WslChildren Restrict to WSL child instances (inclusive with wsl_parents).
+	// root_only must be false for child instances to appear.
+	WslChildren *bool `form:"wsl_children,omitempty" json:"wsl_children,omitempty"`
+}
+
 // ListScriptProfilesParams defines parameters for ListScriptProfiles.
 type ListScriptProfilesParams struct {
 	// Archived Filter script profiles by archived status.
@@ -598,6 +759,487 @@ type CreateScriptProfileJSONRequestBody = ScriptProfileCreateBody
 
 // UpdateScriptProfileJSONRequestBody defines body for UpdateScriptProfile for application/json ContentType.
 type UpdateScriptProfileJSONRequestBody = ScriptProfilePatchBody
+
+// Getter for additional properties for Computer. Returns the specified
+// element and whether it was found
+func (a Computer) Get(fieldName string) (value interface{}, found bool) {
+	if a.AdditionalProperties != nil {
+		value, found = a.AdditionalProperties[fieldName]
+	}
+	return
+}
+
+// Setter for additional properties for Computer
+func (a *Computer) Set(fieldName string, value interface{}) {
+	if a.AdditionalProperties == nil {
+		a.AdditionalProperties = make(map[string]interface{})
+	}
+	a.AdditionalProperties[fieldName] = value
+}
+
+// Override default JSON handling for Computer to handle AdditionalProperties
+func (a *Computer) UnmarshalJSON(b []byte) error {
+	object := make(map[string]json.RawMessage)
+	err := json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["access_group"]; found {
+		err = json.Unmarshal(raw, &a.AccessGroup)
+		if err != nil {
+			return fmt.Errorf("error reading 'access_group': %w", err)
+		}
+		delete(object, "access_group")
+	}
+
+	if raw, found := object["alerts"]; found {
+		err = json.Unmarshal(raw, &a.Alerts)
+		if err != nil {
+			return fmt.Errorf("error reading 'alerts': %w", err)
+		}
+		delete(object, "alerts")
+	}
+
+	if raw, found := object["annotations"]; found {
+		err = json.Unmarshal(raw, &a.Annotations)
+		if err != nil {
+			return fmt.Errorf("error reading 'annotations': %w", err)
+		}
+		delete(object, "annotations")
+	}
+
+	if raw, found := object["children"]; found {
+		err = json.Unmarshal(raw, &a.Children)
+		if err != nil {
+			return fmt.Errorf("error reading 'children': %w", err)
+		}
+		delete(object, "children")
+	}
+
+	if raw, found := object["comment"]; found {
+		err = json.Unmarshal(raw, &a.Comment)
+		if err != nil {
+			return fmt.Errorf("error reading 'comment': %w", err)
+		}
+		delete(object, "comment")
+	}
+
+	if raw, found := object["distribution"]; found {
+		err = json.Unmarshal(raw, &a.Distribution)
+		if err != nil {
+			return fmt.Errorf("error reading 'distribution': %w", err)
+		}
+		delete(object, "distribution")
+	}
+
+	if raw, found := object["grouped_hardware"]; found {
+		err = json.Unmarshal(raw, &a.GroupedHardware)
+		if err != nil {
+			return fmt.Errorf("error reading 'grouped_hardware': %w", err)
+		}
+		delete(object, "grouped_hardware")
+	}
+
+	if raw, found := object["hardware"]; found {
+		err = json.Unmarshal(raw, &a.Hardware)
+		if err != nil {
+			return fmt.Errorf("error reading 'hardware': %w", err)
+		}
+		delete(object, "hardware")
+	}
+
+	if raw, found := object["hostname"]; found {
+		err = json.Unmarshal(raw, &a.Hostname)
+		if err != nil {
+			return fmt.Errorf("error reading 'hostname': %w", err)
+		}
+		delete(object, "hostname")
+	}
+
+	if raw, found := object["id"]; found {
+		err = json.Unmarshal(raw, &a.Id)
+		if err != nil {
+			return fmt.Errorf("error reading 'id': %w", err)
+		}
+		delete(object, "id")
+	}
+
+	if raw, found := object["is_default_child"]; found {
+		err = json.Unmarshal(raw, &a.IsDefaultChild)
+		if err != nil {
+			return fmt.Errorf("error reading 'is_default_child': %w", err)
+		}
+		delete(object, "is_default_child")
+	}
+
+	if raw, found := object["is_wsl_instance"]; found {
+		err = json.Unmarshal(raw, &a.IsWslInstance)
+		if err != nil {
+			return fmt.Errorf("error reading 'is_wsl_instance': %w", err)
+		}
+		delete(object, "is_wsl_instance")
+	}
+
+	if raw, found := object["last_exchange_time"]; found {
+		err = json.Unmarshal(raw, &a.LastExchangeTime)
+		if err != nil {
+			return fmt.Errorf("error reading 'last_exchange_time': %w", err)
+		}
+		delete(object, "last_exchange_time")
+	}
+
+	if raw, found := object["last_ping_time"]; found {
+		err = json.Unmarshal(raw, &a.LastPingTime)
+		if err != nil {
+			return fmt.Errorf("error reading 'last_ping_time': %w", err)
+		}
+		delete(object, "last_ping_time")
+	}
+
+	if raw, found := object["network_devices"]; found {
+		err = json.Unmarshal(raw, &a.NetworkDevices)
+		if err != nil {
+			return fmt.Errorf("error reading 'network_devices': %w", err)
+		}
+		delete(object, "network_devices")
+	}
+
+	if raw, found := object["reboot_required_flag"]; found {
+		err = json.Unmarshal(raw, &a.RebootRequiredFlag)
+		if err != nil {
+			return fmt.Errorf("error reading 'reboot_required_flag': %w", err)
+		}
+		delete(object, "reboot_required_flag")
+	}
+
+	if raw, found := object["tags"]; found {
+		err = json.Unmarshal(raw, &a.Tags)
+		if err != nil {
+			return fmt.Errorf("error reading 'tags': %w", err)
+		}
+		delete(object, "tags")
+	}
+
+	if raw, found := object["title"]; found {
+		err = json.Unmarshal(raw, &a.Title)
+		if err != nil {
+			return fmt.Errorf("error reading 'title': %w", err)
+		}
+		delete(object, "title")
+	}
+
+	if raw, found := object["total_memory"]; found {
+		err = json.Unmarshal(raw, &a.TotalMemory)
+		if err != nil {
+			return fmt.Errorf("error reading 'total_memory': %w", err)
+		}
+		delete(object, "total_memory")
+	}
+
+	if raw, found := object["total_swap"]; found {
+		err = json.Unmarshal(raw, &a.TotalSwap)
+		if err != nil {
+			return fmt.Errorf("error reading 'total_swap': %w", err)
+		}
+		delete(object, "total_swap")
+	}
+
+	if raw, found := object["upgrades"]; found {
+		err = json.Unmarshal(raw, &a.Upgrades)
+		if err != nil {
+			return fmt.Errorf("error reading 'upgrades': %w", err)
+		}
+		delete(object, "upgrades")
+	}
+
+	if len(object) != 0 {
+		a.AdditionalProperties = make(map[string]interface{})
+		for fieldName, fieldBuf := range object {
+			var fieldVal interface{}
+			err := json.Unmarshal(fieldBuf, &fieldVal)
+			if err != nil {
+				return fmt.Errorf("error unmarshaling field %s: %w", fieldName, err)
+			}
+			a.AdditionalProperties[fieldName] = fieldVal
+		}
+	}
+	return nil
+}
+
+// Override default JSON handling for Computer to handle AdditionalProperties
+func (a Computer) MarshalJSON() ([]byte, error) {
+	var err error
+	object := make(map[string]json.RawMessage)
+
+	if a.AccessGroup != nil {
+		object["access_group"], err = json.Marshal(a.AccessGroup)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'access_group': %w", err)
+		}
+	}
+
+	if a.Alerts != nil {
+		object["alerts"], err = json.Marshal(a.Alerts)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'alerts': %w", err)
+		}
+	}
+
+	if a.Annotations != nil {
+		object["annotations"], err = json.Marshal(a.Annotations)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'annotations': %w", err)
+		}
+	}
+
+	if a.Children != nil {
+		object["children"], err = json.Marshal(a.Children)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'children': %w", err)
+		}
+	}
+
+	if a.Comment != nil {
+		object["comment"], err = json.Marshal(a.Comment)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'comment': %w", err)
+		}
+	}
+
+	if a.Distribution != nil {
+		object["distribution"], err = json.Marshal(a.Distribution)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'distribution': %w", err)
+		}
+	}
+
+	if a.GroupedHardware != nil {
+		object["grouped_hardware"], err = json.Marshal(a.GroupedHardware)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'grouped_hardware': %w", err)
+		}
+	}
+
+	if a.Hardware != nil {
+		object["hardware"], err = json.Marshal(a.Hardware)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'hardware': %w", err)
+		}
+	}
+
+	if a.Hostname != nil {
+		object["hostname"], err = json.Marshal(a.Hostname)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'hostname': %w", err)
+		}
+	}
+
+	if a.Id != nil {
+		object["id"], err = json.Marshal(a.Id)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'id': %w", err)
+		}
+	}
+
+	if a.IsDefaultChild != nil {
+		object["is_default_child"], err = json.Marshal(a.IsDefaultChild)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'is_default_child': %w", err)
+		}
+	}
+
+	if a.IsWslInstance != nil {
+		object["is_wsl_instance"], err = json.Marshal(a.IsWslInstance)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'is_wsl_instance': %w", err)
+		}
+	}
+
+	if a.LastExchangeTime != nil {
+		object["last_exchange_time"], err = json.Marshal(a.LastExchangeTime)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'last_exchange_time': %w", err)
+		}
+	}
+
+	if a.LastPingTime != nil {
+		object["last_ping_time"], err = json.Marshal(a.LastPingTime)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'last_ping_time': %w", err)
+		}
+	}
+
+	if a.NetworkDevices != nil {
+		object["network_devices"], err = json.Marshal(a.NetworkDevices)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'network_devices': %w", err)
+		}
+	}
+
+	if a.RebootRequiredFlag != nil {
+		object["reboot_required_flag"], err = json.Marshal(a.RebootRequiredFlag)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'reboot_required_flag': %w", err)
+		}
+	}
+
+	if a.Tags != nil {
+		object["tags"], err = json.Marshal(a.Tags)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'tags': %w", err)
+		}
+	}
+
+	if a.Title != nil {
+		object["title"], err = json.Marshal(a.Title)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'title': %w", err)
+		}
+	}
+
+	if a.TotalMemory != nil {
+		object["total_memory"], err = json.Marshal(a.TotalMemory)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'total_memory': %w", err)
+		}
+	}
+
+	if a.TotalSwap != nil {
+		object["total_swap"], err = json.Marshal(a.TotalSwap)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'total_swap': %w", err)
+		}
+	}
+
+	if a.Upgrades != nil {
+		object["upgrades"], err = json.Marshal(a.Upgrades)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'upgrades': %w", err)
+		}
+	}
+
+	for fieldName, field := range a.AdditionalProperties {
+		object[fieldName], err = json.Marshal(field)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling '%s': %w", fieldName, err)
+		}
+	}
+	return json.Marshal(object)
+}
+
+// Getter for additional properties for Computer_Children_Item. Returns the specified
+// element and whether it was found
+func (a Computer_Children_Item) Get(fieldName string) (value interface{}, found bool) {
+	if a.AdditionalProperties != nil {
+		value, found = a.AdditionalProperties[fieldName]
+	}
+	return
+}
+
+// Setter for additional properties for Computer_Children_Item
+func (a *Computer_Children_Item) Set(fieldName string, value interface{}) {
+	if a.AdditionalProperties == nil {
+		a.AdditionalProperties = make(map[string]interface{})
+	}
+	a.AdditionalProperties[fieldName] = value
+}
+
+// Override default JSON handling for Computer_Children_Item to handle AdditionalProperties
+func (a *Computer_Children_Item) UnmarshalJSON(b []byte) error {
+	object := make(map[string]json.RawMessage)
+	err := json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["hostname"]; found {
+		err = json.Unmarshal(raw, &a.Hostname)
+		if err != nil {
+			return fmt.Errorf("error reading 'hostname': %w", err)
+		}
+		delete(object, "hostname")
+	}
+
+	if raw, found := object["id"]; found {
+		err = json.Unmarshal(raw, &a.Id)
+		if err != nil {
+			return fmt.Errorf("error reading 'id': %w", err)
+		}
+		delete(object, "id")
+	}
+
+	if raw, found := object["is_wsl_instance"]; found {
+		err = json.Unmarshal(raw, &a.IsWslInstance)
+		if err != nil {
+			return fmt.Errorf("error reading 'is_wsl_instance': %w", err)
+		}
+		delete(object, "is_wsl_instance")
+	}
+
+	if raw, found := object["title"]; found {
+		err = json.Unmarshal(raw, &a.Title)
+		if err != nil {
+			return fmt.Errorf("error reading 'title': %w", err)
+		}
+		delete(object, "title")
+	}
+
+	if len(object) != 0 {
+		a.AdditionalProperties = make(map[string]interface{})
+		for fieldName, fieldBuf := range object {
+			var fieldVal interface{}
+			err := json.Unmarshal(fieldBuf, &fieldVal)
+			if err != nil {
+				return fmt.Errorf("error unmarshaling field %s: %w", fieldName, err)
+			}
+			a.AdditionalProperties[fieldName] = fieldVal
+		}
+	}
+	return nil
+}
+
+// Override default JSON handling for Computer_Children_Item to handle AdditionalProperties
+func (a Computer_Children_Item) MarshalJSON() ([]byte, error) {
+	var err error
+	object := make(map[string]json.RawMessage)
+
+	if a.Hostname != nil {
+		object["hostname"], err = json.Marshal(a.Hostname)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'hostname': %w", err)
+		}
+	}
+
+	if a.Id != nil {
+		object["id"], err = json.Marshal(a.Id)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'id': %w", err)
+		}
+	}
+
+	if a.IsWslInstance != nil {
+		object["is_wsl_instance"], err = json.Marshal(a.IsWslInstance)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'is_wsl_instance': %w", err)
+		}
+	}
+
+	if a.Title != nil {
+		object["title"], err = json.Marshal(a.Title)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling 'title': %w", err)
+		}
+	}
+
+	for fieldName, field := range a.AdditionalProperties {
+		object[fieldName], err = json.Marshal(field)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling '%s': %w", fieldName, err)
+		}
+	}
+	return json.Marshal(object)
+}
 
 // Getter for additional properties for LoginResponse. Returns the specified
 // element and whether it was found
@@ -1164,6 +1806,9 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
+	// ListComputers request
+	ListComputers(ctx context.Context, params *ListComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// LoginWithPasswordWithBody request with any body
 	LoginWithPasswordWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -1216,6 +1861,18 @@ type ClientInterface interface {
 
 	// RedactScript request
 	RedactScript(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*http.Response, error)
+}
+
+func (c *Client) ListComputers(ctx context.Context, params *ListComputersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewListComputersRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
 }
 
 func (c *Client) LoginWithPasswordWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -1444,6 +2101,311 @@ func (c *Client) RedactScript(ctx context.Context, scriptId ScriptIdPathParam, r
 		return nil, err
 	}
 	return c.Client.Do(req)
+}
+
+// NewListComputersRequest generates requests for ListComputers
+func NewListComputersRequest(server string, params *ListComputersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/api/computers")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		queryValues := queryURL.Query()
+
+		if params.Query != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "query", runtime.ParamLocationQuery, *params.Query); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Limit != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.Offset != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "offset", runtime.ParamLocationQuery, *params.Offset); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.RootOnly != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "root_only", runtime.ParamLocationQuery, *params.RootOnly); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.ArchivedOnly != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "archived_only", runtime.ParamLocationQuery, *params.ArchivedOnly); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithNetwork != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_network", runtime.ParamLocationQuery, *params.WithNetwork); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithAllNetwork != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_all_network", runtime.ParamLocationQuery, *params.WithAllNetwork); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithHardware != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_hardware", runtime.ParamLocationQuery, *params.WithHardware); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithGroupedHardware != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_grouped_hardware", runtime.ParamLocationQuery, *params.WithGroupedHardware); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithAnnotations != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_annotations", runtime.ParamLocationQuery, *params.WithAnnotations); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithAlerts != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_alerts", runtime.ParamLocationQuery, *params.WithAlerts); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithUpgrades != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_upgrades", runtime.ParamLocationQuery, *params.WithUpgrades); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithReleaseUpgrades != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_release_upgrades", runtime.ParamLocationQuery, *params.WithReleaseUpgrades); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithRebootPackages != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_reboot_packages", runtime.ParamLocationQuery, *params.WithRebootPackages); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WithWslProfiles != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "with_wsl_profiles", runtime.ParamLocationQuery, *params.WithWslProfiles); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WslParents != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "wsl_parents", runtime.ParamLocationQuery, *params.WslParents); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		if params.WslChildren != nil {
+
+			if queryFrag, err := runtime.StyleParamWithLocation("form", true, "wsl_children", runtime.ParamLocationQuery, *params.WslChildren); err != nil {
+				return nil, err
+			} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+				return nil, err
+			} else {
+				for k, v := range parsed {
+					for _, v2 := range v {
+						queryValues.Add(k, v2)
+					}
+				}
+			}
+
+		}
+
+		queryURL.RawQuery = queryValues.Encode()
+	}
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
 }
 
 // NewLoginWithPasswordRequest calls the generic LoginWithPassword builder with application/json body
@@ -2061,6 +3023,9 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
+	// ListComputersWithResponse request
+	ListComputersWithResponse(ctx context.Context, params *ListComputersParams, reqEditors ...RequestEditorFn) (*ListComputersResponse, error)
+
 	// LoginWithPasswordWithBodyWithResponse request with any body
 	LoginWithPasswordWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LoginWithPasswordResponse, error)
 
@@ -2113,6 +3078,30 @@ type ClientWithResponsesInterface interface {
 
 	// RedactScriptWithResponse request
 	RedactScriptWithResponse(ctx context.Context, scriptId ScriptIdPathParam, reqEditors ...RequestEditorFn) (*RedactScriptResponse, error)
+}
+
+type ListComputersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ComputerListResponse
+	JSON400      *BadRequest
+	JSON401      *Unauthorized
+}
+
+// Status returns HTTPResponse.Status
+func (r ListComputersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ListComputersResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
 }
 
 type LoginWithPasswordResponse struct {
@@ -2479,6 +3468,15 @@ func (r RedactScriptResponse) StatusCode() int {
 	return 0
 }
 
+// ListComputersWithResponse request returning *ListComputersResponse
+func (c *ClientWithResponses) ListComputersWithResponse(ctx context.Context, params *ListComputersParams, reqEditors ...RequestEditorFn) (*ListComputersResponse, error) {
+	rsp, err := c.ListComputers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseListComputersResponse(rsp)
+}
+
 // LoginWithPasswordWithBodyWithResponse request with arbitrary body returning *LoginWithPasswordResponse
 func (c *ClientWithResponses) LoginWithPasswordWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LoginWithPasswordResponse, error) {
 	rsp, err := c.LoginWithPasswordWithBody(ctx, contentType, body, reqEditors...)
@@ -2644,6 +3642,46 @@ func (c *ClientWithResponses) RedactScriptWithResponse(ctx context.Context, scri
 		return nil, err
 	}
 	return ParseRedactScriptResponse(rsp)
+}
+
+// ParseListComputersResponse parses an HTTP response from a ListComputersWithResponse call
+func ParseListComputersResponse(rsp *http.Response) (*ListComputersResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ListComputersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ComputerListResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
+		var dest BadRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON400 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
+		var dest Unauthorized
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON401 = &dest
+
+	}
+
+	return response, nil
 }
 
 // ParseLoginWithPasswordResponse parses an HTTP response from a LoginWithPasswordWithResponse call
